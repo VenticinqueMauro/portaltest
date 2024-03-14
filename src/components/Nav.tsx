@@ -1,5 +1,5 @@
 'use client';
-import { SignUpButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 
 export default function Nav() {
@@ -11,7 +11,10 @@ export default function Nav() {
             <a href="/">Home </a>
             {
                 !user &&
-                <SignUpButton afterSignUpUrl="/" />
+                <>
+                    <SignUpButton afterSignUpUrl="/" />
+                    <SignInButton afterSignInUrl="/" />
+                </>
             }
             {
                 isLoaded && user &&
