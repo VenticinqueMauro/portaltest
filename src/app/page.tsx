@@ -38,7 +38,7 @@ export default function page() {
 
   return (
     <main>
-      Next Auth
+      <a href="/" className="block mt-5">Inicio</a>
       <a href="/dashboard" className="block mt-5">Dashboard</a>
       <button onClick={handleLogin} className="block px-3 py-2 rounded bg-emerald-500 mt-5">Login</button>
       <button onClick={handleLogout} className="block px-3 py-2 rounded bg-red-500 mt-5">Logout</button>
