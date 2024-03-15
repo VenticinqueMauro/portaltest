@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/mongodb";
 import { User } from "@/models/user";
 import bcrypt from "bcrypt";
+import { verify } from "jsonwebtoken";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -11,6 +13,20 @@ export async function POST(req: NextRequest) {
 
     try {
         await connectDB();
+
+        // VERIFICACION DE ROLE PARA CREACION DE USUARIOS ADMINISTRADORES 
+        // const token = cookies().get('portal_app')?.value
+
+        // if (!token) {
+        //     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        // }
+
+        // const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
+
+        // if (!decodedToken || decodedToken.role !== 'admin') {
+        //     return NextResponse.json({ error: 'You do not have permission to create users' }, { status: 403 });
+        // }
+        //////////////////////////////////////////////////////////////////////
 
         const userFound = await User.findOne({ email });
 
