@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
-import { User } from "@/models/user";
+import { AdminUser } from "@/models/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     try {
         await connectDB();
 
-        const userFound = await User.findOne({ email })
+        const userFound = await AdminUser.findOne({ email })
 
         if (!userFound) {
             return NextResponse.json({ error: 'This email is not associated with any registered account' }, { status: 404 });

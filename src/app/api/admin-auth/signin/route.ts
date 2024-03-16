@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
-import { User } from "@/models/user";
+import { AdminUser } from "@/models/user";
 import bcrypt from "bcrypt";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
@@ -7,9 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
 
-    const { email, password, fullname } = await req.json();
-
-    if (password.length < 6) return NextResponse.json({ error: 'The password must be at least 6 characters long' });
+    const { email, password, fullname, role } = await req.json();
 
     try {
         await connectDB();
@@ -28,7 +26,7 @@ export async function POST(req: NextRequest) {
         // }
         //////////////////////////////////////////////////////////////////////
 
-        const userFound = await User.findOne({ email });
+        const userFound = await AdminUser.findOne({ email });
 
         if (userFound) {
             return NextResponse.json({ message: 'This email has already been registered' }, { status: 400 })
@@ -36,10 +34,11 @@ export async function POST(req: NextRequest) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = new User({
+        const user = new AdminUser({
             email,
             fullname,
-            password: hashedPassword
+            password: hashedPassword,
+            role
         });
 
         await user.save();

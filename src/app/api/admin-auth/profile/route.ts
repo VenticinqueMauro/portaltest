@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
-import { User } from "@/models/user";
+import { AdminUser } from "@/models/user";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -21,7 +21,7 @@ export async function GET() {
             return NextResponse.json({ error: 'Token has expired' }, { status: 401 });
         }
 
-        const user = await User.findOne({ email: decodedToken.email }).select("-password")
+        const user = await AdminUser.findOne({ email: decodedToken.email }).select("-password")
 
         if (!user) return NextResponse.json({ error: "User not found", authenticate: false }, { status: 400 });
 

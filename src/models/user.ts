@@ -8,14 +8,14 @@ enum UserRole {
     ADMIN = 'admin',
 }
 
-interface UserDocument extends Document {
+interface AdminUserDocument extends Document {
     email: string;
     password: string;
     fullname: string;
     role: UserRole;
 }
 
-const userSchema = new Schema<UserDocument>({
+const AdminUserSchema = new Schema<AdminUserDocument>({
     email: {
         type: String,
         required: true,
@@ -38,4 +38,4 @@ const userSchema = new Schema<UserDocument>({
     }
 });
 
-export const User = models.User || model<UserDocument>('User', userSchema);
+export const AdminUser = models.User || model<AdminUserDocument>('User', AdminUserSchema);
