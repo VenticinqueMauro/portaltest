@@ -3,7 +3,7 @@
 export default function page() {
 
   async function handleLogin() {
-    const res = await fetch('/api/admin-auth/login', {
+    const res = await fetch('/api/auth/admin/login', {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
@@ -19,7 +19,7 @@ export default function page() {
   }
 
   async function handleLogout() {
-    const res = await fetch('/api/admin-auth/logout', {
+    const res = await fetch('/api/auth/admin/logout', {
       method: "DELETE",
       credentials: 'include'
     })
@@ -28,7 +28,7 @@ export default function page() {
   }
 
   async function handleProfile() {
-    const res = await fetch('/api/admin-auth/profile', {
+    const res = await fetch('/api/auth/admin/profile', {
       method: "GET",
       credentials: 'include'
     })
@@ -37,7 +37,7 @@ export default function page() {
   }
 
   async function handleSignin() {
-    const res = await fetch('/api/admin-auth/signin', {
+    const res = await fetch('/api/auth/admin/signin', {
       method: "POST",
       credentials: 'include',
       body: JSON.stringify({
