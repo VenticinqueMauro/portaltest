@@ -1,21 +1,21 @@
 import { connectDB } from "@/lib/mongodb";
-import { AdminUser } from "@/models/user";
+import { AdminUser } from "@/models/admin.user";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET() {
 
-    const portal_app = cookies().get('portal_app')?.value
+    const token = cookies().get('portal_app')?.value
 
-    if (!portal_app) {
+    if (!token) {
         return NextResponse.json({ message: 'No token exist' }, { status: 404 })
     }
 
     try {
         await connectDB();
 
-        const decodedToken: any = verify(portal_app, `${process.env.JWT_KEY}`);
+        const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
 
         if (decodedToken.exp * 1000 < Date.now()) {
             return NextResponse.json({ error: 'Token has expired' }, { status: 401 });

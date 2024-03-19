@@ -38,4 +38,4 @@ const AdminUserSchema = new Schema<AdminUserDocument>({
     }
 });
 
-export const AdminUser = models.User || model<AdminUserDocument>('User', AdminUserSchema);
+export const AdminUser = models.AdminUser || model<AdminUserDocument>('AdminUser', AdminUserSchema);

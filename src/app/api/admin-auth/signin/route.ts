@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
-import { AdminUser } from "@/models/user";
+import { AdminUser } from "@/models/admin.user";
 import bcrypt from "bcrypt";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
@@ -13,17 +13,23 @@ export async function POST(req: NextRequest) {
         await connectDB();
 
         // VERIFICACION DE ROLE PARA CREACION DE USUARIOS ADMINISTRADORES 
-        // const token = cookies().get('portal_app')?.value
+        const token = cookies().get('portal_app')?.value
 
-        // if (!token) {
-        //     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        // }
+        if (!token) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
 
-        // const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
+        const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
 
-        // if (!decodedToken || decodedToken.role !== 'admin') {
-        //     return NextResponse.json({ error: 'You do not have permission to create users' }, { status: 403 });
-        // }
+        if (decodedToken.exp * 1000 < Date.now()) {
+            return NextResponse.json({ error: 'Token has expired' }, { status: 401 });
+        }
+
+        const userAuthorized = await AdminUser.findOne({ email: decodedToken.email }).select("-password")
+
+        if (!userAuthorized || userAuthorized.role !== 'admin') {
+            return NextResponse.json({ error: 'You do not have permission to create users' }, { status: 403 });
+        }
         //////////////////////////////////////////////////////////////////////
 
         const userFound = await AdminUser.findOne({ email });

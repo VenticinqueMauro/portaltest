@@ -7,7 +7,7 @@ export default function page() {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
-        "email": "test@test.com",
+        "email": "test25@test.com",
         "password": "123456",
       }),
       headers: {
@@ -36,6 +36,20 @@ export default function page() {
     alert(JSON.stringify(data))
   }
 
+  async function handleSignin() {
+    const res = await fetch('/api/admin-auth/signin', {
+      method: "POST",
+      credentials: 'include',
+      body: JSON.stringify({
+        email: "testa2@testa.com",
+        password: "123456",
+        fullname: "Testa Testa"
+      })
+    })
+    const data = await res.json()
+    alert(JSON.stringify(data))
+  }
+
   return (
     <main>
       <a href="/" className="block mt-5">Inicio</a>
@@ -43,6 +57,7 @@ export default function page() {
       <button onClick={handleLogin} className="block px-3 py-2 rounded bg-emerald-500 mt-5">Login</button>
       <button onClick={handleLogout} className="block px-3 py-2 rounded bg-red-500 mt-5">Logout</button>
       <button onClick={handleProfile} className="block px-3 py-2 rounded bg-blue-500 mt-5">Profile</button>
+      <button onClick={handleSignin} className="block px-3 py-2 rounded bg-yellow-500 mt-5">Signin</button>
     </main>
   )
 }
