@@ -16,13 +16,12 @@ export async function GET(req: NextRequest) {
         const userFound = await ClientUser.findOne({ emailVerificationToken: token });
 
         if (!userFound) {
-            return NextResponse.json({ error: 'Invalid token' })
+            return NextResponse.json({ message: 'Invalid token' }, { status: 404 })
         }
 
         await userFound.updateOne({ emailVerified: true, emailVerificationToken: null });
 
-        return NextResponse.json({ success: true })
-
+        return NextResponse.json({ message: 'Email verified successfully' }, { status: 200 });
     } catch (error) {
         if (error instanceof Error) {
             return NextResponse.json({

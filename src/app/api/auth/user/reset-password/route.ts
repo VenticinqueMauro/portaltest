@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
             react: ResetPasswordEmailTemplate({ email, resetPasswordToken }) as React.ReactElement,
         })
 
-        return NextResponse.json({ message: 'Reset password successful' }, { status: 200 })
+        return NextResponse.json({ message: 'Password reset email sent' }, { status: 200 })
 
     } catch (error) {
         if (error instanceof Error) {

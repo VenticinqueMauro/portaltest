@@ -9,6 +9,6 @@ export const VerifyEmailTemplate: React.FC<Readonly<VerifyEmailTemplateProps>> =
     <div>
         <h1>Verificacion de email para: {email}!</h1>
         <p>Para verificar tu correo haz click en el siguiente enlace</p>
-        <a href={`http://localhost:3000/api/auth/user/verify-email?token=${emailVerificationToken}`}>Verificar Email</a>
+        <a href={`http://localhost:3000/auth/verify-email?token=${emailVerificationToken}`}>Verificar Email</a>
     </div>
 );
