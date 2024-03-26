@@ -3,17 +3,26 @@ import { NextResponse } from "next/server";
 
 export async function DELETE() {
     try {
-        cookies().delete('portal_app')
+        // Eliminar la cookie del token de autenticación
+        cookies().delete('portal_app');
 
-        return NextResponse.json({ message: 'Logout successfully' }, { status: 200 });
+        // Crear una respuesta con un mensaje de éxito
+        return NextResponse.json({ message: 'Cierre de sesión exitoso' }, { status: 200 });
 
     } catch (error) {
+        // Manejar errores
         if (error instanceof Error) {
             return NextResponse.json({
                 error: error.message
             }, {
                 status: 400
-            })
+            });
+        } else {
+            return NextResponse.json({
+                error: 'Ha ocurrido un error inesperado'
+            }, {
+                status: 500 // Internal Server Error
+            });
         }
     }
 }
