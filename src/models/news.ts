@@ -1,6 +1,6 @@
 import { Schema, model, models, Document } from "mongoose";
 
-enum NewsStatus {
+export enum NewsStatus {
     INACTIVE = 'inactive',
     ACTIVE = 'active',
     PENDING = 'pending',
@@ -15,8 +15,8 @@ interface NewsDocument extends Document {
     image: string;
     status: NewsStatus;
     comments?: string[]; 
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 const NewsSchema = new Schema<NewsDocument>({
@@ -64,4 +64,4 @@ const NewsSchema = new Schema<NewsDocument>({
     }
 });
 
-export const News = models.New || model<NewsDocument>('News', NewsSchema);
+export const News = models.News || model<NewsDocument>('News', NewsSchema);

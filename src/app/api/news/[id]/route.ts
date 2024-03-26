@@ -1,0 +1,74 @@
+import { connectDB } from "@/lib/mongodb";
+import { News } from "@/models/news";
+import { handleError } from "@/utils/utils";
+import { NextRequest, NextResponse } from "next/server";
+
+
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+    const id = params.id;
+
+    try {
+        await connectDB();
+
+        const newsFound = await News.findById(id);
+
+        if (!newsFound) {
+            return NextResponse.json({ error: "No se encontró la noticia" }, { status: 404 });
+        }
+
+        return NextResponse.json({ message: "Noticia encontrada", data: newsFound }, { status: 200 });
+
+    } catch (error) {
+        return handleError(error);
+    }
+}
+
+export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+    const id = params.id;
+
+    try {
+        await connectDB();
+
+        const newsFound = await News.findById(id);
+
+        if (!newsFound) {
+            return NextResponse.json({ error: "No se encontró la noticia" }, { status: 404 });
+        }
+
+        const updatedNews = await News.findOneAndUpdate(
+            { _id: id }, // Condición de búsqueda
+            await request.json(), // Datos actualizados
+            { new: true } // Opción para devolver el documento actualizado
+        );
+
+        if (!updatedNews) {
+            return NextResponse.json({ error: "No se pudo actualizar la noticia" }, { status: 500 });
+        }
+
+        return NextResponse.json({ message: "Noticia actualizada", data: updatedNews }, { status: 200 });
+
+    } catch (error) {
+        return handleError(error);
+    }
+}
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+    const id = params.id;
+
+    try {
+        await connectDB();
+
+        const newsFound = await News.findById(id);
+
+        if (!newsFound) {
+            return NextResponse.json({ error: "No se encontró la noticia" }, { status: 404 });
+        }
+
+        await News.deleteOne({ _id: id });
+
+        return NextResponse.json({ message: "Noticia eliminada" }, { status: 200 });
+
+    } catch (error) {
+        return handleError(error);
+    }
+}
