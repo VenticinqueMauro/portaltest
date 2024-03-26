@@ -1,4 +1,4 @@
-import { Schema, model, models, Document } from "mongoose";
+import { Schema, model, models, Document, Types } from "mongoose";
 
 export enum NewsStatus {
     INACTIVE = 'inactive',
@@ -6,21 +6,37 @@ export enum NewsStatus {
     PENDING = 'pending',
 }
 
+interface LinkedNews {
+    _id: Types.ObjectId;
+    title: string;
+    summary: string;
+    image: string;
+}
+
 interface NewsDocument extends Document {
     title: string;
+    summary: string;
     content: string;
-    author: string;
-    category?: string[]; 
-    tags?: string[];
-    image: string;
     status: NewsStatus;
-    comments?: string[]; 
+    highlightedText?: string;
+    newsLinked?: LinkedNews[];
+    image?: string;
+    quote?: string;
+    author?: string;
+    category?: string[];
+    tags?: string[];
+    comments?: string[];
     createdAt?: Date;
     updatedAt?: Date;
 }
 
 const NewsSchema = new Schema<NewsDocument>({
     title: {
+        type: String,
+        required: true,
+        minlength: 3
+    },
+    summary: {
         type: String,
         required: true,
         minlength: 3
@@ -32,18 +48,36 @@ const NewsSchema = new Schema<NewsDocument>({
     },
     author: {
         type: String,
-        required: true,
         minlength: 3
     },
     category: {
-        type: [String], 
+        type: [String],
     },
     tags: {
-        type: [String], 
+        type: [String],
     },
     image: {
         type: String,
         required: true,
+    },
+    quote: {
+        type: String
+    },
+    highlightedText: {
+        type: String
+    },
+    newsLinked: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'News',
+            validate: {
+                validator: function (val: any[]) {
+                    return val.length <= 3;
+                },
+                message: `El campo 'noticias vinculadas' no puede tener más de ${3} noticias vinculadas.`
+            }
+        }],
+        default: []
     },
     status: {
         type: String,
@@ -51,7 +85,7 @@ const NewsSchema = new Schema<NewsDocument>({
         default: NewsStatus.INACTIVE
     },
     comments: {
-        type: [String], 
+        type: [String],
         default: []
     },
     createdAt: {
