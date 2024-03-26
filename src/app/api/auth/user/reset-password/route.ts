@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
         const today = new Date();
         const expiryDate = new Date(today.setDate(today.getDate() + 1)); // 24 hours from now
 
-        await userFound.updateOne({ resetPasswordToken: resetPasswordToken, resetPasswordExpires: expiryDate });
+        await userFound.updateOne({ resetPasswordToken: resetPasswordToken, resetPasswordTokenExpiry: expiryDate });
 
         await sendEmail({
             from: 'Portal Test <onboarding@resend.dev>',

@@ -38,12 +38,10 @@ const ClientUserSchema = new Schema<ClientUserDocument>({
     emailVerificationToken: {
         type: String,
         default: null,
-        unique: true
     },
     resetPasswordToken: {
         type: String,
         default: null,
-        unique: true
     },
     resetPasswordTokenExpiry: {
         type: Date,

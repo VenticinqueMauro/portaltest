@@ -20,16 +20,16 @@ export async function PUT(req: NextRequest) {
             return NextResponse.json({ error: 'Invalid token' })
         }
 
-        const resetPasswordExpires = userFound.resetPasswordExpires;
+        const resetPasswordExpires = userFound.resetPasswordTokenExpiry;
 
 
-        if (resetPasswordExpires.getTime() < Date.now()) {
+        if (!resetPasswordExpires || resetPasswordExpires.getTime() < Date.now()) {
             return NextResponse.json({ error: 'Token expired' })
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await userFound.updateOne({ password: hashedPassword, resetPasswordToken: null, resetPasswordExpires: null });
+        await userFound.updateOne({ password: hashedPassword, resetPasswordToken: null, resetPasswordTokenExpiry: null });
 
         return NextResponse.json({ message: 'Password changed successfully' }, { status: 200 })
 
