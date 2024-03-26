@@ -24,7 +24,7 @@ export default function page() {
       credentials: 'include',
       body: JSON.stringify({
         "email": "mauro.venticinque@hotmail.com",
-        "password": "mauro123"
+        "password": "mauro1234"
       }),
       headers: {
         'Content-Type': 'application/json'
