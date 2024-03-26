@@ -1,9 +1,25 @@
-import { authMiddleware as authUsersMiddleware } from "@clerk/nextjs";
+import { jwtVerify } from 'jose';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export default authUsersMiddleware({
-    publicRoutes: ['/', /^\/api\/.*/, '/dashboard'],
-});
+export async function middleware(request: NextRequest) {
+
+    const token = request.cookies.get('portal_app')?.value;
+
+    if (token === undefined) return NextResponse.redirect(new URL('/', request.url));
+
+    try {
+        await jwtVerify(token, new TextEncoder().encode(`${process.env.JWT_KEY}`))
+        return NextResponse.next()
+    } catch (error) {
+        console.log(error)
+        return NextResponse.redirect(new URL('/', request.url))
+    }
+
+}
 
 export const config = {
-    matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+    matcher: [
+        '/dashboard/:path*'
+    ],
 };

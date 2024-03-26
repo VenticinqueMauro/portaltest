@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
-import { User } from "@/models/user";
+import { ClientUser } from "@/models/client.user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     try {
         await connectDB();
 
-        const userFound = await User.findOne({ email })
+        const userFound = await ClientUser.findOne({ email })
 
         if (!userFound) {
             return NextResponse.json({ error: 'This email is not associated with any registered account' }, { status: 404 });
@@ -30,14 +30,16 @@ export async function POST(req: NextRequest) {
         const tokenData = {
             exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
             email,
-            fullname
+            fullname,
+            subscribed: userFound?.subscribed,
+            emailVerified: userFound?.emailVerified
         }
 
-        const token = jwt.sign(tokenData, `${process.env.JWT_KEY}`)
+        const token = jwt.sign(tokenData, `${process.env.JWT_KEY_CLIENT}`)
 
         const response = NextResponse.json({ message: 'Login Succesfull' }, { status: 200 })
 
-        response.cookies.set('portal_app', token, {
+        response.cookies.set('portal_app_client', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 60 * 60 * 24 * 30,

@@ -1,18 +1,19 @@
+import { sendEmail } from "@/actions/emails/verifyEmail";
+import { VerifyEmailTemplate } from "@/components/EmailTemplates/Verify.email";
 import { connectDB } from "@/lib/mongodb";
-import { User } from "@/models/user";
+import { ClientUser } from "@/models/client.user";
 import bcrypt from "bcrypt";
+import crypto from 'crypto';
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
 
     const { email, password, fullname } = await req.json();
 
-    if (password.length < 6) return NextResponse.json({ error: 'The password must be at least 6 characters long' });
-
     try {
         await connectDB();
 
-        const userFound = await User.findOne({ email });
+        const userFound = await ClientUser.findOne({ email });
 
         if (userFound) {
             return NextResponse.json({ message: 'This email has already been registered' }, { status: 400 })
@@ -20,13 +21,24 @@ export async function POST(req: NextRequest) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = new User({
+        const user = new ClientUser({
             email,
             fullname,
-            password: hashedPassword
+            password: hashedPassword,
         });
 
         await user.save();
+
+        const emailVerificationToken = crypto.randomBytes(32).toString("base64url");
+
+        await user.updateOne({ emailVerificationToken: emailVerificationToken });
+
+        await sendEmail({
+            from: 'Portal Test <onboarding@resend.dev>',
+            to: [email],
+            subject: "Email Verification",
+            react: VerifyEmailTemplate({email, emailVerificationToken}) as React.ReactElement,
+        })
 
         return NextResponse.json({ message: 'Registration successful' }, { status: 200 })
 
