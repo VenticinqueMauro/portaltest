@@ -6,11 +6,19 @@ export enum NewsStatus {
     PENDING = 'pending',
 }
 
-interface LinkedNews {
+export interface LinkedNews {
     _id: Types.ObjectId;
     title: string;
     summary: string;
     image: string;
+}
+
+export enum CategoryNews{
+    POLITICA = 'politica',
+    ECONEGOCIOS = 'eco & negocios',
+    DEPORTES = 'deportes',
+    TENDENCIAS = 'tendencias',
+    PORTALCANA = 'portalcana',
 }
 
 interface NewsDocument extends Document {
@@ -18,12 +26,12 @@ interface NewsDocument extends Document {
     summary: string;
     content: string;
     status: NewsStatus;
+    category: CategoryNews[];
     subscribersOnly: boolean;
     highlightedText?: string;
     newsLinked?: LinkedNews[];
     image?: string;
     author?: string;
-    category?: string[];
     tags?: string[];
     comments?: string[];
     createdAt?: Date;
@@ -52,6 +60,7 @@ const NewsSchema = new Schema<NewsDocument>({
     },
     category: {
         type: [String],
+        enum: Object.values(CategoryNews),
     },
     tags: {
         type: [String],
