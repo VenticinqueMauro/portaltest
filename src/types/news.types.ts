@@ -1,13 +1,17 @@
-import { NewsStatus } from "@/models/news";
+import { CategoryNews, LinkedNews, NewsStatus } from "@/models/news";
 
 export type NewsType = {
     title: string;
+    summary: string;
     content: string;
-    author: string;
-    category?: string[];
-    tags?: string[];
-    image: string;
     status: NewsStatus;
+    category: CategoryNews[];
+    subscribersOnly: boolean;
+    highlightedText?: string;
+    newsLinked?: LinkedNews[];
+    image?: string;
+    author?: string;
+    tags?: string[];
     comments?: string[];
     createdAt?: Date;
     updatedAt?: Date;
