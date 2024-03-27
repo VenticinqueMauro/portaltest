@@ -18,10 +18,10 @@ interface NewsDocument extends Document {
     summary: string;
     content: string;
     status: NewsStatus;
+    subscribersOnly: boolean;
     highlightedText?: string;
     newsLinked?: LinkedNews[];
     image?: string;
-    quote?: string;
     author?: string;
     category?: string[];
     tags?: string[];
@@ -60,9 +60,6 @@ const NewsSchema = new Schema<NewsDocument>({
         type: String,
         required: true,
     },
-    quote: {
-        type: String
-    },
     highlightedText: {
         type: String
     },
@@ -83,6 +80,10 @@ const NewsSchema = new Schema<NewsDocument>({
         type: String,
         enum: Object.values(NewsStatus),
         default: NewsStatus.INACTIVE
+    },
+    subscribersOnly: {
+        type: Boolean,
+        default: false
     },
     comments: {
         type: [String],
