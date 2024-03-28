@@ -1,6 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
-import { View } from "@/models/views";
 import { handleError } from "@/utils/utils";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
@@ -24,9 +23,6 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         if (!newsFound) {
             return NextResponse.json({ error: "No se encontró la noticia" }, { status: 404 });
         }
-
-        // Incrementar las vistas
-        await View.updateOne({ newsId: id }, { $inc: { viewsCount: 1 }, $push: { viewDateTime: new Date() } }, { upsert: true });
 
         return NextResponse.json({ message: "Noticia encontrada", data: newsFound }, { status: 200 });
 

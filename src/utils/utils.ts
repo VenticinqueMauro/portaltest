@@ -18,3 +18,18 @@ export const handleError = (error: any) => {
         });
     }
 };
+
+
+// Funcion para formatear fechas
+
+export function formatDate(date: Date) {
+    const options: any = {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'America/Argentina/Buenos_Aires'
+    };
+    return date.toLocaleDateString('es-AR', options);
+}
