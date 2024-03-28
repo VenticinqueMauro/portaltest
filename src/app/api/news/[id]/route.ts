@@ -45,7 +45,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
         const updatedNews = await News.findOneAndUpdate(
             { _id: id }, // Condición de búsqueda
-            { ...request.json(), updatedAt: new Date() }, // Datos actualizados
+            { ...await request.json(), updatedAt: new Date() }, // Datos actualizados
             { new: true } // Opción para devolver el documento actualizado
         );
 

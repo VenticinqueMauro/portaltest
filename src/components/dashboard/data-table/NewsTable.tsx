@@ -1,11 +1,11 @@
 import { NewsType } from "@/types/news.types";
-import { NewsDataTable, columns } from "./Columns"
-import { DataTable } from "./DataTable"
+import { NewsDataTable, columnsNews } from "./Columns"
 import { formatDate } from "@/utils/utils";
+import { DataTableNews } from "./DataTable";
 
 
 async function getData(): Promise<NewsDataTable[]> {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, {cache: "no-store"});
     const { data } = await response.json();
 
 
@@ -27,7 +27,7 @@ export default async function NewsTable() {
 
     return (
         <div className="py-10">
-            <DataTable columns={columns} data={data} />
+            <DataTableNews columns={columnsNews} data={data} />
         </div>
     )
 }
