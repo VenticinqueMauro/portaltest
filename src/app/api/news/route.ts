@@ -2,6 +2,8 @@ import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
 import { NewsType } from "@/types/news.types";
 import { handleError } from "@/utils/utils";
+import { verify } from "jsonwebtoken";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -23,6 +25,14 @@ export async function GET() {
 export async function POST(request: NextRequest) {
     const news: NewsType = await request.json();
 
+    const token = cookies().get('portal_app')?.value
+
+    if (!token) {
+        return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
+    const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
+
     try {
         await connectDB();
 
@@ -32,7 +42,10 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Ya existe una noticia con el mismo título" }, { status: 400 });
         }
 
-        const newNews = new News(news);
+        const newNews = new News({
+            ...news,
+            author: decodedToken.fullname
+        });
 
         if (!newNews) {
             return NextResponse.json({ error: "No se pudo crear la noticia" }, { status: 400 });

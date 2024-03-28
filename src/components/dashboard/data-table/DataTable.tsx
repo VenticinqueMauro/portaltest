@@ -74,7 +74,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
-                            Columns
+                            Columnas
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -153,7 +153,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
-                    Previous
+                    Previo
                 </Button>
                 <Button
                     variant="outline"
@@ -161,7 +161,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >
-                    Next
+                    Siguiente
                 </Button>
             </div>
         </div>

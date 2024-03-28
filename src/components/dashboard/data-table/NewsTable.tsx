@@ -14,6 +14,7 @@ async function getData(): Promise<NewsDataTable[]> {
         title: item.title,
         summary: item.summary,
         category: item.category,
+        author: item.author,
         status: item.status,
         createdAt: formatDate(new Date(item?.createdAt as Date)),
         updatedAt: formatDate(new Date(item?.updatedAt as Date)),
