@@ -30,6 +30,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
+import { CirclePlus } from "lucide-react"
+import { ButtonCreateNews } from "./Button.CreateNews"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -62,7 +64,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
     return (
         <div>
             {/* BUSQUEDA Y COLUMNAS  */}
-            <div className="flex items-center py-4">
+            <div className="flex items-center py-4 gap-5">
                 <Input
                     placeholder="Filtrar noticias por titulo"
                     value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -71,6 +73,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
                     }
                     className="max-w-sm"
                 />
+                <ButtonCreateNews />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">

@@ -77,25 +77,6 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         },
     },
     {
-        accessorKey: "status",
-        header: ({ column }) => {
-            return (
-                <span
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
-                >
-                    Estado
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </span>
-            )
-        },
-        cell: ({ row }) => {
-            return (
-                <Badge variant={"outline"} className={`${row.getValue('status') === 'inactive' ? 'text-destructive' : row.getValue('status') === 'pending' ? 'text-amber-500' : 'text-green-500'} uppercase rounded`}>{row.getValue('status')}</Badge>
-            )
-        },
-    },
-    {
         accessorKey: "createdAt",
         header: ({ column }) => {
             return (
@@ -128,6 +109,25 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         header: "Noticias vinculadas",
     },
     {
+        accessorKey: "status",
+        header: ({ column }) => {
+            return (
+                <span
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
+                >
+                    Estado
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </span>
+            )
+        },
+        cell: ({ row }) => {
+            return (
+                <Badge variant={"outline"} className={`${row.getValue('status') === 'inactive' ? 'text-destructive' : row.getValue('status') === 'pending' ? 'text-amber-500' : 'text-green-500'} uppercase rounded`}>{row.getValue('status')}</Badge>
+            )
+        },
+    },
+    {
         accessorKey: "Acciones",
         cell: ({ row }) => {
             const news = row.original
@@ -143,11 +143,11 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                         <DropdownMenuLabel>Acciones</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
-                            <FilePenLine size={18} className="mr-1" />
+                            <FilePenLine size={18} className="mr-1 text-blue-800" />
                             Modificar
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                            <Trash2 size={18} className="mr-1" />
+                            <Trash2 size={18} className="mr-1 text-destructive" />
                             Eliminar
                         </DropdownMenuItem>
                     </DropdownMenuContent>
