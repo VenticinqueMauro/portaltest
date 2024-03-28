@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function Sidebar() {
@@ -6,6 +7,7 @@ export default function Sidebar() {
             <span>
                 TDN Admin Panel
             </span>
+            <Link href={'/'}>home</Link>
         </aside>
     )
 }

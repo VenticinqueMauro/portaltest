@@ -9,6 +9,7 @@ export type NewsType = {
     category: CategoryNews[];
     subscribersOnly: boolean;
     highlightedText?: string;
+    lastModifiedBy?: string;
     newsLinked?: LinkedNews[];
     image?: string;
     author?: string;

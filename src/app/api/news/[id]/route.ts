@@ -1,7 +1,9 @@
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
 import { handleError } from "@/utils/utils";
+import { verify } from "jsonwebtoken";
 import { isValidObjectId } from "mongoose";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -34,6 +36,14 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
     const id = params.id;
 
+    const token = cookies().get('portal_app')?.value
+
+    if (!token) {
+        return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
+
+    const decodedToken: any = verify(token, `${process.env.JWT_KEY}`)
+
     try {
         await connectDB();
 
@@ -45,7 +55,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
         const updatedNews = await News.findOneAndUpdate(
             { _id: id }, // Condición de búsqueda
-            { ...await request.json(), updatedAt: new Date() }, // Datos actualizados
+            { ...await request.json(), updatedAt: new Date(), lastModifiedBy: decodedToken.fullname }, // Datos actualizados
             { new: true } // Opción para devolver el documento actualizado
         );
 

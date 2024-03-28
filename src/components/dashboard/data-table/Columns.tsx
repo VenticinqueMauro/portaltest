@@ -20,6 +20,7 @@ export type NewsDataTable = {
     category: CategoryNews[];
     author: string,
     status: NewsStatus;
+    lastModifiedBy?: string;
     createdAt?: Date;
     updatedAt?: Date;
     newsLinked?: LinkedNews[];
@@ -84,7 +85,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
                 >
-                    Fecha de creación
+                    Creación
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
@@ -98,11 +99,15 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
                 >
-                    Fecha de actualización
+                    Actualización
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
         }
+    },
+    {
+        accessorKey: "lastModifiedBy",
+        header: "Modificado por"
     },
     {
         accessorKey: "newsLinked",

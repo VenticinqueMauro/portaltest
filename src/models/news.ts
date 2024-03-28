@@ -13,7 +13,7 @@ export interface LinkedNews {
     image: string;
 }
 
-export enum CategoryNews{
+export enum CategoryNews {
     POLITICA = 'politica',
     ECONEGOCIOS = 'eco & negocios',
     DEPORTES = 'deportes',
@@ -28,6 +28,7 @@ interface NewsDocument extends Document {
     status: NewsStatus;
     category: CategoryNews[];
     subscribersOnly: boolean;
+    lastModifiedBy?: string;
     highlightedText?: string;
     newsLinked?: LinkedNews[];
     image?: string;
@@ -101,6 +102,9 @@ const NewsSchema = new Schema<NewsDocument>({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    lastModifiedBy: {
+        type: String,
     },
     updatedAt: {
         type: Date,
