@@ -14,7 +14,7 @@ async function getData(): Promise<NewsDataTable[]> {
     }
 
     return data.map((item: NewsType) => ({
-        id: item._id,
+        id: item._id?.toString(),
         title: item.title,
         summary: item.summary,
         category: item.category,
