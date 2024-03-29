@@ -21,6 +21,12 @@ export const handleCreateNews = async (formData: FormData) => {
         author: author
     }
 
+    if (!data.title ||!data.summary ||!data.content ||!data.category ||!data.tags ||!data.image) {
+        return { error: 'Faltan campos' };
+    }
+
+    const dataString = JSON.stringify(data);
+    
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`, {
             method: 'POST',
@@ -28,7 +34,7 @@ export const handleCreateNews = async (formData: FormData) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: dataString
         });
 
         if (!response.ok) {
