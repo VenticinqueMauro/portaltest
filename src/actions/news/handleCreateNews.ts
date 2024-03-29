@@ -3,9 +3,6 @@
 import { decodeToken, handleError } from "@/utils/utils";
 import { revalidatePath } from "next/cache";
 
-const BASE_URL = process.env.NEXT_PUBLIC_URL;
-
-
 export const handleCreateNews = async (formData: FormData) => {
     const decodedToken = decodeToken();
     const author = decodedToken.fullname;
@@ -21,7 +18,7 @@ export const handleCreateNews = async (formData: FormData) => {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/news`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`, {
             method: 'POST',
             credentials: 'include',
             headers: {
