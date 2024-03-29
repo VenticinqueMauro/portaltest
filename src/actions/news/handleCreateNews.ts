@@ -11,22 +11,28 @@ export const handleCreateNews = async (formData: FormData) => {
         return { error: 'No autorizado' };
     }
 
+    const title = formData.get('title')
+    const summary = formData.get('summary')
+    const content = formData.get('content')
+    const category = formData.get('category')
+    const tags = formData.get('tags')
+    const image = formData.get('image')
+
+
     const data = {
-        title: formData.get('title'),
-        summary: formData.get('summary'),
-        content: formData.get('content'),
-        category: formData.get('category'),
-        tags: formData.get('tags'),
-        image: formData.get('image'),
-        author: author
+        title,
+        summary,
+        content,
+        category,
+        tags,
+        image,
+        author
     }
 
-    if (!data.title ||!data.summary ||!data.content ||!data.category ||!data.tags ||!data.image) {
-        return { error: 'Faltan campos' };
-    }
+    console.log(title)
 
     const dataString = JSON.stringify(data);
-    
+
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`, {
             method: 'POST',
