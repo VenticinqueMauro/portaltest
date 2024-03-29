@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     try {
         await connectDB();
 
-        const news: NewsType = await request.json();
+        const news = await request.json();
 
         const existingNews = await News.findOne({ title: news.title });
         if (existingNews) {

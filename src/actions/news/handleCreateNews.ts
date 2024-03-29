@@ -1,6 +1,6 @@
 'use server'
 
-import { decodeToken, handleError } from "@/utils/utils";
+import { decodeToken } from "@/utils/utils";
 import { revalidatePath } from "next/cache";
 
 export const handleCreateNews = async (formData: FormData) => {
@@ -28,8 +28,6 @@ export const handleCreateNews = async (formData: FormData) => {
         image,
         author
     }
-
-    console.log(title)
 
     const dataString = JSON.stringify(data);
 
