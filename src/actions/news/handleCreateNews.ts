@@ -7,6 +7,10 @@ export const handleCreateNews = async (formData: FormData) => {
     const decodedToken = decodeToken();
     const author = decodedToken.fullname;
 
+    if (!author) {
+        return { error: 'No autorizado' };
+    }
+
     const data = {
         title: formData.get('title'),
         summary: formData.get('summary'),
@@ -14,7 +18,7 @@ export const handleCreateNews = async (formData: FormData) => {
         category: formData.get('category'),
         tags: formData.get('tags'),
         image: formData.get('image'),
-        author
+        author: author
     }
 
     try {
@@ -30,13 +34,11 @@ export const handleCreateNews = async (formData: FormData) => {
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.error);
-        }   
+        }
 
-        revalidatePath('/dashboard');    
+        revalidatePath('/dashboard');
         return await response.json();
     } catch (error) {
-        console.log(error)
+        return handleError(error);
     }
-
-
 }

@@ -8,8 +8,14 @@ import { handleCreateNews } from "@/actions/news/handleCreateNews"
 
 export default function CreateNewsForm() {
 
+    const handleSubmit = async (formData: FormData) => {
+        const response = await handleCreateNews(formData)
+
+        alert(JSON.stringify(response))
+    }
+
     return (
-        <form action={handleCreateNews} className="space-y-8 py-10">
+        <form action={handleSubmit} className="space-y-8 py-10">
             <Select name="category">
                 <SelectTrigger>
                     <SelectValue placeholder="Categoria" />
@@ -23,8 +29,8 @@ export default function CreateNewsForm() {
             <Input name='title' placeholder="Titulo" required />
             <Textarea name='summary' placeholder="Sumario" required />
             <Textarea name='content' placeholder="Contenido" required />
-            <Input name='tags' placeholder="Etiquetas" />
-            <Input name='image' type="text" placeholder="Imagen" />
+            <Input name='tags' placeholder="Etiquetas" required />
+            <Input name='image' type="text" placeholder="Imagen" required />
             <Button type="submit" className="w-full">Crear</Button>
         </form>
     )

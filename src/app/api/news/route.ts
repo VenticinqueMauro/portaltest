@@ -2,8 +2,6 @@ import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
 import { NewsType } from "@/types/news.types";
 import { handleError } from "@/utils/utils";
-import { verify } from "jsonwebtoken";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -39,11 +37,7 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({ message: "Noticia creada", data: newNews }, { status: 201 });
     } catch (error) {
-        if (error instanceof Error) {
-            return NextResponse.json({ error: `${error.message}` }, { status: 500 });
-        } else {
-            return NextResponse.json({ error: 'Ocurrió un error inesperado' }, { status: 500 });
-        }
+        return handleError(error)
     }
 }
 
