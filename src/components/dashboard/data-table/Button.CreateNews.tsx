@@ -8,6 +8,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { CirclePlus } from "lucide-react"
+import CreateNewsForm from "../form/CreateNews.form"
 
 export const ButtonCreateNews = () => {
     return (
@@ -20,8 +21,7 @@ export const ButtonCreateNews = () => {
                 <SheetHeader>
                     <SheetTitle>Crear una nueva noticia</SheetTitle>
                     <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
+                        <CreateNewsForm />
                     </SheetDescription>
                 </SheetHeader>
             </SheetContent>

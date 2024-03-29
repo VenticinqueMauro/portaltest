@@ -23,39 +23,27 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-    const news: NewsType = await request.json();
-
-    const token = cookies().get('portal_app')?.value
-
-    if (!token) {
-        return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
-    }
-
-    const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
-
     try {
         await connectDB();
 
-        const newsFound = await News.findOne({ title: news.title });
+        const news: NewsType = await request.json();
 
-        if (newsFound) {
+        const existingNews = await News.findOne({ title: news.title });
+        if (existingNews) {
             return NextResponse.json({ error: "Ya existe una noticia con el mismo título" }, { status: 400 });
         }
 
-        const newNews = new News({
-            ...news,
-            author: decodedToken.fullname
-        });
-
-        if (!newNews) {
-            return NextResponse.json({ error: "No se pudo crear la noticia" }, { status: 400 });
-        }
+        const newNews = new News(news);
 
         await newNews.save();
 
         return NextResponse.json({ message: "Noticia creada", data: newNews }, { status: 201 });
     } catch (error) {
-        return handleError(error);
+        if (error instanceof Error) {
+            return NextResponse.json({ error: `${error.message}` }, { status: 500 });
+        } else {
+            return NextResponse.json({ error: 'Ocurrió un error inesperado' }, { status: 500 });
+        }
     }
 }
 

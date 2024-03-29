@@ -1,9 +1,8 @@
 import { Schema, model, models, Document, Types } from "mongoose";
 
 export enum NewsStatus {
-    INACTIVE = 'inactive',
-    ACTIVE = 'active',
-    PENDING = 'pending',
+    PUBLISHED = 'publicado',
+    PENDING = 'pendiente',
 }
 
 export interface LinkedNews {
@@ -89,7 +88,7 @@ const NewsSchema = new Schema<NewsDocument>({
     status: {
         type: String,
         enum: Object.values(NewsStatus),
-        default: NewsStatus.INACTIVE
+        default: NewsStatus.PENDING
     },
     subscribersOnly: {
         type: Boolean,

@@ -128,7 +128,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         },
         cell: ({ row }) => {
             return (
-                <Badge variant={"outline"} className={`${row.getValue('status') === 'inactive' ? 'text-destructive' : row.getValue('status') === 'pending' ? 'text-amber-500' : 'text-green-500'} uppercase rounded`}>{row.getValue('status')}</Badge>
+                <Badge variant={"outline"} className={`${row.getValue('status') === 'pendiente' ? 'text-amber-500' : 'text-green-500'} uppercase rounded`}>{row.getValue('status')}</Badge>
             )
         },
     },

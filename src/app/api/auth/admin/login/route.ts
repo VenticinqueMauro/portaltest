@@ -35,7 +35,8 @@ export async function POST(req: NextRequest) {
         const tokenData = {
             exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
             email,
-            fullname: userFound.fullname
+            fullname: userFound.fullname,
+            role: userFound.role
         }
         const token = jwt.sign(tokenData, `${process.env.JWT_KEY}`)
 
