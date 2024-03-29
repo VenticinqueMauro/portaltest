@@ -39,6 +39,6 @@ export const handleCreateNews = async (formData: FormData) => {
         revalidatePath('/dashboard');
         return await response.json();
     } catch (error) {
-        return handleError(error);
+        return { error: 'Hubo un error al crear la noticia' };
     }
 }
