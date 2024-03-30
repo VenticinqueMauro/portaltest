@@ -2,7 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {
     Tooltip,
     TooltipContent,
@@ -12,10 +11,12 @@ import {
 import { CategoryNews, LinkedNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, FilePenLine, MoreHorizontal, Trash2 } from "lucide-react";
+import ButtonDeleteNews from "./Button.DeleteNews";
 
 
 export type NewsDataTable = {
-    id: string
+    id: string;
+    title: string;
     summary: string;
     category: CategoryNews[];
     author: string,
@@ -137,26 +138,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         cell: ({ row }) => {
             const news = row.original
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <FilePenLine size={18} className="mr-1 text-blue-800" />
-                            Modificar
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Trash2 size={18} className="mr-1 text-destructive" />
-                            Eliminar
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <ButtonDeleteNews id={news.id} title={news.title} />
             )
         },
     },

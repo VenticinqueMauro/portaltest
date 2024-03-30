@@ -6,21 +6,31 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner";
 import { handleCreateNews } from "@/actions/news/handleCreateNews"
+import { useState } from "react";
 
 
 export default function CreateNewsForm() {
 
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const handleSubmit = async (formData: FormData) => {
 
-        const response = await handleCreateNews(formData)
+        try {
+            setIsLoading(true);
+            const response = await handleCreateNews(formData)
 
-        if (response.error) {
-            toast.error(response.error);
-        } else if (response.message) {
-            toast.success(response.message);
-        } else {
-            toast.warning(response);
+            if (response.error) {
+                toast.error(response.error);
+            } else if (response.message) {
+                toast.success(response.message);
+            } else {
+                toast.warning(response);
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -40,7 +50,9 @@ export default function CreateNewsForm() {
             <Textarea name='summary' placeholder="Sumario" required />
             <Textarea name='content' placeholder="Contenido" required />
             <Input name='image' type="text" placeholder="Imagen" required />
-            <Button type="submit" className="w-full">Crear</Button>
+            <Button type="submit" className={`${isLoading ? 'opacity-80 cursor-not-allowed' : ''} w-full`} disabled={isLoading}>
+                {isLoading ? 'Cargando...' : 'Crear'}
+            </Button>
         </form>
     )
 }
