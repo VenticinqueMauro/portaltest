@@ -1,8 +1,12 @@
 'use server'
 
+import { decodeToken } from "@/utils/utils";
 import { revalidatePath } from "next/cache";
 
 export const handleCreateNews = async (formData: FormData) => {
+
+    const decodedToken = decodeToken();
+    const author = decodedToken.fullname;
 
     const title = formData.get('title')
     const summary = formData.get('summary')
@@ -17,6 +21,7 @@ export const handleCreateNews = async (formData: FormData) => {
         content,
         category,
         image,
+        author
     }
 
 

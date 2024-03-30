@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     try {
         await connectDB();
 
-        const { title, summary, content, category, tags, image } = await request.json();
+        const { title, summary, content, category, tags, image, author } = await request.json();
 
         const existingNews = await News.findOne({ title });
 
@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
             category,
             tags,
             image,
+            author
         });
 
         await newNews.save();
