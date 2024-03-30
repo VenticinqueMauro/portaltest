@@ -1,5 +1,6 @@
 import Sidebar from "@/components/dashboard/layout/Sidebar"
 import { Metadata } from "next"
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
     title: 'Admin Panel',
@@ -15,6 +16,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
             <div className="flex-1 ml-56 overflow-y-auto p-6">
                 {children}
             </div>
+            <Toaster />
         </section>
     )
 }

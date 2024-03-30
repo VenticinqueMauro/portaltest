@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export const handleError = (error: any) => {
     if (error instanceof Error) {
         return NextResponse.json({
-            error: `Error: ${error.message}`
+            error: `${error.message}`
         }, {
             status: 400
         });

@@ -24,7 +24,6 @@ export const handleCreateNews = async (formData: FormData) => {
         author
     }
 
-
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, {
             method: 'POST',

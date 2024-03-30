@@ -4,20 +4,29 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner";
 import { handleCreateNews } from "@/actions/news/handleCreateNews"
+
 
 export default function CreateNewsForm() {
 
+
     const handleSubmit = async (formData: FormData) => {
-        
+
         const response = await handleCreateNews(formData)
 
-        alert(JSON.stringify(response))
+        if (response.error) {
+            toast.error(response.error);
+        } else if (response.message) {
+            toast.success(response.message);
+        } else {
+            toast.warning(response);
+        }
     }
 
     return (
         <form action={handleSubmit} className="space-y-8 py-10">
-            <Select name="category">
+            <Select name="category" required>
                 <SelectTrigger>
                     <SelectValue placeholder="Categoria" />
                 </SelectTrigger>

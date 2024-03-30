@@ -41,22 +41,22 @@ interface NewsDocument extends Document {
 const NewsSchema = new Schema<NewsDocument>({
     title: {
         type: String,
-        required: true,
-        minlength: 3
+        required: [true, 'El título es obligatorio'],
+        minlength: [3, 'El título debe tener al menos 3 caracteres']
     },
     summary: {
         type: String,
-        required: true,
-        minlength: 3
+        required: [true, 'El resumen es obligatorio'],
+        minlength: [3, 'El resumen debe tener al menos 3 caracteres']
     },
     content: {
         type: String,
-        required: true,
-        minlength: 3
+        required: [true, 'El contenido es obligatorio'],
+        minlength: [3, 'El contenido debe tener al menos 3 caracteres']
     },
     author: {
         type: String,
-        minlength: 3
+        minlength: [3, 'El autor debe tener al menos 3 caracteres']
     },
     category: {
         type: [String],
@@ -67,7 +67,7 @@ const NewsSchema = new Schema<NewsDocument>({
     },
     image: {
         type: String,
-        required: true,
+        required: [true, 'La imagen es obligatoria'],
     },
     highlightedText: {
         type: String
@@ -110,5 +110,6 @@ const NewsSchema = new Schema<NewsDocument>({
         default: Date.now
     }
 });
+
 
 export const News = models.News || model<NewsDocument>('News', NewsSchema);

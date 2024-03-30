@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button"
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
     SheetHeader,
     SheetTitle,
-    SheetTrigger,
+    SheetTrigger
 } from "@/components/ui/sheet"
 import { CirclePlus } from "lucide-react"
 import CreateNewsForm from "../form/CreateNews.form"
@@ -20,9 +18,9 @@ export const ButtonCreateNews = () => {
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>Crear una nueva noticia</SheetTitle>
-                    <SheetDescription>
+                    <div>
                         <CreateNewsForm />
-                    </SheetDescription>
+                    </div>
                 </SheetHeader>
             </SheetContent>
         </Sheet>
