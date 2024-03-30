@@ -24,14 +24,23 @@ export async function POST(request: NextRequest) {
     try {
         await connectDB();
 
-        const news = await request.json();
+        const { title, summary, content, category, tags, image, author } = await request.json();
 
-        const existingNews = await News.findOne({ title: news.title });
+        const existingNews = await News.findOne({ title });
+        
         if (existingNews) {
             return NextResponse.json({ error: "Ya existe una noticia con el mismo título" }, { status: 400 });
         }
 
-        const newNews = new News(news);
+        const newNews = new News({
+            title,
+            summary,
+            content,
+            category,
+            tags,
+            image,
+            author
+        });
 
         await newNews.save();
 

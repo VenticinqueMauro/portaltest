@@ -29,26 +29,26 @@ export const handleCreateNews = async (formData: FormData) => {
         author
     }
 
-    const dataString = JSON.stringify(data);
-
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`, {
             method: 'POST',
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: dataString
+            body: JSON.stringify(data)
         });
 
+        const json = await response.json();
+
         if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error);
+            return json.error
         }
 
         revalidatePath('/dashboard');
-        return await response.json();
+        return json;
     } catch (error) {
-        return { error: 'Hubo un error al crear la noticia' };
+        if (error instanceof Error) {
+            return error.message
+        }
     }
 }
