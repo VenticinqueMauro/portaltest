@@ -2,28 +2,27 @@
 
 import { handleDeleteNews } from "@/actions/news/handleDeleteNews";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { FilePenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { FilePenLine, MoreHorizontal, Trash2 } from "lucide-react";
 
 interface Props {
     id: string;
     title: string;
 }
 
-export default function ButtonDeleteNews({ id, title }: Props) {
+export default function ButtonActionsNews({ id, title }: Props) {
 
     return (
         <div className="flex items-center gap-4">
-            <FilePenLine size={18} className=" text-blue-500 cursor-pointer hover:text-blue-600" />
+            <SheetEditNews id={id} title={title} />
             <DialogDeleteNews id={id} title={title} />
         </div>
     )
 }
 
 const DialogDeleteNews = ({ id, title }: Props) => {
-
 
     const handleDelete = async () => {
 
@@ -60,6 +59,27 @@ const DialogDeleteNews = ({ id, title }: Props) => {
                 </DialogFooter>
             </DialogContent>
         </Dialog>
+
+    )
+}
+
+
+const SheetEditNews = ({ id, title }: Props) => {
+    return (
+        <Sheet>
+            <SheetTrigger>
+                <FilePenLine size={18} className=" text-blue-500 cursor-pointer hover:text-blue-600" />
+            </SheetTrigger>
+            <SheetContent>
+                <SheetHeader>
+                    <SheetTitle>Edicion de noticia</SheetTitle>
+                    <SheetDescription>
+                        This action cannot be undone. This will permanently delete your account
+                        and remove your data from our servers.
+                    </SheetDescription>
+                </SheetHeader>
+            </SheetContent>
+        </Sheet>
 
     )
 }

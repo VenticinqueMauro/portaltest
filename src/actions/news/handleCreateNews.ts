@@ -1,5 +1,6 @@
 'use server'
 
+import { FormMessage } from "@/components/ui/form";
 import { decodeToken } from "@/utils/utils";
 import { revalidatePath } from "next/cache";
 
@@ -39,7 +40,6 @@ export const handleCreateNews = async (formData: FormData) => {
         if (!response.ok) {
             return json.error
         }
-
         revalidatePath('/dashboard');
         return json;
     } catch (error) {

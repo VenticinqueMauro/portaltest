@@ -1,7 +1,6 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
     Tooltip,
     TooltipContent,
@@ -10,8 +9,8 @@ import {
 } from "@/components/ui/tooltip";
 import { CategoryNews, LinkedNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, FilePenLine, MoreHorizontal, Trash2 } from "lucide-react";
-import ButtonDeleteNews from "./Button.DeleteNews";
+import { ArrowUpDown } from "lucide-react";
+import ButtonActionsNews from "./Button.ActionsNews";
 
 
 export type NewsDataTable = {
@@ -86,7 +85,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
                 >
-                    Creación
+                    Creado en
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
@@ -100,7 +99,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
                 >
-                    Actualización
+                    Actualizado en
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
@@ -138,7 +137,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         cell: ({ row }) => {
             const news = row.original
             return (
-                <ButtonDeleteNews id={news.id} title={news.title} />
+                <ButtonActionsNews id={news.id} title={news.title} />
             )
         },
     },

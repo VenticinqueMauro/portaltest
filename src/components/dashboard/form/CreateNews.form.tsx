@@ -6,36 +6,30 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner";
 import { handleCreateNews } from "@/actions/news/handleCreateNews"
-import { useState } from "react";
+import { createRef } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 
 export default function CreateNewsForm() {
 
-    const [isLoading, setIsLoading] = useState(false);
-
+    const ref = createRef<HTMLFormElement>();
 
     const handleSubmit = async (formData: FormData) => {
 
-        try {
-            setIsLoading(true);
-            const response = await handleCreateNews(formData)
+        const response = await handleCreateNews(formData)
 
-            if (response.error) {
-                toast.error(response.error);
-            } else if (response.message) {
-                toast.success(response.message);
-            } else {
-                toast.warning(response);
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
+        if (response.error) {
+            toast.error(response.error);
+        } else if (response.message) {
+            toast.success(response.message);
+            ref.current?.reset()
+        } else {
+            toast.warning(response);
         }
     }
 
     return (
-        <form action={handleSubmit} className="space-y-8 py-10">
+        <form ref={ref} action={handleSubmit} className="space-y-8 py-10">
             <Select name="category" required>
                 <SelectTrigger>
                     <SelectValue placeholder="Categoria" />
@@ -50,9 +44,7 @@ export default function CreateNewsForm() {
             <Textarea name='summary' placeholder="Sumario" required />
             <Textarea name='content' placeholder="Contenido" required />
             <Input name='image' type="text" placeholder="Imagen" required />
-            <Button type="submit" className={`${isLoading ? 'opacity-80 cursor-not-allowed' : ''} w-full`} disabled={isLoading}>
-                {isLoading ? 'Cargando...' : 'Crear'}
-            </Button>
+            <Button type="submit" className="w-full">Crear</Button>
         </form>
     )
 }
