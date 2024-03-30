@@ -9,6 +9,7 @@ import { handleCreateNews } from "@/actions/news/handleCreateNews"
 export default function CreateNewsForm() {
 
     const handleSubmit = async (formData: FormData) => {
+        
         const response = await handleCreateNews(formData)
 
         alert(JSON.stringify(response))

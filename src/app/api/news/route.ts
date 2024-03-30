@@ -2,6 +2,8 @@ import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
 import { NewsType } from "@/types/news.types";
 import { handleError } from "@/utils/utils";
+import { verify } from "jsonwebtoken";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -21,13 +23,14 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+
     try {
         await connectDB();
 
-        const { title, summary, content, category, tags, image, author } = await request.json();
+        const { title, summary, content, category, tags, image } = await request.json();
 
         const existingNews = await News.findOne({ title });
-        
+
         if (existingNews) {
             return NextResponse.json({ error: "Ya existe una noticia con el mismo título" }, { status: 400 });
         }
@@ -39,7 +42,6 @@ export async function POST(request: NextRequest) {
             category,
             tags,
             image,
-            author
         });
 
         await newNews.save();
