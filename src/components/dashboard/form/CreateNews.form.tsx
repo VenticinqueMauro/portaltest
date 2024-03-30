@@ -22,15 +22,14 @@ export default function CreateNewsForm() {
                     <SelectValue placeholder="Categoria" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="politica">Light</SelectItem>
-                    <SelectItem value="deportes">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    <SelectItem value="politica">politica</SelectItem>
+                    <SelectItem value="deportes">deportes</SelectItem>
+                    <SelectItem value="tendencias">tendencias</SelectItem>
                 </SelectContent>
             </Select>
             <Input name='title' placeholder="Titulo" required />
             <Textarea name='summary' placeholder="Sumario" required />
             <Textarea name='content' placeholder="Contenido" required />
-            <Input name='tags' placeholder="Etiquetas" required />
             <Input name='image' type="text" placeholder="Imagen" required />
             <Button type="submit" className="w-full">Crear</Button>
         </form>

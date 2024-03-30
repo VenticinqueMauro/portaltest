@@ -8,7 +8,6 @@ export const handleCreateNews = async (formData: FormData) => {
     const summary = formData.get('summary')
     const content = formData.get('content')
     const category = formData.get('category')
-    const tags = formData.get('tags')
     const image = formData.get('image')
 
 
@@ -17,7 +16,6 @@ export const handleCreateNews = async (formData: FormData) => {
         summary,
         content,
         category,
-        tags,
         image,
     }
 
