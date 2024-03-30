@@ -21,7 +21,7 @@ export const handleCreateNews = async (formData: FormData) => {
 
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, {
             method: 'POST',
             credentials: "include",
             headers: {
