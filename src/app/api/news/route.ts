@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json({ message: "Noticia creada", data: newNews }, { status: 201 });
     } catch (error) {
-        return handleError(error)
+        console.log(error)
     }
 }
 
