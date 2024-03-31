@@ -10,23 +10,24 @@ import { toast } from "sonner";
 interface Props {
     id: string;
     title: string;
+    media?: string;
 }
 
-export default function ButtonActionsNews({ id, title }: Props) {
+export default function ButtonActionsNews({ id, title, media }: Props) {
 
     return (
         <div className="flex items-center gap-4">
             <SheetEditNews id={id} title={title} />
-            <DialogDeleteNews id={id} title={title} />
+            <DialogDeleteNews id={id} title={title} media={media} />
         </div>
     )
 }
 
-const DialogDeleteNews = ({ id, title }: Props) => {
+const DialogDeleteNews = ({ id, title, media }: Props) => {
 
     const handleDelete = async () => {
 
-        const response = await handleDeleteNews(id);
+        const response = await handleDeleteNews({ id, media });
 
         if (response.error) {
             toast.error(response.error);
