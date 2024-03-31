@@ -110,7 +110,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead key={header.id} className="text-xs xl:text-sm">
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
