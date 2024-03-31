@@ -26,7 +26,7 @@ export const handleDeleteNews = async ({ id, media }: Props) => {
         }
 
         if (media) {
-            await cloudinary.uploader.destroy('ybzis1puqtzdy4oyeueb');
+            await cloudinary.uploader.destroy(media);
         }
 
         revalidatePath('/dashboard');

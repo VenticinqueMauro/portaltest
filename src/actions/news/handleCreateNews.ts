@@ -25,7 +25,7 @@ const processAndUploadFile = async (file: File, resourceType: string = '') => {
                 reject(error);
                 return;
             }
-            resolve(result?.secure_url || '');
+            resolve(result?.public_id || '');
         }).end(buffer);
     });
 };
