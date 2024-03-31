@@ -28,6 +28,8 @@ export default function CreateNewsForm() {
         }
     }
 
+
+
     return (
         <form ref={ref} action={handleSubmit} className="space-y-8 py-10">
             <Select name="category" required>
@@ -40,10 +42,10 @@ export default function CreateNewsForm() {
                     <SelectItem value="tendencias">tendencias</SelectItem>
                 </SelectContent>
             </Select>
-            <Input name='title' placeholder="Titulo" required />
+            <Input name='title' placeholder="Titulo" />
             <Textarea name='summary' placeholder="Sumario" required />
             <Textarea name='content' placeholder="Contenido" required />
-            <Input name='image' type="text" placeholder="Imagen" required />
+            <Input name='image' type="file" placeholder="Imagen" accept="image/*,video/*" multiple required />
             <Button type="submit" className="w-full">Crear</Button>
         </form>
     )
