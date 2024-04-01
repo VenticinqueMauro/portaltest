@@ -4,30 +4,32 @@ import { handleDeleteNews } from "@/actions/news/handleDeleteNews";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { CategoryNews } from "@/models/news";
 import { FilePenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface Props {
     id: string;
-    title: string;
+    category?: CategoryNews;
+    title?: string;
     media?: string;
 }
 
-export default function ButtonActionsNews({ id, title, media }: Props) {
+export default function ButtonActionsNews({ id, category, title, media }: Props) {
 
     return (
         <div className="flex items-center gap-4">
             <SheetEditNews id={id} title={title} />
-            <DialogDeleteNews id={id} title={title} media={media} />
+            <DialogDeleteNews id={id} category={category} title={title} media={media} />
         </div>
     )
 }
 
-const DialogDeleteNews = ({ id, title, media }: Props) => {
+const DialogDeleteNews = ({ id, category, title, media }: Props) => {
 
     const handleDelete = async () => {
 
-        const response = await handleDeleteNews({ id, media });
+        const response = await handleDeleteNews({ id, category, title, media });
 
         if (response.error) {
             toast.error(response.error);

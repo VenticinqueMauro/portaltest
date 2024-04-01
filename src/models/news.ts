@@ -25,7 +25,7 @@ interface NewsDocument extends Document {
     summary: string;
     content: string;
     status: NewsStatus;
-    category: CategoryNews[];
+    category: CategoryNews;
     subscribersOnly: boolean;
     lastModifiedBy?: string;
     highlightedText?: string;
@@ -59,7 +59,7 @@ const NewsSchema = new Schema<NewsDocument>({
         minlength: [3, 'El autor debe tener al menos 3 caracteres']
     },
     category: {
-        type: [String],
+        type: String,
         enum: Object.values(CategoryNews),
     },
     tags: {
