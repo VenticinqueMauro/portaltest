@@ -1,7 +1,7 @@
 'use server'
 
 import { decodeToken } from "@/utils/utils";
-import { v2 as cloudinary } from 'cloudinary';
+import { ResourceType, TransformationOptions, UploadApiOptions, v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from "next/cache";
 
 cloudinary.config({
@@ -10,20 +10,30 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const processAndUploadFile = async (file: File, resourceType: string = '') => {
+const processAndUploadFile = async (file: File, resourceType: ResourceType | undefined = 'auto', category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
 
     return new Promise<string>((resolve, reject) => {
-        const options: any = {};
-        if (resourceType) {
-            options.resource_type = resourceType;
-        }
-
+        const options: UploadApiOptions = {
+            folder: `Noticias/${category}/${title}`,
+            resourceType: resourceType,
+            eager: {
+                width: 400,
+                height: 300,
+                crop: 'fill',
+                quality: 'auto',
+            },
+        };
         cloudinary.uploader.upload_stream(options, (error, result) => {
             if (error) {
-                reject(error);
-                return;
+                if (error.message.includes('too large')) {
+                    reject('La imagen es demasiado grande. Por favor, elige una imagen más pequeña.');
+                    return;
+                } else {
+                    reject(error.message);
+                    return;
+                }
             }
             resolve(result?.public_id || '');
         }).end(buffer);
@@ -47,9 +57,9 @@ export const handleCreateNews = async (formData: FormData) => {
     let videoUrl;
 
     if (isImage) {
-        imageUrl = await processAndUploadFile(file);
+        imageUrl = await processAndUploadFile(file, 'image', category, title);
     } else if (isVideo) {
-        videoUrl = await processAndUploadFile(file, 'video');
+        videoUrl = await processAndUploadFile(file, 'video', category, title);
     }
 
     const data = {
