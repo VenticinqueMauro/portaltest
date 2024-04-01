@@ -20,6 +20,7 @@ export type NewsDataTable = {
     category: CategoryNews[];
     author: string,
     status: NewsStatus;
+    image: string;
     lastModifiedBy?: string;
     createdAt?: Date;
     updatedAt?: Date;
@@ -137,7 +138,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         cell: ({ row }) => {
             const news = row.original
             return (
-                <ButtonActionsNews id={news.id} title={news.title} />
+                <ButtonActionsNews id={news.id} title={news.title} media={news.image} />
             )
         },
     },

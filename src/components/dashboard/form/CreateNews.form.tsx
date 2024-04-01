@@ -1,13 +1,13 @@
 'use client';
 
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { toast } from "sonner";
-import { handleCreateNews } from "@/actions/news/handleCreateNews"
+import { handleCreateNews } from "@/actions/news/handleCreateNews";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { createRef } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { toast } from "sonner";
+import SubmitButton from "./SubmitButton";
 
 
 export default function CreateNewsForm() {
@@ -40,11 +40,11 @@ export default function CreateNewsForm() {
                     <SelectItem value="tendencias">tendencias</SelectItem>
                 </SelectContent>
             </Select>
-            <Input name='title' placeholder="Titulo" required />
+            <Input name='title' placeholder="Titulo" />
             <Textarea name='summary' placeholder="Sumario" required />
             <Textarea name='content' placeholder="Contenido" required />
-            <Input name='image' type="text" placeholder="Imagen" required />
-            <Button type="submit" className="w-full">Crear</Button>
+            <Input name='image' type="file" placeholder="Imagen" accept="image/*,video/*" required />
+            <SubmitButton title={'Crear'} />
         </form>
     )
 }

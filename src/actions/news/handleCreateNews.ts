@@ -1,28 +1,64 @@
 'use server'
 
-import { FormMessage } from "@/components/ui/form";
 import { decodeToken } from "@/utils/utils";
+import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from "next/cache";
+
+cloudinary.config({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const processAndUploadFile = async (file: File, resourceType: string = '') => {
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+
+    return new Promise<string>((resolve, reject) => {
+        const options: any = {};
+        if (resourceType) {
+            options.resource_type = resourceType;
+        }
+
+        cloudinary.uploader.upload_stream(options, (error, result) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve(result?.public_id || '');
+        }).end(buffer);
+    });
+};
 
 export const handleCreateNews = async (formData: FormData) => {
 
     const decodedToken = decodeToken();
     const author = decodedToken.fullname;
 
-    const title = formData.get('title')
-    const summary = formData.get('summary')
-    const content = formData.get('content')
-    const category = formData.get('category')
-    const image = formData.get('image')
+    const title = formData.get('title');
+    const summary = formData.get('summary');
+    const content = formData.get('content');
+    const category = formData.get('category');
+    const file = formData.get('image') as File;
+    const isImage = file.type.startsWith('image');
+    const isVideo = file.type.startsWith('video');
 
+    let imageUrl;
+    let videoUrl;
+
+    if (isImage) {
+        imageUrl = await processAndUploadFile(file);
+    } else if (isVideo) {
+        videoUrl = await processAndUploadFile(file, 'video');
+    }
 
     const data = {
         title,
         summary,
         content,
         category,
-        image,
-        author
+        author,
+        image: imageUrl || videoUrl,
     }
 
     try {
@@ -48,3 +84,4 @@ export const handleCreateNews = async (formData: FormData) => {
         }
     }
 }
+

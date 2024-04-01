@@ -20,6 +20,7 @@ async function getData(): Promise<NewsDataTable[]> {
         category: item.category,
         author: item.author,
         status: item.status,
+        image: item.image || '-',
         lastModifiedBy: item.lastModifiedBy || '-',
         createdAt: formatDate(new Date(item?.createdAt as Date)),
         updatedAt: formatDate(new Date(item?.updatedAt as Date)),

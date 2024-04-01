@@ -1,8 +1,14 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
+import { v2 as cloudinary } from 'cloudinary';
 
-export const handleDeleteNews = async (id: string) => {
+interface Props {
+    id: string;
+    media?: string;
+}
+
+export const handleDeleteNews = async ({ id, media }: Props) => {
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news/${id}`, {
@@ -17,6 +23,10 @@ export const handleDeleteNews = async (id: string) => {
 
         if (!response.ok) {
             return json.error
+        }
+
+        if (media) {
+            await cloudinary.uploader.destroy(media);
         }
 
         revalidatePath('/dashboard');

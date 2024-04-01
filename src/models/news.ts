@@ -67,7 +67,6 @@ const NewsSchema = new Schema<NewsDocument>({
     },
     image: {
         type: String,
-        required: [true, 'La imagen es obligatoria'],
     },
     highlightedText: {
         type: String
