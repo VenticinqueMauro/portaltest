@@ -15,12 +15,19 @@ export const ButtonCreateNews = () => {
                 <CirclePlus size={16} className="mr-1" />
                 Nueva noticia
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="min-w-full h-full ">
                 <SheetHeader>
                     <SheetTitle>Crear una nueva noticia</SheetTitle>
-                    <div>
-                        <CreateNewsForm />
+                    <div className="flex  gap-5">
+                        <div className="flex-1 max-h-[90vh] overflow-y-auto border-r rounded pr-3">
+                            {/* Contenido del primer div */}
+
+                        </div>
+                        <div className="flex-1">
+                            <CreateNewsForm />
+                        </div>
                     </div>
+
                 </SheetHeader>
             </SheetContent>
         </Sheet>

@@ -7,6 +7,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { CldImage, CldVideoPlayer } from 'next-cloudinary';
 import { CategoryNews, LinkedNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
@@ -31,6 +32,21 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
     {
         accessorKey: "title",
         header: "Titulo",
+    },
+    {
+        accessorKey: "image",
+        header: "Imagen",
+        cell: ({ row }) => {
+            return (
+                <CldImage
+                    width="100"
+                    height="50"
+                    src={row.getValue('image')}
+                    alt="Description of my image"
+                    className="rounded"
+                />
+            )
+        }
     },
     {
         accessorKey: "summary",

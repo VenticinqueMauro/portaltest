@@ -1,7 +1,7 @@
 'use server'
 
 import { decodeToken } from "@/utils/utils";
-import { ResourceType, TransformationOptions, UploadApiOptions, v2 as cloudinary } from 'cloudinary';
+import { TransformationOptions, UploadApiOptions, v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from "next/cache";
 
 cloudinary.config({
@@ -10,14 +10,17 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const processAndUploadFile = async (file: File, resourceType: ResourceType | undefined = 'auto', category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
+type ResourceType = "image" | "raw" | "video";
+
+
+const processAndUploadFile = async (file: File, resourceType: ResourceType = "image", category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
 
     return new Promise<string>((resolve, reject) => {
         const options: UploadApiOptions = {
             folder: `Noticias/${category}/${title}`,
-            resourceType: resourceType,
+            resource_type: resourceType,
             eager: {
                 width: 400,
                 height: 300,
