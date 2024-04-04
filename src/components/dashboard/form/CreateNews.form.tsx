@@ -110,8 +110,10 @@ export default function CreateNewsForm() {
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="politica">politica</SelectItem>
+                    <SelectItem value="eco & negocios">eco & negocios</SelectItem>
                     <SelectItem value="deportes">deportes</SelectItem>
                     <SelectItem value="tendencias">tendencias</SelectItem>
+                    <SelectItem value="portalcana">Portal caña</SelectItem>
                 </SelectContent>
             </Select>
             <div>
