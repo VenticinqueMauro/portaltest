@@ -17,6 +17,7 @@ async function getData(): Promise<NewsDataTable[]> {
         id: item._id?.toString(),
         title: item.title,
         summary: item.summary,
+        content: item.content,
         category: item.category,
         author: item.author,
         status: item.status,

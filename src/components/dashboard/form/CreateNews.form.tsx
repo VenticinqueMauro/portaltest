@@ -104,26 +104,28 @@ export default function CreateNewsForm() {
 
     return (
         <form ref={ref} action={handleSubmit} className="space-y-5 py-10 px-3">
-            <Select name="category" required>
-                <SelectTrigger>
-                    <SelectValue placeholder="Seleccione una categoria" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="politica">politica</SelectItem>
-                    <SelectItem value="eco & negocios">eco & negocios</SelectItem>
-                    <SelectItem value="deportes">deportes</SelectItem>
-                    <SelectItem value="tendencias">tendencias</SelectItem>
-                    <SelectItem value="portalcana">Portal caña</SelectItem>
-                </SelectContent>
-            </Select>
+            <div className="max-w-56">
+                <Select name="category" required>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Seleccione una categoria" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="politica">politica</SelectItem>
+                        <SelectItem value="eco & negocios">eco & negocios</SelectItem>
+                        <SelectItem value="deportes">deportes</SelectItem>
+                        <SelectItem value="tendencias">tendencias</SelectItem>
+                        <SelectItem value="portalcana">Portal caña</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
             <div>
                 <Label htmlFor="title" >Titulo
-                    <Input id="title" name='title' required/>
+                    <Input className="font-normal" id="title" name='title' required />
                 </Label>
             </div>
             <div>
                 <Label htmlFor="summary">Sumario
-                    <Textarea id="summary" name='summary' required />
+                    <Textarea className="font-normal" id="summary" name='summary' required />
                 </Label>
             </div>
             <div className="max-w-56">
@@ -146,7 +148,7 @@ export default function CreateNewsForm() {
                 </Label>
             </div>
             <div className="max-w-56">
-                <Label htmlFor="imgContent">Imagenes contenido
+                <Label htmlFor="imgContent">Imagen o Video de contenido
                     <Input id="imgContent" name='imgContent' type="file" accept="image/*,video/*" onChange={handleContentFileChange}
                     />
                 </Label>

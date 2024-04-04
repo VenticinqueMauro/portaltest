@@ -12,12 +12,15 @@ import { CategoryNews, LinkedNews, MediaNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import ButtonActionsNews from "./Button.ActionsNews";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import Image from "next/image";
 
 
 export type NewsDataTable = {
     id: string;
     title: string;
     summary: string;
+    content: string;
     category: CategoryNews;
     author: string,
     status: NewsStatus;
@@ -32,25 +35,40 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
     {
         accessorKey: "title",
         header: "Titulo",
-    },
-    {
-        accessorKey: "summary",
-        header: "Sumario",
         cell: ({ row }) => {
+            const news = row.original;
             return (
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <p className="truncate cursor-pointer">{row.getValue('summary')}</p>
-                        </TooltipTrigger>
-                        <TooltipContent className="rounded max-w-xs bg-background text-foreground border shadow">
-                            <p>{row.getValue('summary')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <HoverCard>
+                    <HoverCardTrigger className="cursor-pointer hover:underline">{row.getValue('title')}</HoverCardTrigger>
+                    <HoverCardContent className="w-96 max-h-[500px] overflow-y-auto ">
+                        <h1 className="text-lg font-bold">{news.title}</h1>
+                        <h2 className="text-base mb-5">{news.summary}</h2>
+                        {news.media?.portada?.url && (<CldImage src={news.media?.portada?.publicId} width={400} height={300} alt="portada" />)}
+                        <div className="text-sm" dangerouslySetInnerHTML={{ __html: news.content }} />
+                    </HoverCardContent>
+                </HoverCard>
+
             )
-        },
+        }
     },
+    // {
+    //     accessorKey: "summary",
+    //     header: "Sumario",
+    //     cell: ({ row }) => {
+    //         return (
+    //             <TooltipProvider>
+    //                 <Tooltip>
+    //                     <TooltipTrigger asChild>
+    //                         <p className="truncate cursor-pointer">{row.getValue('summary')}</p>
+    //                     </TooltipTrigger>
+    //                     <TooltipContent className="rounded max-w-xs bg-background text-foreground border shadow">
+    //                         <p>{row.getValue('summary')}</p>
+    //                     </TooltipContent>
+    //                 </Tooltip>
+    //             </TooltipProvider>
+    //         )
+    //     },
+    // },
     {
         accessorKey: "category",
         header: ({ column }) => {

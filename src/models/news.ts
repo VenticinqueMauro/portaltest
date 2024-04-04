@@ -6,26 +6,26 @@ export enum NewsStatus {
 }
 
 export interface MediaNews {
-        portada: {
-            publicId: string;
-            url: string;
-            type: "image" | "video";
-        };
-        zona1: {
-            publicId: string;
-            url: string;
-            type: "image" | "video";
-        };
-        zona2: {
-            publicId: string;
-            url: string;
-            type: "image" | "video";
-        };
-        gallery: Array<{
-            publicId: string;
-            url: string;
-            type: "image" | "video";
-        }>;
+    portada: {
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    };
+    zona1: {
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    };
+    zona2: {
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    };
+    gallery: Array<{
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    }>;
 }
 
 export interface LinkedNews {
@@ -51,7 +51,6 @@ interface NewsDocument extends Document {
     category: CategoryNews;
     subscribersOnly: boolean;
     lastModifiedBy?: string;
-    highlightedText?: string;
     newsLinked?: LinkedNews[];
     media?: MediaNews;
     author?: string;
@@ -121,9 +120,6 @@ const NewsSchema = new Schema<NewsDocument>({
                 enum: ['image', 'video']
             }
         }]
-    },
-    highlightedText: {
-        type: String
     },
     newsLinked: {
         type: [{
