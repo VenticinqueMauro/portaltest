@@ -5,6 +5,29 @@ export enum NewsStatus {
     PENDING = 'pendiente',
 }
 
+export interface MediaNews {
+        portada: {
+            publicId: string;
+            url: string;
+            type: "image" | "video";
+        };
+        zona1: {
+            publicId: string;
+            url: string;
+            type: "image" | "video";
+        };
+        zona2: {
+            publicId: string;
+            url: string;
+            type: "image" | "video";
+        };
+        gallery: Array<{
+            publicId: string;
+            url: string;
+            type: "image" | "video";
+        }>;
+}
+
 export interface LinkedNews {
     _id: Types.ObjectId;
     title: string;
@@ -30,7 +53,7 @@ interface NewsDocument extends Document {
     lastModifiedBy?: string;
     highlightedText?: string;
     newsLinked?: LinkedNews[];
-    image?: string;
+    media?: MediaNews;
     author?: string;
     tags?: string[];
     comments?: string[];
@@ -65,8 +88,39 @@ const NewsSchema = new Schema<NewsDocument>({
     tags: {
         type: [String],
     },
-    image: {
-        type: String,
+    media: {
+        portada: {
+            publicId: String,
+            url: String,
+            type: {
+                type: String,
+                enum: ['image', 'video']
+            }
+        },
+        zona1: {
+            publicId: String,
+            url: String,
+            type: {
+                type: String,
+                enum: ['image', 'video']
+            }
+        },
+        zona2: {
+            publicId: String,
+            url: String,
+            type: {
+                type: String,
+                enum: ['image', 'video']
+            }
+        },
+        gallery: [{
+            publicId: String,
+            url: String,
+            type: {
+                type: String,
+                enum: ['image', 'video']
+            }
+        }]
     },
     highlightedText: {
         type: String

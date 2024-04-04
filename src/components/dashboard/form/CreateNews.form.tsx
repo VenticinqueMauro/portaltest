@@ -4,18 +4,29 @@ import { handleCreateNews } from "@/actions/news/handleCreateNews";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { createRef, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 
 
 export default function CreateNewsForm() {
 
     const ref = createRef<HTMLFormElement>();
     const [editorContent, setEditorContent] = useState<string>('');
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [selectedPortadaFile, setSelectedPortadaFile] = useState<File | null>(null);
+    const [selectedContentFile, setSelectedContentFile] = useState<File | null>(null);
+    const [previewPortadaImageUrl, setPreviewPortadaImageUrl] = useState<any>(null);
+    const [previewContentImageUrl, setPreviewContentImageUrl] = useState<any>(null);
+    const [portadaType, setPortadaType] = useState<string>('image');
+    const [contentType, setContentType] = useState<string>('image');
+    const [clearContent, setClearContent] = useState(false);
+
+    useEffect(() => {
+        setClearContent(false)
+    }, [clearContent]);
 
     const MAX_FILE_SIZE_MB = 10;
 
@@ -23,17 +34,54 @@ export default function CreateNewsForm() {
         setEditorContent(content);
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePortadaFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
             if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
                 toast.error(`El archivo seleccionado es demasiado grande. Por favor, selecciona un archivo de máximo ${MAX_FILE_SIZE_MB}MB.`);
                 event.target.value = '';
             } else {
-                setSelectedFile(file);
+                setSelectedPortadaFile(file);
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageUrl = e.target?.result;
+                    setPreviewPortadaImageUrl(imageUrl);
+                };
+                reader.readAsDataURL(file);
+
+                // Detectar el tipo de archivo
+                const isImage = file.type.startsWith('image');
+                setPortadaType(isImage ? 'image' : 'video');
             }
-        }
-    };
+        };
+    }
+
+    const handleContentFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+                toast.error(`El archivo seleccionado es demasiado grande. Por favor, selecciona un archivo de máximo ${MAX_FILE_SIZE_MB}MB.`);
+                event.target.value = '';
+            } else {
+                setSelectedContentFile(file);
+
+                // Previsualización de la imagen
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageUrl = e.target?.result;
+                    setPreviewContentImageUrl(imageUrl);
+                    setSelectedPortadaFile(null);
+                };
+                reader.readAsDataURL(file);
+
+                // Detectar el tipo de archivo
+                const isImage = file.type.startsWith('image');
+                setContentType(isImage ? 'image' : 'video');
+            }
+        };
+    }
 
     const handleSubmit = async (formData: FormData) => {
 
@@ -45,6 +93,10 @@ export default function CreateNewsForm() {
         } else if (response.message) {
             toast.success(response.message);
             ref.current?.reset()
+            setSelectedPortadaFile(null);
+            setPreviewPortadaImageUrl(null);
+            setPortadaType('image');
+            setClearContent(true);
         } else {
             toast.warning(response);
         }
@@ -64,22 +116,36 @@ export default function CreateNewsForm() {
             </Select>
             <div>
                 <Label htmlFor="title" >Titulo
-                    <Input id="title" name='title' />
+                    <Input id="title" name='title' required/>
                 </Label>
             </div>
             <div>
                 <Label htmlFor="summary">Sumario
-                    <Textarea id="summary" name='summary'  required />
+                    <Textarea id="summary" name='summary' required />
                 </Label>
             </div>
+            <div className="max-w-56">
+                <Label htmlFor="portada">Portada
+                    <Input id="portada" name='portada' type="file" accept="image/*,video/*" required onChange={handlePortadaFileChange}
+                    />
+                </Label>
+                {previewPortadaImageUrl && portadaType === 'image' && (
+                    <Image src={previewPortadaImageUrl} alt="Previsualización de portada" width={300} height={200} />
+                )}
+                {previewPortadaImageUrl && portadaType === 'video' && (
+                    <video width="300" height="200" controls>
+                        <source src={previewPortadaImageUrl} type="video/mp4" />
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                )}            </div>
             <div>
                 <Label htmlFor="content">Contenido
-                    <Tiptap content={editorContent} onChange={handleEditorChange} />
+                    <Tiptap content={editorContent} onChange={handleEditorChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
                 </Label>
             </div>
-            <div>
-                <Label htmlFor="image">Imagen
-                    <Input id="image" name='image' type="file"  accept="image/*,video/*" required onChange={handleFileChange}
+            <div className="max-w-56">
+                <Label htmlFor="imgContent">Imagenes contenido
+                    <Input id="imgContent" name='imgContent' type="file" accept="image/*,video/*" onChange={handleContentFileChange}
                     />
                 </Label>
             </div>

@@ -4,7 +4,7 @@ import { handleDeleteNews } from "@/actions/news/handleDeleteNews";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { CategoryNews } from "@/models/news";
+import { CategoryNews, MediaNews } from "@/models/news";
 import { FilePenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,7 +12,7 @@ interface Props {
     id: string;
     category?: CategoryNews;
     title?: string;
-    media?: string;
+    media?: MediaNews;
 }
 
 export default function ButtonActionsNews({ id, category, title, media }: Props) {

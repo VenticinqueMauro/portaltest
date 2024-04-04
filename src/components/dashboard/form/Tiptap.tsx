@@ -1,22 +1,39 @@
 'use client'
 
+import StarterKit from '@tiptap/starter-kit'
 import BulletList from '@tiptap/extension-bullet-list'
 import Highlight from '@tiptap/extension-highlight'
 import ListItem from '@tiptap/extension-list-item'
+import Image from '@tiptap/extension-image'
+import BlockQuote from '@tiptap/extension-blockquote';
+import Dropcursor from '@tiptap/extension-dropcursor'
 import { EditorContent, useEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
 import ToolbarTiptap from './Toolbar.tiptap'
+import { useCallback, useEffect } from 'react'
 
 interface Props {
     content: string;
     onChange: (richtext: string) => void;
+    imageUrl: any
+    type: string
+    clearContent: boolean
 }
 
-const Tiptap = ({ content, onChange }: Props) => {
+const Tiptap = ({ content, imageUrl, type, clearContent, onChange }: Props) => {
     const editor = useEditor({
         extensions: [
             StarterKit.configure(),
             Highlight.configure(),
+            Image.configure({
+                HTMLAttributes: {
+                    width: 400,
+                    height: 300,
+                    alt: 'Imagen de prueba',
+                    class: 'object-cover',
+                }
+            }),
+            BlockQuote.configure(),
+            Dropcursor.configure(),
             ListItem.configure(),
             BulletList.configure({
                 itemTypeName: 'listItem',
@@ -26,13 +43,29 @@ const Tiptap = ({ content, onChange }: Props) => {
         content: content,
         editorProps: {
             attributes: {
-                class: "rounded-md border min-h-[250px] border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                class: "rounded-md border min-h-[250px] border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 font-normal"
             }
         },
         onUpdate({ editor }) {
             onChange(editor.getHTML())
+            console.log(editor.getHTML())
         }
     })
+
+
+    useEffect(() => {
+        if (imageUrl && type === 'image') {
+            editor?.chain().focus().setImage({ src: imageUrl }).run()
+        } else if (imageUrl && type === 'video') {
+            editor?.chain().focus().setImage({ src: "/default-video.jpg" }).run()
+        }
+    }, [editor, imageUrl, type])
+
+    useEffect(() => {
+        if (clearContent === true) {
+            editor?.commands.clearContent(clearContent)
+        }
+    }, [clearContent, editor])
 
     return (
         <div className='flex flex-col justify-stretch '>
