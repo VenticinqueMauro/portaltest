@@ -8,7 +8,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CldImage, CldVideoPlayer } from 'next-cloudinary';
-import { CategoryNews, LinkedNews, NewsStatus } from "@/models/news";
+import { CategoryNews, LinkedNews, MediaNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import ButtonActionsNews from "./Button.ActionsNews";
@@ -21,7 +21,7 @@ export type NewsDataTable = {
     category: CategoryNews;
     author: string,
     status: NewsStatus;
-    image: string;
+    media?: MediaNews;
     lastModifiedBy?: string;
     createdAt?: Date;
     updatedAt?: Date;
@@ -32,21 +32,6 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
     {
         accessorKey: "title",
         header: "Titulo",
-    },
-    {
-        accessorKey: "image",
-        header: "Imagen",
-        cell: ({ row }) => {
-            return (
-                <CldImage
-                    width="100"
-                    height="50"
-                    src={row.getValue('image')}
-                    alt="Description of my image"
-                    className="rounded"
-                />
-            )
-        }
     },
     {
         accessorKey: "summary",
@@ -154,7 +139,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         cell: ({ row }) => {
             const news = row.original
             return (
-                <ButtonActionsNews id={news.id} category={news.category} title={news.title} media={news.image} />
+                <ButtonActionsNews id={news.id} category={news.category} title={news.title} media={news?.media} />
             )
         },
     },

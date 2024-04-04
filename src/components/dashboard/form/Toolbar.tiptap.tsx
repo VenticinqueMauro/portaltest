@@ -2,7 +2,7 @@
 
 import { Toggle } from "@/components/ui/toggle"
 import { Editor } from "@tiptap/react"
-import { Bold, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Highlighter, Italic, List, ListOrdered, Minus, Pilcrow, Redo, Strikethrough, Undo, WrapText } from "lucide-react"
+import { Bold, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Highlighter, Italic, List, ListOrdered, MessageSquareQuote, Minus, Pilcrow, Redo, Strikethrough, Undo, WrapText } from "lucide-react"
 
 interface Props {
     editor: Editor | null
@@ -86,6 +86,13 @@ export default function ToolbarTiptap({ editor }: Props) {
                 onPressedChange={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
             >
                 <Heading6 className="w-4 h-4" />
+            </Toggle>
+            <Toggle
+                size='sm'
+                pressed={editor.isActive('BlockQuote')}
+                onPressedChange={() => editor.chain().focus().setBlockquote().run()}
+            >
+                <MessageSquareQuote className="w-4 h-4" />
             </Toggle>
             <Toggle
                 size='sm'

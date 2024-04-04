@@ -20,7 +20,18 @@ async function getData(): Promise<NewsDataTable[]> {
         category: item.category,
         author: item.author,
         status: item.status,
-        image: item.image || '-',
+        media: {
+            portada: {
+                publicId: item.media?.portada?.publicId,
+                url: item.media?.portada?.url,
+                type: item.media?.portada?.type
+            },
+            zona1: {
+                publicId: item.media?.zona1?.publicId,
+                url: item.media?.zona1?.url,
+                type: item.media?.zona1?.type
+            }
+        },
         lastModifiedBy: item.lastModifiedBy || '-',
         createdAt: formatDate(new Date(item?.createdAt as Date)),
         updatedAt: formatDate(new Date(item?.updatedAt as Date)),

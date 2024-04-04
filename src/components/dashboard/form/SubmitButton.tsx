@@ -12,8 +12,7 @@ export default function SubmitButton({ title }: Props) {
 
     return (
         <Button type="submit" className={`${pending ? "opacity-80 cursor-not-allowed" : ''} w-full flex items-center gap-1`}>
-            {pending ? "Cargando..." : title}
+            {pending ? "Creando noticia, por favor espere..." : title}
         </Button>
-
     )
 }
