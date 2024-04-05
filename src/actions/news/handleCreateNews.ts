@@ -1,6 +1,7 @@
 'use server'
 
 import { CategoryNews } from "@/models/news";
+import { NewsType } from "@/types/news.types";
 import { decodeToken } from "@/utils/utils";
 import { TransformationOptions, UploadApiOptions, v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from "next/cache";
@@ -24,7 +25,7 @@ const processAndUploadFile = async (file: File, resourceType: ResourceType = "im
 
     return new Promise<CloudinaryUploadResult>((resolve, reject) => {
         const options: UploadApiOptions = {
-            folder: `Noticias/${category}/${title}`,
+            folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}`,
             resource_type: resourceType,
             eager: {
                 width: 400,
@@ -68,11 +69,11 @@ export const handleCreateNews = async (formData: FormData) => {
     let content = formData.get('content') || '';
     const category = formData.get('category');
     const filePortada = formData.get('portada') as File;
-    const fileContent = formData.get('imgContent') as File; 
+    const fileContent = formData.get('imgContent') as File;
     const isImagePortada = filePortada.type.startsWith('image');
-    const isImageContent = fileContent.type.startsWith('image'); 
+    const isImageContent = fileContent.type.startsWith('image');
     const isVideoPortada = filePortada.type.startsWith('video');
-    const isVideoContent = fileContent.type.startsWith('video'); 
+    const isVideoContent = fileContent.type.startsWith('video');
 
     let imagePortadaUrl: CloudinaryUploadResult | null = null;
     let videoPortadaUrl: CloudinaryUploadResult | null = null;
@@ -98,7 +99,7 @@ export const handleCreateNews = async (formData: FormData) => {
         });
     }
     if (videoContentUrl) {
-        content = String(content).replace(/<img.*?src="(.*?)".*?>/g, () => { 
+        content = String(content).replace(/<img.*?src="(.*?)".*?>/g, () => {
             return `<video controls><source src="${videoContentUrl?.url}" type="video/mp4" /></video>`;
         });
     }
@@ -116,12 +117,18 @@ export const handleCreateNews = async (formData: FormData) => {
                 url: imagePortadaUrl?.url || videoPortadaUrl?.url || '',
                 type: imagePortadaUrl ? 'image' : (videoPortadaUrl ? 'video' : '')
             },
-            zona1: {
-                publicId: imageContentUrl?.public_id || videoContentUrl?.public_id || '',
-                url: imageContentUrl?.url || videoContentUrl?.url || '',
-                type: imageContentUrl ? 'image' : (videoContentUrl ? 'video' : '')
-            }
+            zona1: {},
+            zona2: {},
         }
+    }
+
+    // Comprobar si hay datos disponibles para zona1 antes de incluirlos en media
+    if (imageContentUrl || videoContentUrl) {
+        data.media.zona1 = {
+            publicId: imageContentUrl?.public_id || videoContentUrl?.public_id || '',
+            url: imageContentUrl?.url || videoContentUrl?.url || '',
+            type: imageContentUrl ? 'image' : (videoContentUrl ? 'video' : '')
+        };
     }
 
     try {

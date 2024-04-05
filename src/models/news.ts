@@ -93,15 +93,17 @@ const NewsSchema = new Schema<NewsDocument>({
             url: String,
             type: {
                 type: String,
-                enum: ['image', 'video']
-            }
+                enum: ['image', 'video'],
+                required: true
+            },
         },
         zona1: {
             publicId: String,
             url: String,
             type: {
                 type: String,
-                enum: ['image', 'video']
+                enum: ['image', 'video'],
+                required: false
             }
         },
         zona2: {
@@ -109,7 +111,8 @@ const NewsSchema = new Schema<NewsDocument>({
             url: String,
             type: {
                 type: String,
-                enum: ['image', 'video']
+                enum: ['image', 'video'],
+                required: false
             }
         },
         gallery: [{
@@ -117,7 +120,8 @@ const NewsSchema = new Schema<NewsDocument>({
             url: String,
             type: {
                 type: String,
-                enum: ['image', 'video']
+                enum: ['image', 'video'],
+                required: false
             }
         }]
     },

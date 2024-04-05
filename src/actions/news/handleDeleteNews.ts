@@ -68,7 +68,7 @@ export const handleDeleteNews = async ({ id, category, title, media }: Props) =>
             // Esperar que todas las promesas de eliminación se completen
             await Promise.all(deletePromises).then(async () => {
                 // Eliminar la carpeta en Cloudinary
-                await cloudinary.api.delete_folder(`Noticias/${category}/${title}`).then(console.log).catch(console.error);
+                await cloudinary.api.delete_folder(`Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}`).then(console.log).catch(console.error);
             }).catch(console.error);
         }
 

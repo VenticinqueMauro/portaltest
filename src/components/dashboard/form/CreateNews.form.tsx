@@ -10,6 +10,7 @@ import { createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
+import SelectCategories from "./SelectCategories";
 
 
 export default function CreateNewsForm() {
@@ -76,7 +77,6 @@ export default function CreateNewsForm() {
                 };
                 reader.readAsDataURL(file);
 
-                // Detectar el tipo de archivo
                 const isImage = file.type.startsWith('image');
                 setContentType(isImage ? 'image' : 'video');
             }
@@ -104,21 +104,7 @@ export default function CreateNewsForm() {
 
     return (
         <form ref={ref} action={handleSubmit} className="space-y-5 py-10 px-3">
-            <div className="max-w-56">
-                <Label htmlFor="category">Categoria*</Label>
-                <Select name="category" required>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Seleccione una categoria" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="politica">politica</SelectItem>
-                        <SelectItem value="eco & negocios">eco & negocios</SelectItem>
-                        <SelectItem value="deportes">deportes</SelectItem>
-                        <SelectItem value="tendencias">tendencias</SelectItem>
-                        <SelectItem value="portalcana">Portal caña</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
+            <SelectCategories />
             <div>
                 <Label htmlFor="title" >Titulo*</Label>
                 <Input className="font-normal" id="title" name='title' required />
