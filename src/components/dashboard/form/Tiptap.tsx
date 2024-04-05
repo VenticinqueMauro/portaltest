@@ -10,16 +10,19 @@ import Dropcursor from '@tiptap/extension-dropcursor'
 import { EditorContent, useEditor } from '@tiptap/react'
 import ToolbarTiptap from './Toolbar.tiptap'
 import { useCallback, useEffect } from 'react'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
 
 interface Props {
     content: string;
-    onChange: (richtext: string) => void;
     imageUrl: any
     type: string
     clearContent: boolean
+    onChange: (richtext: string) => void;
+    handleContentFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Tiptap = ({ content, imageUrl, type, clearContent, onChange }: Props) => {
+const Tiptap = ({ content, imageUrl, type, clearContent, onChange, handleContentFileChange }: Props) => {
     const editor = useEditor({
         extensions: [
             StarterKit.configure(),
@@ -31,13 +34,6 @@ const Tiptap = ({ content, imageUrl, type, clearContent, onChange }: Props) => {
                     alt: 'Imagen de prueba',
                     class: 'object-cover',
                 }
-            }),
-            BlockQuote.configure(),
-            Dropcursor.configure(),
-            ListItem.configure(),
-            BulletList.configure({
-                itemTypeName: 'listItem',
-                keepMarks: true,
             }),
         ],
         content: content,
@@ -69,7 +65,7 @@ const Tiptap = ({ content, imageUrl, type, clearContent, onChange }: Props) => {
 
     return (
         <div className='flex flex-col justify-stretch '>
-            <ToolbarTiptap editor={editor} />
+            <ToolbarTiptap editor={editor} handleContentFileChange={handleContentFileChange} />
             <EditorContent editor={editor} />
         </div>
     )

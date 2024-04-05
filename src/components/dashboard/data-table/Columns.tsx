@@ -8,6 +8,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CldImage, CldVideoPlayer } from 'next-cloudinary';
+import 'next-cloudinary/dist/cld-video-player.css';
 import { CategoryNews, LinkedNews, MediaNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
@@ -37,13 +38,27 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         header: "Titulo",
         cell: ({ row }) => {
             const news = row.original;
+            console.log(news)
             return (
                 <HoverCard>
                     <HoverCardTrigger className="cursor-pointer hover:underline">{row.getValue('title')}</HoverCardTrigger>
                     <HoverCardContent className="w-96 max-h-[500px] overflow-y-auto ">
                         <h1 className="text-lg font-bold">{news.title}</h1>
                         <h2 className="text-base mb-5">{news.summary}</h2>
-                        {news.media?.portada?.url && (<CldImage src={news.media?.portada?.publicId} width={400} height={300} alt="portada" />)}
+                        {news.media?.portada?.type === "image" ? (
+                            <CldImage
+                                src={news.media?.portada?.publicId || ''}
+                                width={400}
+                                height={300}
+                                alt="portada"
+                            />
+                        ) : (
+                            <CldVideoPlayer
+                                width="1920"
+                                height="1080"
+                                src={news.media?.portada?.publicId || ''} 
+                            />
+                        )}
                         <div className="text-sm" dangerouslySetInnerHTML={{ __html: news.content }} />
                     </HoverCardContent>
                 </HoverCard>

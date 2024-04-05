@@ -2,14 +2,14 @@
 
 import { handleCreateNews } from "@/actions/news/handleCreateNews";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image";
 import { createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
-import { Label } from "@/components/ui/label";
-import Image from "next/image";
 
 
 export default function CreateNewsForm() {
@@ -105,6 +105,7 @@ export default function CreateNewsForm() {
     return (
         <form ref={ref} action={handleSubmit} className="space-y-5 py-10 px-3">
             <div className="max-w-56">
+                <Label htmlFor="category">Categoria*</Label>
                 <Select name="category" required>
                     <SelectTrigger>
                         <SelectValue placeholder="Seleccione una categoria" />
@@ -119,20 +120,17 @@ export default function CreateNewsForm() {
                 </Select>
             </div>
             <div>
-                <Label htmlFor="title" >Titulo
-                    <Input className="font-normal" id="title" name='title' required />
-                </Label>
+                <Label htmlFor="title" >Titulo*</Label>
+                <Input className="font-normal" id="title" name='title' required />
             </div>
             <div>
-                <Label htmlFor="summary">Sumario
-                    <Textarea className="font-normal" id="summary" name='summary' required />
-                </Label>
+                <Label htmlFor="summary">Sumario*</Label>
+                <Textarea className="font-normal" id="summary" name='summary' required />
             </div>
             <div className="max-w-56">
-                <Label htmlFor="portada">Portada
-                    <Input id="portada" name='portada' type="file" accept="image/*,video/*" required onChange={handlePortadaFileChange}
-                    />
-                </Label>
+                <Label htmlFor="portada">Portada*</Label>
+                <Input id="portada" name='portada' type="file" accept="image/*,video/*" required onChange={handlePortadaFileChange}
+                />
                 {previewPortadaImageUrl && portadaType === 'image' && (
                     <Image src={previewPortadaImageUrl} alt="Previsualización de portada" width={300} height={200} />
                 )}
@@ -143,17 +141,10 @@ export default function CreateNewsForm() {
                     </video>
                 )}            </div>
             <div>
-                <Label htmlFor="content">Contenido
-                    <Tiptap content={editorContent} onChange={handleEditorChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
-                </Label>
+                <Label htmlFor="content">Contenido*</Label>
+                <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
             </div>
-            <div className="max-w-56">
-                <Label htmlFor="imgContent">Imagen o Video de contenido
-                    <Input id="imgContent" name='imgContent' type="file" accept="image/*,video/*" onChange={handleContentFileChange}
-                    />
-                </Label>
-            </div>
-            <SubmitButton title={'Crear'} />
+            <SubmitButton title={'Crear Nueva Noticia'} />
         </form>
     )
 }
