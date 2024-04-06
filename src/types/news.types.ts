@@ -1,4 +1,4 @@
-import { CategoryNews, LinkedNews, MediaNews, NewsStatus } from "@/models/news";
+import { CategoryNews, MediaNews, NewsStatus } from "@/models/news";
 
 export type NewsType = {
     _id?: string,
@@ -6,11 +6,11 @@ export type NewsType = {
     summary: string;
     content: string;
     status: NewsStatus;
-    category: CategoryNews[];
+    category: CategoryNews;
     subscribersOnly: boolean;
     highlightedText?: string;
     lastModifiedBy?: string;
-    newsLinked?: LinkedNews[];
+    newsLinked?: string[];
     media?: MediaNews;
     author?: string;
     tags?: string[];

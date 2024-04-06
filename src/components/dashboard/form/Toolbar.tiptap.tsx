@@ -1,9 +1,8 @@
 'use client'
 
-import { Input } from "@/components/ui/input"
 import { Toggle } from "@/components/ui/toggle"
 import { Editor } from "@tiptap/react"
-import { Bold, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Highlighter, ImagePlus, Italic, List, ListOrdered, MessageSquareQuote, Minus, Pilcrow, Redo, Strikethrough, Undo, WrapText } from "lucide-react"
+import { Bold, Heading3, Heading4, Heading5, Heading6, Highlighter, ImagePlus, Italic, List, ListOrdered, MessageSquareQuote, Minus, Pilcrow, Redo, Strikethrough, Undo, WrapText } from "lucide-react"
 
 interface Props {
     editor: Editor | null
@@ -18,7 +17,7 @@ export default function ToolbarTiptap({ editor, handleContentFileChange }: Props
 
 
     return (
-        <div className="border border-input bg-transparent rounded mb-2 gap-1 flex w-fit">
+        <div className="border border-input bg-transparent mb-2 gap-1 flex w-fit">
             <Toggle
                 size='sm'
                 pressed={editor.isActive('bold')}
@@ -128,12 +127,12 @@ export default function ToolbarTiptap({ editor, handleContentFileChange }: Props
             >
                 <Highlighter className="w-4 h-4" />
             </Toggle>
-            <Toggle size='sm' className="relative ">
-                {/* Botón de carga de archivo */}
+            <Toggle
+                size='sm'
+                className="relative"
+            >
                 <label htmlFor="imgContent" className="cursor-pointer block w-full ">
-                    {/* Icono de imagen o video */}
                     <ImagePlus className="w-4 h-4" />
-                    {/* Input de archivo */}
                     <input id="imgContent" name='imgContent' className="sr-only" type="file" accept="image/*,video/*" onChange={handleContentFileChange} />
                 </label>
             </Toggle>

@@ -1,19 +1,21 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Card, CardContent } from "@/components/ui/card"
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { CldImage, CldVideoPlayer } from 'next-cloudinary';
-import 'next-cloudinary/dist/cld-video-player.css';
-import { CategoryNews, LinkedNews, MediaNews, NewsStatus } from "@/models/news";
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+import { CategoryNews, MediaNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { CldImage, CldVideoPlayer } from 'next-cloudinary';
+import 'next-cloudinary/dist/cld-video-player.css';
 import ButtonActionsNews from "./Button.ActionsNews";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import Image from "next/image";
 
 
@@ -29,7 +31,7 @@ export type NewsDataTable = {
     lastModifiedBy?: string;
     createdAt?: Date;
     updatedAt?: Date;
-    newsLinked?: LinkedNews[];
+    newsLinked?: string[];
 }
 
 export const columnsNews: ColumnDef<NewsDataTable>[] = [
@@ -38,11 +40,10 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         header: "Titulo",
         cell: ({ row }) => {
             const news = row.original;
-            console.log(news)
             return (
                 <HoverCard>
                     <HoverCardTrigger className="cursor-pointer hover:underline">{row.getValue('title')}</HoverCardTrigger>
-                    <HoverCardContent className="w-96 max-h-[500px] overflow-y-auto ">
+                    <HoverCardContent className="w-96 max-h-[500px] overflow-y-auto overflow-x-hidden">
                         <h1 className="text-lg font-bold">{news.title}</h1>
                         <h2 className="text-base mb-5">{news.summary}</h2>
                         {news.media?.portada?.type === "image" ? (
@@ -56,34 +57,29 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                             <CldVideoPlayer
                                 width="1920"
                                 height="1080"
-                                src={news.media?.portada?.publicId || ''} 
+                                src={news.media?.portada?.publicId || ''}
                             />
                         )}
-                        <div className="text-sm" dangerouslySetInnerHTML={{ __html: news.content }} />
+                        <div className="text-sm mb-3" dangerouslySetInnerHTML={{ __html: news.content }} />
+                        <Carousel className="w-full">
+                            <CarouselContent className="-ml-1">
+                                {news.media?.gallery?.map((image) => (
+                                    <CarouselItem key={image.url} className="pl-1 md:basis-1/2 lg:basis-1/3">
+                                        <div className="p-1">
+                                            <Image src={image.url} alt="image" width={200} height={100} className="rounded" />
+                                        </div>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                            <CarouselPrevious />
+                            <CarouselNext />
+                        </Carousel>
                     </HoverCardContent>
                 </HoverCard>
 
             )
         }
     },
-    // {
-    //     accessorKey: "summary",
-    //     header: "Sumario",
-    //     cell: ({ row }) => {
-    //         return (
-    //             <TooltipProvider>
-    //                 <Tooltip>
-    //                     <TooltipTrigger asChild>
-    //                         <p className="truncate cursor-pointer">{row.getValue('summary')}</p>
-    //                     </TooltipTrigger>
-    //                     <TooltipContent className="rounded max-w-xs bg-background text-foreground border shadow">
-    //                         <p>{row.getValue('summary')}</p>
-    //                     </TooltipContent>
-    //                 </Tooltip>
-    //             </TooltipProvider>
-    //         )
-    //     },
-    // },
     {
         accessorKey: "category",
         header: ({ column }) => {
@@ -143,10 +139,6 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
     {
         accessorKey: "lastModifiedBy",
         header: "Modificado por"
-    },
-    {
-        accessorKey: "newsLinked",
-        header: "Noticias vinculadas",
     },
     {
         accessorKey: "status",

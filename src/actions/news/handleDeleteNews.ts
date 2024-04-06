@@ -52,6 +52,16 @@ export const handleDeleteNews = async ({ id, category, title, media }: Props) =>
                 const resourceType = media.zona1.type === 'image' ? 'image' : 'video';
                 publicIdsToDelete[resourceType].push(media.zona1.publicId);
             }
+            if (media.gallery && media.gallery.length > 0) {
+                media.gallery.forEach((item: any) => {
+                    console.log(item)
+                    if (item.publicId) {
+                        publicIdsToDelete["image"].push(item.publicId);
+                    }
+                });
+            }
+
+            console.log(publicIdsToDelete)
 
             // Eliminar recursos en Cloudinary por tipo de recurso
             const deletePromises: Promise<any>[] = [];

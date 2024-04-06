@@ -13,7 +13,7 @@ async function getData(): Promise<NewsDataTable[]> {
         return [];
     }
 
-    return data.map((item: NewsType) => ({
+    return data.map((item: NewsType, index: number) => ({
         id: item._id?.toString(),
         title: item.title,
         summary: item.summary,
@@ -31,7 +31,12 @@ async function getData(): Promise<NewsDataTable[]> {
                 publicId: item.media?.zona1?.publicId,
                 url: item.media?.zona1?.url,
                 type: item.media?.zona1?.type
-            }
+            },
+            gallery: item.media?.gallery ? item.media.gallery.map((mediaItem: any) => ({
+                publicId: mediaItem.publicId,
+                url: mediaItem.url,
+                type: mediaItem.type
+            })) : []
         },
         lastModifiedBy: item.lastModifiedBy || '-',
         createdAt: formatDate(new Date(item?.createdAt as Date)),

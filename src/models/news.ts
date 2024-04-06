@@ -24,16 +24,11 @@ export interface MediaNews {
     gallery: Array<{
         publicId: string;
         url: string;
-        type: "image" | "video";
+        type: "image";
     }>;
 }
 
-export interface LinkedNews {
-    _id: Types.ObjectId;
-    title: string;
-    summary: string;
-    image: string;
-}
+
 
 export enum CategoryNews {
     POLITICA = 'politica',
@@ -51,7 +46,7 @@ interface NewsDocument extends Document {
     category: CategoryNews;
     subscribersOnly: boolean;
     lastModifiedBy?: string;
-    newsLinked?: LinkedNews[];
+    newsLinked?: string[];
     media?: MediaNews;
     author?: string;
     tags?: string[];
@@ -126,16 +121,7 @@ const NewsSchema = new Schema<NewsDocument>({
         }]
     },
     newsLinked: {
-        type: [{
-            type: Schema.Types.ObjectId,
-            ref: 'News',
-            validate: {
-                validator: function (val: any[]) {
-                    return val.length <= 3;
-                },
-                message: `El campo 'noticias vinculadas' no puede tener más de ${3} noticias vinculadas.`
-            }
-        }],
+        type: [String],
         default: []
     },
     status: {

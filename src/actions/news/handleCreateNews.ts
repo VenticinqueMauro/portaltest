@@ -19,44 +19,100 @@ interface CloudinaryUploadResult {
     url?: string;
 }
 
-const processAndUploadFile = async (file: File, resourceType: ResourceType = "image", category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
+const processAndUploadFiles = async (files: File[] | File, resourceType: ResourceType = "image", category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
+    const uploadPromises: Promise<CloudinaryUploadResult>[] = [];
 
-    return new Promise<CloudinaryUploadResult>((resolve, reject) => {
-        const options: UploadApiOptions = {
-            folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}`,
-            resource_type: resourceType,
-            eager: {
-                width: 400,
-                height: 300,
-                crop: 'fill',
-                quality: 'auto',
-            },
-        };
-        cloudinary.uploader.upload_stream(options, (error, result) => {
-            if (error) {
-                if (error.message.includes('too large')) {
-                    reject('La imagen es demasiado grande. Por favor, elige una imagen más pequeña.');
-                    return;
-                } else {
-                    reject(error.message);
-                    return;
-                }
-            }
-            const publicId = result?.public_id;
-            const url = result?.eager?.[0]?.secure_url;
+    if (Array.isArray(files)) {
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (file instanceof File) { // Verifica si es un archivo válido
+                const arrayBuffer = await file.arrayBuffer();
+                const buffer = new Uint8Array(arrayBuffer);
 
-            if (publicId && url) {
-                // Resuelve la promesa con un objeto que contiene el public_id y la url
-                resolve({ public_id: publicId, url: url });
-            } else {
-                // Si no se pudo obtener el public_id o la url, rechaza la promesa con un mensaje de error
-                reject('No se pudo obtener el public_id o la URL de la imagen cargada.');
+                const uploadPromise = new Promise<CloudinaryUploadResult>((resolve, reject) => {
+                    const options: UploadApiOptions = {
+                        folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}/galeria`,
+                        resource_type: resourceType,
+                        eager: {
+                            width: 400,
+                            height: 300,
+                            crop: 'limit',
+                            quality: 'auto',
+                        },
+                    };
+                    cloudinary.uploader.upload_stream(options, (error, result) => {
+                        if (error) {
+                            if (error.message.includes('too large')) {
+                                reject('La imagen es demasiado grande. Por favor, elige una imagen más pequeña.');
+                                return;
+                            } else {
+                                reject(error.message);
+                                return;
+                            }
+                        }
+                        const publicId = result?.public_id;
+                        const url = result?.eager?.[0]?.secure_url;
+
+                        if (publicId && url) {
+                            // Resuelve la promesa con un objeto que contiene el public_id y la url
+                            resolve({ public_id: publicId, url: url });
+                        } else {
+                            // Si no se pudo obtener el public_id o la url, rechaza la promesa con un mensaje de error
+                            reject('No se pudo obtener el public_id o la URL de la imagen cargada.');
+                        }
+                    }).end(buffer);
+                });
+
+                uploadPromises.push(uploadPromise);
             }
-        }).end(buffer);
-    });
+        }
+    } else {
+        // Si solo hay un archivo, procesa ese archivo directamente
+        if (files instanceof File) { // Verifica si es un archivo válido
+            const arrayBuffer = await files.arrayBuffer();
+            const buffer = new Uint8Array(arrayBuffer);
+
+            const uploadPromise = new Promise<CloudinaryUploadResult>((resolve, reject) => {
+                const options: UploadApiOptions = {
+                    folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}`,
+                    resource_type: resourceType,
+                    eager: {
+                        width: 400,
+                        height: 300,
+                        crop: 'limit',
+                        quality: 'auto',
+                    },
+                };
+                cloudinary.uploader.upload_stream(options, (error, result) => {
+                    if (error) {
+                        if (error.message.includes('too large')) {
+                            reject('La imagen es demasiado grande. Por favor, elige una imagen más pequeña.');
+                            return;
+                        } else {
+                            reject(error.message);
+                            return;
+                        }
+                    }
+                    const publicId = result?.public_id;
+                    const url = result?.eager?.[0]?.secure_url;
+
+                    if (publicId && url) {
+                        // Resuelve la promesa con un objeto que contiene el public_id y la url
+                        resolve({ public_id: publicId, url: url });
+                    } else {
+                        // Si no se pudo obtener el public_id o la url, rechaza la promesa con un mensaje de error
+                        reject('No se pudo obtener el public_id o la URL de la imagen cargada.');
+                    }
+                }).end(buffer);
+            });
+
+            uploadPromises.push(uploadPromise);
+        }
+    }
+
+    return Promise.all(uploadPromises);
 };
+
 
 
 export const handleCreateNews = async (formData: FormData) => {
@@ -67,9 +123,26 @@ export const handleCreateNews = async (formData: FormData) => {
     const title = formData.get('title');
     const summary = formData.get('summary');
     let content = formData.get('content') || '';
+    let arrayLinkedNews: string[] = [];
+    const newsLinkedForm = formData.get('newsLinked');
+
+    if (Array.isArray(newsLinkedForm)) {
+        // Iteramos sobre cada elemento del array
+        newsLinkedForm.forEach(item => {
+            // Removemos corchetes y comillas y dividimos por coma
+            const splitItems = item.replace(/\[|\]|"/g, '').split(',');
+            // Agregamos los valores resultantes a arrayLinkedNews
+            arrayLinkedNews = arrayLinkedNews.concat(splitItems);
+        });
+    } else if (typeof newsLinkedForm === 'string') {
+        // Removemos corchetes y comillas y dividimos por coma
+        arrayLinkedNews = newsLinkedForm.replace(/\[|\]|"/g, '').split(',');
+    }
+
     const category = formData.get('category');
     const filePortada = formData.get('portada') as File;
     const fileContent = formData.get('imgContent') as File;
+    const filesGallery = formData.getAll('gallery') as File[];
     const isImagePortada = filePortada.type.startsWith('image');
     const isImageContent = fileContent.type.startsWith('image');
     const isVideoPortada = filePortada.type.startsWith('video');
@@ -79,18 +152,34 @@ export const handleCreateNews = async (formData: FormData) => {
     let videoPortadaUrl: CloudinaryUploadResult | null = null;
     let imageContentUrl: CloudinaryUploadResult | null = null;
     let videoContentUrl: CloudinaryUploadResult | null = null;
+    let imagesGalleryUrls: CloudinaryUploadResult[] = [];
 
     if (isImagePortada) {
-        imagePortadaUrl = await processAndUploadFile(filePortada, 'image', category, title);
+        const results = await processAndUploadFiles(filePortada, 'image', category, title);
+        imagePortadaUrl = results.length > 0 ? results[0] : null; // Solo toma el primer resultado
     } else if (isVideoPortada) {
-        videoPortadaUrl = await processAndUploadFile(filePortada, 'video', category, title);
+        const results = await processAndUploadFiles(filePortada, 'video', category, title);
+        videoPortadaUrl = results.length > 0 ? results[0] : null; // Solo toma el primer resultado
     }
 
     if (isImageContent) {
-        imageContentUrl = await processAndUploadFile(fileContent, 'image', category, title);
+        const results = await processAndUploadFiles(fileContent, 'image', category, title);
+        imageContentUrl = results.length > 0 ? results[0] : null; // Solo toma el primer resultado
     } else if (isVideoContent) {
-        videoContentUrl = await processAndUploadFile(fileContent, 'video', category, title);
+        const results = await processAndUploadFiles(fileContent, 'video', category, title);
+        videoContentUrl = results.length > 0 ? results[0] : null; // Solo toma el primer resultado
     }
+
+    if (filesGallery.length > 0) {
+        const uploadPromises = filesGallery.map(file => processAndUploadFiles(file, 'image', category, title));
+        const results = await Promise.all(uploadPromises);
+
+        // Aplanar el array de resultados
+        const flattenedResults = results.flat();
+
+        imagesGalleryUrls = flattenedResults.filter(result => result !== null) as CloudinaryUploadResult[];
+    }
+
 
     // Reemplazar las URLs de las imágenes en el contenido si hay una URL de imagen
     if (imageContentUrl) {
@@ -104,6 +193,11 @@ export const handleCreateNews = async (formData: FormData) => {
         });
     }
 
+    const formattedGallery = imagesGalleryUrls.map(item => ({
+        publicId: item?.public_id,
+        url: item?.url,
+        type: 'image'
+    }));
 
     const data = {
         title,
@@ -119,7 +213,9 @@ export const handleCreateNews = async (formData: FormData) => {
             },
             zona1: {},
             zona2: {},
-        }
+            gallery: formattedGallery
+        },
+        newsLinked: arrayLinkedNews
     }
 
     // Comprobar si hay datos disponibles para zona1 antes de incluirlos en media

@@ -15,7 +15,7 @@ export const ButtonCreateNews = () => {
                 <CirclePlus size={16} className="mr-1" />
                 Nueva noticia
             </SheetTrigger>
-            <SheetContent className="min-w-full h-full overflow-y-auto">
+            <SheetContent className="min-w-full h-full overflow-y-auto px-12">
                 <SheetHeader className="max-w-7xl mx-auto">
                     <SheetTitle>Crear una nueva noticia</SheetTitle>
                     <div >

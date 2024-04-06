@@ -3,14 +3,14 @@
 import { handleCreateNews } from "@/actions/news/handleCreateNews";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
+import SelectCategories from "./SelectCategories";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
-import SelectCategories from "./SelectCategories";
+import SelectLinkedNews from "./SelectLinkedNews";
 
 
 export default function CreateNewsForm() {
@@ -19,11 +19,16 @@ export default function CreateNewsForm() {
     const [editorContent, setEditorContent] = useState<string>('');
     const [selectedPortadaFile, setSelectedPortadaFile] = useState<File | null>(null);
     const [selectedContentFile, setSelectedContentFile] = useState<File | null>(null);
+    const [selectedGalleryFiles, setSelectedGalleryFiles] = useState<FileList | null>(null);
     const [previewPortadaImageUrl, setPreviewPortadaImageUrl] = useState<any>(null);
     const [previewContentImageUrl, setPreviewContentImageUrl] = useState<any>(null);
     const [portadaType, setPortadaType] = useState<string>('image');
     const [contentType, setContentType] = useState<string>('image');
     const [clearContent, setClearContent] = useState(false);
+    const [LinkedNews, setLinkedNews] = useState<string[]>([]);
+
+
+
 
     useEffect(() => {
         setClearContent(false)
@@ -59,6 +64,25 @@ export default function CreateNewsForm() {
         };
     }
 
+    const handleGalleryFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFiles = event.target.files;
+
+        if (selectedFiles && selectedFiles.length >= 3) {
+            const oversizedFiles = Array.from(selectedFiles).filter(file => file.size > MAX_FILE_SIZE_MB * 1024 * 1024);
+
+            if (oversizedFiles.length > 0) {
+                const filenames = oversizedFiles.map(file => file.name).join(', ');
+                toast.error(`Los siguientes archivos son demasiado grandes: ${filenames}. Por favor, selecciona archivos de máximo ${MAX_FILE_SIZE_MB}MB.`);
+                event.target.value = '';
+            } else {
+                setSelectedGalleryFiles(selectedFiles);
+            }
+        } else {
+            toast.error('Por favor, selecciona al menos 3 archivos de imagen.');
+            event.target.value = '';
+        }
+    };
+
     const handleContentFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -86,6 +110,8 @@ export default function CreateNewsForm() {
     const handleSubmit = async (formData: FormData) => {
 
         formData.append('content', editorContent);
+        formData.append('newsLinked', JSON.stringify(LinkedNews));
+        formData.append('gallery', JSON.stringify(selectedGalleryFiles));
         const response = await handleCreateNews(formData)
 
         if (response.error) {
@@ -97,6 +123,7 @@ export default function CreateNewsForm() {
             setPreviewPortadaImageUrl(null);
             setPortadaType('image');
             setClearContent(true);
+            setLinkedNews([])
         } else {
             toast.warning(response);
         }
@@ -125,11 +152,17 @@ export default function CreateNewsForm() {
                         <source src={previewPortadaImageUrl} type="video/mp4" />
                         Tu navegador no soporta la etiqueta de video.
                     </video>
-                )}            </div>
+                )}
+            </div>
             <div>
                 <Label htmlFor="content">Contenido*</Label>
                 <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
             </div>
+            <div className="w-56">
+                <Label htmlFor="gallery">Galería de imagenes (opcional)</Label>
+                <Input id="gallery" name='gallery' type="file" multiple accept="image/*" onChange={handleGalleryFilesChange} />
+            </div>
+            <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews} />
             <SubmitButton title={'Crear Nueva Noticia'} />
         </form>
     )

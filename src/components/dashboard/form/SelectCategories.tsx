@@ -4,10 +4,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export default function SelectCategories() {
     return (
         <div className="max-w-56">
-            <Label htmlFor="category">Categoria*</Label>
+            <Label htmlFor="category">Categoría*</Label>
             <Select name="category" required>
                 <SelectTrigger>
-                    <SelectValue placeholder="Seleccione una categoria" />
+                    <SelectValue placeholder="Seleccione una categoría" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="politica">politica</SelectItem>
