@@ -38,6 +38,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
     const token = cookies().get('portal_app')?.value
 
+
     if (!token) {
         return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }

@@ -12,11 +12,12 @@ import {
 } from "@/components/ui/carousel"
 import { CategoryNews, MediaNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Play } from "lucide-react";
 import { CldImage, CldVideoPlayer } from 'next-cloudinary';
 import 'next-cloudinary/dist/cld-video-player.css';
 import ButtonActionsNews from "./Button.ActionsNews";
 import Image from "next/image";
+import HandleNewsStatus from "./HandleNewsStatus";
 
 
 export type NewsDataTable = {
@@ -155,7 +156,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         },
         cell: ({ row }) => {
             return (
-                <Badge variant={"outline"} className={`${row.getValue('status') === 'pendiente' ? 'text-amber-500' : 'text-green-500'} uppercase rounded`}>{row.getValue('status')}</Badge>
+                <HandleNewsStatus row={row} />
             )
         },
     },

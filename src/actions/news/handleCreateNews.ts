@@ -1,9 +1,7 @@
 'use server'
 
-import { CategoryNews } from "@/models/news";
-import { NewsType } from "@/types/news.types";
 import { decodeToken } from "@/utils/utils";
-import { TransformationOptions, UploadApiOptions, v2 as cloudinary } from 'cloudinary';
+import { UploadApiOptions, v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from "next/cache";
 
 cloudinary.config({
