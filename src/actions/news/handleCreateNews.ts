@@ -17,8 +17,9 @@ interface CloudinaryUploadResult {
     url?: string;
 }
 
-const processAndUploadFiles = async (files: File[] | File, resourceType: ResourceType = "image", category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
+const processAndUploadFiles = async (files: File[] | File | null, resourceType: ResourceType = "image", category: FormDataEntryValue | null, title: FormDataEntryValue | null) => {
     const uploadPromises: Promise<CloudinaryUploadResult>[] = [];
+
 
     if (Array.isArray(files)) {
         for (let i = 0; i < files.length; i++) {
@@ -66,7 +67,7 @@ const processAndUploadFiles = async (files: File[] | File, resourceType: Resourc
         }
     } else {
         // Si solo hay un archivo, procesa ese archivo directamente
-        if (files instanceof File) { // Verifica si es un archivo válido
+        if (files instanceof File && files.size > 0) { // Verifica si es un archivo válido
             const arrayBuffer = await files.arrayBuffer();
             const buffer = new Uint8Array(arrayBuffer);
 
@@ -82,11 +83,13 @@ const processAndUploadFiles = async (files: File[] | File, resourceType: Resourc
                     },
                 };
                 cloudinary.uploader.upload_stream(options, (error, result) => {
+                    console.log(options)
                     if (error) {
                         if (error.message.includes('too large')) {
                             reject('La imagen es demasiado grande. Por favor, elige una imagen más pequeña.');
                             return;
                         } else {
+                            console.log('ERRORASO!', error)
                             reject(error.message);
                             return;
                         }
@@ -140,7 +143,7 @@ export const handleCreateNews = async (formData: FormData) => {
     const category = formData.get('category');
     const filePortada = formData.get('portada') as File;
     const fileContent = formData.get('imgContent') as File;
-    const filesGallery = formData.getAll('gallery') as File[];
+    const filesGallery = formData.getAll('gallery') as File[] | null;
     const isImagePortada = filePortada.type.startsWith('image');
     const isImageContent = fileContent.type.startsWith('image');
     const isVideoPortada = filePortada.type.startsWith('video');
@@ -168,7 +171,7 @@ export const handleCreateNews = async (formData: FormData) => {
         videoContentUrl = results.length > 0 ? results[0] : null; // Solo toma el primer resultado
     }
 
-    if (filesGallery.length > 0) {
+    if (filesGallery !== null && filesGallery.length > 0) {
         const uploadPromises = filesGallery.map(file => processAndUploadFiles(file, 'image', category, title));
         const results = await Promise.all(uploadPromises);
 

@@ -111,7 +111,9 @@ export default function CreateNewsForm() {
 
         formData.append('content', editorContent);
         formData.append('newsLinked', JSON.stringify(LinkedNews));
-        formData.append('gallery', JSON.stringify(selectedGalleryFiles));
+        if (selectedGalleryFiles !== null) {
+            formData.append('gallery', JSON.stringify(selectedGalleryFiles));
+        }
         const response = await handleCreateNews(formData)
 
         if (response.error) {
