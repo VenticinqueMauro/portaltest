@@ -5,18 +5,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { createRef, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
 import SelectCategories from "./SelectCategories";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
 import SelectLinkedNews from "./SelectLinkedNews";
+import { NewsDataTable } from "../data-table/Columns";
+import { handleEditNews } from "@/actions/news/handleEditNews";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
-export default function CreateNewsForm() {
+export default function EditNewsForm({ news }: { news: NewsDataTable }) {
 
     const ref = createRef<HTMLFormElement>();
-    const [editorContent, setEditorContent] = useState<string>('');
+    const [editorContent, setEditorContent] = useState<string>(news.content);
     const [selectedPortadaFile, setSelectedPortadaFile] = useState<File | null>(null);
     const [selectedContentFile, setSelectedContentFile] = useState<File | null>(null);
     const [selectedGalleryFiles, setSelectedGalleryFiles] = useState<FileList | null>(null);
@@ -26,9 +29,7 @@ export default function CreateNewsForm() {
     const [portadaType, setPortadaType] = useState<string>('image');
     const [contentType, setContentType] = useState<string>('image');
     const [clearContent, setClearContent] = useState(false);
-    const [LinkedNews, setLinkedNews] = useState<string[]>([]);
-
-
+    const [LinkedNews, setLinkedNews] = useState<string[] | undefined>(news?.newsLinked);
 
 
     useEffect(() => {
@@ -124,12 +125,13 @@ export default function CreateNewsForm() {
 
     const handleSubmit = async (formData: FormData) => {
 
+        formData.append('news', JSON.stringify(news));
         formData.append('content', editorContent);
         formData.append('newsLinked', JSON.stringify(LinkedNews));
         if (selectedGalleryFiles !== null) {
             formData.append('gallery', JSON.stringify(selectedGalleryFiles));
         }
-        const response = await handleCreateNews(formData)
+        const response = await handleEditNews(formData)
 
         if (response.error) {
             toast.error(response.error);
@@ -138,55 +140,84 @@ export default function CreateNewsForm() {
             ref.current?.reset()
             setSelectedPortadaFile(null);
             setPreviewPortadaImageUrl(null);
+            setPreviewContentImageUrl(null);
+            setSelectedGalleryFiles(null)
             setPortadaType('image');
             setClearContent(true);
             setLinkedNews([])
-        } else {
-            toast.warning(response);
-        }
+            const escapeKeyEvent = new KeyboardEvent('keydown', {
+                key: 'Escape',
+                code: 'Escape',
+                keyCode: 27,
+                which: 27,
+                bubbles: true,
+                cancelable: true,
+            });
+            document.dispatchEvent(escapeKeyEvent);
+    } else {
+        toast.warning(response);
+}
     }
 
-    return (
-        <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
-            <SelectCategories />
-            <div>
-                <Label htmlFor="title" >Titulo*</Label>
-                <Input className="font-normal" id="title" name='title' required />
+return (
+    <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
+        <div className="max-w-56">
+            <Label htmlFor="category">Categoría*</Label>
+            <Select name="category" defaultValue={news.category}>
+                <SelectTrigger>
+                    <SelectValue placeholder="Seleccione una categoría" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="politica">politica</SelectItem>
+                    <SelectItem value="eco & negocios">eco & negocios</SelectItem>
+                    <SelectItem value="deportes">deportes</SelectItem>
+                    <SelectItem value="tendencias">tendencias</SelectItem>
+                    <SelectItem value="portalcana">Portal caña</SelectItem>
+                </SelectContent>
+            </Select>
+        </div>
+        <div>
+            <Label htmlFor="title" >Titulo*</Label>
+            <Input className="font-normal" id="title" name='title' defaultValue={news?.title} />
+        </div>
+        <div>
+            <Label htmlFor="summary">Sumario*</Label>
+            <Textarea className="font-normal" id="summary" name='summary' defaultValue={news?.summary} />
+        </div>
+        <div className="max-w-56">
+            <Label htmlFor="portada">Portada*</Label>
+            <Input id="portada" name='portada' type="file" accept="image/*,video/*" onChange={handlePortadaFileChange}
+            />
+            {previewPortadaImageUrl && portadaType === 'image' ? (
+                <Image src={previewPortadaImageUrl} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+            ) : (
+                news.media?.portada?.url && news.media.portada.type === 'image' ? (
+                    <Image src={news.media.portada.url} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                ) : null
+            )}
+            {previewPortadaImageUrl && portadaType === 'video' ? (
+                <video width="300" height="200" controls>
+                    <source src={previewPortadaImageUrl} type="video/mp4" />
+                    Tu navegador no soporta la etiqueta de video.
+                </video>
+            ) : null}
+        </div>
+        <div>
+            <Label htmlFor="content">Contenido*</Label>
+            <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
+        </div>
+        <div >
+            <Label htmlFor="gallery">Galería de imágenes (opcional)</Label>
+            <Input id="gallery" name="gallery" type="file" multiple accept="image/*" className="w-56" onChange={handleGalleryFilesChange} />
+            <div className="flex items-center gap-3 py-2">
+                {previewGalleryImageUrls?.map((imageUrl: string, index: number) => (
+                    <Image key={index} src={imageUrl} alt={`Preview ${index + 1}`} width={300} height={200} className="object-contain w-36" />
+                ))}
             </div>
-            <div>
-                <Label htmlFor="summary">Sumario*</Label>
-                <Textarea className="font-normal" id="summary" name='summary' required />
-            </div>
-            <div className="max-w-56">
-                <Label htmlFor="portada">Portada*</Label>
-                <Input id="portada" name='portada' type="file" accept="image/*,video/*" required onChange={handlePortadaFileChange}
-                />
-                {previewPortadaImageUrl && portadaType === 'image' && (
-                    <Image src={previewPortadaImageUrl} alt="Previsualización de portada" width={300} height={200} />
-                )}
-                {previewPortadaImageUrl && portadaType === 'video' && (
-                    <video width="300" height="200" controls>
-                        <source src={previewPortadaImageUrl} type="video/mp4" />
-                        Tu navegador no soporta la etiqueta de video.
-                    </video>
-                )}
-            </div>
-            <div>
-                <Label htmlFor="content">Contenido*</Label>
-                <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
-            </div>
-            <div>
-                <Label htmlFor="gallery">Galería de imagenes (opcional)</Label>
-                <Input id="gallery" name='gallery' type="file" multiple accept="image/*" className="w-56" onChange={handleGalleryFilesChange} />
-                <div className="flex items-center gap-3 py-2">
-                    {previewGalleryImageUrls?.map((imageUrl: string, index: number) => (
-                        <Image key={index} src={imageUrl} alt={`Preview ${index + 1}`} width={300} height={200} className="object-contain w-36" />
-                    ))}
-                </div>
-            </div>
-            <hr />
-            <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews} />
-            <SubmitButton title={'Crear Nueva Noticia'} />
-        </form>
-    )
+        </div>
+        <hr />
+        <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews as Dispatch<SetStateAction<string[]>> | undefined} id={news.id} />
+        <SubmitButton title={'Editar Noticia'} />
+    </form>
+)
 }

@@ -10,16 +10,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { NewsType } from "@/types/news.types";
-import { CldImage, CldVideoPlayer } from "next-cloudinary";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { NewsDataTable } from "../data-table/Columns";
 
 interface Props {
-    LinkedNews: string[];
-    setLinkedNews: React.Dispatch<React.SetStateAction<string[]>>;
+    id?: string;
+    LinkedNews: string[] | undefined;
+    setLinkedNews: React.Dispatch<React.SetStateAction<string[]>> | undefined;
 }
 
-export default function SelectLinkedNews({ LinkedNews, setLinkedNews }: Props) {
+export default function SelectLinkedNews({ LinkedNews, setLinkedNews, id }: Props) {
     const [allNews, setAllNews] = useState<NewsType[] | undefined>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -28,22 +29,29 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews }: Props) {
     useEffect(() => {
         const fetchLinkedNews = async () => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`);
+            console.log(id)
             const { data } = await response.json();
-            setAllNews(data)
+            const filteredNews = data.filter((news: NewsType) => news._id !== id)
+            setAllNews(filteredNews)
         }
 
         fetchLinkedNews();
-    }, [])
+    }, [id])
+
+
+    console.log(allNews)
 
     const handleNewsSelect = (isChecked: boolean, newsId: string) => {
-        if (isChecked) {
-            if (LinkedNews.length < 3) {
-                setLinkedNews(prevSelected => [...prevSelected, newsId]);
+        if (LinkedNews && setLinkedNews) {
+            if (isChecked) {
+                if (LinkedNews.length < 3) {
+                    setLinkedNews(prevSelected => [...prevSelected, newsId]);
+                } else {
+                    toast.warning("Ya has seleccionado el máximo de noticias permitidas.");
+                }
             } else {
-                toast.warning("Ya has seleccionado el máximo de noticias permitidas.");
+                setLinkedNews(prevSelected => prevSelected.filter(id => id !== newsId));
             }
-        } else {
-            setLinkedNews(prevSelected => prevSelected.filter(id => id !== newsId));
         }
     };
 
@@ -81,7 +89,7 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews }: Props) {
                                         <Checkbox
                                             id={`checkbox_${news._id}`}
                                             value={news._id}
-                                            checked={LinkedNews.includes(news._id as string)}
+                                            checked={LinkedNews?.includes(news._id as string)}
                                             onCheckedChange={(isChecked) => handleNewsSelect(isChecked as boolean, news._id as string)}
                                             className="absolute top-2 right-2"
                                         />

@@ -165,7 +165,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         cell: ({ row }) => {
             const news = row.original
             return (
-                <ButtonActionsNews id={news.id} category={news.category} title={news.title} media={news?.media} />
+                <ButtonActionsNews id={news.id} category={news.category} title={news.title} media={news?.media} news={news} />
             )
         },
     },

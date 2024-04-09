@@ -7,19 +7,22 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { CategoryNews, MediaNews } from "@/models/news";
 import { FilePenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { NewsDataTable } from "./Columns";
+import EditNewsForm from "../form/EditNews.form";
 
 interface Props {
     id: string;
     category?: CategoryNews;
     title?: string;
     media?: MediaNews;
+    news?: NewsDataTable
 }
 
-export default function ButtonActionsNews({ id, category, title, media }: Props) {
+export default function ButtonActionsNews({ id, category, title, media, news }: Props) {
 
     return (
         <div className="flex items-center gap-4">
-            <SheetEditNews id={id} title={title} />
+            <SheetEditNews id={id} title={title} news={news} />
             <DialogDeleteNews id={id} category={category} title={title} media={media} />
         </div>
     )
@@ -67,19 +70,23 @@ const DialogDeleteNews = ({ id, category, title, media }: Props) => {
 }
 
 
-const SheetEditNews = ({ id, title }: Props) => {
+const SheetEditNews = ({ id, title, news }: Props) => {
+
+    if (!news) {
+        return null;
+    }
+
     return (
         <Sheet>
             <SheetTrigger>
                 <FilePenLine size={18} className=" text-blue-500 cursor-pointer hover:text-blue-600" />
             </SheetTrigger>
-            <SheetContent>
-                <SheetHeader>
-                    <SheetTitle>Edicion de noticia</SheetTitle>
-                    <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
-                    </SheetDescription>
+            <SheetContent className="min-w-full h-full overflow-y-auto px-12">
+                <SheetHeader className="max-w-7xl mx-auto">
+                    <SheetTitle>Editar noticia</SheetTitle>
+                    <div >
+                        <EditNewsForm news={news} />
+                    </div>
                 </SheetHeader>
             </SheetContent>
         </Sheet>
