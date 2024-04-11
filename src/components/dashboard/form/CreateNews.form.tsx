@@ -12,6 +12,7 @@ import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
 import SelectLinkedNews from "./SelectLinkedNews";
 import { Delete } from "lucide-react";
+import TagsNews from "./TagsNews";
 
 
 export default function CreateNewsForm() {
@@ -155,7 +156,7 @@ export default function CreateNewsForm() {
     const handleChangeTags = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value;
         if ((newValue.endsWith(' ')) && newValue.trim() !== '') {
-            setTags([...tags, newValue.trim()]);
+            setTags([...tags, newValue.trim().toUpperCase()]);
             event.target.value = '';
         }
     };
@@ -211,14 +212,7 @@ export default function CreateNewsForm() {
             <div>
                 <Label htmlFor="title" >Tags (opcional)</Label>
                 <Input className="font-normal" id="title" name='tags' placeholder="Agrega etiquetas y presiona 'espacio' para generar una nueva" onChange={handleChangeTags} />
-                <div className="mt-2 ">
-                    {tags.map((tag, index) => (
-                        <span key={index} className="relative text-blue-600 uppercase mr-2  italic text-sm px-3 py-2 rounded bg-muted-foreground/5" >
-                            #{tag}
-                            <Delete className="absolute top-0 right-0 w-3 h-3 text-destructive cursor-pointer" onClick={() => handleDeleteTags(tag)} />
-                        </span>
-                    ))}
-                </div>
+                <TagsNews tags={tags} handleDeleteTags={handleDeleteTags} />
             </div>
             <SubmitButton title={'Crear Nueva Noticia'} />
         </form>

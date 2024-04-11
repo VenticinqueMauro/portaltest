@@ -74,6 +74,12 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                             <CarouselPrevious />
                             <CarouselNext />
                         </Carousel>
+                        {
+                            news?.tags && news.tags.length &&
+                            news.tags.map(tag => (
+                                <span key={tag} className="text-blue-600 uppercase mr-2  italic text-sm px-3 py-1 shadow rounded bg-muted-foreground/5 ">#{tag}</span>
+                            ))
+                        }
                     </HoverCardContent>
                 </HoverCard>
 
