@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { NewsType } from "@/types/news.types";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { NewsDataTable } from "../data-table/Columns";
 
 interface Props {
     id?: string;
@@ -29,7 +28,6 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews, id }: Prop
     useEffect(() => {
         const fetchLinkedNews = async () => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/news`);
-            console.log(id)
             const { data } = await response.json();
             const filteredNews = data.filter((news: NewsType) => news._id !== id)
             setAllNews(filteredNews)
@@ -39,7 +37,6 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews, id }: Prop
     }, [id])
 
 
-    console.log(allNews)
 
     const handleNewsSelect = (isChecked: boolean, newsId: string) => {
         if (LinkedNews && setLinkedNews) {
