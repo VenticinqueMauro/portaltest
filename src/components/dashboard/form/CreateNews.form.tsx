@@ -11,6 +11,7 @@ import SelectCategories from "./SelectCategories";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
 import SelectLinkedNews from "./SelectLinkedNews";
+import { Delete } from "lucide-react";
 
 
 export default function CreateNewsForm() {
@@ -129,7 +130,7 @@ export default function CreateNewsForm() {
             if (tag.trim() !== '') {
                 formData.append('tags', tag);
             }
-        });        
+        });
         if (selectedGalleryFiles !== null) {
             formData.append('gallery', JSON.stringify(selectedGalleryFiles));
         }
@@ -159,7 +160,12 @@ export default function CreateNewsForm() {
         }
     };
 
-    console.log(tags)
+    const handleDeleteTags = (tag: string) => {
+
+        const filteredTags = tags.filter(tags => tags !== tag)
+        setTags(filteredTags)
+    }
+
 
     return (
         <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
@@ -203,11 +209,14 @@ export default function CreateNewsForm() {
             <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews} />
             <hr />
             <div>
-                <Label htmlFor="title" >Tags</Label>
+                <Label htmlFor="title" >Tags (opcional)</Label>
                 <Input className="font-normal" id="title" name='tags' placeholder="Agrega etiquetas y presiona 'espacio' para generar una nueva" onChange={handleChangeTags} />
-                <div className="mt-1">
+                <div className="mt-2 ">
                     {tags.map((tag, index) => (
-                        <span key={index} className="text-blue-600 uppercase mr-2 italic text-sm">#{tag}</span>
+                        <span key={index} className="relative text-blue-600 uppercase mr-2  italic text-sm px-3 py-2 rounded bg-muted-foreground/5" >
+                            #{tag}
+                            <Delete className="absolute top-0 right-0 w-3 h-3 text-destructive cursor-pointer" onClick={() => handleDeleteTags(tag)} />
+                        </span>
                     ))}
                 </div>
             </div>

@@ -14,6 +14,7 @@ import SelectLinkedNews from "./SelectLinkedNews";
 import { NewsDataTable } from "../data-table/Columns";
 import { handleEditNews } from "@/actions/news/handleEditNews";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Delete, Trash } from "lucide-react";
 
 
 export default function EditNewsForm({ news }: { news: NewsDataTable }) {
@@ -30,6 +31,8 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
     const [contentType, setContentType] = useState<string>('image');
     const [clearContent, setClearContent] = useState(false);
     const [LinkedNews, setLinkedNews] = useState<string[] | undefined>(news?.newsLinked);
+    const [tags, setTags] = useState<string[]>(news?.tags || []);
+
 
 
     useEffect(() => {
@@ -128,6 +131,11 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
         formData.append('news', JSON.stringify(news));
         formData.append('content', editorContent);
         formData.append('newsLinked', JSON.stringify(LinkedNews));
+        tags.forEach((tag) => {
+            if (tag.trim() !== '') {
+                formData.append('tags', tag);
+            }
+        });
         if (selectedGalleryFiles !== null) {
             formData.append('gallery', JSON.stringify(selectedGalleryFiles));
         }
@@ -154,70 +162,97 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
                 cancelable: true,
             });
             document.dispatchEvent(escapeKeyEvent);
-    } else {
-        toast.warning(response);
-}
+        } else {
+            toast.warning(response);
+        }
     }
 
-return (
-    <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
-        <div className="max-w-56">
-            <Label htmlFor="category">Categoría*</Label>
-            <Select name="category" defaultValue={news.category}>
-                <SelectTrigger>
-                    <SelectValue placeholder="Seleccione una categoría" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="politica">politica</SelectItem>
-                    <SelectItem value="eco & negocios">eco & negocios</SelectItem>
-                    <SelectItem value="deportes">deportes</SelectItem>
-                    <SelectItem value="tendencias">tendencias</SelectItem>
-                    <SelectItem value="portalcana">Portal caña</SelectItem>
-                </SelectContent>
-            </Select>
-        </div>
-        <div>
-            <Label htmlFor="title" >Titulo*</Label>
-            <Input className="font-normal" id="title" name='title' defaultValue={news?.title} />
-        </div>
-        <div>
-            <Label htmlFor="summary">Sumario*</Label>
-            <Textarea className="font-normal" id="summary" name='summary' defaultValue={news?.summary} />
-        </div>
-        <div className="max-w-56">
-            <Label htmlFor="portada">Portada*</Label>
-            <Input id="portada" name='portada' type="file" accept="image/*,video/*" onChange={handlePortadaFileChange}
-            />
-            {previewPortadaImageUrl && portadaType === 'image' ? (
-                <Image src={previewPortadaImageUrl} alt="Previsualización de portada" className="py-2" width={300} height={200} />
-            ) : (
-                news.media?.portada?.url && news.media.portada.type === 'image' ? (
-                    <Image src={news.media.portada.url} alt="Previsualización de portada" className="py-2" width={300} height={200} />
-                ) : null
-            )}
-            {previewPortadaImageUrl && portadaType === 'video' ? (
-                <video width="300" height="200" controls>
-                    <source src={previewPortadaImageUrl} type="video/mp4" />
-                    Tu navegador no soporta la etiqueta de video.
-                </video>
-            ) : null}
-        </div>
-        <div>
-            <Label htmlFor="content">Contenido*</Label>
-            <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
-        </div>
-        <div >
-            <Label htmlFor="gallery">Galería de imágenes (opcional)</Label>
-            <Input id="gallery" name="gallery" type="file" multiple accept="image/*" className="w-56" onChange={handleGalleryFilesChange} />
-            <div className="flex items-center gap-3 py-2">
-                {previewGalleryImageUrls?.map((imageUrl: string, index: number) => (
-                    <Image key={index} src={imageUrl} alt={`Preview ${index + 1}`} width={300} height={200} className="object-contain w-36" />
-                ))}
+    const handleChangeTags = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value;
+        if ((newValue.endsWith(' ')) && newValue.trim() !== '') {
+            setTags([...tags, newValue.trim()]);
+            event.target.value = '';
+        }
+    };
+
+    const handleDeleteTags = (tag: string) => {
+
+        const filteredTags = tags.filter(tags => tags !== tag)
+        setTags(filteredTags)
+    }
+
+    return (
+        <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
+            <div className="max-w-56">
+                <Label htmlFor="category">Categoría*</Label>
+                <Select name="category" defaultValue={news.category}>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Seleccione una categoría" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="politica">politica</SelectItem>
+                        <SelectItem value="eco & negocios">eco & negocios</SelectItem>
+                        <SelectItem value="deportes">deportes</SelectItem>
+                        <SelectItem value="tendencias">tendencias</SelectItem>
+                        <SelectItem value="portalcana">Portal caña</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
-        </div>
-        <hr />
-        <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews as Dispatch<SetStateAction<string[]>> | undefined} id={news.id} />
-        <SubmitButton title={'Editar Noticia'} />
-    </form>
-)
+            <div>
+                <Label htmlFor="title" >Titulo*</Label>
+                <Input className="font-normal" id="title" name='title' defaultValue={news?.title} />
+            </div>
+            <div>
+                <Label htmlFor="summary">Sumario*</Label>
+                <Textarea className="font-normal" id="summary" name='summary' defaultValue={news?.summary} />
+            </div>
+            <div className="max-w-56">
+                <Label htmlFor="portada">Portada*</Label>
+                <Input id="portada" name='portada' type="file" accept="image/*,video/*" onChange={handlePortadaFileChange}
+                />
+                {previewPortadaImageUrl && portadaType === 'image' ? (
+                    <Image src={previewPortadaImageUrl} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                ) : (
+                    news.media?.portada?.url && news.media.portada.type === 'image' ? (
+                        <Image src={news.media.portada.url} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                    ) : null
+                )}
+                {previewPortadaImageUrl && portadaType === 'video' ? (
+                    <video width="300" height="200" controls>
+                        <source src={previewPortadaImageUrl} type="video/mp4" />
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                ) : null}
+            </div>
+            <div>
+                <Label htmlFor="content">Contenido*</Label>
+                <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />
+            </div>
+            <div >
+                <Label htmlFor="gallery">Galería de imágenes (opcional)</Label>
+                <Input id="gallery" name="gallery" type="file" multiple accept="image/*" className="w-56" onChange={handleGalleryFilesChange} />
+                <div className="flex items-center gap-3 py-2">
+                    {previewGalleryImageUrls?.map((imageUrl: string, index: number) => (
+                        <Image key={index} src={imageUrl} alt={`Preview ${index + 1}`} width={300} height={200} className="object-contain w-36" />
+                    ))}
+                </div>
+            </div>
+            <hr />
+            <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews as Dispatch<SetStateAction<string[]>> | undefined} id={news.id} />
+            <hr />
+            <div>
+                <Label htmlFor="title" >Tags (opcional)</Label>
+                <Input className="font-normal" id="title" name='tags' placeholder="Agrega etiquetas y presiona 'espacio' para generar una nueva" onChange={handleChangeTags} />
+                <div className="mt-2 ">
+                    {tags.map((tag, index) => (
+                        <span key={index} className="relative text-blue-600 uppercase mr-2  italic text-sm px-3 py-2 rounded bg-muted-foreground/5" >
+                            #{tag}
+                            <Delete className="absolute top-0 right-0 w-3 h-3 text-destructive cursor-pointer" onClick={() => handleDeleteTags(tag)} />
+                        </span>
+                    ))}
+                </div>
+            </div>
+            <SubmitButton title={'Editar Noticia'} />
+        </form>
+    )
 }
