@@ -148,6 +148,8 @@ export const handleCreateNews = async (formData: FormData) => {
     const isImageContent = fileContent.type.startsWith('image');
     const isVideoPortada = filePortada.type.startsWith('video');
     const isVideoContent = fileContent.type.startsWith('video');
+    const tags = formData.getAll('tags');
+
 
     let imagePortadaUrl: CloudinaryUploadResult | null = null;
     let videoPortadaUrl: CloudinaryUploadResult | null = null;
@@ -200,6 +202,8 @@ export const handleCreateNews = async (formData: FormData) => {
         type: 'image'
     }));
 
+    const filteredTags = tags.filter(tags => tags !== '')
+
     const data = {
         title,
         summary,
@@ -216,7 +220,8 @@ export const handleCreateNews = async (formData: FormData) => {
             zona2: {},
             gallery: formattedGallery
         },
-        newsLinked: arrayLinkedNews
+        newsLinked: arrayLinkedNews,
+        tags: filteredTags
     }
 
     // Comprobar si hay datos disponibles para zona1 antes de incluirlos en media

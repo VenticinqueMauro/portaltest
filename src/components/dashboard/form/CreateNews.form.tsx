@@ -27,8 +27,7 @@ export default function CreateNewsForm() {
     const [contentType, setContentType] = useState<string>('image');
     const [clearContent, setClearContent] = useState(false);
     const [LinkedNews, setLinkedNews] = useState<string[]>([]);
-
-
+    const [tags, setTags] = useState<string[]>([]);
 
 
     useEffect(() => {
@@ -126,6 +125,11 @@ export default function CreateNewsForm() {
 
         formData.append('content', editorContent);
         formData.append('newsLinked', JSON.stringify(LinkedNews));
+        tags.forEach((tag) => {
+            if (tag.trim() !== '') {
+                formData.append('tags', tag);
+            }
+        });        
         if (selectedGalleryFiles !== null) {
             formData.append('gallery', JSON.stringify(selectedGalleryFiles));
         }
@@ -141,10 +145,21 @@ export default function CreateNewsForm() {
             setPortadaType('image');
             setClearContent(true);
             setLinkedNews([])
+            setTags([])
         } else {
             toast.warning(response);
         }
     }
+
+    const handleChangeTags = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value;
+        if ((newValue.endsWith(' ')) && newValue.trim() !== '') {
+            setTags([...tags, newValue.trim()]);
+            event.target.value = '';
+        }
+    };
+
+    console.log(tags)
 
     return (
         <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
@@ -186,6 +201,16 @@ export default function CreateNewsForm() {
             </div>
             <hr />
             <SelectLinkedNews LinkedNews={LinkedNews} setLinkedNews={setLinkedNews} />
+            <hr />
+            <div>
+                <Label htmlFor="title" >Tags</Label>
+                <Input className="font-normal" id="title" name='tags' placeholder="Agrega etiquetas y presiona 'espacio' para generar una nueva" onChange={handleChangeTags} />
+                <div className="mt-1">
+                    {tags.map((tag, index) => (
+                        <span key={index} className="text-blue-600 uppercase mr-2 italic text-sm">#{tag}</span>
+                    ))}
+                </div>
+            </div>
             <SubmitButton title={'Crear Nueva Noticia'} />
         </form>
     )

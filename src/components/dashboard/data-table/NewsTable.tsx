@@ -41,7 +41,8 @@ async function getData(): Promise<NewsDataTable[]> {
         lastModifiedBy: item.lastModifiedBy || '-',
         createdAt: formatDate(new Date(item?.createdAt as Date)),
         updatedAt: formatDate(new Date(item?.updatedAt as Date)),
-        newsLinked: item.newsLinked
+        newsLinked: item.newsLinked,
+        tags: item.tags
     }));
 }
 

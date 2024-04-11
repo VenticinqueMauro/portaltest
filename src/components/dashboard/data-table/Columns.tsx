@@ -1,22 +1,20 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Card, CardContent } from "@/components/ui/card"
 import {
     Carousel,
     CarouselContent,
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { CategoryNews, MediaNews, NewsStatus } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, Play } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import { CldImage, CldVideoPlayer } from 'next-cloudinary';
 import 'next-cloudinary/dist/cld-video-player.css';
-import ButtonActionsNews from "./Button.ActionsNews";
 import Image from "next/image";
+import ButtonActionsNews from "./Button.ActionsNews";
 import HandleNewsStatus from "./HandleNewsStatus";
 
 
@@ -33,6 +31,7 @@ export type NewsDataTable = {
     createdAt?: Date;
     updatedAt?: Date;
     newsLinked?: string[];
+    tags?: string[]
 }
 
 export const columnsNews: ColumnDef<NewsDataTable>[] = [
