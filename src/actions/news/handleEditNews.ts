@@ -233,7 +233,7 @@ export const handleEditNews = async (formData: FormData) => {
         summary,
         content,
         category,
-        lasModifiedBy: modifiedBy,
+        lastModifiedBy: modifiedBy,
         media: {
             portada: {
                 publicId: imagePortadaUrl?.public_id || videoPortadaUrl?.public_id || news.media.portada.publicId,

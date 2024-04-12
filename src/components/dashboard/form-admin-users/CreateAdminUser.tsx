@@ -7,18 +7,8 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 import { CirclePlus } from "lucide-react"
+import FormCreateUser from "./FormCreateUser"
 
 export function CreateAdminUser() {
     return (
@@ -33,47 +23,7 @@ export function CreateAdminUser() {
                 <DialogHeader>
                     <DialogTitle>Crear nuevo usario</DialogTitle>
                 </DialogHeader>
-                <div className="grid gap-4 py-4">
-                    <Select>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Selecciona un rol" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Rol</SelectLabel>
-                                <SelectItem value="admin">admin</SelectItem>
-                                <SelectItem value="redactor en jefe">Redactor en jefe</SelectItem>
-                                <SelectItem value="redactor">Redactor</SelectItem>
-                                <SelectItem value="editor">Editor</SelectItem>
-                                <SelectItem value="publicista">Publicista</SelectItem>
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                    <form action="">
-                        <div className="grid gap-2">
-                            <Label htmlFor="name">Nombre y Apellido</Label>
-                            <Input id="name" type="text" placeholder="Pedro Duarte" required />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="email">Email</Label>
-                            <div className="relative">
-                                <Input id="email" type="text" placeholder="pepeduarte24" required />
-                                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">@tdn.com</span>
-                            </div>
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Contraseña</Label>
-                            <Input id="password" type="password" placeholder="*******" required />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Confirmar contraseña</Label>
-                            <Input id="password" type="password" placeholder="*******" required />
-                        </div>
-                    </form>
-                </div>
-                <DialogFooter>
-                    <Button type="submit" className="w-full">Crear</Button>
-                </DialogFooter>
+                <FormCreateUser />
             </DialogContent>
         </Dialog>
     )

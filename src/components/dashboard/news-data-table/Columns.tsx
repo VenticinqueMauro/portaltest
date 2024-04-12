@@ -92,11 +92,16 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
             return (
                 <span
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
+                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground "
                 >
                     Categoría
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
+            )
+        },
+        cell: ({ row }) => {
+            return (
+                <p className="capitalize">{row.original.category}</p>
             )
         }
     },
@@ -106,13 +111,18 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
             return (
                 <span
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
+                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground "
                 >
                     Autor
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
         },
+        cell: ({ row }) => {
+            return (
+                <p className="capitalize">{row.original.author}</p>
+            )
+        }
     },
     {
         accessorKey: "createdAt",
@@ -125,6 +135,11 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                     Creado en
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
+            )
+        },
+        cell: ({ row }) => {
+            return (
+                <p>{row.original.createdAt?.toString()}hs</p>
             )
         }
     },
@@ -140,11 +155,22 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
+        },
+        cell: ({ row }) => {
+            return (
+                <p>{row.original.updatedAt?.toString()}hs</p>
+            )
         }
     },
     {
         accessorKey: "lastModifiedBy",
-        header: "Modificado por"
+        header: "Modificado por",
+        cell: ({ row }) => {
+            const news = row.original
+            return (
+                <p className="capitalize">{news?.lastModifiedBy}</p>
+            )
+        }
     },
     {
         accessorKey: "status",

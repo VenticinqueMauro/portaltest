@@ -7,32 +7,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     // Obtener los datos del cuerpo de la solicitud
-    const { email, password, fullname, role } = await req.json();
+    const { email, password, fullname, role, token } = await req.json();
+    
 
     try {
         // Conectar a la base de datos
         await connectDB();
 
-        // Verificar el rol para la creación de usuarios administradores
-        const token = cookies().get('portal_app')?.value;
-
-        // Verificar si no hay un token
-        if (!token) {
-            // Retornar un mensaje de error indicando que no está autorizado
-            return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
-        }
-
-        // Decodificar el token para verificar su validez y obtener el correo electrónico del usuario
-        const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
-
-        // Verificar si el token ha expirado
-        if (decodedToken.exp * 1000 < Date.now()) {
-            // Retornar un mensaje de error indicando que el token ha expirado
-            return NextResponse.json({ error: 'El token ha expirado' }, { status: 401 });
-        }
-
         // Verificar si el usuario autenticado tiene permisos de administrador
-        const userAuthorized = await AdminUser.findOne({ email: decodedToken.email }).select("-password");
+        const userAuthorized = await AdminUser.findOne({ email: token.email }).select("-password");
 
         if (!userAuthorized || userAuthorized.role !== 'admin') {
             // Retornar un mensaje de error indicando que el usuario no tiene permisos para crear usuarios

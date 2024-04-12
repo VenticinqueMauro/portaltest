@@ -7,8 +7,10 @@ export default function page() {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({
-        "email": "admin@admin.com",
-        "password": "admin123"
+        // "email": "admin@admin.com",
+        // "password": "admin123"
+        "email": "test@tdn.com",
+        "password": "test"
       }),
       headers: {
         'Content-Type': 'application/json'
