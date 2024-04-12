@@ -8,7 +8,7 @@ import { CategoryNews, MediaNews } from "@/models/news";
 import { FilePenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { NewsDataTable } from "./Columns";
-import EditNewsForm from "../form/EditNews.form";
+import EditNewsForm from "../form-news/EditNews.form";
 
 interface Props {
     id: string;

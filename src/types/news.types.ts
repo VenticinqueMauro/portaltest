@@ -1,3 +1,4 @@
+import { UserRole } from "@/models/admin.user";
 import { CategoryNews, MediaNews, NewsStatus } from "@/models/news";
 
 export type NewsType = {
@@ -17,4 +18,12 @@ export type NewsType = {
     comments?: string[];
     createdAt?: Date;
     updatedAt?: Date;
+}
+
+export type AdminUser = {
+    _id: string
+    email: string;
+    password: string;
+    fullname: string;
+    role: UserRole;
 }

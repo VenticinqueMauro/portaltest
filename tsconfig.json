@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/actions/emails/verifyEmail.js", "src/components/dashboard/form/NewsLinked.form.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/actions/emails/verifyEmail.js", "src/components/dashboard/form-news/NewsLinked.form.tsx"],
   "exclude": ["node_modules"]
 }

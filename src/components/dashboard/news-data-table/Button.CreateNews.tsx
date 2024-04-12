@@ -6,7 +6,7 @@ import {
     SheetTrigger
 } from "@/components/ui/sheet"
 import { CirclePlus } from "lucide-react"
-import CreateNewsForm from "../form/CreateNews.form"
+import CreateNewsForm from "../form-news/CreateNews.form"
 
 export const ButtonCreateNews = () => {
     return (

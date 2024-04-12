@@ -1,4 +1,4 @@
-import NewsTable from "@/components/dashboard/data-table/NewsTable";
+import NewsTable from "@/components/dashboard/news-data-table/NewsTable";
 
 export default function page() {
 

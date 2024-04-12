@@ -11,7 +11,7 @@ import SelectCategories from "./SelectCategories";
 import SubmitButton from "./SubmitButton";
 import Tiptap from "./Tiptap";
 import SelectLinkedNews from "./SelectLinkedNews";
-import { NewsDataTable } from "../data-table/Columns";
+import { NewsDataTable } from "../news-data-table/Columns";
 import { handleEditNews } from "@/actions/news/handleEditNews";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Delete, Trash } from "lucide-react";

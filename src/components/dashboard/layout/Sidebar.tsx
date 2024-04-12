@@ -1,15 +1,15 @@
 'use client';
 
-import { LayoutPanelTop, Megaphone, Newspaper, UserPlus } from 'lucide-react'
-import Link from 'next/link'
+import { LayoutPanelTop, Megaphone, Newspaper, UserPlus } from 'lucide-react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React from 'react';
 
 const navItems = [
     {
         title: 'Usuarios',
         href: '/users',
-        icon: <UserPlus  className='w-5 h-5' />
+        icon: <UserPlus className='w-5 h-5' />
     },
     {
         title: 'Noticias',
@@ -26,25 +26,22 @@ const navItems = [
         href: '/editar-home',
         icon: <LayoutPanelTop className='w-5 h-5' />
     },
-]
+];
 
 export default function Sidebar() {
-
     const pathname = usePathname();
-
 
     return (
         <aside className='w-[200px] flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 overflow-y-auto border-r p-6 space-y-10'>
-            <span className=''>
-                TDN Admin Panel
-            </span>
+            <span className=''>TDN Admin Panel</span>
             <div className='flex flex-col gap-8'>
-                {
-                    navItems.map(item => (
-                        <Link key={item.title} href={item.href} className={`${pathname.startsWith(item.href) ? 'text-foreground bg-muted-foreground/5 shadow' : 'text-muted-foreground'} flex gap-1 items-center hover:text-foreground py-1 px-2 rounded `}>{item.icon}{item.title}</Link>
-                    ))
-                }
+                {navItems.map(item => (
+                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'text-foreground bg-muted-foreground/5 shadow' : 'text-muted-foreground'} flex gap-1 items-center hover:text-foreground py-1 px-2 rounded `}>
+                        {item.icon}
+                        {item.title}
+                    </Link>
+                ))}
             </div>
         </aside>
-    )
+    );
 }
