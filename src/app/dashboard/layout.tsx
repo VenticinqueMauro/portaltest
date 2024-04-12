@@ -1,5 +1,7 @@
 import Sidebar from "@/components/dashboard/layout/Sidebar"
+import { decodeToken } from "@/utils/utils";
 import { Metadata } from "next"
+import { cookies } from "next/headers";
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
@@ -9,6 +11,8 @@ export const metadata: Metadata = {
 
 
 export default function layout({ children }: { children: React.ReactNode }) {
+
+    const token = decodeToken();
 
     return (
         <section className="min-h-screen bg-background text-foreground relative flex ">

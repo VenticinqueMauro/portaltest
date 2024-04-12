@@ -1,6 +1,7 @@
 'use client';
 
 import { LayoutPanelTop, Megaphone, Newspaper, UserPlus } from 'lucide-react';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';

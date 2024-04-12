@@ -49,26 +49,27 @@ export function CreateAdminUser() {
                             </SelectGroup>
                         </SelectContent>
                     </Select>
-                    <div className="grid gap-2">
-                        <Label htmlFor="name">Nombre y Apellido</Label>
-                        <Input id="name" type="text" placeholder="Pedro Duarte" required />
-                    </div>
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">Email</Label>
-                        <div className="relative">
-                            <Input id="email" type="text" placeholder="pepeduarte24" required />
-                            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">@tdn.com</span>
+                    <form action="">
+                        <div className="grid gap-2">
+                            <Label htmlFor="name">Nombre y Apellido</Label>
+                            <Input id="name" type="text" placeholder="Pedro Duarte" required />
                         </div>
-                    </div>
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="password">Contrseña</Label>
-                        <Input id="password" type="password" placeholder="*******" required />
-                    </div>
-                    <div className="grid gap-2">
-                        <Label htmlFor="password">Confirmar contraseña</Label>
-                        <Input id="password" type="password" placeholder="*******" required />
-                    </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="email">Email</Label>
+                            <div className="relative">
+                                <Input id="email" type="text" placeholder="pepeduarte24" required />
+                                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">@tdn.com</span>
+                            </div>
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="password">Contraseña</Label>
+                            <Input id="password" type="password" placeholder="*******" required />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="password">Confirmar contraseña</Label>
+                            <Input id="password" type="password" placeholder="*******" required />
+                        </div>
+                    </form>
                 </div>
                 <DialogFooter>
                     <Button type="submit" className="w-full">Crear</Button>
