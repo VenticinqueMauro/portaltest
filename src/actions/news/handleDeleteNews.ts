@@ -19,8 +19,6 @@ interface Props {
 
 export const handleDeleteNews = async ({ id, category, title, media }: Props) => {
 
-    console.log(media)
-
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news/${id}`, {
             method: 'DELETE',

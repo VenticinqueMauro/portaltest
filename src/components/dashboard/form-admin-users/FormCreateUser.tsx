@@ -35,14 +35,14 @@ export default function FormCreateUser() {
 
     return (
         <form ref={ref} action={handleSubmit} className="grid gap-4 py-4">
-            <Select name="role">
+            <Select name="role" required>
                 <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Selecciona un rol" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
                         <SelectLabel>Rol</SelectLabel>
-                        <SelectItem value="admin">admin</SelectItem>
+                        <SelectItem value="admin">Admin</SelectItem>
                         <SelectItem value="redactor en jefe">Redactor en jefe</SelectItem>
                         <SelectItem value="redactor">Redactor</SelectItem>
                         <SelectItem value="editor">Editor</SelectItem>

@@ -1,6 +1,5 @@
 "use client"
 
-import { AdminUser } from "@/types/news.types"
 import { ColumnDef } from "@tanstack/react-table"
 import { KeyRound, MoreHorizontal, Trash } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -12,6 +11,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import DeleteAdminUser from "../form-admin-users/DeleteAdminUser"
 
 export type AdminUsersDataTable = {
     id: string;
@@ -32,11 +32,16 @@ export const columns: ColumnDef<AdminUsersDataTable>[] = [
     {
         accessorKey: "role",
         header: "Rol",
+        cell: ({ row }) => {
+            return (
+                <p className={`${row.original.role === 'ADMIN' && 'font-bold text-primary'} rounded border w-fit px-2`}>{row.original.role}</p>
+            )
+        }
     },
     {
         header: "Acciones",
         cell: ({ row }) => {
-            const payment = row.original
+            const user = row.original
 
             return (
                 <DropdownMenu>
@@ -55,11 +60,8 @@ export const columns: ColumnDef<AdminUsersDataTable>[] = [
                                 Cambiar contraseña
                             </span>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild >
-                            <span className="gap-1">
-                                <Trash className="w-4 h-4 text-destructive" />
-                                Eliminar
-                            </span>
+                        <DropdownMenuItem >
+                            <DeleteAdminUser id={user.id} />
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
