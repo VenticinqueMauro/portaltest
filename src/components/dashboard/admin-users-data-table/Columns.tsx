@@ -42,29 +42,8 @@ export const columns: ColumnDef<AdminUsersDataTable>[] = [
         header: "Acciones",
         cell: ({ row }) => {
             const user = row.original
-
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild >
-                            <span className="gap-1">
-                                <KeyRound className="w-4 h-4 text-blue-500" />
-                                Cambiar contraseña
-                            </span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem >
-                            <DeleteAdminUser id={user.id} />
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <DeleteAdminUser id={user.id} name={user.fullname} />
             )
         },
     },

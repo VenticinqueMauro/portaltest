@@ -1,7 +1,7 @@
+import { AdminProfile } from "@/components/dashboard/layout/AdminProfile";
 import Sidebar from "@/components/dashboard/layout/Sidebar"
 import { decodeToken } from "@/utils/utils";
 import { Metadata } from "next"
-import { cookies } from "next/headers";
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
             <div className="flex-1 ml-[200px] overflow-y-auto p-6">
                 {children}
             </div>
+            <AdminProfile fullname={token?.fullname} email={token?.email} role={token?.role} />
             <Toaster />
         </section>
     )

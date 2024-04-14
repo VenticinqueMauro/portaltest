@@ -9,15 +9,15 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     try {
         await connectDB();
 
-        const newsFound = await AdminUser.findById(id);
+        const userFound = await AdminUser.findById(id);
 
-        if (!newsFound) {
+        if (!userFound) {
             return NextResponse.json({ error: "No se encontró el usuario" }, { status: 404 });
         }
 
         await AdminUser.deleteOne({ _id: id });
 
-        return NextResponse.json({ message: "Noticia eliminada" }, { status: 200 });
+        return NextResponse.json({ message: "Usuario eliminado" }, { status: 200 });
 
     } catch (error) {
         return handleError(error);

@@ -1,12 +1,14 @@
 'use client';
 
 import { handleDeleteUser } from "@/actions/adminUsers/handleDeleteUser";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 
 
-export default function DeleteAdminUser({ id }: { id: string }) {
+export default function DeleteAdminUser({ id, name }: { id: string, name: string }) {
 
     const handleDelete = async () => {
 
@@ -22,9 +24,26 @@ export default function DeleteAdminUser({ id }: { id: string }) {
     }
 
     return (
-        <span className="flex gap-1 cursor-pointer" onClick={handleDelete} >
-            <Trash2 className="text-red-500 hover:text-red-600 w-4 h-4" />
-            Eliminar
-        </span>
+        <Dialog>
+            <DialogTrigger>
+                <Trash2 size={18} className="text-red-500 hover:text-red-600" />
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Confirmación de Eliminación</DialogTitle>
+                    <DialogDescription>
+                        Esta acción eliminará permanentemente al usuario <strong className="text-accent-foreground">{name}</strong> y no se puede deshacer. ¿Está seguro de que desea proceder?
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter >
+                    <DialogClose asChild>
+                        <Button className="w-full flex items-center gap-1" variant={'destructive'} type="submit" onClick={handleDelete}>
+                            <Trash2 size={20} />
+                            Confirmar Eliminación
+                        </Button>
+                    </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     )
 }
