@@ -16,12 +16,14 @@ export async function handleCreateAdminUser(formData: FormData) {
     const email = formData.get('email');
     const role = formData.get('role');
     const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
 
     const data = {
         fullname,
         email: email + '@tdn.com',
         role,
         password,
+        confirmPassword,
         token: authorized
     }
 

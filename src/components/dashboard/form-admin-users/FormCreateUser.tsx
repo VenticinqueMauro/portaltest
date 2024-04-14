@@ -66,8 +66,8 @@ export default function FormCreateUser() {
                 <Input id="password" name="password" type="password" placeholder="*******" required />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="password">Confirmar contraseña</Label>
-                <Input id="new-password" type="new-password" placeholder="*******" required />
+                <Label htmlFor="confirmPassword">Confirmar contraseña</Label>
+                <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="*******" required />
             </div>
             <SubmitAdminButton title={'Crear usuario'} />
         </form>
