@@ -12,7 +12,7 @@ export default function SubmitAdminButton({ title }: Props) {
 
     return (
         <Button type="submit" className={`${pending ? "opacity-80 cursor-not-allowed" : ''} w-full flex items-center gap-1`}>
-            {pending && title.startsWith('Crear') ? "Creando usuario, por favor espere..." : pending && title.startsWith("Editar") ? 'Editando usuario, por favor espere...' : title}
+            {pending && title.startsWith('Crear') ? "Creando usuario, por favor espere..." : pending && title.startsWith("Editar") ? 'Editando usuario, por favor espere...' : pending && title.startsWith('Cambiar') ? "Cambiando contraseña" : title}
         </Button>
     )
 }

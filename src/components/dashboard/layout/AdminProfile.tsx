@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { ChangePasswordAdminUser } from "../form-admin-users/ChangePasswordAdminUser";
 
 interface Props {
     fullname: string;
@@ -28,7 +29,7 @@ export function AdminProfile({ fullname, email, role }: Props) {
 
     const handleLogout = async () => {
         try {
-            const res = await fetch('/api/auth/admin/logout', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/auth/admin/logout`, {
                 method: "DELETE",
                 credentials: 'include'
             })
@@ -67,8 +68,8 @@ export function AdminProfile({ fullname, email, role }: Props) {
                             Volver al inicio
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
-                        Cambiar contraseña
+                    <DropdownMenuItem asChild>
+                        <ChangePasswordAdminUser email={email} />
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout}>

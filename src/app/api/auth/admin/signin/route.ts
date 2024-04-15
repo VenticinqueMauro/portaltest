@@ -29,8 +29,6 @@ export async function POST(req: NextRequest) {
     // Obtener los datos del cuerpo de la solicitud
     const { email, password, confirmPassword, fullname, role, token } = await req.json()
 
-    console.log(email)
-
     // Validar los datos con el esquema definido
     const validation = userSchema.safeParse({ email, password, confirmPassword, fullname, role, token });
     if (!validation.success) {

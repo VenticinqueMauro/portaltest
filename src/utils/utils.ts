@@ -46,3 +46,4 @@ export function decodeToken() {
     const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
     return decodedToken;
 }
+
