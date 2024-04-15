@@ -1,5 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import { AdminUser } from "@/models/admin.user";
+import { handleError } from "@/utils/utils";
 import bcrypt from "bcrypt";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -27,6 +28,8 @@ const userSchema = z.object({
 export async function POST(req: NextRequest) {
     // Obtener los datos del cuerpo de la solicitud
     const { email, password, confirmPassword, fullname, role, token } = await req.json()
+
+    console.log(email)
 
     // Validar los datos con el esquema definido
     const validation = userSchema.safeParse({ email, password, confirmPassword, fullname, role, token });
@@ -58,7 +61,7 @@ export async function POST(req: NextRequest) {
 
         if (userFound) {
             // Retornar un mensaje de error indicando que el correo electrónico ya ha sido registrado
-            return NextResponse.json({ message: 'Este correo electrónico ya ha sido registrado' }, { status: 400 });
+            return NextResponse.json({ error: 'Este correo electrónico ya ha sido registrado' }, { status: 400 });
         }
 
         // Generar el hash del password
@@ -79,18 +82,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ message: 'Registro exitoso' }, { status: 200 })
 
     } catch (error) {
-        if (error instanceof Error) {
-            return NextResponse.json({
-                error: `Registration failed: ${error.message}`
-            }, {
-                status: 400
-            });
-        } else {
-            return NextResponse.json({
-                error: 'Ha ocurrido un error inesperado'
-            }, {
-                status: 500 // Internal Server Error
-            });
-        }
+        return handleError(error);
     }
 }

@@ -34,7 +34,7 @@ export const columns: ColumnDef<AdminUsersDataTable>[] = [
         header: "Rol",
         cell: ({ row }) => {
             return (
-                <p className={`${row.original.role === 'ADMIN' && 'font-bold text-primary'} rounded border w-fit px-2`}>{row.original.role}</p>
+                <p className={`${row.original.role === 'ADMIN' && 'text-primary'} rounded border w-fit px-2`}>{row.original.role}</p>
             )
         }
     },

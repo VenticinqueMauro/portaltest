@@ -12,10 +12,12 @@ import {
 import {
     ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel,
     getFilteredRowModel,
+    getPaginationRowModel,
     useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { CreateAdminUser } from "../form-admin-users/CreateAdminUser";
+import { Button } from "@/components/ui/button";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -34,6 +36,7 @@ export default function DataTableAdminUsers<TData, TValue>({ columns, data, }: D
         getCoreRowModel: getCoreRowModel(),
         onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         state: {
             columnFilters,
         },
@@ -96,6 +99,24 @@ export default function DataTableAdminUsers<TData, TValue>({ columns, data, }: D
                     </TableBody>
                 </Table>
             </div>
-        </div>
+            <div className="flex items-center justify-end space-x-2 py-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    Previo
+                </Button>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    Siguiente
+                </Button>
+            </div>
+        </div >
     )
 }
