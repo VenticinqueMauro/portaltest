@@ -14,11 +14,17 @@ import {
 } from "@/components/ui/select";
 import SubmitAdminButton from "./SubmitAdminButton";
 import { toast } from "sonner";
-import { createRef } from "react";
+import { createRef, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function FormCreateUser() {
 
     const ref = createRef<HTMLFormElement>();
+    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible2, setIsVisible2] = useState(false);
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
+    const toggleVisibility2 = () => setIsVisible2(!isVisible2);
 
     const handleSubmit = async (formData: FormData) => {
         const response = await handleCreateAdminUser(formData);
@@ -63,11 +69,17 @@ export default function FormCreateUser() {
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="password">Contraseña</Label>
-                <Input id="password" name="password" type="password" placeholder="*******" required />
+                <div className="relative">
+                    <Input id="password" name="password" type={isVisible ? 'text' : 'password'} placeholder="*******" required />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility}>{isVisible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
+                </div>
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="confirmPassword">Confirmar contraseña</Label>
-                <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="*******" required />
+                <div className="relative">
+                    <Input id="confirmPassword" name="confirmPassword" type={isVisible2 ? 'text' : 'password'} placeholder="*******" required />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility2}>{isVisible2 ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
+                </div>
             </div>
             <SubmitAdminButton title={'Crear usuario'} />
         </form>
