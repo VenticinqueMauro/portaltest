@@ -183,7 +183,7 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
     }
 
     return (
-        <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
+        <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3 max-w-3xl mx-auto">
             <div className="max-w-56">
                 <Label htmlFor="category">Categoría*</Label>
                 <Select name="category" defaultValue={news.category}>

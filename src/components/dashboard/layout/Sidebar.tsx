@@ -33,8 +33,8 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <aside className='w-[200px] flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 overflow-y-auto border-r p-6 space-y-10'>
-            <span className='flex justify-between items-center relative text-muted-foreground'>
+        <aside className='w-[200px] flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 overflow-y-auto border-r py-6 px-1 space-y-10'>
+            <span className='flex justify-between items-center relative text-muted-foreground px-2'>
                 Admin Panel
                 <NotificationBell />
             </span>

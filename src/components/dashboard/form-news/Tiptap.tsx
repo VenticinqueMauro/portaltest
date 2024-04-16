@@ -1,17 +1,13 @@
 'use client'
 
-import StarterKit from '@tiptap/starter-kit'
-import BulletList from '@tiptap/extension-bullet-list'
 import Highlight from '@tiptap/extension-highlight'
-import ListItem from '@tiptap/extension-list-item'
+import TaskItem from '@tiptap/extension-task-item'
+import TaskList from '@tiptap/extension-task-list'
 import Image from '@tiptap/extension-image'
-import BlockQuote from '@tiptap/extension-blockquote';
-import Dropcursor from '@tiptap/extension-dropcursor'
 import { EditorContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import { useEffect } from 'react'
 import ToolbarTiptap from './Toolbar.tiptap'
-import { useCallback, useEffect } from 'react'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
 
 interface Props {
     content: string;
@@ -26,6 +22,8 @@ const Tiptap = ({ content, imageUrl, type, clearContent, onChange, handleContent
     const editor = useEditor({
         extensions: [
             StarterKit.configure(),
+            TaskList,
+            TaskItem,
             Highlight.configure(),
             Image.configure({
                 HTMLAttributes: {

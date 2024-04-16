@@ -169,7 +169,7 @@ export default function CreateNewsForm() {
 
 
     return (
-        <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3">
+        <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3 max-w-3xl mx-auto">
             <SelectCategories />
             <div>
                 <Label htmlFor="title" >Titulo*</Label>

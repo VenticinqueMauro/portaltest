@@ -83,7 +83,7 @@ const SheetEditNews = ({ id, title, news }: Props) => {
             </SheetTrigger>
             <SheetContent className="min-w-full h-full overflow-y-auto px-12">
                 <SheetHeader className="max-w-7xl mx-auto">
-                    <SheetTitle>Editar noticia</SheetTitle>
+                    <SheetTitle className="max-w-7xl mx-auto">Editar noticia</SheetTitle>
                     <div >
                         <EditNewsForm news={news} />
                     </div>
