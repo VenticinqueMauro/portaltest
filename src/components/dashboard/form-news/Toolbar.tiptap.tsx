@@ -91,7 +91,7 @@ export default function ToolbarTiptap({ editor, handleContentFileChange }: Props
             <Toggle
                 size='sm'
                 pressed={editor.isActive('BlockQuote')}
-                onPressedChange={() => editor.chain().focus().setBlockquote().run()}
+                onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
             >
                 <MessageSquareQuote className="w-4 h-4" />
             </Toggle>

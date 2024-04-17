@@ -204,10 +204,21 @@ export const handleCreateNews = async (formData: FormData) => {
 
     const filteredTags = tags.filter(tags => tags !== '')
 
+    // Función para transformar etiquetas <p> vacías en <br/>
+    function transformEmptyParagraphs(content: any) {
+        // Expresión regular para buscar etiquetas <p> vacías
+        const emptyParagraphRegex = /<p>\s*<\/p>/g;
+        // Reemplazar todas las coincidencias de etiquetas <p> vacías con <br/>
+        return content.replace(emptyParagraphRegex, '<br/>');
+    }
+
+    // Lógica para transformar etiquetas <p> vacías en <br/> en el contenido
+    const transformedContent = transformEmptyParagraphs(content);
+
     const data = {
         title,
         summary,
-        content,
+        content: transformedContent,
         category,
         author,
         media: {
