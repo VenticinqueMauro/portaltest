@@ -63,7 +63,7 @@ const Tiptap = ({ content, imageUrl, type, clearContent, onChange, handleContent
 
     return (
         <div className='flex flex-col justify-stretch '>
-            <ToolbarTiptap editor={editor} handleContentFileChange={handleContentFileChange} />
+            <ToolbarTiptap editor={editor} handleContentFileChange={handleContentFileChange} imageUrl={imageUrl} />
             <EditorContent editor={editor} />
         </div>
     )

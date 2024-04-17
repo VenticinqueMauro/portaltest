@@ -6,15 +6,15 @@ import { Bold, Heading3, Heading4, Heading5, Heading6, Highlighter, ImagePlus, I
 
 interface Props {
     editor: Editor | null
+    imageUrl: string | null
     handleContentFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function ToolbarTiptap({ editor, handleContentFileChange }: Props) {
+export default function ToolbarTiptap({ editor, imageUrl, handleContentFileChange }: Props) {
 
     if (!editor) {
         return null
     }
-
 
     return (
         <div className="border border-input bg-transparent mb-2 gap-1 flex w-fit">
@@ -130,6 +130,7 @@ export default function ToolbarTiptap({ editor, handleContentFileChange }: Props
             <Toggle
                 size='sm'
                 className="relative"
+                disabled={editor.getHTML().includes('img')}
             >
                 <label htmlFor="imgContent" className="cursor-pointer block w-full ">
                     <ImagePlus className="w-4 h-4" />
