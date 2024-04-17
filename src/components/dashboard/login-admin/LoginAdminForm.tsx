@@ -84,13 +84,13 @@ export function LoginAdminForm() {
                     </form>
                 </div>
             </div>
-            <div className="hidden bg-muted lg:block">
+            <div className="hidden bg-muted lg:flex justify-center items-center ">
                 <Image
-                    src="/placeholder.svg"
+                    src="/fondo-login.png"
                     alt="Image"
-                    width="1920"
-                    height="1080"
-                    className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                    width="497"
+                    height="640"
+                    className="object-contain  dark:brightness-[0.1] dark:grayscale"
                 />
             </div>
         </div>
