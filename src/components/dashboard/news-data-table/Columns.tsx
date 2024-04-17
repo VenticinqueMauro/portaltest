@@ -60,7 +60,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                                 src={news.media?.portada?.publicId || ''}
                             />
                         )}
-                        <div className="text-sm mb-3" dangerouslySetInnerHTML={{ __html: news.content }} />
+                        <div className="text-sm mb-3 mt-3" dangerouslySetInnerHTML={{ __html: news.content }} />
                         <Carousel className="w-full">
                             <CarouselContent className="-ml-1">
                                 {news.media?.gallery?.map((image) => (
@@ -75,7 +75,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                             <CarouselNext />
                         </Carousel>
                         {
-                            news?.tags && news.tags.length &&
+                            news?.tags && news.tags.length >= 1 &&
                             news.tags.map(tag => (
                                 <span key={tag} className="text-blue-600 uppercase mr-2  italic text-sm px-3 py-1 shadow rounded bg-muted-foreground/5 ">#{tag}</span>
                             ))

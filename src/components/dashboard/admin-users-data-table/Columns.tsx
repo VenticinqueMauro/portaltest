@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { KeyRound, MoreHorizontal, Trash } from "lucide-react"
+import { ArrowUpDown, KeyRound, MoreHorizontal, Trash } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -31,7 +31,17 @@ export const columns: ColumnDef<AdminUsersDataTable>[] = [
     },
     {
         accessorKey: "role",
-        header: "Rol",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Rol
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
         cell: ({ row }) => {
             return (
                 <p className={`${row.original.role === 'ADMIN' && 'text-primary'} rounded border w-fit px-2`}>{row.original.role}</p>

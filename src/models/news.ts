@@ -1,4 +1,4 @@
-import { Schema, model, models, Document, Types } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
 
 export enum NewsStatus {
     PUBLISHED = 'publicado',

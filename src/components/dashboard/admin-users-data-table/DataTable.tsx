@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/table";
 import {
     ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel,
+    SortingState,
+    getSortedRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
     useReactTable,
@@ -26,6 +28,7 @@ interface DataTableProps<TData, TValue> {
 
 export default function DataTableAdminUsers<TData, TValue>({ columns, data, }: DataTableProps<TData, TValue>) {
 
+    const [sorting, setSorting] = useState<SortingState>([])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
         []
     )
@@ -35,10 +38,13 @@ export default function DataTableAdminUsers<TData, TValue>({ columns, data, }: D
         columns,
         getCoreRowModel: getCoreRowModel(),
         onColumnFiltersChange: setColumnFilters,
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         state: {
             columnFilters,
+            sorting
         },
     })
 
