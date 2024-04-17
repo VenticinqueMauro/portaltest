@@ -41,7 +41,7 @@ export default function FormChangePasswordUser({ email }: { email: string }) {
             if (res.ok) {
                 toast.success('Serás redirigido a la página de inicio de sesión en breve 😀')
                 setTimeout(() => {
-                    router.push('/')
+                    router.push('/login-tdn')
                 }, 3000)
             }
         } else {

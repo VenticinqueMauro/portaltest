@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
 
     const token = request.cookies.get('portal_app')?.value;
 
-    if (token === undefined) return NextResponse.redirect(new URL('/', request.url));
+    if (token === undefined) return NextResponse.redirect(new URL('/login-tdn', request.url));
 
     try {
         await jwtVerify(token, new TextEncoder().encode(`${process.env.JWT_KEY}`))
