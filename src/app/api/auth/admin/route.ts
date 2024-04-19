@@ -4,8 +4,22 @@ import { handleError } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+
+    const searchParams = request.nextUrl.searchParams
+    const id = searchParams.get('id')
+
     try {
         await connectDB();
+
+        if (id) {
+            const adminUser = await AdminUser.findById(id, '-password');
+
+            if (!adminUser) {
+                return NextResponse.json({ error: 'No se encontro el usuario' }, { status: 404 })
+            }
+
+            return NextResponse.json({ message: "Usuario administrador encontrado con éxito", data: adminUser }, { status: 200 })
+        }
 
         const adminUsers = await AdminUser.find({}, '-password');
 

@@ -1,6 +1,5 @@
 import { decodeToken } from "@/utils/utils";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
@@ -9,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default function LoginAdminLayout({ children }: { children: React.ReactNode }) {
 
     const token = decodeToken();
 

@@ -60,12 +60,11 @@ export function AdminProfile({ fullname, email, role }: Props) {
                     </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 mr-3">
-                    <DropdownMenuLabel className="capitalize">{fullname} / {role}</DropdownMenuLabel>
-                    <DropdownMenuItem disabled>{email}</DropdownMenuItem>
+                    <DropdownMenuLabel className="capitalize">{fullname} <span className="text-muted-foreground font-normal">/ {role}</span></DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                        <Link href='/'>
-                            Volver al inicio
+                        <Link href='/dashboard/profile'>
+                            Editar Perfil
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
