@@ -1,7 +1,7 @@
 import { decodeToken, handleError } from "@/utils/utils";
 import CardProfile from "../../../components/dashboard/profile/CardProfile";
 
-async function getProfile(id: string) {
+export async function getProfile(id: string) {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/auth/admin?id=${id}`)
 

@@ -18,9 +18,10 @@ interface Props {
     fullname: string;
     email: string;
     role: string;
+    avatar: string;
 }
 
-export function AdminProfile({ fullname, email, role }: Props) {
+export function AdminProfile({ fullname, email, role, avatar }: Props) {
 
     const router = useRouter();
 
@@ -55,7 +56,7 @@ export function AdminProfile({ fullname, email, role }: Props) {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Avatar className="cursor-pointer">
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src={avatar} />
                         <AvatarFallback>TDN</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>
