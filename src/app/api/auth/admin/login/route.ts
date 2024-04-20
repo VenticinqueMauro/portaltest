@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
         // Si la autenticación es exitosa, generar un token JWT
         const tokenData = {
             exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
+            id: userFound._id,
             email,
             fullname: userFound.fullname,
             role: userFound.role

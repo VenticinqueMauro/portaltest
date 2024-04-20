@@ -1,5 +1,5 @@
 import { UserRole } from "@/models/admin.user";
-import { CategoryNews, MediaNews, NewsStatus } from "@/models/news";
+import { CategoryNews, MediaNews } from "@/models/news";
 
 export type NewsType = {
     _id?: string,
@@ -26,4 +26,9 @@ export type AdminUser = {
     password: string;
     fullname: string;
     role: UserRole;
+}
+
+export enum NewsStatus {
+    PUBLISHED = 'publicado',
+    PENDING = 'pendiente',
 }

@@ -1,9 +1,5 @@
+import { NewsStatus } from "@/types/news.types";
 import { Document, Schema, model, models } from "mongoose";
-
-export enum NewsStatus {
-    PUBLISHED = 'publicado',
-    PENDING = 'pendiente',
-}
 
 export interface MediaNews {
     portada: {
@@ -27,8 +23,6 @@ export interface MediaNews {
         type: "image";
     }>;
 }
-
-
 
 export enum CategoryNews {
     POLITICA = 'politica',

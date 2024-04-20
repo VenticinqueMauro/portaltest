@@ -8,11 +8,17 @@ export enum UserRole {
     ADMIN = 'admin',
 }
 
+interface UserAvatar {
+    publicId: string,
+    url: string
+}
+
 interface AdminUserDocument extends Document {
     email: string;
     password: string;
     fullname: string;
     role: UserRole;
+    avatar: UserAvatar
 }
 
 const AdminUserSchema = new Schema<AdminUserDocument>({
@@ -35,6 +41,14 @@ const AdminUserSchema = new Schema<AdminUserDocument>({
         type: String,
         enum: Object.values(UserRole),
         default: UserRole.WRITER
+    },
+    avatar: {
+        publicId: {
+            type: String
+        },
+        url: {
+            type: String
+        }
     }
 });
 

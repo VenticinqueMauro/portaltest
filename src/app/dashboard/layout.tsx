@@ -3,6 +3,7 @@ import Sidebar from "@/components/dashboard/layout/Sidebar"
 import { decodeToken } from "@/utils/utils";
 import { Metadata } from "next"
 import { Toaster } from 'sonner'
+import { getProfile } from "./profile/page";
 
 export const metadata: Metadata = {
     title: 'Admin Panel | Noticias',
@@ -10,9 +11,11 @@ export const metadata: Metadata = {
 }
 
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default async function layout({ children }: { children: React.ReactNode }) {
 
     const token = decodeToken();
+
+    const { data: user } = await getProfile(token.id)
 
     return (
         <section className="min-h-screen bg-background text-foreground relative flex ">
@@ -20,7 +23,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
             <div className="flex-1 ml-[200px] overflow-y-auto p-6">
                 {children}
             </div>
-            <AdminProfile fullname={token?.fullname} email={token?.email} role={token?.role} />
+            <AdminProfile fullname={user.fullname} email={user.email} role={user.role} avatar={user.avatar.url} />
             <Toaster />
         </section>
     )
