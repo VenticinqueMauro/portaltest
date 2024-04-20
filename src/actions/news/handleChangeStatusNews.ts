@@ -1,6 +1,6 @@
 'use server';
 
-import { NewsStatus } from "@/models/news";
+import { NewsStatus } from "@/types/news.types";
 import { revalidatePath } from "next/cache";
 
 export const handleNewsStatus = async (id: string, status: NewsStatus) => {
