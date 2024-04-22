@@ -1,14 +1,13 @@
 'use client'
 
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
-import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import SubmitAdminButton from "../form-admin-users/SubmitAdminButton";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export function LoginAdminForm() {
 
@@ -45,6 +44,8 @@ export function LoginAdminForm() {
             }
         } catch (error) {
             toast.error("Ocurrió un error inesperado");
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -71,14 +72,17 @@ export function LoginAdminForm() {
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="current-password">Password</Label>
                             </div>
                             <div className="relative">
-                                <Input id="password" name="password" type={isVisible ? 'text' : 'password'} placeholder="*******" required />
+                                <Input id="current-password" name="password" type={isVisible ? 'text' : 'password'} placeholder="*******" required />
                                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility}>{isVisible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
                             </div>
                         </div>
-                        <SubmitAdminButton title='Ingresar' />
+
+                        <Button type="submit" className={`${loading ? "opacity-80 cursor-not-allowed" : ''} w-full flex items-center gap-1`} >
+                            {loading ? 'Ingresando al panel administrador...' : 'Ingresar'}
+                        </Button>
                     </form>
                 </div>
             </div>
