@@ -1,10 +1,9 @@
-import { AdminProfile } from "@/components/dashboard/layout/AdminProfile";
-import Sidebar from "@/components/dashboard/layout/Sidebar"
-import { decodeToken } from "@/utils/utils";
-import { Metadata } from "next"
-import { Toaster } from 'sonner'
-import { getProfile } from "./profile/page";
+import Sidebar from "@/components/dashboard/layout/Sidebar";
 import { NewsStatus, NewsType } from "@/types/news.types";
+import { decodeToken } from "@/utils/utils";
+import { Metadata } from "next";
+import { Toaster } from 'sonner';
+import { getProfile } from "./profile/page";
 
 export const metadata: Metadata = {
     title: 'Admin Panel | Noticias',
@@ -39,15 +38,11 @@ export default async function layout({ children }: { children: React.ReactNode }
     const hasPendingNews = await getPendingNews();
 
     return (
-        <section className="min-h-screen bg-background text-foreground relative flex ">
+        <section className="min-h-screen bg-background text-foreground relative flex">
             <Sidebar hasPendingNews={hasPendingNews} user={user} />
             <div className="flex-1 ml-[200px] overflow-y-auto p-6">
                 {children}
             </div>
-            {/* {
-                user &&
-                <AdminProfile fullname={user.fullname} email={user.email} role={user.role} avatar={user.avatar?.url} />
-            } */}
             <Toaster />
         </section>
     )
