@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
+import SubmitAdminButton from "../form-admin-users/SubmitAdminButton";
 
 export function LoginAdminForm() {
 
@@ -77,10 +78,7 @@ export function LoginAdminForm() {
                                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility}>{isVisible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
                             </div>
                         </div>
-
-                        <Button type="submit" className="w-full" disabled={loading}>
-                            {loading ? 'Ingresando' : 'Ingresar'}
-                        </Button>
+                        <SubmitAdminButton title='Ingresar' />
                     </form>
                 </div>
             </div>
