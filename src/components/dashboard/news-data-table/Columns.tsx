@@ -169,7 +169,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         cell: ({ row }) => {
             const news = row.original
             return (
-                <p className="capitalize">{news?.lastModifiedBy}</p>
+                <p>{news?.lastModifiedBy}</p>
             )
         }
     },

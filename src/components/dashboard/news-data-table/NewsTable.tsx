@@ -5,7 +5,7 @@ import { DataTableNews } from "./DataTable";
 
 
 async function getData(): Promise<NewsDataTable[]> {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, { cache: "no-store" });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`);
 
     const { data } = await response.json();
 

@@ -9,7 +9,7 @@ export async function handleCreateAdminUser(formData: FormData) {
     const authorized = decodeToken();
 
     if (authorized.role !== 'admin') {
-        return 'No autorizado'
+        return 'No tienes permiso para crear usuarios'
     }
 
     const fullname = formData.get('fullname');
