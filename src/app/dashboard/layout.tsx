@@ -23,7 +23,10 @@ export default async function layout({ children }: { children: React.ReactNode }
             <div className="flex-1 ml-[200px] overflow-y-auto p-6">
                 {children}
             </div>
-            <AdminProfile fullname={user.fullname} email={user.email} role={user.role} avatar={user.avatar.url} />
+            {
+                user &&
+                <AdminProfile fullname={user.fullname} email={user.email} role={user.role} avatar={user.avatar?.url} />
+            }
             <Toaster />
         </section>
     )

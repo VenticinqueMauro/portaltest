@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ChangePasswordAdminUser } from "../form-admin-users/ChangePasswordAdminUser";
 
@@ -18,7 +18,7 @@ interface Props {
     fullname: string;
     email: string;
     role: string;
-    avatar: string;
+    avatar: string | undefined;
 }
 
 export function AdminProfile({ fullname, email, role, avatar }: Props) {
