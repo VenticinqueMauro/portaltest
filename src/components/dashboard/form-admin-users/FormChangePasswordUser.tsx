@@ -53,26 +53,58 @@ export default function FormChangePasswordUser({ email }: { email: string }) {
         <form ref={ref} action={handleSubmit} className="grid gap-4 py-4">
             <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" name="email" type="text" placeholder="pepeduarte24" defaultValue={email} disabled />
+                <Input
+                    id="email"
+                    name="email"
+                    type="text"
+                    placeholder="pepeduarte24"
+                    defaultValue={email}
+                    autoComplete="email"
+                    disabled
+                />
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="oldPassword">Antigua contraseña</Label>
                 <div className="relative">
-                    <Input id="oldPassword" name="oldPassword" type={isVisible ? 'text' : 'password'} placeholder="*******" required />
+                    <Input
+                        id="oldPassword"
+                        aria-label="current-password"
+                        name="oldPassword"
+                        type={isVisible ? 'text' : 'password'}
+                        placeholder="*******"
+                        autoComplete="current-password"
+                        required
+                    />
                     <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility}>{isVisible ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
                 </div>
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="newPassword">Nueva contraseña</Label>
                 <div className="relative">
-                    <Input id="newPassword" name="newPassword" type={isVisible2 ? 'text' : 'password'} placeholder="*******" required />
+                    <Input
+                        id="newPassword"
+                        aria-label="new-password"
+                        name="newPassword"
+                        type={isVisible2 ? 'text' : 'password'}
+                        placeholder="*******"
+                        autoComplete="new-password"
+                        required
+                    />
                     <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility2}>{isVisible2 ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
                 </div>
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="confirmNewPassword">Confirmar contraseña</Label>
                 <div className="relative">
-                    <Input id="confirmNewPassword" name="confirmNewPassword" type={isVisible3 ? 'text' : 'password'} placeholder="*******" required />
+                    <Input
+                        id="confirmNewPassword"
+                        aria-label="new-password"
+                        name="confirmNewPassword"
+                        type={isVisible3 ? 'text' : 'password'}
+                        placeholder="*******"
+                        autoComplete="new-password"
+                        required
+                    />
                     <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground cursor-pointer" onClick={toggleVisibility3}>{isVisible3 ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}</span>
                 </div>
             </div>
