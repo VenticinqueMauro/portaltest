@@ -40,7 +40,7 @@ export default async function layout({ children }: { children: React.ReactNode }
 
     return (
         <section className="min-h-screen bg-background text-foreground relative flex ">
-            <Sidebar hasPendingNews={hasPendingNews} />
+            <Sidebar hasPendingNews={hasPendingNews} role={token.role} />
             <div className="flex-1 ml-[200px] overflow-y-auto p-6">
                 {children}
             </div>

@@ -1,12 +1,6 @@
+import { UserRole } from "@/types/news.types";
 import { Schema, model, models, Document } from "mongoose";
 
-export enum UserRole {
-    EDITOR = 'editor',
-    WRITER = 'redactor',
-    PUBLICIST = 'publicista',
-    CHIEF_WRITER = 'redactor en jefe',
-    ADMIN = 'admin',
-}
 
 interface UserAvatar {
     publicId: string,
