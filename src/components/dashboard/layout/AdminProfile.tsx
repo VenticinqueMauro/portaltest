@@ -5,7 +5,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
@@ -52,17 +51,21 @@ export function AdminProfile({ fullname, email, role, avatar }: Props) {
     }
 
     return (
-        <div className="fixed top-4 right-6">
+        <div>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Avatar className="cursor-pointer">
-                        <AvatarImage src={avatar} />
-                        <AvatarFallback>TDN</AvatarFallback>
-                    </Avatar>
+                    <div className="flex gap-2 items-center">
+                        <Avatar className="cursor-pointer">
+                            <AvatarImage src={avatar} alt={`Avatar ${fullname}`} className="aspect-square" />
+                            <AvatarFallback>TDN</AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <p className="text-sm font-medium line-clamp-1">{fullname}</p>
+                            <p className="text-xs text-muted-foreground font-normal">{email}</p>
+                        </div>
+                    </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 mr-3">
-                    <DropdownMenuLabel className="capitalize">{fullname} <span className="text-muted-foreground font-normal">/ {role}</span></DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+                <DropdownMenuContent className="w-56 ml-3">
                     <DropdownMenuItem>
                         <Link href='/dashboard/profile'>
                             Editar Perfil

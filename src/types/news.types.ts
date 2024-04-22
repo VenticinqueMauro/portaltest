@@ -25,6 +25,10 @@ export type AdminUser = {
     password: string;
     fullname: string;
     role: UserRole;
+    avatar?: {
+        publicId: string;
+        url: string
+    }
 }
 
 export enum NewsStatus {

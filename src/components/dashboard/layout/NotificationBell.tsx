@@ -14,7 +14,7 @@ export default function NotificationBell({ hasPendingNews }: { hasPendingNews: b
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <button className='relative p-1'>
+                    <button className='relative p-1 mb-5'>
                         <Bell className='text-muted-foreground w-5 h-5' />
                         {hasPendingNews && (
                             <div className='absolute top-0 right-0 rounded-full w-2 h-2 animate-bounce inline-block bg-primary'></div>

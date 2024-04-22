@@ -5,15 +5,16 @@ import { LayoutPanelTop, Megaphone, Newspaper, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import NotificationBell from './NotificationBell';
-import { UserRole } from '@/types/news.types';
+import { AdminUser, UserRole } from '@/types/news.types';
+import { AdminProfile } from './AdminProfile';
 
 interface Props {
     hasPendingNews: boolean;
-    role: UserRole
+    user: AdminUser
 }
 
 
-export default function Sidebar({ hasPendingNews, role }: Props) {
+export default function Sidebar({ hasPendingNews, user }: Props) {
     const pathname = usePathname();
 
     const navItems = [
@@ -21,19 +22,19 @@ export default function Sidebar({ hasPendingNews, role }: Props) {
             title: 'Usuarios',
             href: '/users',
             icon: <UserPlus className='w-5 h-5' />,
-            show: role === 'admin'
+            show: user.role === 'admin'
         },
         {
             title: 'Noticias',
             href: '/dashboard',
             icon: <Newspaper className='w-5 h-5' />,
-            show: true 
+            show: true
         },
         {
             title: 'Publicidades',
             href: '/publicidades',
             icon: <Megaphone className='w-5 h-5' />,
-            show: true 
+            show: true
         },
         {
             title: 'Editar Home',
@@ -49,7 +50,7 @@ export default function Sidebar({ hasPendingNews, role }: Props) {
     return (
         <aside className='w-[200px] flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 overflow-y-auto border-r py-6 px-1 space-y-10'>
             <span className='flex justify-between items-center relative text-muted-foreground px-2 '>
-                Admin Panel
+                <AdminProfile avatar={user.avatar?.url || ''} email={user.email} fullname={user.fullname} role={user.role} />
                 <NotificationBell hasPendingNews={hasPendingNews} />
             </span>
             <div className='flex flex-col gap-8'>

@@ -28,9 +28,11 @@ const processAndUploadFiles = async (file: File | null, resourceType: ResourceTy
                 eager: {
                     width: 100,
                     height: 100,
-                    crop: 'limit',
+                    crop: 'auto',
+                    aspect_ratio: '1:1',
                     quality: 'auto',
                 },
+                
             };
             cloudinary.uploader.upload_stream(options, (error, result) => {
                 if (error) {

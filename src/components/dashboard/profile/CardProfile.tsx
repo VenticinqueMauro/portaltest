@@ -70,7 +70,7 @@ export default function CardProfile({ user }: Props) {
                         <Label htmlFor="avatar" >
                             <Avatar className="cursor-pointer w-16 h-16 shadow relative group">
                                 {avatarPreview ? (
-                                    <AvatarImage src={avatarPreview} />
+                                    <AvatarImage src={avatarPreview} className="aspect-square object-contain" />
                                 ) : (
                                     <AvatarImage src={user.avatar?.url} />
                                 )}
