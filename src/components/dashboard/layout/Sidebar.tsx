@@ -31,8 +31,8 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
             show: user.role !== 'publicista'
         },
         {
-            title: 'Publicidades',
-            href: '/publicidades',
+            title: 'Publicidad',
+            href: '/publicidad',
             icon: <Megaphone className='w-4 h-4' />,
             show: user.role === 'admin' || user.role === 'publicista'
         },
