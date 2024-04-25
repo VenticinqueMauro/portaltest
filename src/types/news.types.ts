@@ -43,3 +43,48 @@ export enum UserRole {
     CHIEF_WRITER = 'redactor en jefe',
     ADMIN = 'admin',
 }
+
+export type AzucarTucuman = {
+    '50kg': {
+        precioActual: number,
+        precioAnterior?: number,
+        diferenciaPorcentual?: number
+    },
+    '1kg': {
+        precioActual: number,
+        precioAnterior?: number,
+        diferenciaPorcentual?: number
+    }
+};
+
+export type AzucarInternacional = {
+    londresN5: {
+        precioActual: number,
+        precioAnterior?: number,
+        diferenciaPorcentual?: number
+    },
+    eeuuN11: {
+        precioActual: number,
+        precioAnterior?: number,
+        diferenciaPorcentual?: number
+    }
+};
+
+export type Combustible = {
+    bioetanol: {
+        precioActual: number,
+        precioAnterior?: number,
+        diferenciaPorcentual?: number
+    },
+    petroleo: {
+        precioActual: number,
+        precioAnterior?: number,
+        diferenciaPorcentual?: number
+    }
+};
+
+export type QuotationType = {
+    azucarTucuman: AzucarTucuman,
+    azucarInternacional: AzucarInternacional,
+    combustible: Combustible
+}
