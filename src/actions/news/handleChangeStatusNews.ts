@@ -2,8 +2,16 @@
 
 import { NewsStatus } from "@/types/news.types";
 import { revalidatePath } from "next/cache";
+import { decodeToken } from '@/utils/utils';
+
 
 export const handleNewsStatus = async (id: string, status: NewsStatus) => {
+
+    const token = decodeToken();
+
+    if(token.role !== 'admin' && token.role !== 'editor') {
+        return { error: 'No autorizado' };
+    }
 
     const updatedStatus = status === 'publicado' ? 'pendiente' : 'publicado';
 
@@ -23,7 +31,7 @@ export const handleNewsStatus = async (id: string, status: NewsStatus) => {
             return data.error;
         }
 
-        revalidatePath('/dashboard');
+        revalidatePath('/dashboard/noticias');
         return data.message
     } catch (error) {
         if (error instanceof Error) {

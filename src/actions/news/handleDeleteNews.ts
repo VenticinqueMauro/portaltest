@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { v2 as cloudinary } from 'cloudinary';
 import { CategoryNews, MediaNews } from "@/models/news";
+import { decodeToken } from '@/utils/utils';
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -18,6 +19,15 @@ interface Props {
 }
 
 export const handleDeleteNews = async ({ id, category, title, media }: Props) => {
+
+    const token = decodeToken();
+
+    console.log(token.role)
+
+    if (token.role !== 'admin' && token.role !== 'editor') {
+        return { error: 'No autorizado' };
+    }
+
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news/${id}`, {
@@ -80,7 +90,7 @@ export const handleDeleteNews = async ({ id, category, title, media }: Props) =>
             }).catch(console.error);
         }
 
-        revalidatePath('/dashboard');
+        revalidatePath('/dashboard/noticias');
         return json;
     } catch (error) {
         if (error instanceof Error) {

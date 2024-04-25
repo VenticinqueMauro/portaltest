@@ -3,7 +3,7 @@ import { NewsStatus, NewsType } from "@/types/news.types";
 import { decodeToken } from "@/utils/utils";
 import { Metadata } from "next";
 import { Toaster } from 'sonner';
-import { getProfile } from "./profile/page";
+import { getProfile } from "./perfil/page";
 
 export const metadata: Metadata = {
     title: 'Admin Panel | Noticias',

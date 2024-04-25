@@ -17,10 +17,10 @@ export default function HandleNewsStatus({ row }: Props) {
         const response = await handleNewsStatus(row.original.id, row.original.status);
 
         if (response.error) {
-            toast.error(response);
+            toast.error(response.error);
         } else {
             toast.success(response);
-        }
+        } 
     }
 
 

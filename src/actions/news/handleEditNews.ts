@@ -283,7 +283,7 @@ export const handleEditNews = async (formData: FormData) => {
         if (!response.ok) {
             return json.error
         }
-        revalidatePath('/dashboard');
+        revalidatePath('/dashboard/noticias');
         return json;
     } catch (error) {
         if (error instanceof Error) {

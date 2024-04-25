@@ -1,7 +1,7 @@
 'use client';
 
 
-import { LayoutPanelTop, Megaphone, Newspaper, UserPlus } from 'lucide-react';
+import { LayoutPanelTop, Megaphone, Newspaper, UserPlus, CircleDollarSign } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import NotificationBell from './NotificationBell';
@@ -20,32 +20,35 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
     const navItems = [
         {
             title: 'Usuarios',
-            href: '/users',
+            href: '/usuarios',
             icon: <UserPlus className='w-4 h-4' />,
             show: user.role === 'admin'
         },
         {
             title: 'Noticias',
-            href: '/dashboard',
+            href: '/noticias',
             icon: <Newspaper className='w-4 h-4' />,
-            show: true
+            show: user.role !== 'publicista'
         },
         {
             title: 'Publicidades',
             href: '/publicidades',
             icon: <Megaphone className='w-4 h-4' />,
-            show: true
+            show: user.role === 'admin' || user.role === 'publicista'
         },
         {
             title: 'Editar Home',
             href: '/editar-home',
             icon: <LayoutPanelTop className='w-4 h-4' />,
-            show: true
+            show: user.role === 'admin' || user.role === 'editor'
         },
+        {
+            title: 'Cotizaciones',
+            href: '/cotizaciones',
+            icon: <CircleDollarSign className='w-4 h-4' />,
+            show: user.role === 'admin' || user.role === 'editor'
+        }
     ];
-
-    const visibleNavItems = navItems.filter(item => item.show);
-
 
     return (
         <aside className='w-[200px] flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 overflow-y-auto border-r py-6 px-1 space-y-10'>
@@ -54,8 +57,8 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
                 <NotificationBell hasPendingNews={hasPendingNews} />
             </span>
             <div className='flex flex-col gap-4'>
-                {visibleNavItems.map(item => (
-                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'text-foreground bg-muted-foreground/5 shadow' : 'text-muted-foreground'} flex gap-1 items-center hover:text-foreground py-1 px-2 rounded`}>
+                {navItems.map(item => (
+                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'text-foreground bg-muted-foreground/5 shadow' : 'text-foreground/80'} flex gap-1 items-center hover:text-foreground py-1 px-2 rounded ${!item.show && 'pointer-events-none opacity-60'}`}>
                         {item.icon}
                         {item.title}
                     </Link>

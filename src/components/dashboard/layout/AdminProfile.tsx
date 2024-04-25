@@ -67,7 +67,12 @@ export function AdminProfile({ fullname, email, role, avatar }: Props) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 ml-3">
                     <DropdownMenuItem asChild>
-                        <Link href='/dashboard/profile'>
+                        <Link href='/dashboard'>
+                            Volver al inicio
+                        </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <Link href='/dashboard/perfil'>
                             Editar Perfil
                         </Link>
                     </DropdownMenuItem>
