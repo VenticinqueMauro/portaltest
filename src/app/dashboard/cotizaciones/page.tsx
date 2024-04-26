@@ -1,4 +1,4 @@
-import CardQuotation from "@/components/dashboard/cotizaciones/Card.quotation";
+import CardQuotation from "@/components/dashboard/cotizaciones/CardQuotationContainer";
 import { QuotationType } from "@/types/news.types";
 
 async function getQuotations() {
@@ -14,8 +14,6 @@ async function getQuotations() {
 export default async function page() {
 
     const quotations = await getQuotations()
-
-    console.log(quotations)
 
     return (
         <div>
