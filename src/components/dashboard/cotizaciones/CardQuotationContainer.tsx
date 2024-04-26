@@ -12,8 +12,8 @@ interface Props {
 
 export default function CardQuotationContainer({ quotations }: Props) {
 
-    const titleTuc = quotations?.azucarTucuman && "Azucar Tucuman"
-    const titleInt = quotations?.azucarInternacional && "Azucar Internacional"
+    const titleTuc = quotations?.azucarTucuman && "Azúcar Tucumán"
+    const titleInt = quotations?.azucarInternacional && "Azúcar Internacional"
     const titleCom = quotations?.combustible && "Combustibles"
 
     const title50kg = quotations?.azucarTucuman["50kg"] && 'Bolsa 50kg'

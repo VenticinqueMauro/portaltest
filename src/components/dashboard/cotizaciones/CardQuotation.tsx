@@ -7,7 +7,7 @@ import {
 import { Clock3, Edit, TrendingDown, TrendingUp } from "lucide-react";
 
 interface Props {
-    globalTitle: "Azucar Tucuman" | "Azucar Internacional" | "Combustibles" | undefined;
+    globalTitle: "Azúcar Tucumán" | "Azúcar Internacional" | "Combustibles" | undefined;
     dateQuote1: Date | undefined;
     dateQuote2: Date | undefined;
     titleQuote1: "Bolsa 50kg" | "Londres N5" | "Bioetanol" | undefined;
