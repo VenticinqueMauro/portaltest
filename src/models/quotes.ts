@@ -5,7 +5,7 @@ import { Schema, model, models, Document } from "mongoose";
 interface QuotationsDocument extends Document {
     azucarTucuman: AzucarTucuman,
     azucarInternacional: AzucarInternacional,
-    combustible: Combustible
+    combustible: Combustible,
 }
 
 export const QuotationSchema = new Schema<QuotationsDocument>({
@@ -13,36 +13,42 @@ export const QuotationSchema = new Schema<QuotationsDocument>({
         '50kg': {
             precioActual: Number,
             precioAnterior: Number,
-            diferenciaPorcentual: Number
+            diferenciaPorcentual: Number,
+            updated: Date
         },
         '1kg': {
             precioActual: Number,
             precioAnterior: Number,
-            diferenciaPorcentual: Number
+            diferenciaPorcentual: Number,
+            updated: Date
         }
     },
     azucarInternacional: {
         londresN5: {
             precioActual: Number,
             precioAnterior: Number,
-            diferenciaPorcentual: Number
+            diferenciaPorcentual: Number,
+            updated: Date
         },
         eeuuN11: {
             precioActual: Number,
             precioAnterior: Number,
-            diferenciaPorcentual: Number
+            diferenciaPorcentual: Number,
+            updated: Date
         }
     },
     combustible: {
         bioetanol: {
             precioActual: Number,
             precioAnterior: Number,
-            diferenciaPorcentual: Number
+            diferenciaPorcentual: Number,
+            updated: Date
         },
         petroleo: {
             precioActual: Number,
             precioAnterior: Number,
-            diferenciaPorcentual: Number
+            diferenciaPorcentual: Number,
+            updated: Date
         }
     }
 });

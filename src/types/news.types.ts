@@ -48,12 +48,14 @@ export type AzucarTucuman = {
     '50kg': {
         precioActual: number,
         precioAnterior?: number,
-        diferenciaPorcentual?: number
+        diferenciaPorcentual?: number,
+        updated?: Date
     },
     '1kg': {
         precioActual: number,
         precioAnterior?: number,
-        diferenciaPorcentual?: number
+        diferenciaPorcentual?: number,
+        updated?: Date
     }
 };
 
@@ -61,12 +63,14 @@ export type AzucarInternacional = {
     londresN5: {
         precioActual: number,
         precioAnterior?: number,
-        diferenciaPorcentual?: number
+        diferenciaPorcentual?: number,
+        updated?: Date
     },
     eeuuN11: {
         precioActual: number,
         precioAnterior?: number,
-        diferenciaPorcentual?: number
+        diferenciaPorcentual?: number,
+        updated?: Date
     }
 };
 
@@ -74,12 +78,14 @@ export type Combustible = {
     bioetanol: {
         precioActual: number,
         precioAnterior?: number,
-        diferenciaPorcentual?: number
+        diferenciaPorcentual?: number,
+        updated?: Date
     },
     petroleo: {
         precioActual: number,
         precioAnterior?: number,
-        diferenciaPorcentual?: number
+        diferenciaPorcentual?: number,
+        updated?: Date
     }
 };
 

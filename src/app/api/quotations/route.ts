@@ -1,7 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import { Quotation } from "@/models/quotes";
 import { QuotationType } from "@/types/news.types";
-import { handleError } from "@/utils/utils";
+import { handleError, updateQuotation } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -28,60 +28,37 @@ export async function PUT(request: NextRequest) {
 
         // Buscar la cotización existente
         let oldQuotation: QuotationType | null = await Quotation.findOne({});
-
-        // Si no hay cotizaciones existentes, establecer oldQuotation en un objeto vacío
         if (!oldQuotation) {
             oldQuotation = {
-                azucarTucuman: {},
-                azucarInternacional: {},
-                combustible: {}
+                azucarTucuman: {
+                    "50kg": {
+                        precioActual: 0
+                    },
+                    "1kg": {
+                        precioActual: 0
+                    }
+                },
+                azucarInternacional: {
+                    londresN5: {
+                        precioActual: 0
+                    },
+                    eeuuN11: {
+                        precioActual: 0
+                    }
+                },
+                combustible: {
+                    bioetanol: {
+                        precioActual: 0
+                    },
+                    petroleo: {
+                        precioActual: 0
+                    }
+                }
             };
         }
 
-        // Verificar y calcular diferencias porcentuales para azucarTucuman
-        if (quotation.azucarTucuman) {
-            for (const [key, value] of Object.entries(quotation.azucarTucuman)) {
-                const precioActual = value.precioActual || 0;
-                const precioAnterior = oldQuotation.azucarTucuman[key]?.precioActual || 0;
-                const diferenciaPorcentual = precioAnterior !== 0 ? (((precioActual - precioAnterior) / precioAnterior) * 100).toFixed(2) : 0;
-
-                oldQuotation.azucarTucuman[key] = {
-                    precioActual,
-                    precioAnterior,
-                    diferenciaPorcentual
-                };
-            }
-        }
-
-        // Verificar y calcular diferencias porcentuales para azucarInternacional
-        if (quotation.azucarInternacional) {
-            for (const [key, value] of Object.entries(quotation.azucarInternacional)) {
-                const precioActual = value.precioActual || 0;
-                const precioAnterior = oldQuotation.azucarInternacional[key]?.precioActual || 0;
-                const diferenciaPorcentual = precioAnterior !== 0 ? (((precioActual - precioAnterior) / precioAnterior) * 100).toFixed(2) : 0;
-
-                oldQuotation.azucarInternacional[key] = {
-                    precioActual,
-                    precioAnterior,
-                    diferenciaPorcentual
-                };
-            }
-        }
-
-        // Verificar y calcular diferencias porcentuales para combustible
-        if (quotation.combustible) {
-            for (const [key, value] of Object.entries(quotation.combustible)) {
-                const precioActual = value.precioActual || 0;
-                const precioAnterior = oldQuotation.combustible[key]?.precioActual || 0;
-                const diferenciaPorcentual = precioAnterior !== 0 ? (((precioActual - precioAnterior) / precioAnterior) * 100).toFixed(2) : 0;
-
-                oldQuotation.combustible[key] = {
-                    precioActual,
-                    precioAnterior,
-                    diferenciaPorcentual
-                };
-            }
-        }
+        // Actualizar las cotizaciones
+        updateQuotation(oldQuotation, quotation);
 
         // Actualizar la cotización existente en la base de datos
         const updatedQuotation = await Quotation.findOneAndUpdate({}, oldQuotation, { new: true, upsert: true });
@@ -94,4 +71,6 @@ export async function PUT(request: NextRequest) {
         return handleError(error);
     }
 }
+
+
 
