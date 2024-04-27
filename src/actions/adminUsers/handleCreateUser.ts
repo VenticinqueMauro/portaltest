@@ -27,8 +27,6 @@ export async function handleCreateAdminUser(formData: FormData) {
         token: authorized
     }
 
-    console.log(data)
-
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/auth/admin/signin`, {
             method: 'POST',

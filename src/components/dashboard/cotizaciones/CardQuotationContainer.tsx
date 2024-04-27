@@ -1,10 +1,6 @@
 import { QuotationType } from "@/types/news.types";
 import CardQuotation from "./CardQuotation";
 
-interface Quotation {
-    title: string;
-    items: { title: string; price: string; percentage: string | undefined; date: string | undefined }[];
-}
 
 interface Props {
     quotations: QuotationType | undefined
@@ -19,7 +15,7 @@ export default function CardQuotationContainer({ quotations }: Props) {
     const title50kg = quotations?.azucarTucuman["50kg"] && 'Bolsa 50kg'
     const title1kg = quotations?.azucarTucuman["1kg"] && 'Fracc/1kg'
     const titleLond = quotations?.azucarInternacional.londresN5 && 'Londres N5'
-    const titleEeuu = quotations?.azucarInternacional.eeuuN11 && 'EEUU N1'
+    const titleEeuu = quotations?.azucarInternacional.eeuuN11 && 'EEUU N11'
     const titleBio = quotations?.combustible.bioetanol && 'Bioetanol'
     const titlePet = quotations?.combustible.petroleo && 'Petróleo'
 
