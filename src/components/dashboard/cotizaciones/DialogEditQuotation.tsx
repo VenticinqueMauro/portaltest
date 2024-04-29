@@ -37,6 +37,15 @@ export function DialogEditQuotation({ data }: Props) {
             toast.error(response.error)
         } else if (response.message) {
             toast.success(response.message)
+            const escapeKeyEvent = new KeyboardEvent('keydown', {
+                key: 'Escape',
+                code: 'Escape',
+                keyCode: 27,
+                which: 27,
+                bubbles: true,
+                cancelable: true,
+            });
+            document.dispatchEvent(escapeKeyEvent);
         } else {
             toast.warning(response)
         }
@@ -62,7 +71,7 @@ export function DialogEditQuotation({ data }: Props) {
                             type="text"
                             placeholder="Ingrese el nuevo precio"
                             pattern="\d*\.?\d*"
-                            />
+                        />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="priceQuote2" className="uppercase">{data.titleQuote2}</Label>
@@ -72,7 +81,7 @@ export function DialogEditQuotation({ data }: Props) {
                             type="text"
                             placeholder="Ingrese el nuevo precio"
                             pattern="\d*\.?\d*"
-                            />
+                        />
                     </div>
                     <SubmitAdminButton title={'Actualizar'} />
                 </form>

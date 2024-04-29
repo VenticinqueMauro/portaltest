@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 
     return (
-        <section className="py-10">
+        <section className="py-14">
             {children}
         </section>
     )
