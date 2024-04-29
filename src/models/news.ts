@@ -33,6 +33,7 @@ export enum CategoryNews {
 }
 
 interface NewsDocument extends Document {
+    pretitle: string;
     title: string;
     summary: string;
     content: string;
@@ -50,6 +51,11 @@ interface NewsDocument extends Document {
 }
 
 const NewsSchema = new Schema<NewsDocument>({
+    pretitle: {
+        type: String,
+        required: [true, 'El antetítulo es obligatorio'],
+        minlength: [3, 'El antetítulo debe tener al menos 3 caracteres']
+    },
     title: {
         type: String,
         required: [true, 'El título es obligatorio'],

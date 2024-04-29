@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     try {
         await connectDB();
 
-        const { title, summary, content, category, tags, media, author, newsLinked } = await request.json();
+        const { pretitle, title, summary, content, category, tags, media, author, newsLinked } = await request.json();
 
         const existingNews = await News.findOne({ title });
 
@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
         }
 
         const newNews = new News({
+            pretitle,
             title,
             summary,
             content,

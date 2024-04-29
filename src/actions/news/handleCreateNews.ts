@@ -121,6 +121,7 @@ export const handleCreateNews = async (formData: FormData) => {
     const decodedToken = decodeToken();
     const author = decodedToken.fullname;
 
+    const pretitle = formData.get('pretitle');
     const title = formData.get('title');
     const summary = formData.get('summary');
     let content = formData.get('content') || '';
@@ -216,6 +217,7 @@ export const handleCreateNews = async (formData: FormData) => {
     const transformedContent = transformEmptyParagraphs(content);
 
     const data = {
+        pretitle,
         title,
         summary,
         content: transformedContent,

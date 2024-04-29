@@ -200,7 +200,11 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
                 </Select>
             </div>
             <div>
-                <Label htmlFor="title" >Titulo*</Label>
+                <Label htmlFor="pretitle" >Antetítulo*</Label>
+                <Input className="font-normal" id="pretitle" name='pretitle' defaultValue={news?.pretitle} />
+            </div>
+            <div>
+                <Label htmlFor="title" >Título*</Label>
                 <Input className="font-normal" id="title" name='title' defaultValue={news?.title} />
             </div>
             <div>

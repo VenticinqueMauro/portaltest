@@ -21,6 +21,7 @@ import { NewsStatus } from "@/types/news.types";
 
 export type NewsDataTable = {
     id: string;
+    pretitle: string;
     title: string;
     summary: string;
     content: string;
@@ -45,6 +46,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                 <HoverCard>
                     <HoverCardTrigger className="cursor-pointer hover:underline">{row.getValue('title')}</HoverCardTrigger>
                     <HoverCardContent className="w-96 max-h-[500px] overflow-y-auto overflow-x-hidden" sideOffset={-50}>
+                        <h4 className="text-sm font-bold text-muted-foreground">{news.pretitle}</h4>
                         <h1 className="text-lg font-bold">{news.title}</h1>
                         <h2 className="text-base mb-5">{news.summary}</h2>
                         {news.media?.portada?.type === "image" ? (

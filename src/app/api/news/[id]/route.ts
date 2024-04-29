@@ -1,9 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
 import { handleError } from "@/utils/utils";
-import { verify } from "jsonwebtoken";
 import { isValidObjectId } from "mongoose";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 

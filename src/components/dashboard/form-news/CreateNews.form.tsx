@@ -172,6 +172,10 @@ export default function CreateNewsForm() {
         <form ref={ref} action={handleSubmit} className="space-y-5 pb-10 pt-3 px-3 max-w-3xl mx-auto">
             <SelectCategories />
             <div>
+                <Label htmlFor="pretitle" >Antetítulo*</Label>
+                <Input className="font-normal" id="pretitle" name='pretitle' required />
+            </div>
+            <div>
                 <Label htmlFor="title" >Titulo*</Label>
                 <Input className="font-normal" id="title" name='title' required />
             </div>

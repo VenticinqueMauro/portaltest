@@ -2,6 +2,7 @@ import { CategoryNews, MediaNews } from "@/models/news";
 
 export type NewsType = {
     _id?: string,
+    pretitle: string;
     title: string;
     summary: string;
     content: string;

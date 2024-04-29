@@ -123,6 +123,7 @@ export const handleEditNews = async (formData: FormData) => {
     const newsJSONString = formData.get('news') as string;
     const news = JSON.parse(newsJSONString);
 
+    const pretitle = formData.get('pretitle');
     const title = formData.get('title');
     const summary = formData.get('summary');
     let content = formData.get('content') || '';
@@ -240,6 +241,7 @@ export const handleEditNews = async (formData: FormData) => {
 
 
     const data = {
+        pretitle,
         title,
         summary,
         content: transformedContent,
