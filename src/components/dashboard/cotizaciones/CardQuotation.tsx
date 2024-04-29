@@ -58,7 +58,7 @@ export default function CardQuotation({ globalTitle, dateQuote1, dateQuote2, tit
     };
 
     return (
-        <Card className="relative max-w-xs">
+        <Card className="relative max-w-sm">
             <DialogEditQuotation data={data} />
             <CardHeader>
                 <CardTitle className="flex items-center gap-1 justify-between">
