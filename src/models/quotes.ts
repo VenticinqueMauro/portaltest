@@ -1,5 +1,5 @@
-import { AzucarInternacional, AzucarTucuman, Combustible, UserRole } from "@/types/news.types";
-import { Schema, model, models, Document } from "mongoose";
+import { AzucarInternacional, AzucarTucuman, Combustible } from "@/types/news.types";
+import { Document, Schema, model, models } from "mongoose";
 
 
 interface QuotationsDocument extends Document {

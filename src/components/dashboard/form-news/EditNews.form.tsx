@@ -1,21 +1,18 @@
 'use client';
 
-import { handleCreateNews } from "@/actions/news/handleCreateNews";
+import { handleEditNews } from "@/actions/news/handleEditNews";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { Dispatch, SetStateAction, createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
-import SelectCategories from "./SelectCategories";
-import SubmitButton from "./SubmitButton";
-import Tiptap from "./Tiptap";
-import SelectLinkedNews from "./SelectLinkedNews";
 import { NewsDataTable } from "../news-data-table/Columns";
-import { handleEditNews } from "@/actions/news/handleEditNews";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Delete, Trash } from "lucide-react";
+import SelectLinkedNews from "./SelectLinkedNews";
+import SubmitButton from "./SubmitButton";
 import TagsNews from "./TagsNews";
+import Tiptap from "./Tiptap";
 
 
 export default function EditNewsForm({ news }: { news: NewsDataTable }) {

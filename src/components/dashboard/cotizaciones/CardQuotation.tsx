@@ -4,7 +4,7 @@ import {
     CardHeader,
     CardTitle
 } from "@/components/ui/card";
-import { Clock3, Edit, TrendingDown, TrendingUp } from "lucide-react";
+import { Clock3, TrendingDown, TrendingUp } from "lucide-react";
 import { DialogEditQuotation } from "./DialogEditQuotation";
 
 interface Props {

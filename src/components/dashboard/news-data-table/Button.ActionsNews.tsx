@@ -3,12 +3,12 @@
 import { handleDeleteNews } from "@/actions/news/handleDeleteNews";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { CategoryNews, MediaNews } from "@/types/news.types";
 import { FilePenLine, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { NewsDataTable } from "./Columns";
 import EditNewsForm from "../form-news/EditNews.form";
-import { CategoryNews, MediaNews } from "@/types/news.types";
+import { NewsDataTable } from "./Columns";
 
 interface Props {
     id: string;

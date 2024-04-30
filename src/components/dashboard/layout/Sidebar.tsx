@@ -1,12 +1,12 @@
 'use client';
 
 
-import { LayoutPanelTop, Megaphone, Newspaper, UserPlus, CircleDollarSign } from 'lucide-react';
+import { AdminUser } from '@/types/news.types';
+import { CircleDollarSign, LayoutPanelTop, Megaphone, Newspaper, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import NotificationBell from './NotificationBell';
-import { AdminUser, UserRole } from '@/types/news.types';
 import { AdminProfile } from './AdminProfile';
+import NotificationBell from './NotificationBell';
 
 interface Props {
     hasPendingNews: boolean;

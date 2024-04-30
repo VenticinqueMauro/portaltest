@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { v2 as cloudinary } from 'cloudinary';
-import { CategoryNews, MediaNews } from "@/models/news";
 import { decodeToken } from '@/utils/utils';
+import { CategoryNews, MediaNews } from "@/types/news.types";
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,

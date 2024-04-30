@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { HTMLAttributes } from "react";
 import { useFormStatus } from "react-dom";
 
 interface Props {
