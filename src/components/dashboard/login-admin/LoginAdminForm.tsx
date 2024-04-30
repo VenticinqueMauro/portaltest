@@ -86,13 +86,13 @@ export function LoginAdminForm() {
                     </form>
                 </div>
             </div>
-            <div className="hidden bg-muted lg:flex justify-center items-center ">
+            <div className="hidden lg:flex justify-center items-center bg-[#433A8A]">
                 <Image
                     src="/fondo-login.png"
                     alt="Image"
                     width="497"
                     height="640"
-                    className="object-contain  dark:brightness-[0.1] dark:grayscale"
+                    className="object-fill  dark:brightness-[0.1] dark:grayscale"
                 />
             </div>
         </div>

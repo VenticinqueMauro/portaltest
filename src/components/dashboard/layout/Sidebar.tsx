@@ -54,7 +54,7 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
         <aside className='w-[200px] flex-shrink-0 flex flex-col fixed top-0 left-0 bottom-0 overflow-y-auto border-r py-6 px-1 space-y-10'>
             <span className='flex justify-between items-center relative text-muted-foreground px-2 '>
                 <AdminProfile avatar={user.avatar?.url || ''} email={user.email} fullname={user.fullname} role={user.role} />
-                <NotificationBell hasPendingNews={hasPendingNews} />
+                <NotificationBell hasPendingNews={hasPendingNews} role={user.role} />
             </span>
             <div className='flex flex-col gap-4'>
                 {navItems.map(item => (
