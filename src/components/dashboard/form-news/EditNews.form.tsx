@@ -70,6 +70,7 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
         };
     }
 
+
     const handleGalleryFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFiles = event.target.files;
 
@@ -216,17 +217,26 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
                 <Input id="portada" name='portada' type="file" accept="image/*,video/*" onChange={handlePortadaFileChange}
                 />
                 {previewPortadaImageUrl && portadaType === 'image' ? (
-                    <Image src={previewPortadaImageUrl} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                    <div>
+                        <Image src={previewPortadaImageUrl} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                        <Input id="caption" name='caption' type="text" className="border-none mt-2" placeholder={news.media?.portada.caption || 'Pie de foto (opcional)'} />
+                    </div>
                 ) : (
-                    news.media?.portada?.url && news.media.portada.type === 'image' ? (
-                        <Image src={news.media.portada.url} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                    news.media?.portada?.url && news.media.portada.type === 'image' && portadaType === 'image' ? (
+                        <div>
+                            <Image src={news.media.portada.url} alt="Previsualización de portada" className="py-2" width={300} height={200} />
+                            <Input id="caption" name='caption' type="text" className="border-none mt-2" placeholder={news.media?.portada.caption || 'Pie de foto (opcional)'} />
+                        </div>
                     ) : null
                 )}
                 {previewPortadaImageUrl && portadaType === 'video' ? (
-                    <video width="300" height="200" controls>
-                        <source src={previewPortadaImageUrl} type="video/mp4" />
-                        Tu navegador no soporta la etiqueta de video.
-                    </video>
+                    <div>
+                        <video width="300" height="200" controls>
+                            <source src={previewPortadaImageUrl} type="video/mp4" />
+                            Tu navegador no soporta la etiqueta de video.
+                        </video>
+                        <Input id="caption" name='caption' type="text" className="border-none mt-2" placeholder={news.media?.portada.caption || 'Pie de foto (opcional)'} />
+                    </div>
                 ) : null}
             </div>
             <div>

@@ -124,9 +124,12 @@ export const handleCreateNews = async (formData: FormData) => {
     const pretitle = formData.get('pretitle');
     const title = formData.get('title');
     const summary = formData.get('summary');
+    const imageCaption = formData.get('caption') as string;
     let content = formData.get('content') || '';
     let arrayLinkedNews: string[] = [];
     const newsLinkedForm = formData.get('newsLinked');
+
+    console.log(imageCaption)
 
     if (Array.isArray(newsLinkedForm)) {
         // Iteramos sobre cada elemento del array
@@ -225,6 +228,7 @@ export const handleCreateNews = async (formData: FormData) => {
         author,
         media: {
             portada: {
+                caption: imageCaption?.length > 0 ? imageCaption : '',
                 publicId: imagePortadaUrl?.public_id || videoPortadaUrl?.public_id || '',
                 url: imagePortadaUrl?.url || videoPortadaUrl?.url || '',
                 type: imagePortadaUrl ? 'image' : (videoPortadaUrl ? 'video' : '')

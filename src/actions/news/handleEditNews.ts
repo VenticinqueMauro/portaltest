@@ -126,6 +126,7 @@ export const handleEditNews = async (formData: FormData) => {
     const pretitle = formData.get('pretitle');
     const title = formData.get('title');
     const summary = formData.get('summary');
+    const imageCaption = formData.get('caption') as string;
     let content = formData.get('content') || '';
     let arrayLinkedNews: string[] = [];
     const newsLinkedForm = formData.get('newsLinked');
@@ -249,6 +250,7 @@ export const handleEditNews = async (formData: FormData) => {
         lastModifiedBy: modifiedBy,
         media: {
             portada: {
+                caption: imageCaption.length > 0 ? imageCaption : news.media.portada.caption,
                 publicId: imagePortadaUrl?.public_id || videoPortadaUrl?.public_id || news.media.portada.publicId,
                 url: imagePortadaUrl?.url || videoPortadaUrl?.url || news.media.portada.url,
                 type: imagePortadaUrl ? 'image' : (videoPortadaUrl ? 'video' : news.media.portada.type)

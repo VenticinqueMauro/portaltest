@@ -24,6 +24,7 @@ async function getData(): Promise<NewsDataTable[]> {
         status: item.status,
         media: {
             portada: {
+                caption: item.media?.portada?.caption,
                 publicId: item.media?.portada?.publicId,
                 url: item.media?.portada?.url,
                 type: item.media?.portada?.type

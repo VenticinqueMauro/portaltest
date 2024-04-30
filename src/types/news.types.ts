@@ -1,40 +1,71 @@
-import { CategoryNews, MediaNews } from "@/models/news";
+
+export type MediaNews = {
+    portada: {
+        caption?: string;
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    };
+    zona1: {
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    };
+    zona2: {
+        publicId: string;
+        url: string;
+        type: "image" | "video";
+    };
+    gallery: Array<{
+        publicId: string;
+        url: string;
+        type: "image";
+    }>;
+}
+
+export enum CategoryNews {
+    POLITICA = 'politica',
+    ECONEGOCIOS = 'eco & negocios',
+    DEPORTES = 'deportes',
+    TENDENCIAS = 'tendencias',
+    PORTALCANA = 'portalcana',
+    }
 
 export type NewsType = {
-    _id?: string,
-    pretitle: string;
-    title: string;
-    summary: string;
-    content: string;
-    status: NewsStatus;
-    category: CategoryNews;
-    subscribersOnly: boolean;
-    highlightedText?: string;
-    lastModifiedBy?: string;
-    newsLinked?: string[];
-    media?: MediaNews;
-    author?: string;
-    tags?: string[];
-    comments?: string[];
-    createdAt?: Date;
-    updatedAt?: Date;
-}
+        _id?: string,
+        pretitle: string;
+        title: string;
+        summary: string;
+        content: string;
+        status: NewsStatus;
+        category: CategoryNews;
+        subscribersOnly: boolean;
+        highlightedText?: string;
+        lastModifiedBy?: string;
+        newsLinked?: string[];
+        media?: MediaNews;
+        author?: string;
+        tags?: string[];
+        comments?: string[];
+        createdAt?: Date;
+        updatedAt?: Date;
+    }
 
 export type AdminUser = {
-    _id: string
+        _id: string
     email: string;
-    password: string;
-    fullname: string;
-    role: UserRole;
-    avatar?: {
-        publicId: string;
-        url: string
+        password: string;
+        fullname: string;
+        role: UserRole;
+        avatar?: {
+            publicId: string;
+            url: string
+        }
     }
-}
 
 export enum NewsStatus {
     PUBLISHED = 'publicado',
-    PENDING = 'pendiente',
+        PENDING = 'pendiente',
 }
 
 export enum UserRole {

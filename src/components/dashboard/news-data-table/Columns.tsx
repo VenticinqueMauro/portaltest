@@ -8,7 +8,6 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { CategoryNews, MediaNews } from "@/models/news";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { CldImage, CldVideoPlayer } from 'next-cloudinary';
@@ -16,7 +15,7 @@ import 'next-cloudinary/dist/cld-video-player.css';
 import Image from "next/image";
 import ButtonActionsNews from "./Button.ActionsNews";
 import HandleNewsStatus from "./HandleNewsStatus";
-import { NewsStatus } from "@/types/news.types";
+import { CategoryNews, MediaNews, NewsStatus } from "@/types/news.types";
 
 
 export type NewsDataTable = {

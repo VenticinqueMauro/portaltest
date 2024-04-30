@@ -187,16 +187,22 @@ export default function CreateNewsForm() {
                 <Label htmlFor="portada">Portada*</Label>
                 <Input id="portada" name='portada' type="file" accept="image/*,video/*" required onChange={handlePortadaFileChange}
                 />
-                {previewPortadaImageUrl && portadaType === 'image' && (
+            </div>
+            {previewPortadaImageUrl && portadaType === 'image' && (
+                <div>
                     <Image src={previewPortadaImageUrl} alt="Previsualización de portada" width={300} height={200} />
-                )}
-                {previewPortadaImageUrl && portadaType === 'video' && (
+                    <Input id="caption" name='caption' type="text" className="border-none mt-2" placeholder="Pie de foto (opcional)" />
+                </div>
+            )}
+            {previewPortadaImageUrl && portadaType === 'video' && (
+                <div>
                     <video width="300" height="200" controls>
                         <source src={previewPortadaImageUrl} type="video/mp4" />
                         Tu navegador no soporta la etiqueta de video.
                     </video>
-                )}
-            </div>
+                    <Input id="caption" name='caption' type="text" className="border-none mt-2" placeholder="Pie de foto (opcional)" />
+                </div>
+            )}
             <div>
                 <Label htmlFor="content">Contenido*</Label>
                 <Tiptap content={editorContent} onChange={handleEditorChange} handleContentFileChange={handleContentFileChange} imageUrl={previewContentImageUrl} type={contentType} clearContent={clearContent} />

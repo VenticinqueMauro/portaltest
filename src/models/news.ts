@@ -1,36 +1,6 @@
-import { NewsStatus } from "@/types/news.types";
+import { CategoryNews, MediaNews, NewsStatus } from "@/types/news.types";
 import { Document, Schema, model, models } from "mongoose";
 
-export interface MediaNews {
-    portada: {
-        publicId: string;
-        url: string;
-        type: "image" | "video";
-    };
-    zona1: {
-        publicId: string;
-        url: string;
-        type: "image" | "video";
-    };
-    zona2: {
-        publicId: string;
-        url: string;
-        type: "image" | "video";
-    };
-    gallery: Array<{
-        publicId: string;
-        url: string;
-        type: "image";
-    }>;
-}
-
-export enum CategoryNews {
-    POLITICA = 'politica',
-    ECONEGOCIOS = 'eco & negocios',
-    DEPORTES = 'deportes',
-    TENDENCIAS = 'tendencias',
-    PORTALCANA = 'portalcana',
-}
 
 interface NewsDocument extends Document {
     pretitle: string;
@@ -84,6 +54,7 @@ const NewsSchema = new Schema<NewsDocument>({
     },
     media: {
         portada: {
+            caption: String,
             publicId: String,
             url: String,
             type: {
