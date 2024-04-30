@@ -27,7 +27,7 @@ export default function HandleNewsStatus({ row }: Props) {
     return (
         <Badge
             variant={"outline"}
-            className={`${row.getValue('status') === 'pendiente' ? 'text-amber-500 hover:bg-amber-500/20' : 'text-green-500 hover:bg-green-500/20'} uppercase rounded cursor-pointer font-normal`}
+            className={`${row.getValue('status') === 'pendiente' ? 'text-amber-600 hover:bg-amber-500/20' : 'text-green-600 hover:bg-green-500/20'} uppercase rounded cursor-pointer font-normal`}
             onClick={() => changeNewsStatus()}
         >
             {row.original.status === 'pendiente'

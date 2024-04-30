@@ -2,10 +2,14 @@ import Image from "next/image";
 
 export default function page() {
     return (
-        <div>
-            <h1 className='text-2xl font-bold'>Bienvenido a TDN Admin</h1>
-            <p className='text-muted-foreground mt-3'>Administre el portal con facilidad. <br />Acceda a poderosas herramientas e información para impulsar su éxito.</p>
-            <Image src='/portada-dashboard.png' className="mx-auto" width={600} height={600} alt="portada" />
+        <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
+            <div className="text-center mb-8">
+                <h1 className="text-4xl font-bold text-gray-800">Bienvenido a TDN Admin</h1>
+                <p className="text-gray-600 mt-2">Administre el portal con facilidad. <br />Acceda a poderosas herramientas e información para impulsar su éxito.</p>
+            </div>
+            <div className="w-full max-w-3xl">
+                <Image src="/portada-dashboard.png" className="mx-auto" width={1080} height={607} alt="portada" />
+            </div>
         </div>
     )
 }

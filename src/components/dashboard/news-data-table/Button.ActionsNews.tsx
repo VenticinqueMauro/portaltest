@@ -79,7 +79,7 @@ const SheetEditNews = ({ id, title, news }: Props) => {
     return (
         <Sheet>
             <SheetTrigger>
-                <FilePenLine size={18} className=" text-blue-500 cursor-pointer hover:text-blue-600" />
+                <FilePenLine size={18} className=" text-violet-900 cursor-pointer hover:text-violet-600" />
             </SheetTrigger>
             <SheetContent className="min-w-full h-full overflow-y-auto px-12">
                 <SheetHeader className="max-w-7xl mx-auto">

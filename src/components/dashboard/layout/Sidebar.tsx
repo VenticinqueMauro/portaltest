@@ -24,31 +24,31 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
         {
             title: 'Usuarios',
             href: '/usuarios',
-            icon: <UserPlus className='w-4 h-4' />,
+            icon: <UserPlus className='w-4 h-4 text-violet-900' />,
             show: user?.role === 'admin'
         },
         {
             title: 'Noticias',
             href: '/noticias',
-            icon: <Newspaper className='w-4 h-4' />,
+            icon: <Newspaper className='w-4 h-4 text-violet-900' />,
             show: user?.role !== 'publicista'
         },
         {
             title: 'Publicidad',
             href: '/publicidad',
-            icon: <Megaphone className='w-4 h-4' />,
+            icon: <Megaphone className='w-4 h-4 text-violet-900' />,
             show: user?.role === 'admin' || user?.role === 'publicista'
         },
         {
             title: 'Editar Home',
             href: '/editar-home',
-            icon: <LayoutPanelTop className='w-4 h-4' />,
+            icon: <LayoutPanelTop className='w-4 h-4 text-violet-900' />,
             show: user?.role === 'admin' || user?.role === 'editor'
         },
         {
             title: 'Cotizaciones',
             href: '/cotizaciones',
-            icon: <CircleDollarSign className='w-4 h-4' />,
+            icon: <CircleDollarSign className='w-4 h-4 text-violet-900' />,
             show: user?.role === 'admin' || user?.role === 'editor'
         }
     ];
@@ -61,14 +61,14 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
             </span>
             <div className='flex flex-col gap-4'>
                 {navItems.map(item => (
-                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'text-foreground bg-muted-foreground/5 shadow' : 'text-foreground/80'} flex gap-1 items-center hover:text-foreground py-1 px-2 rounded ${!item.show && 'pointer-events-none opacity-60'}`}>
+                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'bg-primary/10 shadow text-violet-900' : 'text-foreground/80'} flex gap-1 items-center hover:text-violet-800 py-1 px-2 rounded ${!item.show && 'pointer-events-none opacity-60'}`}>
                         {item.icon}
                         {item.title}
                     </Link>
                 ))}
             </div>
             <Link href='/' >
-                <Image src='/portada-dashboard.png' className="fixed -bottom-10 left-0 w-[180px]" width={600} height={600} alt="portada" />
+                <Image src='/portada-dashboard.png' className="fixed bottom-0 left-0 w-[180px]" priority width={1080} height={1080} alt="portada" />
             </Link>
         </aside>
     );
