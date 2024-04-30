@@ -9,6 +9,8 @@ import { Bell } from 'lucide-react';
 
 export default function NotificationBell({ hasPendingNews, role }: { hasPendingNews: boolean, role: UserRole }) {
 
+    if (!role) return null;
+
     let tooltipMessage;
     if (hasPendingNews && (role === 'admin' || role === 'editor')) {
         tooltipMessage = 'Tienes noticias pendientes de aprobación.';
