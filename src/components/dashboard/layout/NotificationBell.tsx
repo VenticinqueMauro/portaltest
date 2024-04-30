@@ -7,7 +7,7 @@ import {
 import { UserRole } from "@/types/news.types";
 import { Bell } from 'lucide-react';
 
-export default function NotificationBell({ hasPendingNews, role }: { hasPendingNews: boolean, role: UserRole }) {
+export default function NotificationBell({ hasPendingNews, role }: { hasPendingNews: boolean, role: UserRole | undefined }) {
 
     if (!role) return null;
 

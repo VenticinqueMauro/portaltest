@@ -6,7 +6,9 @@ import { CircleDollarSign, LayoutPanelTop, Megaphone, Newspaper, UserPlus } from
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AdminProfile } from './AdminProfile';
-import NotificationBell from './NotificationBell';
+import dynamic from 'next/dynamic';
+
+const NotificationBell = dynamic(() => import('./NotificationBell'), { ssr: false, loading: () => <span className='absolute top-0 right-2 w-6 h-6 block bg-gray-200 animate-pulse rounded-full'></span> });
 
 interface Props {
     hasPendingNews: boolean;
