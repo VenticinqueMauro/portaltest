@@ -50,9 +50,9 @@ export function LoginAdminForm() {
     };
 
     return (
-        <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+        <div className="w-full px-3 lg:px-0 lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px] flex items-center justify-center lg:items-stretch lg:justify-normal ">
             <div className="flex items-center justify-center py-12">
-                <div className="mx-auto grid w-[350px] gap-6">
+                <div className="mx-auto grid max-w-[350px] gap-6">
                     <div className="grid gap-2 text-center">
                         <h1 className="text-3xl font-bold">Login</h1>
                         <p className="text-balance text-muted-foreground">
