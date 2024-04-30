@@ -141,7 +141,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         },
         cell: ({ row }) => {
             return (
-                <p>{row.original.createdAt?.toString()}hs</p>
+                <p>{row.original.createdAt?.toString()}</p>
             )
         }
     },

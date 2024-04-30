@@ -100,8 +100,8 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews, id }: Prop
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious type="button" />
+                <CarouselNext type="button" />
             </Carousel>
         </>
     )
