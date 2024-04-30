@@ -14,10 +14,10 @@ import { toast } from "sonner";
 import { ChangePasswordAdminUser } from "../form-admin-users/ChangePasswordAdminUser";
 
 interface Props {
-    fullname: string;
-    email: string;
-    role: string;
-    avatar: string | undefined;
+    fullname?: string;
+    email?: string;
+    role?: string;
+    avatar?: string | undefined;
 }
 
 export function AdminProfile({ fullname, email, role, avatar }: Props) {
