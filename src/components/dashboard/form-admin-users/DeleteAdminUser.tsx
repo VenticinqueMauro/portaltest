@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 
 
-export default function DeleteAdminUser({ id, name }: { id: string, name: string }) {
+export default function DeleteAdminUser({ id, name, role }: { id: string, name: string, role: string }) {
 
     const handleDelete = async () => {
 
@@ -23,10 +23,11 @@ export default function DeleteAdminUser({ id, name }: { id: string, name: string
         }
     }
 
+
     return (
         <Dialog>
-            <DialogTrigger>
-                <Trash2 size={18} className="text-red-500 hover:text-red-600" />
+            <DialogTrigger disabled={role === 'ADMIN'}>
+                <Trash2 size={18} className={`${role === 'ADMIN' ? 'cursor-not-allowed text-red-500 opacity-50' : 'text-red-500 hover:text-red-600'} `} />
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

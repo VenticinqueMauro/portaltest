@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import DeleteAdminUser from "../form-admin-users/DeleteAdminUser"
+import { UserRole } from "@/types/news.types"
 
 export type AdminUsersDataTable = {
     id: string;
@@ -45,7 +46,7 @@ export const columns: ColumnDef<AdminUsersDataTable>[] = [
         cell: ({ row }) => {
             const user = row.original
             return (
-                <DeleteAdminUser id={user.id} name={user.fullname} />
+                <DeleteAdminUser id={user.id} name={user.fullname} role={user.role} />
             )
         },
     },
