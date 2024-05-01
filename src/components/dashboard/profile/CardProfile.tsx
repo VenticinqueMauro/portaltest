@@ -23,6 +23,8 @@ interface Props {
     }
 }
 
+
+
 export default function CardProfile({ user }: Props) {
 
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -92,7 +94,7 @@ export default function CardProfile({ user }: Props) {
                 <div className="grid gap-1.5 md:grid-cols-2">
                     <div>
                         <h3 className="text-sm font-bold">Permisos</h3>
-                        <ul className="pt-2 list-disc text-sm grid gap-2 text-gray-500 dark:text-gray-400">
+                        <ul className="pt-2 list-disc text-sm grid text-gray-500 dark:text-gray-400">
                             <li>Create user accounts</li>
                             <li>Manage documents</li>
                             <li>Access analytics dashboard</li>

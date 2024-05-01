@@ -16,7 +16,7 @@ export default function CardQuotationContainer({ quotations }: Props) {
     const title1kg = quotations?.azucarTucuman["1kg"] && 'Fracc/1kg'
     const titleLond = quotations?.azucarInternacional.londresN5 && 'Londres N5'
     const titleEeuu = quotations?.azucarInternacional.eeuuN11 && 'EEUU N11'
-    const titleBio = quotations?.combustible.bioetanol && 'Bioetanol'
+    const titleBio = quotations?.combustible.bioetanol && 'Bioetanol ($/L)'
     const titlePet = quotations?.combustible.petroleo && 'Petróleo'
 
     const price50kg = `$${quotations?.azucarTucuman["50kg"].precioActual} + IVA`

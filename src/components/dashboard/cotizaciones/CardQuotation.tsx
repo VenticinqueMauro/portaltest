@@ -11,7 +11,7 @@ interface Props {
     globalTitle: "Azúcar Tucumán" | "Azúcar Internacional" | "Combustibles" | undefined;
     dateQuote1: Date | undefined;
     dateQuote2: Date | undefined;
-    titleQuote1: "Bolsa 50kg" | "Londres N5" | "Bioetanol" | undefined;
+    titleQuote1: "Bolsa 50kg" | "Londres N5" | "Bioetanol ($/L)" | undefined;
     titleQuote2: "Fracc/1kg" | "EEUU N11" | "Petróleo" | undefined;
     priceQuote1: string;
     priceQuote2: string;

@@ -49,18 +49,24 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                         <h1 className="text-lg font-bold">{news.title}</h1>
                         <h2 className="text-base mb-5">{news.summary}</h2>
                         {news.media?.portada?.type === "image" ? (
-                            <CldImage
-                                src={news.media?.portada?.publicId || ''}
-                                width={400}
-                                height={300}
-                                alt="portada"
-                            />
+                            <>
+                                <CldImage
+                                    src={news.media?.portada?.publicId || ''}
+                                    width={400}
+                                    height={300}
+                                    alt="portada"
+                                />
+                                <p className="text-muted-foreground text-xs">{news.media?.portada?.caption}</p>
+                            </>
                         ) : (
-                            <CldVideoPlayer
-                                width="1920"
-                                height="1080"
-                                src={news.media?.portada?.publicId || ''}
-                            />
+                            <>
+                                <CldVideoPlayer
+                                    width="1920"
+                                    height="1080"
+                                    src={news.media?.portada?.publicId || ''}
+                                />
+                                <p className="text-muted-foreground text-xs">{news.media?.portada?.caption}</p>
+                            </>
                         )}
                         <div className="text-sm mb-3 mt-3" dangerouslySetInnerHTML={{ __html: news.content }} />
                         <Carousel className="w-full">

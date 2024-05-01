@@ -9,7 +9,7 @@ export default function SelectCategories() {
                 <SelectTrigger>
                     <SelectValue placeholder="Seleccione una categoría" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="capitalize">
                     <SelectItem value="politica">politica</SelectItem>
                     <SelectItem value="eco & negocios">eco & negocios</SelectItem>
                     <SelectItem value="deportes">deportes</SelectItem>
