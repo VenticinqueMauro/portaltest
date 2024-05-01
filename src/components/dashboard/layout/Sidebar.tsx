@@ -61,7 +61,7 @@ export default function Sidebar({ hasPendingNews, user }: Props) {
             </span>
             <div className='flex flex-col gap-4'>
                 {navItems.map(item => (
-                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'bg-primary/10 shadow text-violet-900' : 'text-foreground/80'} flex gap-1 items-center hover:text-violet-800 py-1 px-2 rounded ${!item.show && 'pointer-events-none opacity-60'}`}>
+                    <Link key={item.title} href={item.href === '/dashboard' ? '/dashboard' : `/dashboard${item.href}`} className={`${pathname.endsWith(item.href) ? 'bg-muted-foreground/5 shadow text-violet-900' : 'text-foreground/80'} flex gap-1 items-center hover:text-violet-800 py-1 px-2 rounded ${!item.show && 'pointer-events-none opacity-60'}`}>
                         {item.icon}
                         {item.title}
                     </Link>
