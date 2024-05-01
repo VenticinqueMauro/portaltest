@@ -123,7 +123,8 @@ export default function ToolbarTiptap({ editor, imageUrl, handleContentFileChang
             </Toggle>
             <Toggle
                 size='sm'
-                onPressedChange={() => editor.chain().focus().setHighlight().run()}
+                pressed={editor.isActive('highlight')}
+                onPressedChange={() => editor.chain().focus().toggleHighlight().run()}
             >
                 <Highlighter className="w-4 h-4" />
             </Toggle>

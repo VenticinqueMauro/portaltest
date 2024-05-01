@@ -24,7 +24,7 @@ const Tiptap = ({ content, imageUrl, type, clearContent, onChange, handleContent
             StarterKit.configure(),
             TaskList,
             TaskItem,
-            Highlight.configure(),
+            Highlight.configure(),   
             Image.configure({
                 HTMLAttributes: {
                     width: 400,
@@ -62,7 +62,7 @@ const Tiptap = ({ content, imageUrl, type, clearContent, onChange, handleContent
     }, [clearContent, editor])
 
     return (
-        <div className='flex flex-col justify-stretch '>
+        <div className='flex flex-col justify-stretch'>
             <ToolbarTiptap editor={editor} handleContentFileChange={handleContentFileChange} imageUrl={imageUrl} />
             <EditorContent editor={editor} />
         </div>
