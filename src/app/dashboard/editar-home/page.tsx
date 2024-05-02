@@ -1,11 +1,21 @@
-import PreviewEditorContainer from "./PreviewEditorContainer";
+import EditorContainer from "@/components/dashboard/editar-home/EditorContainer";
+import { NewsType } from "@/types/news.types";
 
-export default function page() {
+async function GetAllNews() {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`);
+
+    const { data } = await response.json();
+
+    return data;
+}
+
+export default async function page() {
+
+    const news: NewsType[] = await GetAllNews();
+
     return (
-        <div className="py-14 grid grid-cols-12 gap-4 h-screen">
-            <PreviewEditorContainer />
-            <div className='rounded border col-span-2 p-3 h-full'>
-            </div>
+        <div className="relative">
+            <EditorContainer news={news} />
         </div>
     )
 }

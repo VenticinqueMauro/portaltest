@@ -77,7 +77,8 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews, id }: Prop
                     className="w-56 my-1"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                />                <CarouselContent>
+                />
+                <CarouselContent>
                     {filteredNews?.map((news) => (
                         <CarouselItem key={news._id} className="md:basis-64 h-auto">
                             <div className="p-1">

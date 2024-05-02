@@ -44,7 +44,7 @@ export default function PreviewEditorContainer() {
     ];
 
     return (
-        <div className='rounded col-span-10 max-w-7xl p-5'>
+        <div className='rounded col-span-9 max-w-7xl p-5 py-14'>
             <div className="grid grid-cols-12 gap-3">
                 <div className="col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen">
                     {noticias.map((noticia, index) => (
