@@ -8,23 +8,23 @@ interface Props {
 
 export default function CardQuotationContainer({ quotations }: Props) {
 
-    const titleTuc = quotations?.azucarTucuman && "Azúcar Tucumán"
-    const titleInt = quotations?.azucarInternacional && "Azúcar Internacional"
-    const titleCom = quotations?.combustible && "Combustibles"
+    const titleTuc = "Azúcar Tucumán"
+    const titleInt = "Azúcar Internacional"
+    const titleCom = "Combustibles"
 
-    const title50kg = quotations?.azucarTucuman["50kg"] && 'Bolsa 50kg'
-    const title1kg = quotations?.azucarTucuman["1kg"] && 'Fracc/1kg'
-    const titleLond = quotations?.azucarInternacional.londresN5 && 'Londres N5'
-    const titleEeuu = quotations?.azucarInternacional.eeuuN11 && 'EEUU N11'
-    const titleBio = quotations?.combustible.bioetanol && 'Bioetanol ($/L)'
-    const titlePet = quotations?.combustible.petroleo && 'Petróleo'
+    const title50kg = 'Bolsa 50kg'
+    const title1kg = 'Fracc/1kg'
+    const titleLond = 'Londres N5'
+    const titleEeuu = 'EEUU N11'
+    const titleBio = 'Bioetanol ($/L)'
+    const titlePet = 'Petróleo'
 
-    const price50kg = `$${quotations?.azucarTucuman["50kg"].precioActual} + IVA`
-    const price1kg = `$${quotations?.azucarTucuman["1kg"].precioActual} + IVA`
-    const priceLond = `US$${quotations?.azucarInternacional.londresN5.precioActual}`
-    const priceEeuu = `US$${quotations?.azucarInternacional.eeuuN11.precioActual}`
-    const priceBio = `US$${quotations?.combustible.bioetanol.precioActual}`
-    const pricePet = `US$${quotations?.combustible.petroleo.precioActual}`
+    const price50kg = `$${quotations?.azucarTucuman["50kg"].precioActual ?? 0} + IVA`
+    const price1kg = `$${quotations?.azucarTucuman["1kg"].precioActual ?? 0} + IVA`
+    const priceLond = `US$${quotations?.azucarInternacional.londresN5.precioActual ?? 0}`
+    const priceEeuu = `US$${quotations?.azucarInternacional.eeuuN11.precioActual ?? 0}`
+    const priceBio = `US$${quotations?.combustible.bioetanol.precioActual ?? 0}`
+    const pricePet = `US$${quotations?.combustible.petroleo.precioActual ?? 0}`
 
     const dateTuc50kg = quotations?.azucarTucuman["50kg"].updated;
     const dateTuc1kg = quotations?.azucarTucuman["1kg"].updated;

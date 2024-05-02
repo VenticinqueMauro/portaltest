@@ -11,43 +11,97 @@ interface QuotationsDocument extends Document {
 export const QuotationSchema = new Schema<QuotationsDocument>({
     azucarTucuman: {
         '50kg': {
-            precioActual: Number,
-            precioAnterior: Number,
-            diferenciaPorcentual: Number,
+            precioActual: {
+                type: Number,
+                default: 0
+            },
+            precioAnterior: {
+                type: Number,
+                default: 0
+            },
+            diferenciaPorcentual: {
+                type: Number,
+                default: 0
+            },
             updated: Date
         },
         '1kg': {
-            precioActual: Number,
-            precioAnterior: Number,
-            diferenciaPorcentual: Number,
+            precioActual: {
+                type: Number,
+                default: 0
+            },
+            precioAnterior: {
+                type: Number,
+                default: 0
+            },
+            diferenciaPorcentual: {
+                type: Number,
+                default: 0
+            },
             updated: Date
         }
     },
     azucarInternacional: {
         londresN5: {
-            precioActual: Number,
-            precioAnterior: Number,
-            diferenciaPorcentual: Number,
+            precioActual: {
+                type: Number,
+                default: 0
+            },
+            precioAnterior: {
+                type: Number,
+                default: 0
+            },
+            diferenciaPorcentual: {
+                type: Number,
+                default: 0
+            },
             updated: Date
         },
         eeuuN11: {
-            precioActual: Number,
-            precioAnterior: Number,
-            diferenciaPorcentual: Number,
+            precioActual: {
+                type: Number,
+                default: 0
+            },
+            precioAnterior: {
+                type: Number,
+                default: 0
+            },
+            diferenciaPorcentual: {
+                type: Number,
+                default: 0
+            },
             updated: Date
         }
     },
     combustible: {
         bioetanol: {
-            precioActual: Number,
-            precioAnterior: Number,
-            diferenciaPorcentual: Number,
+            precioActual: {
+                type: Number,
+                default: 0
+            },
+            precioAnterior: {
+                type: Number,
+                default: 0
+            },
+            diferenciaPorcentual: {
+                type: Number,
+                default: 0
+            },
             updated: Date
         },
         petroleo: {
-            precioActual: Number,
-            precioAnterior: Number,
-            diferenciaPorcentual: Number,
+            precioActual: {
+                type: Number,
+                default: 0
+            },
+            precioAnterior: {
+                type: Number,
+                default: 0
+            },
+            diferenciaPorcentual: {
+                type: Number,
+                default: 0
+            },
             updated: Date
         }
     }
