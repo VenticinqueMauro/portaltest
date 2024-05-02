@@ -29,43 +29,43 @@ export enum CategoryNews {
     DEPORTES = 'deportes',
     TENDENCIAS = 'tendencias',
     PORTALCANA = 'portalcana',
-    }
+}
 
 export type NewsType = {
-        _id?: string,
-        pretitle: string;
-        title: string;
-        summary: string;
-        content: string;
-        status: NewsStatus;
-        category: CategoryNews;
-        subscribersOnly: boolean;
-        highlightedText?: string;
-        lastModifiedBy?: string;
-        newsLinked?: string[];
-        media?: MediaNews;
-        author?: string;
-        tags?: string[];
-        comments?: string[];
-        createdAt?: Date;
-        updatedAt?: Date;
-    }
+    _id?: string,
+    pretitle: string;
+    title: string;
+    summary: string;
+    content: string;
+    status: NewsStatus;
+    category: CategoryNews;
+    subscribersOnly: boolean;
+    highlightedText?: string;
+    lastModifiedBy?: string;
+    newsLinked?: string[];
+    media?: MediaNews;
+    author?: string;
+    tags?: string[];
+    comments?: string[];
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 
 export type AdminUser = {
-        _id: string
+    _id: string
     email: string;
-        password: string;
-        fullname: string;
-        role: UserRole;
-        avatar?: {
-            publicId: string;
-            url: string
-        }
+    password: string;
+    fullname: string;
+    role: UserRole;
+    avatar?: {
+        publicId: string;
+        url: string
     }
+}
 
 export enum NewsStatus {
     PUBLISHED = 'publicado',
-        PENDING = 'pendiente',
+    PENDING = 'pendiente',
 }
 
 export enum UserRole {
@@ -126,3 +126,33 @@ export type QuotationType = {
     azucarInternacional: AzucarInternacional,
     combustible: Combustible
 }
+
+// HOME TYPES
+
+export type Media = {
+    publicId: string;
+    url: string;
+    type: "image" | "video";
+};
+
+export type MainNews = {
+    media: Media;
+    pretitle: string;
+    title: string;
+    summary: string;
+};
+
+export type SidebarItem = {
+    media?: Media;
+    pretitle: string;
+    title: string;
+    summary: string;
+};
+
+export type MainCover = {
+    cover: {
+        mainNews: MainNews;
+        leftSidebar: SidebarItem[];
+        rightSidebar: SidebarItem[];
+    };
+};
