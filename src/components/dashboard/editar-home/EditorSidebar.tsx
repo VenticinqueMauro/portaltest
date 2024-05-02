@@ -3,6 +3,7 @@
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
+import { Separator } from '@/components/ui/separator';
 import { NewsType } from '@/types/news.types'
 import { useState } from 'react'
 
@@ -27,6 +28,7 @@ export default function EditorSidebar({ news }: { news: NewsType[] }) {
                 value={searchTerm}
                 onChange={handleSearch}
             />
+            <Separator className='mb-2' />
             {
                 (filteredNews.length === 0 ? news : filteredNews).map((item, index) => ( 
                     <Card key={item._id} className='rounded relative'>
