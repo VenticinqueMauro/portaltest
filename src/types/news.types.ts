@@ -130,12 +130,13 @@ export type QuotationType = {
 // HOME TYPES
 
 export type Media = {
-    publicId: string;
+    publicId?: string;
     url: string;
-    type: "image" | "video";
+    type?: "image" | "video";
 };
 
 export type MainNews = {
+    id: string;
     media: Media;
     pretitle: string;
     title: string;
@@ -143,7 +144,8 @@ export type MainNews = {
 };
 
 export type SidebarItem = {
-    media?: Media;
+    id: string;
+    media: Media;
     pretitle: string;
     title: string;
     summary: string;
@@ -152,7 +154,7 @@ export type SidebarItem = {
 export type MainCover = {
     cover: {
         mainNews: MainNews;
-        leftSidebar: SidebarItem[];
-        rightSidebar: SidebarItem[];
+        leftSidebar?: SidebarItem[];
+        rightSidebar?: SidebarItem[];
     };
 };
