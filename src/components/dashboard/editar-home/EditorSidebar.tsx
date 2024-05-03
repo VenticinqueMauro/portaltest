@@ -1,13 +1,12 @@
 'use client';
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { MainCover, NewsType, SidebarItem } from '@/types/news.types';
-import { SetStateAction, useEffect, useState } from 'react';
-import { SectionName } from './EditorContainer';
+import { useEffect, useState } from 'react';
 import CustomCheckbox from './CustomCheckbox';
+import { SectionName } from './EditorContainer';
 
 interface Props {
     news: NewsType[];
@@ -132,7 +131,7 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
                                 <CardDescription className='line-clamp-1'>{item.pretitle}</CardDescription>
                                 <CardTitle className='line-clamp-3'>{item.title}</CardTitle>
                             </CardHeader>
-                            <CustomCheckbox item={item} handleCheckboxChange={handleCheckboxChange} sectionName={sectionName} selectedItems={selectedItems} />
+                            <CustomCheckbox item={item} handleCheckboxChange={handleCheckboxChange} sectionName={sectionName} selectedItems={selectedItems} selectedNews={selectedNews} />
                         </Card>
                     ))}
                 </>

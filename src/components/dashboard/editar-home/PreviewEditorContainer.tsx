@@ -7,7 +7,7 @@ import {
 import { MainCover } from "@/types/news.types";
 import Image from "next/image"
 import { SectionName } from "./EditorContainer";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 
 interface Props {
@@ -65,7 +65,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                 <div className="col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer">
                     {
                         Array.from({ length: 4 }).map((_, index) => (
-                            <div key={index} className={`${lateralIzq && lateralIzq.length && index !== lateralIzq.length - 1 ? 'border-b-2' : ''} py-2 px-1 h-full flex flex-col gap-1 text-start justify-center`} onClick={() => setSectionName('leftSidebar' as SectionName)}>
+                            <div key={`left-${index}`} className={`${lateralIzq && lateralIzq.length && index !== lateralIzq.length - 1 ? 'border-b-2' : ''} py-2 px-1 h-full flex flex-col gap-1 text-start`} onClick={() => setSectionName('leftSidebar' as SectionName)}>
                                 {index === 0 && (
                                     <div className="relative -top-2">
                                         <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.jpg') : '/placeholder.jpg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
@@ -110,8 +110,8 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                 <div className="col-span-3 w-full min-h-full relative hover:bg-primary/5  cursor-pointer">
                     <div className="col-span-3 w-full min-h-full flex flex-col justify-between" onClick={() => setSectionName('rightSidebar' as SectionName)}>
                         {Array.from({ length: 2 }).map((_, index) => (
-                            <>
-                                <div key={index} className={`py-2 px-1 h-full`}>
+                            <React.Fragment key={`fragment-${index}`}>
+                                <div key={`right-${index}`} className={`py-2 px-1 h-[50%]`}>
                                     <div className="relative -top-2">
                                         <Image src={lateralDer && lateralDer.length ? (lateralDer[index]?.media.url || '/placeholder.jpg') : '/placeholder.jpg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
                                     </div>
@@ -123,12 +123,12 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                                     </h3>
                                 </div>
                                 {index !== 1 && (
-                                    <div className="border-b-2 mb-3"></div>
+                                    <div key={`divider-${index}`} className="border-b-2 mb-3"></div>
                                 )}
-                            </>
+                            </React.Fragment>
                         ))}
-
                     </div>
+
                     <span className={`${sectionName === 'rightSidebar' ? 'absolute top-0 left-0 h-full w-full block border-primary shadow bg-primary/10' : 'hidden'} `}></span>
                 </div>
             </div>
