@@ -4,7 +4,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { MainCover, NewsType } from '@/types/news.types';
+import { MainCover, NewsType, SidebarItem } from '@/types/news.types';
 import { SetStateAction, useEffect, useState } from 'react';
 import { SectionName } from './EditorContainer';
 import CustomCheckbox from './CustomCheckbox';
@@ -24,7 +24,6 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
     useEffect(() => {
-        // Limpiar los ítems seleccionados cuando sectionName cambie
         setSelectedItems([]);
     }, [sectionName]);
 
@@ -36,21 +35,7 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
         setSearchTerm(value)
     }
 
-    console.log(selectedNews)
-
     const handleCheckboxChange = (item: NewsType) => {
-
-        setSelectedItems(prevSelectedItems => {
-            const itemId = item._id as string; // Asegurar que item._id sea tratado como una cadena
-            if (prevSelectedItems.includes(itemId)) {
-                // Si el ítem ya está seleccionado, quitarlo de la lista
-                return prevSelectedItems.filter(id => id !== itemId);
-            } else {
-                // Agregar el ítem a la lista de seleccionados
-                return [...prevSelectedItems, itemId];
-            }
-        })
-
         setSelectedNews(prevSelectedNews => {
             let updatedCover = { ...prevSelectedNews.cover };
 
@@ -67,16 +52,62 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
                     summary: item.summary,
                 };
             } else {
-                if (prevSelectedNews.cover.leftSidebar !== undefined && sectionName === 'leftSidebar') {
-                    updatedCover.leftSidebar = [updatedCover.mainNews, ...prevSelectedNews.cover.leftSidebar.slice(0, 3)];
-                } else if (prevSelectedNews.cover.rightSidebar !== undefined && sectionName === 'rightSidebar') {
-                    updatedCover.rightSidebar = [updatedCover.mainNews, ...prevSelectedNews.cover.rightSidebar.slice(0, 1)];
+                // Obtener el nombre de la sección dinámicamente
+                const sidebarName = sectionName === 'leftSidebar' ? 'leftSidebar' : 'rightSidebar';
+
+                // Clonar el array de la barra lateral correspondiente
+                let updatedSidebar = [...prevSelectedNews.cover[sidebarName] as SidebarItem[]];
+
+                // Encontrar el índice de la noticia en la barra lateral
+                const index = updatedSidebar.findIndex(news => news.id === item._id);
+
+                // Si la noticia ya está seleccionada y se está deseleccionando, eliminarla
+                if (index !== -1) {
+                    updatedSidebar.splice(index, 1);
                 }
+                // Si la noticia no está seleccionada y hay espacio disponible, agregarla
+                else if (updatedSidebar.length < (sectionName === 'leftSidebar' ? 4 : 2)) {
+                    updatedSidebar.push({
+                        id: item._id as string,
+                        media: {
+                            url: item.media?.portada.url as string,
+                            publicId: item.media?.portada?.publicId,
+                            type: item.media?.portada.type as "image" | "video",
+                        },
+                        pretitle: item.pretitle,
+                        title: item.title,
+                        summary: item.summary,
+                    });
+                }
+
+                // Actualizar el estado de la barra lateral correspondiente
+                updatedCover[sidebarName] = updatedSidebar;
             }
 
             return { cover: updatedCover };
         });
+
+        // Verificar y actualizar el estado de selectedItems basado en el tipo de sección
+        setSelectedItems(prevSelectedItems => {
+            const maxSelections = sectionName === 'mainNews' ? 1 : (sectionName === 'leftSidebar' ? 4 : 2);
+            const itemId = item._id as string;
+
+            // Si el elemento ya está seleccionado y se está deseleccionando, eliminarlo del estado
+            if (prevSelectedItems.includes(itemId)) {
+                return prevSelectedItems.filter(id => id !== itemId);
+            }
+            // Si el elemento no está seleccionado y hay espacio disponible, agregarlo al estado
+            else if (prevSelectedItems.length < maxSelections) {
+                return [...prevSelectedItems, itemId];
+            }
+            // Si no se cumplen las condiciones anteriores, devolver el estado sin cambios
+            else {
+                return prevSelectedItems;
+            }
+        });
     };
+
+
 
 
     return (
@@ -89,7 +120,7 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
             />
             <Separator className='' />
             {!sectionName ? (
-                <p className='text-muted-foreground text-center '>Seleccione una sección</p>
+                <p className='text-muted-foreground text-center'>Seleccione una sección</p>
             ) : (
                 <>
                     <h2 className="text-xl tracking-tight font-bold">
