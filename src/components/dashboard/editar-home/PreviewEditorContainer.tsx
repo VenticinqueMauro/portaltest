@@ -8,8 +8,14 @@ import { MainCover } from "@/types/news.types";
 import Image from "next/image"
 import { SectionName } from "./EditorContainer";
 import React, { Dispatch, SetStateAction } from "react";
-import { Button } from "@/components/ui/button";
 import SubmitButtonEditHome from "./SubmitButton.editHome";
+import { Lora } from 'next/font/google';
+
+const lora = Lora({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"],
+    variable: "--font-sans",
+})
 
 
 interface Props {
@@ -27,20 +33,29 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
     const lateralDer = selectedNews?.cover.rightSidebar;
 
 
-
     return (
-        <div className='rounded col-span-9 max-w-7xl p-5 py-14 max-h-[630px]'>
+        <div className={`rounded col-span-9 max-w-7xl p-5 py-14 max-h-[630px]`}>
             <div className="grid grid-cols-12 gap-3">
                 <SubmitButtonEditHome selectedNews={selectedNews} />
-                <div className="col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer">
+                <div className={`${lora.className} col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer`}>
                     {
                         Array.from({ length: 4 }).map((_, index) => (
                             <div key={`left-${index}`} className={`${lateralIzq && lateralIzq.length && index !== lateralIzq.length - 1 ? 'border-b-2' : ''} py-2 px-1 h-full flex flex-col gap-1 text-start`} onClick={() => setSectionName('leftSidebar' as SectionName)}>
-                                {index === 0 && (
+                                {index === 0 && lateralIzq && lateralIzq.length ? (
                                     <div className="relative -top-2">
-                                        <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
-                                    </div>
-                                )}
+                                        {
+                                            lateralIzq[0].media.type !== 'video' ?
+                                                <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                                :
+                                                <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                                    <source src={lateralIzq && lateralIzq.length ? lateralIzq[0]?.media.url : '/placeholder.svg'} type="video/mp4" />
+                                                    Tu navegador no soporta la etiqueta de video.
+                                                </video>
+                                        }
+                                    </div>) :
+                                    index === 0 ?
+                                        <Image src='/placeholder.svg' alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" /> : null
+                                }
                                 <p className="text-sm font-bold text-muted-foreground">
                                     {lateralIzq && lateralIzq[index]?.pretitle.length ? lateralIzq[index]?.pretitle : <span className="w-[150px] rounded h-[10px] mx-auto bg-gray-200 block mb-2" />}
                                 </p>
@@ -54,7 +69,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                 </div>
 
 
-                <div className="col-span-6 w-full min-h-full relative  cursor-pointer">
+                <div className={`${lora.className} col-span-6 w-full min-h-full relative  cursor-pointer`}>
                     <Card className="rounded  min-h-full hover:bg-primary/5" onClick={() => setSectionName('mainNews' as SectionName)}>
                         <div className="px-1">
                             <div className="relative -top-2" >
@@ -85,14 +100,40 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                 </div>
 
 
-                <div className="col-span-3 w-full min-h-full relative hover:bg-primary/5  cursor-pointer">
+                <div className={`${lora.className} col-span-3 w-full min-h-full relative hover:bg-primary/5  cursor-pointer`}>
                     <div className="col-span-3 w-full min-h-full flex flex-col justify-between" onClick={() => setSectionName('rightSidebar' as SectionName)}>
                         {Array.from({ length: 2 }).map((_, index) => (
                             <React.Fragment key={`fragment-${index}`}>
                                 <div key={`right-${index}`} className={`py-2 px-1 h-[50%]`}>
                                     <div className="relative -top-2">
-                                        <Image src={lateralDer && lateralDer.length ? (lateralDer[index]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                        {
+                                            lateralDer && lateralDer.length ? (
+                                                lateralDer[index]?.media?.type !== 'video' ? (
+                                                    <Image
+                                                        src={lateralDer[index]?.media?.url || '/placeholder.svg'}
+                                                        alt="placeholder"
+                                                        width={400}
+                                                        height={300}
+                                                        className="w-full object-cover aspect-video rounded"
+                                                    />
+                                                ) : (
+                                                    <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                                        <source src={portadaPrincipal?.media?.url || '/placeholder.svg'} type="video/mp4" />
+                                                        Tu navegador no soporta la etiqueta de video.
+                                                    </video>
+                                                )
+                                            ) : (
+                                                <Image
+                                                    src='/placeholder.svg'
+                                                    alt="placeholder"
+                                                    width={400}
+                                                    height={300}
+                                                    className="w-full object-cover aspect-video rounded"
+                                                />
+                                            )
+                                        }
                                     </div>
+
                                     <p className="text-sm font-bold text-muted-foreground">
                                         {lateralDer && lateralDer[index]?.pretitle.length ? lateralDer[index]?.pretitle : <span className="w-[150px] rounded h-[10px] mx-auto bg-gray-200 block mb-2" />}
                                     </p>
