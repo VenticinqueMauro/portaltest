@@ -38,7 +38,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                             <div key={`left-${index}`} className={`${lateralIzq && lateralIzq.length && index !== lateralIzq.length - 1 ? 'border-b-2' : ''} py-2 px-1 h-full flex flex-col gap-1 text-start`} onClick={() => setSectionName('leftSidebar' as SectionName)}>
                                 {index === 0 && (
                                     <div className="relative -top-2">
-                                        <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.jpg') : '/placeholder.jpg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                        <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
                                     </div>
                                 )}
                                 <p className="text-sm font-bold text-muted-foreground">
@@ -58,7 +58,15 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                     <Card className="rounded  min-h-full hover:bg-primary/5" onClick={() => setSectionName('mainNews' as SectionName)}>
                         <div className="px-1">
                             <div className="relative -top-2" >
-                                <Image src={portadaPrincipal?.media.url.length ? portadaPrincipal?.media.url : '/placeholder.jpg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                {
+                                    portadaPrincipal.media.type !== 'video' ?
+                                        <Image src={portadaPrincipal?.media.url.length > 0 ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                        :
+                                        <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                            <source src={portadaPrincipal?.media.url} type="video/mp4" />
+                                            Tu navegador no soporta la etiqueta de video.
+                                        </video>
+                                }
                             </div>
                         </div>
                         <CardHeader className="text-center">
@@ -83,7 +91,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                             <React.Fragment key={`fragment-${index}`}>
                                 <div key={`right-${index}`} className={`py-2 px-1 h-[50%]`}>
                                     <div className="relative -top-2">
-                                        <Image src={lateralDer && lateralDer.length ? (lateralDer[index]?.media.url || '/placeholder.jpg') : '/placeholder.jpg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                        <Image src={lateralDer && lateralDer.length ? (lateralDer[index]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
                                     </div>
                                     <p className="text-sm font-bold text-muted-foreground">
                                         {lateralDer && lateralDer[index]?.pretitle.length ? lateralDer[index]?.pretitle : <span className="w-[150px] rounded h-[10px] mx-auto bg-gray-200 block mb-2" />}

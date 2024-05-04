@@ -22,7 +22,6 @@ export const handleDeleteNews = async ({ id, category, title, media }: Props) =>
 
     const token = decodeToken();
 
-    console.log(token.role)
 
     if (token.role !== 'admin' && token.role !== 'editor') {
         return { error: 'No autorizado' };

@@ -28,8 +28,6 @@ const CustomCheckbox: React.FC<Props> = ({ item, sectionName, selectedNews, hand
     }, [item._id, sectionName, selectedNews.cover]);
 
 
-    console.log(selectedNews)
-
     const handleCheckedChange = () => {
         const newCheckedState = !isChecked;
         setIsChecked(newCheckedState);
