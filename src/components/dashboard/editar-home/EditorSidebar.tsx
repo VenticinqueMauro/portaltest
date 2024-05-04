@@ -123,15 +123,24 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
             ) : (
                 <>
                     <h2 className="text-xl tracking-tight font-bold">
-                        {sectionName === 'mainNews' ? 'Portada' : sectionName === 'leftSidebar' ? 'Sección izquierda' : 'Sección derecha'}
+                        {sectionName === 'mainNews' ? 'Sección central' : sectionName === 'leftSidebar' ? 'Sección izquierda' : 'Sección derecha'}
                     </h2>
+                    {sectionName === 'mainNews' && (
+                        <p className="text-xs text-gray-500">Selecciona solo una noticia para la sección central</p>
+                    )}
+                    {sectionName === 'leftSidebar' && (
+                        <p className="text-xs text-gray-500">Selecciona 4 noticias para la sección izquierda</p>
+                    )}
+                    {sectionName === 'rightSidebar' && (
+                        <p className="text-xs text-gray-500">Selecciona 2 noticias para la sección derecha</p>
+                    )}
                     {(filteredNews.length === 0 ? news : filteredNews).map((item, index) => (
                         <Card key={item._id} className='rounded relative'>
                             <CardHeader>
                                 <CardDescription className='line-clamp-1'>{item.pretitle}</CardDescription>
                                 <CardTitle className='line-clamp-3'>{item.title}</CardTitle>
                             </CardHeader>
-                            <CustomCheckbox item={item} handleCheckboxChange={handleCheckboxChange} sectionName={sectionName} selectedItems={selectedItems} selectedNews={selectedNews} />
+                            <CustomCheckbox item={item} handleCheckboxChange={handleCheckboxChange} sectionName={sectionName} selectedNews={selectedNews} />
                         </Card>
                     ))}
                 </>

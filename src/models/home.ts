@@ -1,19 +1,18 @@
 import { MainNews, SidebarItem } from "@/types/news.types";
 import { Schema, model, models, Document } from "mongoose";
 
-
-
 interface HomePageDocument extends Document {
-    portada: {
-        noticiaprincipal: MainNews;
-        lateralizq: SidebarItem[];
-        lateralder: SidebarItem[];
+    cover: {
+        mainNews: MainNews;
+        leftSidebar: SidebarItem[];
+        rightSidebar: SidebarItem[];
     };
 }
 
 const HomePageSchema = new Schema<HomePageDocument>({
-    portada: {
-        noticiaprincipal: {
+    cover: {
+        mainNews: {
+            _id: { type: String, required: true },
             media: {
                 publicId: { type: String, required: true },
                 url: { type: String, required: true },
@@ -23,7 +22,8 @@ const HomePageSchema = new Schema<HomePageDocument>({
             title: { type: String, required: true },
             summary: { type: String, required: true }
         },
-        lateralizq: [{
+        leftSidebar: [{
+            _id: { type: String, required: true },
             media: {
                 publicId: { type: String, required: false },
                 url: { type: String, required: true },
@@ -33,7 +33,8 @@ const HomePageSchema = new Schema<HomePageDocument>({
             title: { type: String, required: true },
             summary: { type: String, required: true }
         }],
-        lateralder: [{
+        rightSidebar: [{
+            _id: { type: String, required: true },
             media: {
                 publicId: { type: String, required: false },
                 url: { type: String, required: true },

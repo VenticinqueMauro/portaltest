@@ -8,6 +8,8 @@ import { MainCover } from "@/types/news.types";
 import Image from "next/image"
 import { SectionName } from "./EditorContainer";
 import React, { Dispatch, SetStateAction } from "react";
+import { Button } from "@/components/ui/button";
+import SubmitButtonEditHome from "./SubmitButton.editHome";
 
 
 interface Props {
@@ -24,44 +26,12 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
     const lateralIzq = selectedNews?.cover.leftSidebar;
     const lateralDer = selectedNews?.cover.rightSidebar;
 
-    console.log(lateralDer)
 
-    const noticias = [
-        {
-            img: '/placeholder.jpg',
-            pretitle: "Actualidad",
-            title: "Nuevas medidas para combatir el cambio climático"
-        },
-        {
-            pretitle: "Deportes",
-            title: "Equipo local gana el campeonato nacional de fútbol"
-        },
-        {
-            pretitle: "Economía",
-            title: "Crecimiento récord en el sector tecnológico"
-        },
-        {
-            pretitle: "Cultura",
-            title: "Festival de música regresa con artistas internacionales"
-        }
-    ];
-
-    const noticias2 = [
-        {
-            img: '/placeholder.jpg',
-            pretitle: "Política",
-            title: "El gobierno anuncia un plan integral para la reforma del sistema de salud pública"
-        },
-        {
-            img: '/placeholder.jpg',
-            pretitle: "Tecnología",
-            title: "Avances en inteligencia artificial: cómo la IA está transformando diversas industrias en todo el mundo"
-        }
-    ];
 
     return (
         <div className='rounded col-span-9 max-w-7xl p-5 py-14 max-h-[630px]'>
             <div className="grid grid-cols-12 gap-3">
+                <SubmitButtonEditHome selectedNews={selectedNews} />
                 <div className="col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer">
                     {
                         Array.from({ length: 4 }).map((_, index) => (
