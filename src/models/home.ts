@@ -12,7 +12,7 @@ interface HomePageDocument extends Document {
 const HomePageSchema = new Schema<HomePageDocument>({
     cover: {
         mainNews: {
-            _id: { type: String, required: true },
+            id: { type: String, required: true },
             media: {
                 publicId: { type: String, required: true },
                 url: { type: String, required: true },
@@ -23,7 +23,7 @@ const HomePageSchema = new Schema<HomePageDocument>({
             summary: { type: String, required: true }
         },
         leftSidebar: [{
-            _id: { type: String, required: true },
+            id: { type: String, required: true },
             media: {
                 publicId: { type: String, required: false },
                 url: { type: String, required: true },
@@ -34,7 +34,7 @@ const HomePageSchema = new Schema<HomePageDocument>({
             summary: { type: String, required: true }
         }],
         rightSidebar: [{
-            _id: { type: String, required: true },
+            id: { type: String, required: true },
             media: {
                 publicId: { type: String, required: false },
                 url: { type: String, required: true },

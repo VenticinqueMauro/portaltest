@@ -9,6 +9,7 @@ interface Props {
 
 export default function SubmitButtonEditHome({ selectedNews }: Props) {
 
+
     const isDataValid = selectedNews?.cover.leftSidebar?.length === 4 &&
         selectedNews?.cover.rightSidebar?.length === 2 &&
         selectedNews?.cover.mainNews?.media?.url &&
@@ -22,7 +23,7 @@ export default function SubmitButtonEditHome({ selectedNews }: Props) {
             if (response.error) {
                 toast.error(response.error)
             } else if (response.message) {
-                toast.success(response.message)
+                toast.success(response.message);
             } else {
                 toast.warning(response)
             }

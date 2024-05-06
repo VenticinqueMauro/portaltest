@@ -7,7 +7,7 @@ import {
 import { MainCover } from "@/types/news.types";
 import Image from "next/image"
 import { SectionName } from "./EditorContainer";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SubmitButtonEditHome from "./SubmitButton.editHome";
 import { Lora } from 'next/font/google';
 
@@ -21,11 +21,12 @@ const lora = Lora({
 interface Props {
     selectedNews: MainCover
     sectionName: SectionName
+    setSelectedNews: Dispatch<SetStateAction<MainCover>>
     setSectionName: Dispatch<SetStateAction<SectionName>>
 }
 
 
-export default function PreviewEditorContainer({ selectedNews, sectionName, setSectionName }: Props) {
+export default function PreviewEditorContainer({ selectedNews, sectionName, setSelectedNews, setSectionName }: Props) {
 
 
     const portadaPrincipal = selectedNews?.cover.mainNews;
@@ -33,8 +34,23 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
     const lateralDer = selectedNews?.cover.rightSidebar;
 
 
+    useEffect(() => {
+        const getMainCover = async () => {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home`)
+
+            const { data } = await response.json();
+
+            if (data) {
+                setSelectedNews(data);
+            }
+        }
+
+        getMainCover();
+    }, [setSelectedNews])
+
+
     return (
-        <div className={`rounded col-span-9 max-w-7xl p-5 py-14 max-h-[630px]`}>
+        <div className={`rounded col-span-9 max-w-7xl p-5 max-h-[630px]`}>
             <div className="grid grid-cols-12 gap-3">
                 <SubmitButtonEditHome selectedNews={selectedNews} />
                 <div className={`${lora.className} col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer`}>

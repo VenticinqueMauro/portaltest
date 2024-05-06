@@ -108,17 +108,18 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
 
 
 
-
     return (
-        <div className='rounded border col-span-3 p-3 flex gap-y-3 flex-col sticky top-0 right-0 h-screen overflow-y-auto'>
-            <Input
-                placeholder="Buscar por título o categoría"
-                className="w-56 my-1"
-                value={searchTerm}
-                onChange={handleSearch}
-            />
-            <Separator className='' />
-            {!sectionName ? (
+        <div className='rounded border col-span-3 px-3 flex gap-y-3 flex-col sticky top-0 right-0 h-screen overflow-y-auto'>
+            <div className='space-y-2  sticky top-0 z-10 bg-white w-full backdrop-blur pt-3 '>
+                <Input
+                    placeholder="Buscar por título o categoría"
+                    className="w-56 my-1"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+                <Separator className='' />
+            </div>
+            {!sectionName || sectionName === undefined ? (
                 <p className='text-muted-foreground text-center'>Seleccione una sección</p>
             ) : (
                 <>

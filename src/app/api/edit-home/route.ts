@@ -4,6 +4,20 @@ import { SidebarItem } from "@/types/news.types";
 import { handleError } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
+
+export async function GET(request: NextRequest) {
+    try {
+        // Conectarse a la base de datos
+        await connectDB();
+
+        const home = await HomePage.findOne({});
+
+        return NextResponse.json({ data: home });
+    } catch (error) {
+        return handleError(error);
+    }
+}
+
 export async function PUT(request: NextRequest) {
     try {
         // Conectarse a la base de datos
@@ -23,7 +37,7 @@ export async function PUT(request: NextRequest) {
             home = new HomePage({
                 cover: {
                     mainNews: {
-                        _id: data.cover.mainNews._id,
+                        id: data.cover.mainNews.id,
                         media: {
                             publicId: data.cover.mainNews.media.publicId,
                             url: data.cover.mainNews.media.url,
@@ -34,7 +48,7 @@ export async function PUT(request: NextRequest) {
                         summary: data.cover.mainNews.summary
                     },
                     leftSidebar: data.cover.leftSidebar.map((item: SidebarItem) => ({
-                        _id: item.id,
+                        id: item.id,
                         media: {
                             publicId: item.media.publicId,
                             url: item.media.url,
@@ -45,7 +59,7 @@ export async function PUT(request: NextRequest) {
                         summary: item.summary
                     })),
                     rightSidebar: data.cover.rightSidebar.map((item: SidebarItem) => ({
-                        _id: item.id,
+                        id: item.id,
                         media: {
                             publicId: item.media.publicId,
                             url: item.media.url,
@@ -64,7 +78,7 @@ export async function PUT(request: NextRequest) {
             // Si se encontró un documento existente, actualizarlo con los datos recibidos
             home.cover = {
                 mainNews: {
-                    _id: data.cover.mainNews._id,
+                    id: data.cover.mainNews.id,
                     media: {
                         publicId: data.cover.mainNews.media.publicId,
                         url: data.cover.mainNews.media.url,
@@ -75,7 +89,7 @@ export async function PUT(request: NextRequest) {
                     summary: data.cover.mainNews.summary
                 },
                 leftSidebar: data.cover.leftSidebar.map((item: SidebarItem) => ({
-                    _id: item.id,
+                    id: item.id,
                     media: {
                         publicId: item.media.publicId,
                         url: item.media.url,
@@ -86,7 +100,7 @@ export async function PUT(request: NextRequest) {
                     summary: item.summary
                 })),
                 rightSidebar: data.cover.rightSidebar.map((item: SidebarItem) => ({
-                    _id: item.id,
+                    id: item.id,
                     media: {
                         publicId: item.media.publicId,
                         url: item.media.url,
