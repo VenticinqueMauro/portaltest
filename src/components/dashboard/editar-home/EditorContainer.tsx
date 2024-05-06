@@ -32,7 +32,7 @@ export default function EditorContainer({ news }: { news: NewsType[] }) {
 
     return (
         <div className="grid grid-cols-12 gap-4">
-            <Tabs defaultValue="portada" className="col-span-9  py-3">
+            <Tabs defaultValue="portada" className="col-span-9  py-3" onValueChange={() => setSectionName(undefined)}>
                 <TabsList>
                     <TabsTrigger value="portada">Portada</TabsTrigger>
                     <TabsTrigger value="section1">seccion 1</TabsTrigger>

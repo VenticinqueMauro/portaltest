@@ -1,6 +1,7 @@
 import { handleEditPortadaHome } from "@/actions/editar-home/handleEditPortadaHome";
 import { Button } from "@/components/ui/button";
 import { MainCover } from "@/types/news.types";
+import { useState } from "react";
 import { toast } from "sonner";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 
 export default function SubmitButtonEditHome({ selectedNews }: Props) {
 
+    const [loading, setLoading] = useState(false);
 
     const isDataValid = selectedNews?.cover.leftSidebar?.length === 4 &&
         selectedNews?.cover.rightSidebar?.length === 2 &&
@@ -18,23 +20,28 @@ export default function SubmitButtonEditHome({ selectedNews }: Props) {
         selectedNews?.cover.mainNews?.summary;
 
     const handleClick = async () => {
+        setLoading(true);
         if (isDataValid) {
             const response = await handleEditPortadaHome(selectedNews);
             if (response.error) {
-                toast.error(response.error)
+                toast.error(response.error);
+                setLoading(false)
             } else if (response.message) {
                 toast.success(response.message);
+                setLoading(false)
             } else {
-                toast.warning(response)
+                toast.warning(response);
+                setLoading(false)
             }
         } else {
             toast.warning("Por favor, completa todos los campos necesarios antes de guardar.");
+            setLoading(false)
         }
     }
 
     return (
-        <div className="col-span-12 col-start-1">
-            <Button size='sm' className="float-end block w-fit" onClick={handleClick} disabled={!isDataValid}>Guardar cambios</Button>
-        </div>
+        <Button size='sm' className={`${loading && 'cursor-not-allowed opacity-50'} w-fit`} onClick={handleClick} disabled={!isDataValid}>
+            {loading ? 'Guardando cambios...' : 'Guardar cambios'}
+        </Button>
     )
 }

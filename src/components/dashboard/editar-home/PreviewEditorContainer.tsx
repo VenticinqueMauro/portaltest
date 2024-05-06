@@ -10,6 +10,9 @@ import { SectionName } from "./EditorContainer";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SubmitButtonEditHome from "./SubmitButton.editHome";
 import { Lora } from 'next/font/google';
+import { Eraser } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ClearPortada from "./ClearPortada";
 
 const lora = Lora({
     subsets: ["latin"],
@@ -52,7 +55,10 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
     return (
         <div className={`rounded col-span-9 max-w-7xl p-5 max-h-[630px]`}>
             <div className="grid grid-cols-12 gap-3">
-                <SubmitButtonEditHome selectedNews={selectedNews} />
+                <div className="col-span-12 col-start-1 gap-x-4 flex items-center justify-end">
+                    <ClearPortada setSelectedNews={setSelectedNews} />
+                    <SubmitButtonEditHome selectedNews={selectedNews} />
+                </div>
                 <div className={`${lora.className} col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer`}>
                     {
                         Array.from({ length: 4 }).map((_, index) => (
