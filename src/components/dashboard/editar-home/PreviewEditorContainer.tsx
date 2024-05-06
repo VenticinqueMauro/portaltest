@@ -3,16 +3,14 @@ import {
     CardDescription,
     CardHeader,
     CardTitle
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import { MainCover } from "@/types/news.types";
-import Image from "next/image"
-import { SectionName } from "./EditorContainer";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import SubmitButtonEditHome from "./SubmitButton.editHome";
 import { Lora } from 'next/font/google';
-import { Eraser } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import ClearPortada from "./ClearPortada";
+import { SectionName } from "./EditorContainer";
+import SubmitButtonEditHome from "./SubmitButton.editHome";
 
 const lora = Lora({
     subsets: ["latin"],
@@ -29,7 +27,7 @@ interface Props {
 }
 
 
-export default function PreviewEditorContainer({ selectedNews, sectionName, setSelectedNews, setSectionName }: Props) {
+export default function PreviewPortadaEditorContainer({ selectedNews, sectionName, setSelectedNews, setSectionName }: Props) {
 
 
     const portadaPrincipal = selectedNews?.cover.mainNews;
@@ -59,7 +57,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                     <ClearPortada setSelectedNews={setSelectedNews} />
                     <SubmitButtonEditHome selectedNews={selectedNews} />
                 </div>
-                <div className={`${lora.className} col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:bg-primary/5 cursor-pointer`}>
+                <div className={`${lora.className} col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:border-primary hover:border-2 cursor-pointer`}>
                     {
                         Array.from({ length: 4 }).map((_, index) => (
                             <div key={`left-${index}`} className={`${lateralIzq && lateralIzq.length && index !== lateralIzq.length - 1 ? 'border-b-2' : ''} py-2 px-1 h-full flex flex-col gap-1 text-start`} onClick={() => setSectionName('leftSidebar' as SectionName)}>
@@ -92,7 +90,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
 
 
                 <div className={`${lora.className} col-span-6 w-full min-h-full relative  cursor-pointer`}>
-                    <Card className="rounded  min-h-full hover:bg-primary/5" onClick={() => setSectionName('mainNews' as SectionName)}>
+                    <Card className="rounded  min-h-full hover:border-primary hover:border-2" onClick={() => setSectionName('mainNews' as SectionName)}>
                         <div className="px-1">
                             <div className="relative -top-2" >
                                 {
@@ -122,7 +120,7 @@ export default function PreviewEditorContainer({ selectedNews, sectionName, setS
                 </div>
 
 
-                <div className={`${lora.className} col-span-3 w-full min-h-full relative hover:bg-primary/5  cursor-pointer`}>
+                <div className={`${lora.className} col-span-3 w-full min-h-full relative hover:border-primary hover:border-2  cursor-pointer`}>
                     <div className="col-span-3 w-full min-h-full flex flex-col justify-between" onClick={() => setSectionName('rightSidebar' as SectionName)}>
                         {Array.from({ length: 2 }).map((_, index) => (
                             <React.Fragment key={`fragment-${index}`}>
