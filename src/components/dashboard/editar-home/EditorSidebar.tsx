@@ -20,11 +20,7 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
 
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredNews, setFilteredNews] = useState<NewsType[]>([]);
-    const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
-    useEffect(() => {
-        setSelectedItems([]);
-    }, [sectionName]);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -86,24 +82,6 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
             return { cover: updatedCover };
         });
 
-        // Verificar y actualizar el estado de selectedItems basado en el tipo de sección
-        setSelectedItems(prevSelectedItems => {
-            const maxSelections = sectionName === 'mainNews' ? 1 : (sectionName === 'leftSidebar' ? 4 : 2);
-            const itemId = item._id as string;
-
-            // Si el elemento ya está seleccionado y se está deseleccionando, eliminarlo del estado
-            if (prevSelectedItems.includes(itemId)) {
-                return prevSelectedItems.filter(id => id !== itemId);
-            }
-            // Si el elemento no está seleccionado y hay espacio disponible, agregarlo al estado
-            else if (prevSelectedItems.length < maxSelections) {
-                return [...prevSelectedItems, itemId];
-            }
-            // Si no se cumplen las condiciones anteriores, devolver el estado sin cambios
-            else {
-                return prevSelectedItems;
-            }
-        });
     };
 
     return (

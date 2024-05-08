@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { MainCover, NewsType, SidebarItem } from '@/types/news.types';
 import { SectionName } from './EditorContainer';
-import { toast } from 'sonner';
 
 interface Props {
     item: NewsType;

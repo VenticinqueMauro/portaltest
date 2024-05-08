@@ -151,10 +151,24 @@ export type SidebarItem = {
     summary: string;
 };
 
+export type SectionNews = {
+    mainNews: MainNews;
+    gridNews: SidebarItem[];
+}
+
+export type SectionNewsMap = {
+    politica: SectionNews;
+    "eco & negocios": SectionNews;
+    deportes: SectionNews;
+    tendencias: SectionNews;
+    portalcana: SectionNews;
+};
+
 export type MainCover = {
     cover: {
         mainNews: MainNews;
         leftSidebar?: SidebarItem[];
         rightSidebar?: SidebarItem[];
-    };
+    },
+    sections?: SectionNewsMap;
 };
