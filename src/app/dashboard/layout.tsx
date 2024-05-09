@@ -44,7 +44,7 @@ export default async function layout({ children }: { children: React.ReactNode }
                 <Image src='/fondo-login.png' width={1080} height={1080} alt="logo" className="w-[200px] rounded-full absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 z-0 opacity-20" />
                 <p className="z-10">Esta función solo está disponible en dispositivos de mayor tamaño</p>
             </div>
-            <div className="hidden xl:block">
+            <div className="hidden xl:block w-full">
                 <Sidebar hasPendingNews={hasPendingNews} user={user} />
                 <div className="flex-1 ml-[200px] overflow-y-auto pl-6">
                     {children}

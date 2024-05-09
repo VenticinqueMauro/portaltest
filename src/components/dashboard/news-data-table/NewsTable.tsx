@@ -53,7 +53,7 @@ export default async function NewsTable() {
     const data = await getData()
 
     return (
-        <div className="py-10">
+        <div className="py-10 pr-6">
             <DataTableNews columns={columnsNews} data={data} />
         </div>
     )

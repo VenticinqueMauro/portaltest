@@ -25,7 +25,7 @@ export default async function AdminUsersTable() {
     const data = await getData()
 
     return (
-        <div className="py-10">
+        <div className="py-10 pr-6">
             <DataTableAdminUsers columns={columns} data={data} />
         </div>
     )
