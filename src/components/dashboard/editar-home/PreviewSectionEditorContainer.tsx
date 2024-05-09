@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
     Card,
     CardDescription,
@@ -8,7 +7,7 @@ import {
 import { CategoryNews, SectionNewsMap } from "@/types/news.types"
 import { Lora } from 'next/font/google'
 import Image from "next/image"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 import { SectionsName } from "./EditorContainer"
 import SubmitButtonEditHome from "./SubmitButton.sections"
 import ClearPortada from "./ClearPortada"
@@ -31,9 +30,25 @@ interface Props {
 
 export default function PreviewSectionEditorContainer({ valueSection, titleSection, selectedSectionNews, sectionName, setSelectedSectionNews, setSectionName }: Props) {
 
-
     const portadaPrincipal = selectedSectionNews[valueSection as CategoryNews]?.mainNews;
-    const gridLateral = selectedSectionNews[valueSection as CategoryNews]?.gridNews
+    const gridLateral = selectedSectionNews[valueSection as CategoryNews]?.gridNews;
+
+    useEffect(() => {
+        const getMainSection = async () => {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`)
+            const { data } = await response.json();
+
+            if (data) {
+                setSelectedSectionNews((prevData) => {
+                    return data.sections;
+                });
+            }
+        }
+
+        getMainSection();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
 
 
     return (

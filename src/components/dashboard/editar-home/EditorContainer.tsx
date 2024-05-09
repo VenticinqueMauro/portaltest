@@ -137,8 +137,6 @@ export default function EditorContainer({ news }: { news: NewsType[] }) {
         
     }, [tabs, news])
 
-    console.log(selectedSectionNews)
-
     return (
         <div className="grid grid-cols-12 gap-4">
             <Tabs defaultValue="portada" className="col-span-9 py-4" onValueChange={(e) => {
