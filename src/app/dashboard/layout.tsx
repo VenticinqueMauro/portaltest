@@ -4,6 +4,7 @@ import { decodeToken } from "@/utils/utils";
 import { Metadata } from "next";
 import { Toaster } from 'sonner';
 import { getProfile } from "./perfil/page";
+import Image from "next/image";
 
 export const metadata: Metadata = {
     title: 'Admin Panel | Noticias',
@@ -39,11 +40,17 @@ export default async function layout({ children }: { children: React.ReactNode }
 
     return (
         <section className="min-h-screen bg-background text-foreground relative flex">
-            <Sidebar hasPendingNews={hasPendingNews} user={user} />
-            <div className="flex-1 ml-[200px] overflow-y-auto pl-6">
-                {children}
+            <div className="xl:hidden flex justify-center items-center w-full text-xl text-center tracking-tight font-semibold relative bg-slate-50">
+                <Image src='/fondo-login.png' width={1080} height={1080} alt="logo" className="w-[200px] rounded-full absolute top-1/2 -translate-x-1/2 -translate-y-1/2 left-1/2 z-0 opacity-20" />
+                <p className="z-10">Esta función solo está disponible en dispositivos de mayor tamaño</p>
             </div>
-            <Toaster />
+            <div className="hidden xl:block">
+                <Sidebar hasPendingNews={hasPendingNews} user={user} />
+                <div className="flex-1 ml-[200px] overflow-y-auto pl-6">
+                    {children}
+                </div>
+                <Toaster />
+            </div>
         </section>
     )
 }
