@@ -1,10 +1,10 @@
 'use server';
 
-import { MainCover } from "@/types/news.types";
+import { SectionNewsMap } from "@/types/news.types";
 import { decodeToken } from "@/utils/utils";
 import { revalidatePath } from "next/cache";
 
-export async function handleEditPortadaHome(selectedNews: MainCover) {
+export async function handleEditSectionsHome(selectedNews: SectionNewsMap) {
 
     const token = decodeToken();
 
@@ -12,11 +12,15 @@ export async function handleEditPortadaHome(selectedNews: MainCover) {
         return { error: 'No tienes permisos para realizar esta acción' }
     }
 
+    const data = {
+        sections: selectedNews
+    }
+
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/sections`, {
             method: 'PUT',
             credentials: 'include',
-            body: JSON.stringify(selectedNews)
+            body: JSON.stringify(data)
         })
 
         const json = await response.json();

@@ -101,7 +101,7 @@ const optionsTabs = [
     },
     {
         value: 'eco & negocios',
-        label: 'Eco y Negocios'
+        label: 'Economía'
     },
     {
         value: 'deportes',
@@ -137,9 +137,11 @@ export default function EditorContainer({ news }: { news: NewsType[] }) {
         
     }, [tabs, news])
 
+    console.log(selectedSectionNews)
+
     return (
         <div className="grid grid-cols-12 gap-4">
-            <Tabs defaultValue="portada" className="col-span-9 py-3" onValueChange={(e) => {
+            <Tabs defaultValue="portada" className="col-span-9 py-4" onValueChange={(e) => {
                 setSectionName(undefined)
                 setSectionsName(undefined)
                 setSelectedNews(initialState)

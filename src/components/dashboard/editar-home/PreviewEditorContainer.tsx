@@ -10,7 +10,7 @@ import Image from "next/image";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import ClearPortada from "./ClearPortada";
 import { SectionName } from "./EditorContainer";
-import SubmitButtonEditHome from "./SubmitButton.editHome";
+import SubmitButtonEditHome from "./SubmitButton.cover";
 
 const lora = Lora({
     subsets: ["latin"],
@@ -37,7 +37,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
 
     useEffect(() => {
         const getMainCover = async () => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home`)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`)
 
             const { data } = await response.json();
 
@@ -52,11 +52,12 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
 
     return (
         <div className={`rounded col-span-9 max-w-7xl p-5 max-h-[630px]`}>
-            <div className="grid grid-cols-12 gap-3">
+            <div className="grid grid-cols-12 gap-x-3">
                 <div className="col-span-12 col-start-1 gap-x-4 flex items-center justify-end">
                     <ClearPortada setSelectedNews={setSelectedNews} />
                     <SubmitButtonEditHome selectedNews={selectedNews} />
                 </div>
+                <h2 className="col-span-12 tracking-tight text-2xl text-muted-foreground pb-3">Portada</h2>
                 <div className={`${lora.className} col-span-3 w-full gap-y-3 min-h-full flex flex-col justify-beetwen relative hover:border-primary hover:border-2 cursor-pointer`}>
                     {
                         Array.from({ length: 4 }).map((_, index) => (

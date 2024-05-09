@@ -84,6 +84,34 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
 
     };
 
+    const isNewsSelectedInCover = (newsId: string, currentSection: keyof MainCover['cover']): boolean => {
+        const coverNews = selectedNews.cover;
+
+        if (currentSection === 'mainNews') {
+            // Si la sección actual es la sección central, verificamos si la noticia está seleccionada en las secciones laterales
+            const leftSidebarItems = coverNews.leftSidebar ?? [];
+            const rightSidebarItems = coverNews.rightSidebar ?? [];
+            const isLeftSelected = leftSidebarItems.some((item: SidebarItem) => item.id === newsId);
+            const isRightSelected = rightSidebarItems.some((item: SidebarItem) => item.id === newsId);
+
+            // Si la noticia está seleccionada en alguna de las secciones laterales, devolvemos verdadero
+            return isLeftSelected || isRightSelected;
+        } else {
+            // Si la sección actual es una de las secciones laterales, verificamos si la noticia está seleccionada en la sección central o en la sección lateral opuesta
+            const mainNewsId = coverNews.mainNews?.id;
+            const isMainSelected = mainNewsId === newsId;
+            const leftSidebarItems = coverNews.leftSidebar ?? [];
+            const rightSidebarItems = coverNews.rightSidebar ?? [];
+
+            // Si la noticia está seleccionada en la sección central o en la sección lateral opuesta, devolvemos verdadero
+            return isMainSelected || (currentSection === 'leftSidebar' ? rightSidebarItems : leftSidebarItems).some((item: SidebarItem) => item.id === newsId);
+        }
+    };
+
+
+
+
+
     return (
         <div className='rounded border col-span-3 px-3 flex gap-y-3 flex-col sticky top-0 right-0 h-screen overflow-y-auto'>
             <div className='space-y-2  sticky top-0 z-10 bg-white w-full backdrop-blur pt-3 '>
@@ -111,15 +139,20 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
                     {sectionName === 'rightSidebar' && (
                         <p className="text-xs text-gray-500">Selecciona 2 noticias para la sección derecha</p>
                     )}
-                    {(filteredNews.length === 0 ? news : filteredNews).map((item, index) => (
-                        <Card key={item._id} className='rounded relative'>
-                            <CardHeader>
-                                <CardDescription className='line-clamp-1'>{item.pretitle}</CardDescription>
-                                <CardTitle className='line-clamp-3'>{item.title}</CardTitle>
-                            </CardHeader>
-                            <CustomCheckbox item={item} handleCheckboxChange={handleCheckboxChange} sectionName={sectionName} selectedNews={selectedNews} />
-                        </Card>
-                    ))}
+                    {(filteredNews.length === 0 ? news : filteredNews).map((item, index) => {
+                        const selectedInCover = isNewsSelectedInCover(item._id as string, sectionName);
+
+                        return (
+                            <Card key={item._id} className={`rounded relative ${selectedInCover ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                <CardHeader>
+                                    <CardDescription className='line-clamp-1'>{item.pretitle}</CardDescription>
+                                    <CardTitle className='line-clamp-3'>{item.title}</CardTitle>
+                                </CardHeader>
+                                <CustomCheckbox item={item} handleCheckboxChange={handleCheckboxChange} sectionName={sectionName} selectedNews={selectedNews} />
+                            </Card>
+                        );
+                    })}
+
                 </>
             )}
         </div>

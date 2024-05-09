@@ -4,17 +4,20 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { MainCover } from "@/types/news.types";
+import { MainCover, SectionNewsMap } from "@/types/news.types";
 import { Eraser } from 'lucide-react';
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
-    setSelectedNews: Dispatch<SetStateAction<MainCover>>
+    setSelectedNews?: Dispatch<SetStateAction<MainCover>>;
+    setSelectedSectionNews?: Dispatch<SetStateAction<SectionNewsMap>>;
+    valueSection?: string;
 }
 
-export default function ClearPortada({ setSelectedNews }: Props) {
-
-    const handleClear = () => setSelectedNews({
+export default function ClearPortada({ setSelectedNews, setSelectedSectionNews, valueSection }: Props) {
+    const handleClear = () => {
+        if (setSelectedNews) {
+            setSelectedNews({
                 cover: {
                     mainNews: {
                         id: '',
@@ -28,7 +31,25 @@ export default function ClearPortada({ setSelectedNews }: Props) {
                     leftSidebar: [],
                     rightSidebar: []
                 }
-            })
+            });
+        } else if (setSelectedSectionNews && valueSection) {
+            setSelectedSectionNews((prevSections) => ({
+                ...prevSections,
+                [valueSection]: {
+                    mainNews: {
+                        id: '',
+                        media: {
+                            url: ""
+                        },
+                        pretitle: "",
+                        title: "",
+                        summary: ""
+                    },
+                    gridNews: []
+                }
+            }));
+        }
+    };
 
     return (
         <TooltipProvider>
@@ -37,9 +58,9 @@ export default function ClearPortada({ setSelectedNews }: Props) {
                     <Eraser size={18} className="" />
                 </TooltipTrigger>
                 <TooltipContent>
-                    <p>Limpiar portada</p>
+                    <p>Limpiar {setSelectedNews ? "portada" : "sección"}</p>
                 </TooltipContent>
             </Tooltip>
-        </TooltipProvider >
-    )
+        </TooltipProvider>
+    );
 }

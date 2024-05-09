@@ -1,4 +1,4 @@
-import { MainNews, SidebarItem } from "@/types/news.types";
+import { MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
 import { Schema, model, models, Document } from "mongoose";
 
 interface HomePageDocument extends Document {
@@ -6,7 +6,8 @@ interface HomePageDocument extends Document {
         mainNews: MainNews;
         leftSidebar: SidebarItem[];
         rightSidebar: SidebarItem[];
-    };
+    },
+    sections: SectionNewsMap;
 }
 
 const HomePageSchema = new Schema<HomePageDocument>({
@@ -44,6 +45,128 @@ const HomePageSchema = new Schema<HomePageDocument>({
             title: { type: String, required: true },
             summary: { type: String, required: true }
         }]
+    },
+    sections: {
+        politica: {
+            mainNews: {
+                id: { type: String },
+                media: {
+                    publicId: { type: String },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            },
+            gridNews: [{
+                id: { type: String },
+                media: {
+                    publicId: { type: String, required: false },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            }]
+        },
+        "eco & negocios": {
+            mainNews: {
+                id: { type: String },
+                media: {
+                    publicId: { type: String },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            },
+            gridNews: [{
+                id: { type: String },
+                media: {
+                    publicId: { type: String, required: false },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            }]
+        },
+        deportes: {
+            mainNews: {
+                id: { type: String },
+                media: {
+                    publicId: { type: String },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            },
+            gridNews: [{
+                id: { type: String },
+                media: {
+                    publicId: { type: String, required: false },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            }]
+        },
+        tendencias: {
+            mainNews: {
+                id: { type: String },
+                media: {
+                    publicId: { type: String },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            },
+            gridNews: [{
+                id: { type: String },
+                media: {
+                    publicId: { type: String, required: false },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            }]
+        },
+        portalcana: {
+            mainNews: {
+                id: { type: String },
+                media: {
+                    publicId: { type: String },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            },
+            gridNews: [{
+                id: { type: String },
+                media: {
+                    publicId: { type: String, required: false },
+                    url: { type: String },
+                    type: { type: String, enum: ["image", "video"] }
+                },
+                pretitle: { type: String },
+                title: { type: String },
+                summary: { type: String }
+            }]
+        }
     }
 });
 

@@ -10,6 +10,8 @@ import { Lora } from 'next/font/google'
 import Image from "next/image"
 import { Dispatch, SetStateAction } from "react"
 import { SectionsName } from "./EditorContainer"
+import SubmitButtonEditHome from "./SubmitButton.sections"
+import ClearPortada from "./ClearPortada"
 
 const lora = Lora({
     subsets: ["latin"],
@@ -36,9 +38,10 @@ export default function PreviewSectionEditorContainer({ valueSection, titleSecti
 
     return (
         <div className={`rounded col-span-9 max-w-7xl p-5 max-h-[630px]`}>
-                <div className="col-span-9 col-start-1 gap-x-4 flex items-center justify-end">
-                    <Button size={'sm'}>Guardar Cambios</Button>
-                </div>
+            <div className="col-span-9 col-start-1 gap-x-4 flex items-center justify-end">
+                <ClearPortada valueSection={valueSection} setSelectedSectionNews={setSelectedSectionNews} />
+                <SubmitButtonEditHome valueSection={valueSection} selectedNews={selectedSectionNews} />
+            </div>
             <div className="grid grid-cols-12 gap-3">
                 <h2 className="col-span-12 tracking-tight text-2xl text-muted-foreground">{titleSection}</h2>
                 <div className={`${lora.className} col-start-1 col-span-6 flex flex-col gap-5 cursor-pointer z-20 `} onClick={() => setSectionName('mainNews' as SectionsName)}>
