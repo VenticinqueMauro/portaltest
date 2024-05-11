@@ -117,7 +117,7 @@ export default function PreviewSectionEditorContainer({ valueSection, titleSecti
                 </div>
 
                 {/* publicidadD */}
-                <div className="row-start-4 col-span-6 w-full h-[150px] bg-gray-100 cursor-not-allowed text-xs text-muted-foreground flex justify-center items-center">Publicidad</div>
+                <div className="row-start-4 col-span-6 w-full h-[150px] bg-publicidad cursor-not-allowed text-xs text-muted-foreground flex justify-center items-center">Publicidad</div>
 
             </div>
         </div>

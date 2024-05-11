@@ -109,7 +109,7 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         },
         cell: ({ row }) => {
             return (
-                <p className="capitalize">{row.original.category}</p>
+                <p className="capitalize">{row.original.category === 'eco & negocios' ? 'economia' : row.original.category}</p>
             )
         }
     },

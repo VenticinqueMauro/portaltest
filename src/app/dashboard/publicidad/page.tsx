@@ -1,6 +1,9 @@
+import PublicidadContainer from "@/components/dashboard/publicidades/PublicidadContainer";
 
 export default function page() {
     return (
-        <div>Publicidad</div>
+        <div>
+            <PublicidadContainer />
+        </div>
     )
 }

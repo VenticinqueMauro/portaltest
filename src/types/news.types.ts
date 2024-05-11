@@ -172,3 +172,64 @@ export type MainCover = {
     },
     sections?: SectionNewsMap;
 };
+
+
+// PUBLICIDADES 
+
+export type AdPosition = "top" | "side" | "bottom" | undefined;
+
+export enum AdSectionName {
+    PORTADA = 'portada',
+    POLITICA = 'politica',
+    ECONEGOCIOS = 'eco & negocios',
+    DEPORTES = 'deportes',
+    TENDENCIAS = 'tendencias',
+    PORTALCANA = 'portalcana',
+}
+
+export type Ad = {
+    media?: {
+        desktop?: {
+            top?: {
+                publicId?: string;
+                url?: string;
+            },
+            side?: {
+                publicId?: string;
+                url?: string;
+            },
+            bottom?: {
+                publicId?: string;
+                url?: string;
+            }
+        };
+        mobile?: {
+            top?: {
+                publicId?: string;
+                url?: string;
+            },
+            side?: {
+                publicId?: string;
+                url?: string;
+            },
+            bottom?: {
+                publicId?: string;
+                url?: string;
+            }
+        }
+    };
+};
+
+
+export type Ads = {
+    ads: {
+        home: {
+            portada?: Ad;
+            politica?: Ad;
+            'eco & negocios'?: Ad;
+            deportes?: Ad;
+            tendencias?: Ad;
+            portalcana?: Ad;
+        }
+    }
+};

@@ -94,7 +94,7 @@ const initialStateSections: {
     }
 };
 
-const optionsTabs = [
+export const optionsTabs = [
     {
         value: 'politica',
         label: 'Política'
