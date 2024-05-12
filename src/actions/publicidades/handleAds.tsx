@@ -17,24 +17,47 @@ interface CloudinaryUploadResult {
     url?: string;
 }
 
-const processAndUploadFiles = async (file: File | null, resourceType: ResourceType = "image", sectionName: FormDataEntryValue | null, device: 'desktop' | 'mobile'): Promise<CloudinaryUploadResult> => {
+const processAndUploadFiles = async (file: File | null, resourceType: ResourceType = "image", sectionName: FormDataEntryValue | null, device: 'desktop' | 'mobile', position: 'top' | 'side' | 'bottom'): Promise<CloudinaryUploadResult> => {
     if (file instanceof File && file.size > 0) {
         const arrayBuffer = await file.arrayBuffer();
         const buffer = new Uint8Array(arrayBuffer);
 
         return new Promise<CloudinaryUploadResult>((resolve, reject) => {
-            const options = {
-                folder: `Publicidades/${sectionName}/${device}`,
+            let options: any = {
+                folder: `Publicidades/${sectionName}/${device}/${position}`,
                 resource_type: resourceType,
                 eager: {
-                    width: 100,
-                    height: 100,
                     crop: 'auto',
-                    aspect_ratio: '1:1',
                     quality: 'auto',
                 },
-
             };
+
+            if (sectionName === 'portada') {
+                if (position === 'top') {
+                    options.eager.width = 970;
+                    options.eager.height = 150;
+                    options.eager.aspect_ratio = '970:150';
+                } else if (position === 'side') {
+                    options.eager.width = 200;
+                    options.eager.height = 500;
+                    options.eager.aspect_ratio = '200:500';
+                }
+            } else {
+                if (position === 'top') {
+                    options.eager.width = 970;
+                    options.eager.height = 100;
+                    options.eager.aspect_ratio = '970:100';
+                } else if (position === 'side') {
+                    options.eager.width = 200;
+                    options.eager.height = 500;
+                    options.eager.aspect_ratio = '200:500';
+                } else if (position === 'bottom') {
+                    options.eager.width = 480;
+                    options.eager.height = 150;
+                    options.eager.aspect_ratio = '480:150';
+                }
+            }
+
             cloudinary.uploader.upload_stream(options, (error, result) => {
                 if (error) {
                     if (error.message.includes('too large')) {
@@ -116,7 +139,7 @@ export async function handleAds(formData: FormData) {
     // Procesar el archivo de escritorio si está presente
     if (DesktopFile && newAd.media?.desktop && position) {
         try {
-            const desktopMedia = await processAndUploadFiles(DesktopFile, 'image', section, 'desktop');
+            const desktopMedia = await processAndUploadFiles(DesktopFile, 'image', section, 'desktop', position);
             newAd.media.desktop[position] = desktopMedia;
         } catch (error) {
             console.error('Error al cargar y procesar archivo de escritorio:', error);
@@ -126,7 +149,7 @@ export async function handleAds(formData: FormData) {
     // Procesar el archivo móvil si está presente
     if (MobileFile && newAd.media?.mobile && position) {
         try {
-            const mobileMedia = await processAndUploadFiles(MobileFile, 'image', section, 'mobile');
+            const mobileMedia = await processAndUploadFiles(MobileFile, 'image', section, 'mobile', position);
             newAd.media.mobile[position] = mobileMedia;
         } catch (error) {
             console.error('Error al cargar y procesar archivo móvil:', error);
