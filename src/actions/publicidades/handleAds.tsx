@@ -3,6 +3,7 @@
 import { SectionName } from '@/components/dashboard/editar-home/EditorContainer';
 import { Ad, AdPosition, AdSectionName, Ads } from '@/types/news.types';
 import { v2 as cloudinary } from 'cloudinary';
+import { revalidatePath } from 'next/cache';
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -116,22 +117,20 @@ export async function handleAds(formData: FormData) {
     const MobileFile = formData.get('mobile') as File;
 
     const ads: Ads = {
-        ads: {
-            home: {}
-        }
+        home: {}
     };
 
     const newAd: Ad = {
         media: {
             desktop: {
-                top: { publicId: '', url: '' },
-                side: { publicId: '', url: '' },
-                bottom: { publicId: '', url: '' }
+                top: { public_id: '', url: '' },
+                side: { public_id: '', url: '' },
+                bottom: { public_id: '', url: '' }
             },
             mobile: {
-                top: { publicId: '', url: '' },
-                side: { publicId: '', url: '' },
-                bottom: { publicId: '', url: '' }
+                top: { public_id: '', url: '' },
+                side: { public_id: '', url: '' },
+                bottom: { public_id: '', url: '' }
             }
         }
     };
@@ -157,82 +156,32 @@ export async function handleAds(formData: FormData) {
     }
 
     // Asignar el nuevo anuncio a la sección correspondiente
-    ads.ads.home[section] = newAd;
+    ads.home[section] = newAd;
 
-    return ads;
+    const data = {
+        ads: ads
+    }
 
-    // let imageDesktop = null;
-    // let imageMobile = null;
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/ads`, {
+            method: 'PUT',
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
 
-    // if (DesktopFile) {
-    //     try {
-    //         const results = await processAndUploadFiles(DesktopFile, 'image', section, 'desktop');
-    //         imageDesktop = results;
-    //     } catch (error) {
-    //         console.error('Error al cargar y procesar archivo desktop:', error);
-    //     }
-    // }
-    // if (MobileFile) {
-    //     try {
-    //         const results = await processAndUploadFiles(MobileFile, 'image', section, 'mobile');
-    //         imageMobile = results;
-    //     } catch (error) {
-    //         console.error('Error al cargar y procesar archivo mobile:', error);
-    //     }
-    // }
+        const json = await response.json();
 
-    // console.log(imageDesktop)
-
-    // const ad: Ad = {
-    //     position: position === 'top' || position === 'side' || position === 'bottom' ? position : undefined,
-    //     device: 'desktop',
-    //     media: imageDesktop ? imageDesktop : undefined
-    // };
-
-
-    // return {
-    //     section: section,
-    //     ads: {
-    //         [section]: [ad],
-    //     },
-    // };
-
-    // if (fullname) {
-    //     data.fullname = fullname;
-    // }
-
-    // if (email && email.length) {
-    //     data.email = email;
-    // }
-
-    // if (imageAvatar && imageAvatar.public_id && imageAvatar.url) {
-    //     data.avatar = {
-    //         publicId: imageAvatar.public_id,
-    //         url: imageAvatar.url
-    //     };
-    // }
-
-    // try {
-    //     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/auth/admin/${id}`, {
-    //         method: 'PATCH',
-    //         credentials: "include",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(data)
-    //     });
-
-    //     const json = await response.json();
-
-    //     if (!response.ok) {
-    //         return json.error
-    //     }
-    //     revalidatePath('/dashboard/profile');
-    //     return json;
-    // } catch (error) {
-    //     if (error instanceof Error) {
-    //         return error.message
-    //     }
-    // }
-
+        if (!response.ok) {
+            return json.error
+        }
+        revalidatePath('/dashboard/profile');
+        return json;
+    } catch (error) {
+        if (error instanceof Error) {
+            return error.message
+        }
+    }
 }

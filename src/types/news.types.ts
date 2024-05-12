@@ -191,29 +191,29 @@ export type Ad = {
     media?: {
         desktop?: {
             top?: {
-                publicId?: string;
+                public_id?: string;
                 url?: string;
             },
             side?: {
-                publicId?: string;
+                public_id?: string;
                 url?: string;
             },
             bottom?: {
-                publicId?: string;
+                public_id?: string;
                 url?: string;
             }
         };
         mobile?: {
             top?: {
-                publicId?: string;
+                public_id?: string;
                 url?: string;
             },
             side?: {
-                publicId?: string;
+                public_id?: string;
                 url?: string;
             },
             bottom?: {
-                publicId?: string;
+                public_id?: string;
                 url?: string;
             }
         }
@@ -222,14 +222,12 @@ export type Ad = {
 
 
 export type Ads = {
-    ads: {
-        home: {
-            portada?: Ad;
-            politica?: Ad;
-            'eco & negocios'?: Ad;
-            deportes?: Ad;
-            tendencias?: Ad;
-            portalcana?: Ad;
-        }
+    home: {
+        portada?: Ad;
+        politica?: Ad;
+        'eco & negocios'?: Ad;
+        deportes?: Ad;
+        tendencias?: Ad;
+        portalcana?: Ad;
     }
 };
