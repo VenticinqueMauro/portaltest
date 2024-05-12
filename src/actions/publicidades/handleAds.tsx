@@ -111,8 +111,11 @@ export async function handleAds(formData: FormData) {
     if (positionValue === null || !['top', 'side', 'bottom'].includes(positionValue as string)) {
         return null;
     }
-    const position = positionValue as AdPosition;
 
+
+    const deskPublicId = formData.get('deskPublicId');
+    const mobPublicId = formData.get('mobPublicId');
+    const position = positionValue as AdPosition;
     const DesktopFile = formData.get('desktop') as File;
     const MobileFile = formData.get('mobile') as File;
 
@@ -138,6 +141,9 @@ export async function handleAds(formData: FormData) {
     // Procesar el archivo de escritorio si está presente
     if (DesktopFile && newAd.media?.desktop && position) {
         try {
+            if (deskPublicId) {
+                await deleteResources(deskPublicId as string);
+            }
             const desktopMedia = await processAndUploadFiles(DesktopFile, 'image', section, 'desktop', position);
             newAd.media.desktop[position] = desktopMedia;
         } catch (error) {
@@ -148,6 +154,9 @@ export async function handleAds(formData: FormData) {
     // Procesar el archivo móvil si está presente
     if (MobileFile && newAd.media?.mobile && position) {
         try {
+            if (mobPublicId) {
+                await deleteResources(mobPublicId as string);
+            }
             const mobileMedia = await processAndUploadFiles(MobileFile, 'image', section, 'mobile', position);
             newAd.media.mobile[position] = mobileMedia;
         } catch (error) {
@@ -177,7 +186,7 @@ export async function handleAds(formData: FormData) {
         if (!response.ok) {
             return json.error
         }
-        revalidatePath('/dashboard/profile');
+        revalidatePath('/dashboard/publicidad');
         return json;
     } catch (error) {
         if (error instanceof Error) {

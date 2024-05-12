@@ -2,13 +2,13 @@
 
 import { handleAds } from "@/actions/publicidades/handleAds";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AdPosition, Ads } from "@/types/news.types";
+import { Ad, AdPosition, AdSectionName, Ads } from "@/types/news.types";
 import { useState } from "react";
+import { toast } from "sonner";
+import { optionsTabs } from "../editar-home/EditorContainer";
 import PortadaContainer from "./PortadaContainer";
 import SectionsContainer from "./SectionsContainer";
 import SidebarAds from "./SidebarAds";
-import { optionsTabs } from "../editar-home/EditorContainer";
-import { toast } from "sonner";
 
 interface Props {
     allAds: Ads
@@ -19,8 +19,19 @@ export default function PublicidadContainer({ allAds }: Props) {
     const [sectionName, setSectionName] = useState('portada');
     const [sectionPosition, setSectionPosition] = useState<AdPosition | undefined>();
 
+    const deskPublicId = (allAds.home[sectionName as AdSectionName] as any)?.media?.desktop?.[sectionPosition as any]?.public_id;
+    const mobPublicId = (allAds.home[sectionName as AdSectionName] as any)?.media?.mobile?.[sectionPosition as any]?.public_id;
+
     const handleForm = async (formData: FormData) => {
 
+        if (deskPublicId) {
+            formData.append('deskPublicId', deskPublicId as string);
+        }
+        if(mobPublicId){
+            formData.append('mobPublicId', mobPublicId as string);
+
+        }
+        
         formData.append('section', sectionName);
         formData.append('position', sectionPosition as string);
         const response = await handleAds(formData);

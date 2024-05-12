@@ -75,3 +75,201 @@ export function updateQuotation(oldQuotation: QuotationType, newQuotation: Quota
     });
 }
 
+// ESTADO INCIAL DE PUBLICIDADES
+
+export const initialAds = {
+    home: {
+        portada: {
+            media: {
+                desktop: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                },
+                mobile: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                }
+            }
+        },
+        politica: {
+            media: {
+                desktop: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                },
+                mobile: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                }
+            }
+        },
+        'eco & negocios': {
+            media: {
+                desktop: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                },
+                mobile: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                }
+            }
+        },
+        deportes: {
+            media: {
+                desktop: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                },
+                mobile: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                }
+            }
+        },
+        tendencias: {
+            media: {
+                desktop: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                },
+                mobile: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                }
+            }
+        },
+        portalcana: {
+            media: {
+                desktop: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                },
+                mobile: {
+                    top: {
+                        public_id: "",
+                        url: ""
+                    },
+                    side: {
+                        public_id: "",
+                        url: ""
+                    },
+                    bottom: {
+                        public_id: "",
+                        url: ""
+                    }
+                }
+            }
+        }
+    }
+};
