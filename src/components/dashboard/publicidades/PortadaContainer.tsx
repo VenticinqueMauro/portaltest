@@ -1,29 +1,40 @@
-import { AdPosition } from "@/types/news.types"
+import { AdPosition, AdSectionName, Ads } from "@/types/news.types"
+import Image from "next/image";
 import { Dispatch, SetStateAction } from "react"
 
 interface Props {
+    allAds: Ads;
+    sectionName: string;
     sectionPosition: AdPosition | undefined,
     setSectionPosition: Dispatch<SetStateAction<AdPosition | undefined>>
 }
 
 
-export default function PortadaContainer({ sectionPosition, setSectionPosition }: Props) {
+export default function PortadaContainer({ allAds, sectionName, sectionPosition, setSectionPosition }: Props) {
+
+    const imageAd = allAds.home[sectionName as AdSectionName]!.media;
 
     return (
         <div className={`rounded col-span-9 max-w-7xl p-5 min-w-full border`}>
             <div className="grid grid-cols-12 gap-3">
                 {/* publicidad portada  */}
                 <div className="h-[170px] bg-publicidad col-span-12 flex justify-center items-center hover:border-primary border-2">
-                    <div
-                        className="h-[150px] w-[970px] bg-gray-200/50 border text-foreground text-sm flex justify-center items-center relative cursor-pointer"
-                        onClick={() => setSectionPosition('top')}
-                    >
-                        <div className="text-center">
-                            <p>Banner principal</p>
-                            <p>970 x 150</p>
-                        </div>
-                        <span className={`${sectionPosition === 'top' ? 'absolute top-0 left-0 h-full w-full block border-primary shadow bg-primary/10' : 'hidden'} `}></span>
-                    </div>
+                    {
+                        imageAd && imageAd.desktop && imageAd.desktop?.top?.public_id ?
+                            <Image src={imageAd.desktop.top.url as string} alt={`${sectionName}-${sectionPosition}`} width={970} height={150} />
+                            :
+                            <div
+                                className="h-[150px] w-[970px] bg-gray-200/50 border text-foreground text-sm flex justify-center items-center relative cursor-pointer"
+                                onClick={() => setSectionPosition('top')}
+                            >
+                                <div className="text-center">
+                                    <p>Banner principal</p>
+                                    <p>970 x 150</p>
+                                </div>
+                                <span className={`${sectionPosition === 'top' ? 'absolute top-0 left-0 h-full w-full block border-primary shadow bg-primary/10' : 'hidden'} `}></span>
+                            </div>
+
+                    }
                 </div>
                 {/* noticias con publicidad lateral  */}
                 <div

@@ -2,14 +2,19 @@
 
 import { handleAds } from "@/actions/publicidades/handleAds";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AdPosition } from "@/types/news.types";
+import { AdPosition, Ads } from "@/types/news.types";
 import { useState } from "react";
 import PortadaContainer from "./PortadaContainer";
 import SectionsContainer from "./SectionsContainer";
 import SidebarAds from "./SidebarAds";
 import { optionsTabs } from "../editar-home/EditorContainer";
+import { toast } from "sonner";
 
-export default function PublicidadContainer() {
+interface Props {
+    allAds: Ads
+}
+
+export default function PublicidadContainer({ allAds }: Props) {
 
     const [sectionName, setSectionName] = useState('portada');
     const [sectionPosition, setSectionPosition] = useState<AdPosition | undefined>();
@@ -19,7 +24,13 @@ export default function PublicidadContainer() {
         formData.append('section', sectionName);
         formData.append('position', sectionPosition as string);
         const response = await handleAds(formData);
-        console.log(response)
+        if (response.error) {
+            toast.error(response.error)
+        } else if (response.message) {
+            toast.success(response.message)
+        } else {
+            toast.warning(response)
+        }
     }
 
     return (
@@ -35,7 +46,7 @@ export default function PublicidadContainer() {
                     ))}
                 </TabsList>
                 <TabsContent value="portada">
-                    <PortadaContainer sectionPosition={sectionPosition} setSectionPosition={setSectionPosition} />
+                    <PortadaContainer allAds={allAds} sectionName={sectionName} sectionPosition={sectionPosition} setSectionPosition={setSectionPosition} />
                 </TabsContent>
                 {optionsTabs.map((option) => (
                     <TabsContent key={option.value} value={option.value}>
