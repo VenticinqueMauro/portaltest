@@ -117,7 +117,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                         <p className="text-lg tracking-tight mb-5 font-medium">{sectionPosition === 'top' ? 'Banner principal' : sectionPosition === 'side' ? 'Banner lateral' : 'Banner inferior'}</p>
                         <Label htmlFor="desktop" className="flex gap-1 items-center mb-2 text-muted-foreground font-normal">
                             <ScreenShare />
-                            Desktop {sectionPosition === 'top' ? '970x150 (sugerido)' : '200x500 (sugerido)'}
+                            Desktop {sectionPosition === 'top' ? '970x150 (sugerido)' : sectionPosition === 'side' ? '200x500 (sugerido)' : '480x150 (sugerido)'}
                         </Label>
                         <Input id="desktop" type='file' accept="image/*" className="mb-3 w-fit" onChange={handleImageUploadDesktop} />
                         {desktopFile && <span className="text-muted-foreground text-sm">Archivo seleccionado: {desktopFile.name}</span>}
@@ -127,9 +127,9 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                                     <Image
                                         src={imagePreviewDesktop}
                                         alt="preview"
-                                        width={sectionPosition === 'top' ? 970 : 200}
-                                        height={sectionPosition === 'top' ? 150 : 500}
-                                        className={`${sectionPosition === 'top' ? 'aspect-[970/150]' : 'aspect-[200/500]'} mb-3`}
+                                        width={sectionPosition === 'top' ? 970 : sectionPosition === 'side' ? 200 : 480}
+                                        height={sectionPosition === 'top' ? 150 : sectionPosition === 'side' ? 500 : 150}
+                                        className={`aspect-${sectionPosition === 'top' ? '970/150' : sectionPosition === 'side' ? '200/500' : '480/150'} mb-3`}
                                     />
                                     <button onClick={handleDeleteImageDesktop} className="absolute top-0 right-0  mr-1">
                                         <Trash className="w-4 h-4 text-destructive" />

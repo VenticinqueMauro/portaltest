@@ -41,7 +41,7 @@ export default function PublicidadContainer({ allAds }: Props) {
                 </TabsContent>
                 {optionsTabs.map((option) => (
                     <TabsContent key={option.value} value={option.value}>
-                        <SectionsContainer sectionPosition={sectionPosition} setSectionPosition={setSectionPosition} />
+                        <SectionsContainer allAds={allAds} sectionName={sectionName} sectionPosition={sectionPosition} setSectionPosition={setSectionPosition} />
                     </TabsContent>
                 ))}
             </Tabs>
