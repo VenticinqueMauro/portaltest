@@ -1,10 +1,8 @@
 'use client';
 
-import { handleAds } from "@/actions/publicidades/handleAds";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Ad, AdPosition, AdSectionName, Ads } from "@/types/news.types";
+import { AdPosition, AdSectionName, Ads } from "@/types/news.types";
 import { useState } from "react";
-import { toast } from "sonner";
 import { optionsTabs } from "../editar-home/EditorContainer";
 import PortadaContainer from "./PortadaContainer";
 import SectionsContainer from "./SectionsContainer";
@@ -36,9 +34,11 @@ export default function PublicidadContainer({ allAds }: Props) {
                         <TabsTrigger key={option.value} value={option.value}>{option.label}</TabsTrigger>
                     ))}
                 </TabsList>
+                {/* PUBLICADADES DE PORTADA  */}
                 <TabsContent value="portada">
                     <PortadaContainer allAds={allAds} sectionName={sectionName} sectionPosition={sectionPosition} setSectionPosition={setSectionPosition} />
                 </TabsContent>
+                {/* PUBLICIDADES POR CATEGORIA  */}
                 {optionsTabs.map((option) => (
                     <TabsContent key={option.value} value={option.value}>
                         <SectionsContainer allAds={allAds} sectionName={sectionName} sectionPosition={sectionPosition} setSectionPosition={setSectionPosition} />
@@ -48,7 +48,7 @@ export default function PublicidadContainer({ allAds }: Props) {
 
             {/* SIDEBAR  */}
 
-            <SidebarAds sectionName={sectionName} sectionPosition={sectionPosition} deskPublicId={deskPublicId} mobPublicId={mobPublicId}  />
+            <SidebarAds sectionName={sectionName} sectionPosition={sectionPosition} deskPublicId={deskPublicId} mobPublicId={mobPublicId} />
         </div>
     )
 }

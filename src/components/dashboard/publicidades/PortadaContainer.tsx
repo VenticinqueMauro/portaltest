@@ -9,14 +9,13 @@ interface Props {
     setSectionPosition: Dispatch<SetStateAction<AdPosition | undefined>>
 }
 
-
 export default function PortadaContainer({ allAds, sectionName, sectionPosition, setSectionPosition }: Props) {
 
     const imageAd = allAds.home && allAds.home[sectionName as AdSectionName] && allAds.home[sectionName as AdSectionName]?.media;
 
-    
+
     return (
-        <div className={`rounded col-span-9 max-w-7xl p-5 min-w-full border`}>
+        <div className={`rounded col-span-9 max-w-7xl p-5  border`}>
             <div className="grid grid-cols-12 gap-3">
                 {/* publicidad portada  */}
                 <div className="h-[170px] bg-publicidad col-span-12 flex justify-center items-center hover:border-primary border-2 relative">
@@ -43,7 +42,9 @@ export default function PortadaContainer({ allAds, sectionName, sectionPosition,
                     }
                     <span className={`${sectionPosition === 'top' ? 'absolute top-0 left-0 h-full w-full block shadow bg-primary/10 border-primary border-2' : 'hidden'} `}></span>
                 </div>
+
                 {/* noticias con publicidad lateral  */}
+
                 <div
                     className="col-span-12 justify-end flex gap-3 cursor-pointer "
 
