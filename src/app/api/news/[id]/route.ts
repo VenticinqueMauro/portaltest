@@ -1,3 +1,4 @@
+import { incrementarVisita } from "@/actions/news/handleViews";
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
 import { handleError } from "@/utils/utils";
@@ -9,14 +10,15 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     const id = params.id;
 
     try {
-        // Validar el ID
+        // Validar el ID de la noticia
         if (!isValidObjectId(id)) {
             return NextResponse.json({ error: "ID de noticia inválido" }, { status: 400 });
         }
 
+        // Conectar a la base de datos
         await connectDB();
 
-        // Consultar la noticia
+        // Consultar la noticia por su ID
         const newsFound = await News.findById(id);
 
         // Verificar si se encontró la noticia
@@ -24,10 +26,14 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
             return NextResponse.json({ error: "No se encontró la noticia" }, { status: 404 });
         }
 
+        // Incrementar la visita en el documento de estadísticas de visitas de noticias
+        await incrementarVisita(id);
+
         return NextResponse.json({ message: "Noticia encontrada", data: newsFound }, { status: 200 });
 
     } catch (error) {
-        return handleError(error);
+        console.error('Error al obtener noticia:', error);
+        return NextResponse.json({ error: "Error al obtener noticia" }, { status: 500 });
     }
 }
 

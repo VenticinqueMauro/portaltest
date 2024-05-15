@@ -1,3 +1,4 @@
+import { NewsStatistics } from "@/models/news.views";
 import { QuotationType } from "@/types/news.types";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
@@ -273,3 +274,5 @@ export const initialAds = {
         }
     }
 };
+
+

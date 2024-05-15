@@ -231,3 +231,10 @@ export type Ads = {
         portalcana?: Ad;
     }
 };
+
+// NEWS VIEWS
+
+export type NewsView = {
+    news_id: string;
+    views: number;
+}
