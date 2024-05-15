@@ -12,8 +12,9 @@ interface Props {
 
 export default function PortadaContainer({ allAds, sectionName, sectionPosition, setSectionPosition }: Props) {
 
-    const imageAd = allAds.home[sectionName as AdSectionName]!.media;
+    const imageAd = allAds.home && allAds.home[sectionName as AdSectionName] && allAds.home[sectionName as AdSectionName]?.media;
 
+    
     return (
         <div className={`rounded col-span-9 max-w-7xl p-5 min-w-full border`}>
             <div className="grid grid-cols-12 gap-3">

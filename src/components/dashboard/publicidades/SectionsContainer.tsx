@@ -11,7 +11,7 @@ interface Props {
 
 export default function SectionsContainer({ allAds, sectionName, sectionPosition, setSectionPosition }: Props) {
 
-    const imageAd = allAds.home[sectionName as AdSectionName]!.media;
+    const imageAd = allAds.home && allAds.home[sectionName as AdSectionName] && allAds.home[sectionName as AdSectionName]?.media;
 
 
     return (
@@ -61,16 +61,16 @@ export default function SectionsContainer({ allAds, sectionName, sectionPosition
                                     />
                                     :
                                     <div
-                                className="h-[150px] w-[480px] bg-gray-200/50 border text-foreground text-sm flex justify-center items-center relative"
-                                onClick={() => setSectionPosition('bottom')}
-                            >
-                                <div className="text-center">
-                                    <p>Debajo de portada</p>
-                                    <p>480 x 150</p>
-                                </div>
-                            </div>
+                                        className="h-[150px] w-[480px] bg-gray-200/50 border text-foreground text-sm flex justify-center items-center relative"
+                                        onClick={() => setSectionPosition('bottom')}
+                                    >
+                                        <div className="text-center">
+                                            <p>Debajo de portada</p>
+                                            <p>480 x 150</p>
+                                        </div>
+                                    </div>
                             }
-                            
+
                             <span className={`${sectionPosition === 'bottom' ? 'absolute top-0 left-0 h-full w-full block border-primary border-2 shadow bg-primary/10' : 'hidden'} `}></span>
                         </div>
                     </div>
