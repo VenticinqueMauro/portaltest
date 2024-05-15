@@ -8,11 +8,11 @@ import { Clock3, TrendingDown, TrendingUp } from "lucide-react";
 import { DialogEditQuotation } from "./DialogEditQuotation";
 
 interface Props {
-    globalTitle: "Azúcar Tucumán" | "Azúcar Internacional" | "Combustibles" | undefined;
+    globalTitle: "Azúcar Tucumán" | "Azúcar Internacional" | "Biocombustibles" | undefined;
     dateQuote1: Date | undefined;
     dateQuote2: Date | undefined;
-    titleQuote1: "Bolsa 50kg" | "Londres N5" | "Bioetanol ($/L)" | undefined;
-    titleQuote2: "Fracc/1kg" | "EEUU N11" | "Petróleo" | undefined;
+    titleQuote1: "Bolsa 50kg" | "Londres N5" | "Bioetanol de caña" | undefined;
+    titleQuote2: "Fracc/1kg" | "EEUU N11" | "Bioetanol de maiz" | undefined;
     priceQuote1: string;
     priceQuote2: string;
     percentageQuote1: number | undefined;
@@ -52,9 +52,9 @@ export default function CardQuotation({ globalTitle, dateQuote1, dateQuote2, tit
 
     const data = {
         globalTitle: globalTitle,
-        title: globalTitle === "Azúcar Tucumán"? "azucarTucuman" : globalTitle === "Azúcar Internacional"? "azucarInternacional" : "combustible",
-        titleQuote1: titleQuote1 === "Bolsa 50kg"? "50kg" : titleQuote1 === "Londres N5"? "londresN5" : "bioetanol",
-        titleQuote2: titleQuote2 === "Fracc/1kg"? "1kg" : titleQuote2 === "EEUU N11"? "eeuuN11" : "petroleo",
+        title: globalTitle === "Azúcar Tucumán"? "azucarTucuman" : globalTitle === "Azúcar Internacional"? "azucarInternacional" : "biocombustible",
+        titleQuote1: titleQuote1 === "Bolsa 50kg"? "50kg" : titleQuote1 === "Londres N5"? "londresN5" : "bioetanol de caña",
+        titleQuote2: titleQuote2 === "Fracc/1kg"? "1kg" : titleQuote2 === "EEUU N11"? "eeuuN11" : "bioetanol de maiz",
     };
 
     return (

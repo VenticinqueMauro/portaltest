@@ -1,11 +1,11 @@
-import { AzucarInternacional, AzucarTucuman, Combustible } from "@/types/news.types";
+import { AzucarInternacional, AzucarTucuman, Biocombustible } from "@/types/news.types";
 import { Document, Schema, model, models } from "mongoose";
 
 
 interface QuotationsDocument extends Document {
     azucarTucuman: AzucarTucuman,
     azucarInternacional: AzucarInternacional,
-    combustible: Combustible,
+    biocombustible: Biocombustible,
 }
 
 export const QuotationSchema = new Schema<QuotationsDocument>({
@@ -73,8 +73,8 @@ export const QuotationSchema = new Schema<QuotationsDocument>({
             updated: Date
         }
     },
-    combustible: {
-        bioetanol: {
+    biocombustible: {
+        "bioetanol de caña": {
             precioActual: {
                 type: Number,
                 default: 0
@@ -89,7 +89,7 @@ export const QuotationSchema = new Schema<QuotationsDocument>({
             },
             updated: Date
         },
-        petroleo: {
+        "bioetanol de maiz": {
             precioActual: {
                 type: Number,
                 default: 0

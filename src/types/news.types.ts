@@ -106,14 +106,14 @@ export type AzucarInternacional = {
     }
 };
 
-export type Combustible = {
-    bioetanol: {
+export type Biocombustible = {
+    'bioetanol de caña': {
         precioActual: number,
         precioAnterior?: number,
         diferenciaPorcentual?: number,
         updated?: Date
     },
-    petroleo: {
+    'bioetanol de maiz': {
         precioActual: number,
         precioAnterior?: number,
         diferenciaPorcentual?: number,
@@ -124,7 +124,7 @@ export type Combustible = {
 export type QuotationType = {
     azucarTucuman: AzucarTucuman,
     azucarInternacional: AzucarInternacional,
-    combustible: Combustible
+    biocombustible: Biocombustible
 }
 
 // HOME TYPES

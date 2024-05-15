@@ -46,11 +46,11 @@ export async function PUT(request: NextRequest) {
                         precioActual: 0
                     }
                 },
-                combustible: {
-                    bioetanol: {
+                biocombustible: {
+                    "bioetanol de caña": {
                         precioActual: 0
                     },
-                    petroleo: {
+                    "bioetanol de maiz": {
                         precioActual: 0
                     }
                 }

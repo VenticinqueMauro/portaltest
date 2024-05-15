@@ -25,6 +25,8 @@ interface Props {
 
 export function DialogEditQuotation({ data }: Props) {
 
+    console.log(data)
+
     const handleSubmit = async (formData: FormData) => {
 
         formData.append('title', data.title);
