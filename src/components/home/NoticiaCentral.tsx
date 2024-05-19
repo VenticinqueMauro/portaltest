@@ -18,7 +18,7 @@ export default function NoticiaCentral({ image, pretitle, title, summary }: Prop
                 <div className="relative -top-2">
                     {
                         image.type !== 'video' ?
-                            <Image src={image.url} alt={title} width={400} height={300} />
+                            <Image src={image.url} alt={title} width={400} height={300} className="object-cover rounded w-full aspect-video" />
                             :
                             <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
                                 <source src={image.url} type="video/mp4" />

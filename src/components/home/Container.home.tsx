@@ -5,7 +5,7 @@ import NoticiaCentral from "./NoticiaCentral";
 
 async function getCover() {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`, { next: { revalidate: 60 } });
 
         if (!response.ok) {
             console.log('Error al obtener el cover de la home');
@@ -35,7 +35,7 @@ export default async function ContainerHome() {
                 />
 
                 {/* LATERAL DERECHO  */}
-                <div className="col-span-2 min-h-full flex flex-col gap-4">
+                <div className="col-span-2  flex flex-col ">
                     {homeNews.cover.rightSidebar.map((item, index) => (
                         <LateralDerecho key={item.id} image={{ type: item.media.type as 'image' | 'video', url: item.media.url }} pretitle={item.pretitle} title={item.title} index={index} />
                     ))}
