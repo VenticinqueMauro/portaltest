@@ -1,7 +1,7 @@
 import { MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
 import { Schema, model, models, Document } from "mongoose";
 
-interface HomePageDocument extends Document {
+export interface HomePageDocument extends Document {
     cover: {
         mainNews: MainNews;
         leftSidebar: SidebarItem[];

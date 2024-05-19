@@ -55,11 +55,22 @@ async function getQuotations(): Promise<QuoteApi[]> {
         return [];
     }
 }
+async function getPortalQuotations(): Promise<QuoteApi[]> {
+    try {
+        const responses = await fetch(`${process.env.NEXT_PUBLIC_URL}api/quotations`, { next: { revalidate: 3600 } }).then(response => response.json());
+
+        return responses;
+    } catch (error) {
+        console.error('Error al hacer las consultas:', error);
+        return [];
+    }
+}
 
 
 export default async function QuotesContainer() {
 
     const quotations = await getQuotations();
+    const portal = await getPortalQuotations();
 
     return (
         <div className="bg-black px-3 py-3 lg:px-0">
