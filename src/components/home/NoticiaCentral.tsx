@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { blurImage } from "@/utils/blurImage";
 
 interface Props {
     image: {
@@ -18,7 +19,8 @@ export default function NoticiaCentral({ image, pretitle, title, summary }: Prop
                 <div className="relative -top-2">
                     {
                         image.type !== 'video' ?
-                            <Image src={image.url} alt={title} width={400} height={300} className="object-cover rounded w-full aspect-video" />
+                            <Image src={image.url} alt={title} width={400} height={300}  placeholder="blur"
+                            blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
                             :
                             <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
                                 <source src={image.url} type="video/mp4" />

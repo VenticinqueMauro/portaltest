@@ -2,6 +2,9 @@ import { HomePageDocument } from "@/models/home";
 import LateralDerecho from "./LateralDerecho";
 import LateralIzquierdo from "./LateralIzquierdo";
 import NoticiaCentral from "./NoticiaCentral";
+import { Ads } from "@/types/news.types";
+import Image from "next/image";
+import MasLeidas from "./MasLeidas";
 
 async function getCover() {
     try {
@@ -17,14 +20,18 @@ async function getCover() {
     }
 }
 
-export default async function ContainerHome() {
+interface Props {
+    ads: Ads
+}
+
+export default async function ContainerHome({ ads }: Props) {
 
     const { data: homeNews }: { data: HomePageDocument } = await getCover();
 
     return (
-        <main className="py-10">
+        <main className="py-10 relative">
             {/* COVER PORTADA */}
-            <div className="max-w-6xl mx-auto grid grid-cols-12 gap-4 ">
+            <div className="max-w-6xl mx-auto grid grid-cols-12 gap-4 px-3">
 
                 {/* CENTRAL  */}
                 <NoticiaCentral
@@ -54,9 +61,23 @@ export default async function ContainerHome() {
                         />
                     ))}
                 </div>
-
             </div>
 
+            <MasLeidas />
+
+            {/* PUBLICIDAD LATERAL */}
+            <div className="absolute  top-0 right-0 w-[250px] h-full ">
+                <div
+                    className="flex justify-center  bg-publicidad  items-center w-[250px] h-[550px] sticky top-0 right-0"
+                >
+                    <Image
+                        src={ads.home.portada?.media?.desktop?.side?.url as string}
+                        alt={`publicidad lateral`}
+                        width={200}
+                        height={500}
+                    />
+                </div>
+            </div>
         </main>
     )
 }

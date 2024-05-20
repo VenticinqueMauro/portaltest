@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import { blurImage } from "@/utils/blurImage";
 
 interface Props {
     image: {
@@ -19,7 +20,8 @@ export default function LateralDerecho({ image, pretitle, title, index }: Props)
                     <div className="px-1">
                         <div className="relative -top-2">
                             {image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={400} height={300} className="rounded" />
+                                <Image src={image.url} alt={title} width={400} height={300}  placeholder="blur"
+                                blurDataURL={blurImage} className="rounded" />
                             ) : (
                                 <video
                                     width="400"

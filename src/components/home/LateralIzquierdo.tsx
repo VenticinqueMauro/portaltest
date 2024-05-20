@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { Separator } from '../ui/separator'
+import { blurImage } from '@/utils/blurImage';
 
 interface Props {
     image: {
@@ -21,7 +22,8 @@ export default function LateralIzquierdo({ image, pretitle, title, index, isLast
                     <div className="relative -top-2">
                         {index === 0 && (
                             image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={400} height={300} className="rounded" />
+                                <Image src={image.url} alt={title} width={400} height={300}  placeholder="blur"
+                                blurDataURL={blurImage} className="rounded" />
                             ) : (
                                 <video
                                     width="400"

@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
         statistics.news_views.sort((a: NewsView, b: NewsView) => b.views - a.views);
 
         // Tomar las 4 primeras noticias más vistas
-        const topNewsIds = statistics.news_views.slice(0, 4).map((item: NewsView) => item.news_id);
+        const topNewsIds = statistics.news_views.slice(0, 10).map((item: NewsView) => item.news_id);
 
         // Consultar las noticias más vistas desde la colección de noticias
         const topNews = await News.find({ _id: { $in: topNewsIds } }).select('pretitle title media');
