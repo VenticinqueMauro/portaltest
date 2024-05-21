@@ -129,7 +129,7 @@ async function getQuotations(): Promise<QuoteApi[]> {
 
 async function getPortalQuotations(): Promise<QuoteApi[]> {
     try {
-        const responses = await fetch(`${process.env.NEXT_PUBLIC_URL}api/quotations`, { next: { revalidate: 1 } }).then(response => response.json());
+        const responses = await fetch(`${process.env.NEXT_PUBLIC_URL}api/quotations`, { next: { revalidate: 3600 } }).then(response => response.json());
 
         return responses.data;
     } catch (error) {
