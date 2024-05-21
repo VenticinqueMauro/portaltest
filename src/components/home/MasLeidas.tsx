@@ -43,9 +43,9 @@ export default async function MasLeidas() {
     }
 
     return (
-        <div className="max-w-6xl px-3 mx-auto py-20">
+        <div className="max-w-6xl mx-auto py-20">
             <SectionTitle title='Las más leídas' />
-            <Carousel >
+            <Carousel className="px-3">
                 <CarouselContent className="-ml-1 flex gap-4 ">
                     {moreViews?.map((item: MoreViews) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 basis-auto lg:basis-1/5">
