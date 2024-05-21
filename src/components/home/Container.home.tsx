@@ -1,5 +1,5 @@
 import { HomePageDocument } from "@/models/home";
-import { Ads } from "@/types/news.types";
+import { Ads, SectionNewsMap } from "@/types/news.types";
 import Image from "next/image";
 import LateralDerecho from "./LateralDerecho";
 import LateralIzquierdo from "./LateralIzquierdo";
@@ -36,6 +36,8 @@ export default async function ContainerHome({ ads }: Props) {
 
     const { data: homeNews }: { data: HomePageDocument } = await getCover();
 
+    const sections = Object.keys(homeNews.sections);
+
     return (
         <main className="py-10">
             {/* NOTICIAS PRINCIPALES */}
@@ -51,7 +53,7 @@ export default async function ContainerHome({ ads }: Props) {
                     />
 
                     {/* LATERAL DERECHO  */}
-                    <div className="col-span-2  flex flex-col ">
+                    <div className="col-span-2  flex flex-col">
                         {homeNews.cover.rightSidebar.map((item, index) => (
                             <LateralDerecho key={item.id} image={{ type: item.media.type as 'image' | 'video', url: item.media.url }} pretitle={item.pretitle} title={item.title} index={index} />
                         ))}
@@ -78,8 +80,20 @@ export default async function ContainerHome({ ads }: Props) {
                 <LateralDesktop url={ads.home.portada?.media?.desktop?.side?.url as string} />
             </section>
 
-            <ContainerSectionCategory homeNews={homeNews} ads={ads} />
+            {/* <ContainerSectionCategory homeNews={homeNews} ads={ads} /> */}
+            {sections.map((sectionKey) => {
+                const sectionData = homeNews.sections[sectionKey as keyof SectionNewsMap];
+                const sectionTitle = sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
 
+                return (
+                    <ContainerSectionCategory
+                        key={sectionKey}
+                        sectionData={sectionData}
+                        sectionTitle={sectionTitle.toLowerCase()}
+                        ads={ads}
+                    />
+                );
+            })}
         </main>
     )
 }

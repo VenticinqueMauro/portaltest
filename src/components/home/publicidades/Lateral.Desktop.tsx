@@ -1,3 +1,4 @@
+import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
 
 interface Props {
@@ -6,22 +7,28 @@ interface Props {
 
 export default function LateralDesktop({ url }: Props) {
 
-    if (!url) {
-        return null;
-    }
+    const hasUrl = url && url.length > 0;
 
     return (
-        <div className="absolute  top-0 right-0  h-full ">
-            <div
-                className="flex justify-center  bg-publicidad  items-center p-5 sticky top-0 right-0"
-            >
-                <Image
-                    src={url}
-                    alt={`publicidad lateral`}
-                    width={200}
-                    height={500}
-                />
+        <div className="absolute top-0 right-0 h-full">
+            <div className="flex justify-center items-center bg-publicidad p-5 sticky top-0 right-0">
+                {hasUrl ? (
+                    <Image
+                        src={url}
+                        alt="Publicidad lateral"
+                        width={200}
+                        height={500}
+                        placeholder="blur"
+                        blurDataURL={blurImage}
+                        priority
+                        aria-label="Publicidad lateral"
+                    />
+                ) : (
+                    <span className="w-[200px] h-[500px] text-sm text-muted-foreground flex items-center justify-center text-center">
+                        Espacio publicitario disponible
+                    </span>
+                )}
             </div>
         </div>
-    )
+    );
 }

@@ -1,28 +1,41 @@
-import { HomePageDocument } from "@/models/home";
-import { Ads } from "@/types/news.types";
+import { Ads, MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
 import SuperiorDesktop from "../publicidades/Superior.Desktop";
 import SectionTitle from "../SectionTitle";
 import GridDeNoticiasCategory from "./GridDeNoticias.category";
 import LateralDesktop from "../publicidades/Lateral.Desktop";
 
 interface Props {
-    homeNews: HomePageDocument;
+    sectionData: {
+        mainNews: MainNews;
+        gridNews: SidebarItem[];
+    };
+    sectionTitle: string;
     ads: Ads;
 }
-export default function ContainerSectionCategory({ homeNews, ads }: Props) {
 
-    console.log(homeNews)
+export default function ContainerSectionCategory({ sectionData, sectionTitle, ads }: Props) {
+
+    if (!sectionData || !sectionData.mainNews || !sectionData.mainNews.id) {
+        return null;
+    }
+
+    const title = sectionTitle === 'politica' ? 'Política' :
+        sectionTitle === 'eco & negocios' ? 'Economía' :
+            sectionTitle === 'portalcana' ? 'Portal de la caña' :
+                sectionTitle === 'deportes' ? 'Deportes' :
+                    sectionTitle === 'tendencias' ? 'Tendencias' :
+                        sectionTitle;
 
     return (
-        <section className="relative">
+        <section className="relative ">
             {/* PUBLICIDAD SUPERIOR DESKTOP */}
-            <SuperiorDesktop url={ads.home.politica?.media?.desktop?.top?.url as string} />
+            <SuperiorDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.url as string} />
             {/* TITULO DE SECCION */}
-            <SectionTitle title="Política" />
+            <SectionTitle title={title} />
             {/* GRILLA DE NOTICIAS  */}
-            <GridDeNoticiasCategory homeNews={homeNews} ads={ads} />
+            <GridDeNoticiasCategory sectionData={sectionData} ads={ads} sectionTitle={sectionTitle} />
             {/* PUBLICIDAD LATERAL */}
-            <LateralDesktop url={ads.home.politica?.media?.desktop?.side?.url as string} />
+            <LateralDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.url as string} />
         </section>
     )
 }

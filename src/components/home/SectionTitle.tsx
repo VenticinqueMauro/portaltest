@@ -10,7 +10,7 @@ export default function SectionTitle({ title }: Props) {
     }
 
     return (
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto py-5">
             <span className="italic tracking-tight text-2xl text-tdn relative inline-block">
                 <h2 className="pt-2 border-t border-tdn w-[200px] mb-5 relative">
                     {title}

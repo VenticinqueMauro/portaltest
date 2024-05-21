@@ -1,3 +1,4 @@
+import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
 
 interface Props {
@@ -20,6 +21,9 @@ export default function NoticiasGridCategory({ image, pretitle, title }: Props) 
                         width={400}
                         height={300}
                         className="w-full object-cover aspect-video rounded"
+                        placeholder="blur"
+                        blurDataURL={blurImage}
+                        priority
                     />
                 ) : (
                     <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
