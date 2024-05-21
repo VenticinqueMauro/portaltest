@@ -26,7 +26,7 @@ export default async function page() {
 
     return (
         <div>
-            <div className="h-[170px] bg-publicidad col-span-12 flex justify-center items-center hover:border-primary border-2 relative">
+            <div className="h-[170px] bg-publicidad col-span-12 flex justify-center items-center relative">
                 <Image
                     src={ads.home.portada?.media?.desktop?.top?.url as string}
                     alt={`publicidad`}
