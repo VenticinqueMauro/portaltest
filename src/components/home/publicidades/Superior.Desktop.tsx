@@ -11,7 +11,7 @@ export default function SuperiorDesktop({ url }: Props) {
     const hasUrl = url && url.length > 0;
 
     return (
-        <div className="h-[120px] bg-publicidad col-span-12 flex justify-center items-center max-w-6xl mx-auto  relative my-5">
+        <div className="h-[120px] bg-publicidad col-span-12 flex justify-center items-center max-w-6xl 2xl:mx-auto px-3 2xl:px-0  relative my-5">
             {
                 hasUrl ?
                     <Image

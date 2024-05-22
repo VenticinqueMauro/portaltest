@@ -33,7 +33,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
     }
 
     return (
-        <div className="max-w-6xl mx-auto py-20">
+        <div className="max-w-6xl 2xl:mx-auto py-20 px-3">
             <SectionTitle title={`Más de ${title}`} />
             <Carousel className="px-3">
                 <CarouselContent className="-ml-1 flex gap-4 ">
