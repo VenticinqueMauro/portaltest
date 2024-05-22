@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
-import { CategoryNews, Media } from "@/types/news.types";
+import { CategoryNews, Media, NewsStatus } from "@/types/news.types";
 import { handleError } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
 
         for (const category of categories) {
             const news: MoreNews[] = await News.find(
-                { category },
+                { category, status: NewsStatus.PUBLISHED },
                 { _id: 1, media: 1, pretitle: 1, title: 1 }
             )
                 .sort({ date: -1 })
