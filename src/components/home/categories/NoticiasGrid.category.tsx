@@ -8,9 +8,10 @@ interface Props {
     },
     pretitle: string;
     title: string;
+    id: string;
 }
 
-export default function NoticiasGridCategory({ image, pretitle, title }: Props) {
+export default function NoticiasGridCategory({ image, pretitle, title, id }: Props) {
     return (
         <div className="col-span-6 w-full space-y-2 ">
             {

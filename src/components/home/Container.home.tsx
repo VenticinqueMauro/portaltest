@@ -1,18 +1,12 @@
 import { HomePageDocument } from "@/models/home";
 import { Ads, SectionNewsMap } from "@/types/news.types";
-import Image from "next/image";
 import LateralDerecho from "./LateralDerecho";
 import LateralIzquierdo from "./LateralIzquierdo";
 import MasLeidas from "./MasLeidas";
 import NoticiaCentral from "./NoticiaCentral";
-import NoticiaPrincipalCategory from "./categories/NoticiaPrincipal.category";
-import SectionTitle from "./SectionTitle";
-import NoticiasGridCategory from "./categories/NoticiasGrid.category";
-import LateralDesktop from "./publicidades/Lateral.Desktop";
-import InferiorDesktop from "./publicidades/Inferior.Desktop";
-import SuperiorDesktop from "./publicidades/Superior.Desktop";
-import GridDeNoticiasCategory from "./categories/GridDeNoticias.category";
 import ContainerSectionCategory from "./categories/ContainerSection.category";
+import LateralDesktop from "./publicidades/Lateral.Desktop";
+import { MoreNewsData } from "@/app/api/news/more-news/route";
 
 async function getCover() {
     try {
@@ -28,6 +22,21 @@ async function getCover() {
     }
 }
 
+async function getFormatedCategoryNews(): Promise<MoreNewsData | undefined> {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news/more-news`, { next: { revalidate: 60 } });
+
+        if (!response.ok) {
+            console.log('Error al obtener el cover de la home');
+        }
+        const { data } = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 interface Props {
     ads: Ads
 }
@@ -35,6 +44,8 @@ interface Props {
 export default async function ContainerHome({ ads }: Props) {
 
     const { data: homeNews }: { data: HomePageDocument } = await getCover();
+
+    const moreNews = await getFormatedCategoryNews();
 
     const sections = Object.keys(homeNews.sections);
 
@@ -90,6 +101,7 @@ export default async function ContainerHome({ ads }: Props) {
                         key={sectionKey}
                         sectionData={sectionData}
                         sectionTitle={sectionTitle.toLowerCase()}
+                        moreNews={moreNews}
                         ads={ads}
                     />
                 );

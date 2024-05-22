@@ -1,8 +1,7 @@
-import { HomePageDocument } from "@/models/home";
+import { Ads, MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
 import InferiorDesktop from "../publicidades/Inferior.Desktop";
 import NoticiaPrincipalCategory from "./NoticiaPrincipal.category";
 import NoticiasGridCategory from "./NoticiasGrid.category";
-import { Ads, MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
 
 interface Props {
     sectionData: {
@@ -21,6 +20,7 @@ export default function GridDeNoticiasCategory({ sectionData, ads, sectionTitle 
                 image={{ type: sectionData.mainNews.media.type as 'image' | 'video', url: sectionData.mainNews.media.url }}
                 pretitle={sectionData.mainNews.pretitle}
                 title={sectionData.mainNews.title}
+                id={sectionData.mainNews.id}
             />
 
             <div className="col-span-4 min-h-full">
@@ -32,6 +32,7 @@ export default function GridDeNoticiasCategory({ sectionData, ads, sectionTitle 
                                 image={{ type: item.media.type as 'image' | 'video', url: item.media.url }}
                                 pretitle={item.pretitle}
                                 title={item.title}
+                                id={item.id}
                             />
                         ))
                     }

@@ -3,6 +3,10 @@ import SuperiorDesktop from "../publicidades/Superior.Desktop";
 import SectionTitle from "../SectionTitle";
 import GridDeNoticiasCategory from "./GridDeNoticias.category";
 import LateralDesktop from "../publicidades/Lateral.Desktop";
+import { MoreNewsData } from "@/app/api/news/more-news/route";
+import dynamic from "next/dynamic";
+
+const MoreNewsSlider = dynamic(() => import("./MoreNewsSlider"));
 
 interface Props {
     sectionData: {
@@ -11,9 +15,10 @@ interface Props {
     };
     sectionTitle: string;
     ads: Ads;
+    moreNews?: MoreNewsData;
 }
 
-export default function ContainerSectionCategory({ sectionData, sectionTitle, ads }: Props) {
+export default function ContainerSectionCategory({ sectionData, sectionTitle, moreNews, ads }: Props) {
 
     if (!sectionData || !sectionData.mainNews || !sectionData.mainNews.id) {
         return null;
@@ -34,6 +39,8 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, ad
             <SectionTitle title={title} />
             {/* GRILLA DE NOTICIAS  */}
             <GridDeNoticiasCategory sectionData={sectionData} ads={ads} sectionTitle={sectionTitle} />
+            {/* MAS NOTICIAS  */}
+            <MoreNewsSlider title={title} moreNews={moreNews} category={sectionTitle} sectionData={sectionData} />
             {/* PUBLICIDAD LATERAL */}
             <LateralDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.url as string} />
         </section>

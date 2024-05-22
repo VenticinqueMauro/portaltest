@@ -9,10 +9,10 @@ interface Props {
     },
     pretitle: string;
     title: string;
+    id: string;
 }
 
-export default function NoticiaPrincipalCategory({ image, pretitle, title }: Props) {
-
+export default function NoticiaPrincipalCategory({ image, pretitle, title, id }: Props) {
 
     return (
         <Card className="rounded min-h-full col-span-8 bg-gray-100 ">

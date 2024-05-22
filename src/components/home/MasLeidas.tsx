@@ -7,7 +7,7 @@ import Image from "next/image";
 import SectionTitle from "./SectionTitle";
 import { blurImage } from "@/utils/blurImage";
 
-interface MoreViews {
+interface MostRead {
     _id: string;
     pretitle: string;
     title: string;
@@ -20,7 +20,7 @@ interface MoreViews {
     }
 }
 
-async function getMoreViews() {
+async function getMostReads() {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/newsstatics`, { next: { revalidate: 60 } });
 
@@ -36,9 +36,9 @@ async function getMoreViews() {
 
 export default async function MasLeidas() {
 
-    const moreViews: MoreViews[] = await getMoreViews();
+    const mostReads: MostRead[] = await getMostReads();
 
-    if (!moreViews.length) {
+    if (!mostReads.length) {
         return null;
     }
 
@@ -47,7 +47,7 @@ export default async function MasLeidas() {
             <SectionTitle title='Las más leídas' />
             <Carousel className="px-3">
                 <CarouselContent className="-ml-1 flex gap-4 ">
-                    {moreViews?.map((item: MoreViews) => (
+                    {mostReads?.map((item: MostRead) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 basis-auto lg:basis-1/5">
                             <div className="rounded flex flex-col justify-start gap-1">
                                 <div className="px-1">
