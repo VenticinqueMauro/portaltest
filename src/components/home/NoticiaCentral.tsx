@@ -14,7 +14,7 @@ interface Props {
 
 export default function NoticiaCentral({ image, pretitle, title, summary }: Props) {
     return (
-        <Card className="rounded min-h-full col-start-3 col-span-8 bg-gray-100 ">
+        <Card className="rounded min-h-full col-start-1 col-span-12 lg:col-start-3 lg:col-span-8 bg-gray-100 ">
             <div className="px-1">
                 <div className="relative -top-2">
                     {

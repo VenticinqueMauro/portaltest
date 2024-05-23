@@ -5,7 +5,7 @@ import { Button } from '../ui/button'
 
 export default function Navbar() {
     return (
-        <nav className='bg-tdn px-3 lg:px-0 pt-6 pb-2'>
+        <nav className='bg-tdn px-3 xl:px-0 pt-6 pb-2'>
             <ul className='max-w-7xl mx-auto text-white flex items-center justify-between'>
                 <Link href='/'>
                     {/* <Image src='/portada-dashboard.png' alt='logo' width={100} height={100} /> */}

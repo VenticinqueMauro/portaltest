@@ -148,11 +148,11 @@ export default async function QuotesContainer() {
 
     return (
         <div className="bg-black px-3 py-3">
-            <Carousel className="max-w-7xl mx-auto">
+            <Carousel className="max-w-7xl mx-auto px-3">
                 <CarouselContent className="-ml-1 gap-10">
                     {quotations?.map((quote: QuoteApi) => (
                         <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto `}>
-                            <p className="text-tdn bg-white px-3 py-1 rounded w-[200px] text-sm  flex justify-center gap-1">
+                            <p className="text-tdn bg-white px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
                                 <b>{formatName(quote)}:</b> {formatQuote(quote)}
                             </p>
                         </CarouselItem>
@@ -161,10 +161,10 @@ export default async function QuotesContainer() {
                         <CarouselItem key={item.title} className={` pl-2 md:pl-1 basis-auto `}>
                             <Accordion type="single" collapsible >
                                 <AccordionItem value={item.title} className="border-none min-w-[200px]">
-                                    <AccordionTrigger className="text-tdn bg-white px-3 py-1 rounded w-fit text-sm  space-x-3">
+                                    <AccordionTrigger className="text-tdn bg-white px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
                                         <b>{item.title}</b>
                                     </AccordionTrigger>
-                                    <AccordionContent className="text-tdn bg-white px-3 py-1 text-sm  border-none mt-1">
+                                    <AccordionContent className="text-tdn bg-white px-3 py-1 text-xs md:text-sm  border-none mt-1">
                                         {item.variants.map((variant) => (
                                             <p key={variant.name} >
                                                 <b className="font-medium">{variant.name}</b>: {variant.precioActual}
@@ -176,8 +176,8 @@ export default async function QuotesContainer() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="text-white border-none bg-black  hidden lg:flex" />
-                <CarouselNext className="text-white border-none bg-black  hidden lg:flex" />
+                <CarouselPrevious className="text-white border-none bg-black  hidden xl:flex" />
+                <CarouselNext className="text-white border-none bg-black  hidden xl:flex" />
             </Carousel>
         </div>
     )

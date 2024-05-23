@@ -19,11 +19,33 @@ export default function LateralIzquierdo({ image, pretitle, title, index, isLast
         <>
             <div className="rounded flex flex-col justify-start md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                 <div className="px-1">
-                    <div className="relative -top-2">
+                    {/* DESKTOP DONDE SOLO SE MUESTRA LA IMAGEN DE LA PRIMERA NOTICIA  */}
+                    <div className="hidden md:block relative -top-2">
                         {index === 0 && (
                             image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={400} height={300}  placeholder="blur"
-                                blurDataURL={blurImage} className="rounded" />
+                                <Image src={image.url} alt={title} width={400} height={300} placeholder="blur"
+                                    blurDataURL={blurImage} className="w-full object-cover aspect-video rounded" />
+                            ) : (
+                                <video
+                                    width="400"
+                                    height="300"
+                                    controls={false}
+                                    autoPlay
+                                    loop
+                                    className="w-full object-cover aspect-video rounded"
+                                >
+                                    <source src={image.url} type="video/mp4" />
+                                    Tu navegador no soporta la etiqueta de video.
+                                </video>
+                            )
+                        )}
+                    </div>
+                    {/* MOBILE DONDE SE MUESTRAN IMAGENES EN TODAS LAS NOTICIAS  */}
+                    <div className="md:hidden relative -top-2">
+                        {(
+                            image.type !== 'video' ? (
+                                <Image src={image.url} alt={title} width={400} height={300} placeholder="blur"
+                                    blurDataURL={blurImage} className="w-full object-cover aspect-video rounded" />
                             ) : (
                                 <video
                                     width="400"
@@ -46,8 +68,9 @@ export default function LateralIzquierdo({ image, pretitle, title, index, isLast
                 </div>
             </div>
             {!isLast && (
-                <Separator className="block " />
+                <Separator className="hidden md:block " />
             )}
+            <Separator className="md:hidden mt-5 mb-7" />
         </>
     )
 }

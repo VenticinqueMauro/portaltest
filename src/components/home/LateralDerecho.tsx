@@ -15,13 +15,13 @@ interface Props {
 export default function LateralDerecho({ image, pretitle, title, index }: Props) {
     return (
         <>
-            <div className="rounded  flex flex-col justify-between md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
+            <div className="rounded flex flex-col justify-between md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                 <div>
                     <div className="px-1">
                         <div className="relative -top-2">
                             {image.type !== 'video' ? (
                                 <Image src={image.url} alt={title} width={400} height={300}  placeholder="blur"
-                                blurDataURL={blurImage} className="rounded" />
+                                blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
                             ) : (
                                 <video
                                     width="400"
@@ -43,7 +43,8 @@ export default function LateralDerecho({ image, pretitle, title, index }: Props)
                     </div>
                 </div>
             </div>
-            {index === 0 && <Separator className="block mt-5 mb-7" />}
+            {index === 0 && <Separator className="hidden md:block mt-5 mb-7" />}
+            <Separator className="md:hidden mt-5 mb-7" />
         </>
     )
 }

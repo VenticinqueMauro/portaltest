@@ -53,7 +53,7 @@ export default async function ContainerHome({ ads }: Props) {
         <main className="py-10">
             {/* NOTICIAS PRINCIPALES */}
             <section className="relative">
-                <div className="max-w-6xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3">
+                <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto grid grid-cols-12 gap-4 px-3">
 
                     {/* CENTRAL  */}
                     <NoticiaCentral
@@ -64,14 +64,14 @@ export default async function ContainerHome({ ads }: Props) {
                     />
 
                     {/* LATERAL DERECHO  */}
-                    <div className="col-span-2  flex flex-col">
+                    <div className="col-span-12 lg:col-span-2  flex flex-col items-center">
                         {homeNews.cover.rightSidebar.map((item, index) => (
                             <LateralDerecho key={item.id} image={{ type: item.media.type as 'image' | 'video', url: item.media.url }} pretitle={item.pretitle} title={item.title} index={index} />
                         ))}
                     </div>
 
                     {/* LATERAL IZQUIERDO  */}
-                    <div className="col-span-2 col-start-1 order-1 row-start-1 flex flex-col justify-between">
+                    <div className="row-start-3 col-span-12 lg:col-span-2 lg:col-start-1 lg:order-1 lg:row-start-1 flex flex-col justify-between">
                         {homeNews.cover.leftSidebar.map((item, index) => (
                             <LateralIzquierdo
                                 key={item.id}
