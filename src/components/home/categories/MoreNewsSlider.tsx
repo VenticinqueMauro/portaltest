@@ -55,7 +55,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
                                         <video
                                             width="400"
                                             height="300"
-                                            controls={false}
+                                            controls={true}
                                             autoPlay
                                             loop
                                             className="w-full object-cover aspect-video rounded"

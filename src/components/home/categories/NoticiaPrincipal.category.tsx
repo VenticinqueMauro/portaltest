@@ -23,7 +23,7 @@ export default function NoticiaPrincipalCategory({ image, pretitle, title, id }:
                             <Image src={image.url} alt={title} width={400} height={300} placeholder="blur"
                                 blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
                             :
-                            <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                            <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                 <source src={image.url} type="video/mp4" />
                                 Tu navegador no soporta la etiqueta de video.
                             </video>

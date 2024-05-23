@@ -65,7 +65,7 @@ export default function PreviewSectionEditorContainer({ valueSection, titleSecti
                             portadaPrincipal.media.type !== 'video' ?
                                 <Image src={portadaPrincipal.media.url ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
                                 :
-                                <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                     <source src={portadaPrincipal.media.url} type="video/mp4" />
                                     Tu navegador no soporta la etiqueta de video.
                                 </video>
@@ -96,7 +96,7 @@ export default function PreviewSectionEditorContainer({ valueSection, titleSecti
                                             className="w-full object-cover aspect-video rounded"
                                         />
                                     ) : (
-                                        <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                        <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                             <source src={gridLateral[index]?.media?.url} type="video/mp4" />
                                             Tu navegador no soporta la etiqueta de video.
                                         </video>

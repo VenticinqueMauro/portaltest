@@ -68,7 +68,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                                             lateralIzq[0].media.type !== 'video' ?
                                                 <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
                                                 :
-                                                <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                                <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                                     <source src={lateralIzq && lateralIzq.length ? lateralIzq[0]?.media.url : '/placeholder.svg'} type="video/mp4" />
                                                     Tu navegador no soporta la etiqueta de video.
                                                 </video>
@@ -98,7 +98,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                                     portadaPrincipal.media.type !== 'video' ?
                                         <Image src={portadaPrincipal?.media.url.length > 0 ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
                                         :
-                                        <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                        <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                             <source src={portadaPrincipal?.media.url} type="video/mp4" />
                                             Tu navegador no soporta la etiqueta de video.
                                         </video>
@@ -138,7 +138,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                                                         className="w-full object-cover aspect-video rounded"
                                                     />
                                                 ) : (
-                                                    <video width="400" height="300" controls={false} autoPlay loop className="w-full object-cover aspect-video rounded">
+                                                    <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                                         <source src={lateralDer[index]?.media?.url} type="video/mp4" />
                                                         Tu navegador no soporta la etiqueta de video.
                                                     </video>
