@@ -15,7 +15,7 @@ interface Props {
 export default function LateralDerecho({ image, pretitle, title, index }: Props) {
     return (
         <>
-            <div className="rounded  flex flex-col justify-between">
+            <div className="rounded  flex flex-col justify-between md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                 <div>
                     <div className="px-1">
                         <div className="relative -top-2">

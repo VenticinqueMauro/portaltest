@@ -38,7 +38,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
             <Carousel className="px-3">
                 <CarouselContent className="-ml-1 flex gap-4 ">
                     {filteredNews.map((item: MoreNews) => (
-                        <CarouselItem key={item._id} className="pl-2 md:pl-1 basis-auto lg:basis-1/5">
+                        <CarouselItem key={item._id} className="pl-2 md:pl-1 basis-auto lg:basis-1/5 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                             <div className="rounded flex flex-col justify-start gap-1">
                                 <div className="px-1">
                                     {item.media.portada.type !== 'video' ? (

@@ -13,7 +13,7 @@ interface Props {
 
 export default function NoticiasGridCategory({ image, pretitle, title, id }: Props) {
     return (
-        <div className="col-span-6 w-full space-y-2 ">
+        <div className="col-span-6 w-full space-y-2 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
             {
                 image.type !== 'video' ? (
                     <Image

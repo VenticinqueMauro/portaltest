@@ -17,7 +17,7 @@ interface Props {
 export default function LateralIzquierdo({ image, pretitle, title, index, isLast }: Props) {
     return (
         <>
-            <div className="rounded flex flex-col justify-start">
+            <div className="rounded flex flex-col justify-start md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                 <div className="px-1">
                     <div className="relative -top-2">
                         {index === 0 && (
