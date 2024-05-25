@@ -32,6 +32,8 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Ya existe una noticia con el mismo título" }, { status: 400 });
         }
 
+        const path = title.replace(/\s+/g, '-').toLowerCase();
+
         const newNews = new News({
             pretitle,
             title,
@@ -41,7 +43,8 @@ export async function POST(request: NextRequest) {
             tags,
             media,
             author,
-            newsLinked
+            newsLinked,
+            path
         });
 
         await newNews.save();

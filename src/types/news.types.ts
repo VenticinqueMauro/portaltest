@@ -40,6 +40,7 @@ export type NewsType = {
     status: NewsStatus;
     category: CategoryNews;
     subscribersOnly: boolean;
+    path?: string;
     highlightedText?: string;
     lastModifiedBy?: string;
     newsLinked?: string[];
@@ -141,6 +142,8 @@ export type MainNews = {
     pretitle: string;
     title: string;
     summary: string;
+    category: string;
+    path?: string;
 };
 
 export type SidebarItem = {
@@ -149,6 +152,8 @@ export type SidebarItem = {
     pretitle: string;
     title: string;
     summary: string;
+    category: string;
+    path?: string;
 };
 
 export type SectionNews = {

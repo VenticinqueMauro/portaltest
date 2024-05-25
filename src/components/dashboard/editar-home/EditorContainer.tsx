@@ -22,7 +22,9 @@ const initialState = {
             },
             pretitle: "",
             title: "",
-            summary: ""
+            summary: "",
+            category: "",
+            path: ""
         },
         leftSidebar: [],
         rightSidebar: []
@@ -40,7 +42,9 @@ const initialStateSections: {
             },
             pretitle: "",
             title: "",
-            summary: ""
+            summary: "",
+            category: "",
+            path: ""
         },
         gridNews: []
     },
@@ -52,7 +56,9 @@ const initialStateSections: {
             },
             pretitle: "",
             title: "",
-            summary: ""
+            summary: "",
+            category: "",
+            path: ""
         },
         gridNews: []
     },
@@ -64,7 +70,9 @@ const initialStateSections: {
             },
             pretitle: "",
             title: "",
-            summary: ""
+            summary: "",
+            category: "",
+            path: ""
         },
         gridNews: []
     },
@@ -76,7 +84,9 @@ const initialStateSections: {
             },
             pretitle: "",
             title: "",
-            summary: ""
+            summary: "",
+            category: "",
+            path: ""
         },
         gridNews: []
     },
@@ -88,7 +98,9 @@ const initialStateSections: {
             },
             pretitle: "",
             title: "",
-            summary: ""
+            summary: "",
+            category: "",
+            path: ""
         },
         gridNews: []
     }

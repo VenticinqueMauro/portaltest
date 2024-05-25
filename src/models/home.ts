@@ -21,7 +21,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
             },
             pretitle: { type: String, required: true },
             title: { type: String, required: true },
-            summary: { type: String, required: true }
+            summary: { type: String, required: true },
+            category: { type: String, required: true },
+            path: { type: String, required: true },
         },
         leftSidebar: [{
             id: { type: String, required: true },
@@ -32,7 +34,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
             },
             pretitle: { type: String, required: true },
             title: { type: String, required: true },
-            summary: { type: String, required: true }
+            summary: { type: String, required: true },
+            category: { type: String, required: true },
+            path: { type: String, required: true },
         }],
         rightSidebar: [{
             id: { type: String, required: true },
@@ -43,7 +47,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
             },
             pretitle: { type: String, required: true },
             title: { type: String, required: true },
-            summary: { type: String, required: true }
+            summary: { type: String, required: true },
+            category: { type: String, required: true },
+            path: { type: String, required: true },
         }]
     },
     sections: {
@@ -57,7 +63,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             },
             gridNews: [{
                 id: { type: String },
@@ -68,7 +76,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             }]
         },
         "eco & negocios": {
@@ -81,7 +91,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             },
             gridNews: [{
                 id: { type: String },
@@ -92,7 +104,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             }]
         },
         deportes: {
@@ -105,7 +119,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             },
             gridNews: [{
                 id: { type: String },
@@ -116,7 +132,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             }]
         },
         tendencias: {
@@ -129,7 +147,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             },
             gridNews: [{
                 id: { type: String },
@@ -140,7 +160,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             }]
         },
         portalcana: {
@@ -153,7 +175,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             },
             gridNews: [{
                 id: { type: String },
@@ -164,7 +188,9 @@ const HomePageSchema = new Schema<HomePageDocument>({
                 },
                 pretitle: { type: String },
                 title: { type: String },
-                summary: { type: String }
+                summary: { type: String },
+                category: { type: String },
+                path: { type: String },
             }]
         }
     }

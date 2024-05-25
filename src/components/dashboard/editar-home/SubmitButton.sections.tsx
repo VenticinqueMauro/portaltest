@@ -17,7 +17,10 @@ export default function SubmitButtonEditHome({ valueSection, selectedNews }: Pro
         selectedNews[valueSection as keyof SectionNewsMap]?.mainNews?.pretitle &&
         selectedNews[valueSection as keyof SectionNewsMap]?.mainNews?.title &&
         selectedNews[valueSection as keyof SectionNewsMap]?.mainNews?.id &&
+        selectedNews[valueSection as keyof SectionNewsMap]?.mainNews?.category &&
+        selectedNews[valueSection as keyof SectionNewsMap]?.mainNews?.path &&
         selectedNews[valueSection as keyof SectionNewsMap]?.gridNews?.length === 4;
+
 
 
     const handleClick = async () => {

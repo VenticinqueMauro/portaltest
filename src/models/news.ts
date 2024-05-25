@@ -16,6 +16,7 @@ interface NewsDocument extends Document {
     author?: string;
     tags?: string[];
     comments?: string[];
+    path: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -107,6 +108,9 @@ const NewsSchema = new Schema<NewsDocument>({
     comments: {
         type: [String],
         default: []
+    },
+    path: {
+        type: String
     },
     createdAt: {
         type: Date,

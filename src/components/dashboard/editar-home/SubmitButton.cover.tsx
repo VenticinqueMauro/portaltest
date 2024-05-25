@@ -17,7 +17,9 @@ export default function SubmitButtonEditHome({ selectedNews }: Props) {
         selectedNews?.cover.mainNews?.media?.url &&
         selectedNews?.cover.mainNews?.pretitle &&
         selectedNews?.cover.mainNews?.title &&
-        selectedNews?.cover.mainNews?.summary;
+        selectedNews?.cover.mainNews?.summary &&
+        selectedNews?.cover.mainNews?.category &&
+        selectedNews?.cover.mainNews?.path;
 
     const handleClick = async () => {
         setLoading(true);
