@@ -49,15 +49,21 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
             return NextResponse.json({ error: "No se encontró la noticia" }, { status: 404 });
         }
 
+        const data = await request.json();
+        const path = data.title.replace(/\s+/g, '-').toLowerCase();
+
+
         const updatedNews = await News.findOneAndUpdate(
             { _id: id }, // Condición de búsqueda
-            { ...await request.json(), updatedAt: new Date() }, // Datos actualizados
+            { ...data, path, updatedAt: new Date() }, // Datos actualizados
             { new: true } // Opción para devolver el documento actualizado
         );
 
         if (!updatedNews) {
             return NextResponse.json({ error: "No se pudo actualizar la noticia" }, { status: 500 });
         }
+
+        console.log(updatedNews)
 
         return NextResponse.json({ message: "Noticia actualizada", data: updatedNews }, { status: 200 });
 

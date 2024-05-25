@@ -1,5 +1,6 @@
 import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
     image: {
@@ -8,12 +9,14 @@ interface Props {
     },
     pretitle: string;
     title: string;
+    category: string;
+    path: string;
     id: string;
 }
 
-export default function NoticiasGridCategory({ image, pretitle, title, id }: Props) {
+export default function NoticiasGridCategory({ image, pretitle, title, category, path, id }: Props) {
     return (
-        <div className="col-span-6 w-full space-y-2 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer shadow rounded">
+        <Link href={`${category}/${path}`} className="col-span-6 w-full space-y-2 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer shadow rounded">
             {
                 image.type !== 'video' ? (
                     <Image
@@ -41,6 +44,6 @@ export default function NoticiasGridCategory({ image, pretitle, title, id }: Pro
                     {title}
                 </p>
             </div>
-        </div>
+        </Link>
     )
 }

@@ -12,6 +12,7 @@ export async function handleEditPortadaHome(selectedNews: MainCover) {
         return { error: 'No tienes permisos para realizar esta acción' }
     }
 
+
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`, {
             method: 'PUT',

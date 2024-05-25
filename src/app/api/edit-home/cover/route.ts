@@ -45,7 +45,9 @@ export async function PUT(request: NextRequest) {
                         },
                         pretitle: data.cover.mainNews.pretitle,
                         title: data.cover.mainNews.title,
-                        summary: data.cover.mainNews.summary
+                        summary: data.cover.mainNews.summary,
+                        category: data.cover.mainNews.category,
+                        path: data.cover.mainNews.path,
                     },
                     leftSidebar: data.cover.leftSidebar.map((item: SidebarItem) => ({
                         id: item.id,
@@ -56,7 +58,9 @@ export async function PUT(request: NextRequest) {
                         },
                         pretitle: item.pretitle,
                         title: item.title,
-                        summary: item.summary
+                        summary: item.summary,
+                        category: item.category,
+                        path: item.path
                     })),
                     rightSidebar: data.cover.rightSidebar.map((item: SidebarItem) => ({
                         id: item.id,
@@ -67,7 +71,9 @@ export async function PUT(request: NextRequest) {
                         },
                         pretitle: item.pretitle,
                         title: item.title,
-                        summary: item.summary
+                        summary: item.summary,
+                        category: item.category,
+                        path: item.path
                     }))
                 }
             });
@@ -86,7 +92,9 @@ export async function PUT(request: NextRequest) {
                     },
                     pretitle: data.cover.mainNews.pretitle,
                     title: data.cover.mainNews.title,
-                    summary: data.cover.mainNews.summary
+                    summary: data.cover.mainNews.summary,
+                    category: data.cover.mainNews.category,
+                    path: data.cover.mainNews.path
                 },
                 leftSidebar: data.cover.leftSidebar.map((item: SidebarItem) => ({
                     id: item.id,
@@ -97,7 +105,9 @@ export async function PUT(request: NextRequest) {
                     },
                     pretitle: item.pretitle,
                     title: item.title,
-                    summary: item.summary
+                    summary: item.summary,
+                    category: item.category,
+                    path: item.path
                 })),
                 rightSidebar: data.cover.rightSidebar.map((item: SidebarItem) => ({
                     id: item.id,
@@ -108,7 +118,9 @@ export async function PUT(request: NextRequest) {
                     },
                     pretitle: item.pretitle,
                     title: item.title,
-                    summary: item.summary
+                    summary: item.summary,
+                    category: item.category,
+                    path: item.path
                 }))
             };
 

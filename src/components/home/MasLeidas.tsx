@@ -6,11 +6,14 @@ import {
 import Image from "next/image";
 import SectionTitle from "./SectionTitle";
 import { blurImage } from "@/utils/blurImage";
+import Link from "next/link";
 
 interface MostRead {
     _id: string;
     pretitle: string;
     title: string;
+    category: string;
+    path: string;
     media: {
         portada: {
             publicId: string;
@@ -42,6 +45,8 @@ export default async function MasLeidas() {
         return null;
     }
 
+    console.log('MAS LEIDAS',mostReads)
+
     return (
         <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto lg:py-20 px-3">
             <SectionTitle title='Las más leídas' />
@@ -49,7 +54,7 @@ export default async function MasLeidas() {
                 <CarouselContent className="-ml-1 flex gap-4">
                     {mostReads?.map((item: MostRead) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[400px]">
-                            <div className="rounded flex flex-col justify-start gap-1">
+                            <Link href={`${item.category}/${item.path}`} className="rounded flex flex-col justify-start gap-1">
                                 <div className="px-1">
                                     {(
                                         item.media.portada.type !== 'video' ? (
@@ -81,7 +86,7 @@ export default async function MasLeidas() {
                                     <p className="text-sm font-bold text-muted-foreground">{item.pretitle}</p>
                                     <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
                                 </div>
-                            </div>
+                            </Link>
                         </CarouselItem>
                     ))}
                 </CarouselContent>

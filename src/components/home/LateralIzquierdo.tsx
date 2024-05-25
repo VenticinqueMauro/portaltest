@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import { Separator } from '../ui/separator'
 import { blurImage } from '@/utils/blurImage';
+import Link from 'next/link';
 
 interface Props {
     image: {
@@ -10,14 +11,16 @@ interface Props {
     },
     pretitle: string;
     title: string;
+    category: string;
+    path: string;
     index: number;
     isLast: boolean;
 }
 
-export default function LateralIzquierdo({ image, pretitle, title, index, isLast }: Props) {
+export default function LateralIzquierdo({ image, pretitle, title, category, path, index, isLast }: Props) {
     return (
         <>
-            <div className="rounded flex flex-col justify-start md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
+            <Link href={`${category}/${path}`} className="rounded flex flex-col justify-start md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                 <div className="px-1">
                     {/* DESKTOP DONDE SOLO SE MUESTRA LA IMAGEN DE LA PRIMERA NOTICIA  */}
                     <div className="hidden md:block relative -top-2">
@@ -66,7 +69,7 @@ export default function LateralIzquierdo({ image, pretitle, title, index, isLast
                     <p className="text-sm font-bold text-muted-foreground">{pretitle}</p>
                     <p className="font-semibold tracking-tight line-clamp-3">{title}</p>
                 </div>
-            </div>
+            </Link>
             {!isLast && (
                 <Separator className="hidden md:block " />
             )}

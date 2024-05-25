@@ -21,7 +21,6 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredNews, setFilteredNews] = useState<NewsType[]>([]);
 
-
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
@@ -45,6 +44,8 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
                     pretitle: item.pretitle,
                     title: item.title,
                     summary: item.summary,
+                    category: item.category,
+                    path: item.path
                 };
             } else {
                 // Obtener el nombre de la sección dinámicamente
@@ -72,6 +73,8 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
                         pretitle: item.pretitle,
                         title: item.title,
                         summary: item.summary,
+                        category: item.category,
+                        path: item.path
                     });
                 }
 

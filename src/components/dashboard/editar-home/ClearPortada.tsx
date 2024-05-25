@@ -26,7 +26,9 @@ export default function ClearPortada({ setSelectedNews, setSelectedSectionNews, 
                         },
                         pretitle: "",
                         title: "",
-                        summary: ""
+                        summary: "",
+                        category: "",
+                        path: ""
                     },
                     leftSidebar: [],
                     rightSidebar: []

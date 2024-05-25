@@ -36,7 +36,7 @@ export default function EditorSectionsSidebar({ tabs, news, sectionName, selecte
             if (!updatedSelectedNews[sectionKey]) {
                 // Si no existe, la creamos con mainNews y gridNews vacíos
                 updatedSelectedNews[sectionKey] = {
-                    mainNews: { id: "", media: { url: "", publicId: "", type: "image" }, pretitle: "", title: "", summary: "" },
+                    mainNews: { id: "", media: { url: "", publicId: "", type: "image" }, pretitle: "", title: "", summary: "", category: "", path: "" },
                     gridNews: [],
                 };
             }
@@ -53,6 +53,8 @@ export default function EditorSectionsSidebar({ tabs, news, sectionName, selecte
                     pretitle: item.pretitle,
                     title: item.title,
                     summary: item.summary,
+                    category: item.category,
+                    path: item.path
                 };
             } else {
                 // Si no se actualiza la noticia principal, actualizamos gridNews en la sección correspondiente
@@ -65,7 +67,7 @@ export default function EditorSectionsSidebar({ tabs, news, sectionName, selecte
                     // Agregamos la noticia si se marca
                     if (sectionName === "mainNews") {
                         // Limpiamos las selecciones previas en mainNews
-                        updatedSelectedNews[sectionKey].mainNews = { id: "", media: { url: "", publicId: "", type: "image" }, pretitle: "", title: "", summary: "" };
+                        updatedSelectedNews[sectionKey].mainNews = { id: "", media: { url: "", publicId: "", type: "image" }, pretitle: "", title: "", summary: "", category: "", path: "" };
                     }
                     // Verificamos el límite en gridNews
                     else if (updatedSidebar.length >= 4) {
@@ -82,6 +84,8 @@ export default function EditorSectionsSidebar({ tabs, news, sectionName, selecte
                         pretitle: item.pretitle,
                         title: item.title,
                         summary: item.summary,
+                        category: item.category,
+                        path: item.path
                     });
                 }
 

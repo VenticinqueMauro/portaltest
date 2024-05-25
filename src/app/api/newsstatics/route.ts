@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
         const topNewsIds = statistics.news_views.slice(0, 10).map((item: NewsView) => item.news_id);
 
         // Consultar las noticias más vistas desde la colección de noticias
-        const topNews = await News.find({ _id: { $in: topNewsIds } }).select('pretitle title media');
+        const topNews = await News.find({ _id: { $in: topNewsIds } }).select('pretitle title media category path');
 
         return NextResponse.json({ message: "Las 4 noticias más vistas", data: topNews }, { status: 200 });
 
