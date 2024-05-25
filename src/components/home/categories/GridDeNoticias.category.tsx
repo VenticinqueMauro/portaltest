@@ -20,6 +20,8 @@ export default function GridDeNoticiasCategory({ sectionData, ads, sectionTitle 
                 image={{ type: sectionData.mainNews.media.type as 'image' | 'video', url: sectionData.mainNews.media.url }}
                 pretitle={sectionData.mainNews.pretitle}
                 title={sectionData.mainNews.title}
+                category={sectionData.mainNews.category}
+                path={sectionData.mainNews.path!}
                 id={sectionData.mainNews.id}
             />
 
@@ -32,6 +34,8 @@ export default function GridDeNoticiasCategory({ sectionData, ads, sectionTitle 
                                 image={{ type: item.media.type as 'image' | 'video', url: item.media.url }}
                                 pretitle={item.pretitle}
                                 title={item.title}
+                                category={item.category}
+                                path={item.path!}
                                 id={item.id}
                             />
                         ))

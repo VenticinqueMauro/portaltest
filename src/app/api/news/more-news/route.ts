@@ -10,6 +10,7 @@ export type MoreNews = {
     pretitle: string;
     media: { portada: Media; }
     category: CategoryNews;
+    path: string;
 }
 
 export type MoreNewsData = {
@@ -36,7 +37,7 @@ export async function GET(request: NextRequest) {
         for (const category of categories) {
             const news: MoreNews[] = await News.find(
                 { category, status: NewsStatus.PUBLISHED },
-                { _id: 1, media: 1, pretitle: 1, title: 1 }
+                { _id: 1, media: 1, pretitle: 1, title: 1, category: 1, path: 1 }
             )
                 .sort({ date: -1 })
                 .lean();

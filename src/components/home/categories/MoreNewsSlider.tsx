@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { blurImage } from '@/utils/blurImage';
 import { MoreNews, MoreNewsData } from '@/app/api/news/more-news/route';
 import { MainNews, SectionNewsMap, SidebarItem } from '@/types/news.types';
+import Link from 'next/link';
 
 interface Props {
     title: string;
@@ -39,7 +40,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
                 <CarouselContent className="-ml-1 flex gap-4 ">
                     {filteredNews.map((item: MoreNews) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[400px]">
-                            <div className="rounded flex flex-col justify-start gap-1">
+                            <Link href={`${item.category}/${item.path}`} className="rounded flex flex-col justify-start gap-1">
                                 <div className="px-1">
                                     {item.media.portada.type !== 'video' ? (
                                         <Image
@@ -69,7 +70,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
                                     <p className="text-sm font-bold text-muted-foreground">{item.pretitle}</p>
                                     <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
                                 </div>
-                            </div>
+                            </Link>
                         </CarouselItem>
                     ))}
                 </CarouselContent>

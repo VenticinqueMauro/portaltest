@@ -61,12 +61,22 @@ export default async function ContainerHome({ ads }: Props) {
                         pretitle={homeNews.cover.mainNews.pretitle}
                         title={homeNews.cover.mainNews.title}
                         summary={homeNews.cover.mainNews.summary}
+                        category={homeNews.cover.mainNews.category}
+                        path={homeNews.cover.mainNews.path!}
                     />
 
                     {/* LATERAL DERECHO  */}
                     <div className="col-span-12 lg:col-span-2  flex flex-col items-center">
                         {homeNews.cover.rightSidebar.map((item, index) => (
-                            <LateralDerecho key={item.id} image={{ type: item.media.type as 'image' | 'video', url: item.media.url }} pretitle={item.pretitle} title={item.title} index={index} />
+                            <LateralDerecho
+                                key={item.id}
+                                image={{ type: item.media.type as 'image' | 'video', url: item.media.url }}
+                                pretitle={item.pretitle}
+                                title={item.title}
+                                category={item.category}
+                                path={item.path!}
+                                index={index}
+                            />
                         ))}
                     </div>
 
@@ -78,6 +88,8 @@ export default async function ContainerHome({ ads }: Props) {
                                 image={{ type: item.media.type as 'image' | 'video', url: item.media.url }}
                                 pretitle={item.pretitle}
                                 title={item.title}
+                                category={item.category}
+                                path={item.path!}
                                 index={index}
                                 isLast={index === homeNews.cover.leftSidebar.length - 1}
                             />
