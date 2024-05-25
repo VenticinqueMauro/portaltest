@@ -50,7 +50,7 @@ export default async function MasLeidas() {
     console.log('MAS LEIDAS', mostReads)
 
     return (
-        <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto lg:py-20 px-3">
+        <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto lg:py-20 ">
             <SectionTitle title='Las más leídas' />
             <div className="px-12">
                 <Carousel className="px-3 max-w-5xl mx-auto">
