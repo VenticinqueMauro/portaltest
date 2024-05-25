@@ -275,3 +275,16 @@ export const initialAds = {
     }
 };
 
+// GET NEWS BY PATH
+
+export async function getNewsByPath(path: string) {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news?path=${path}`);
+
+        const { data } = await res.json();
+
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}

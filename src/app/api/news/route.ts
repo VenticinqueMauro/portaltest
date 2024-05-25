@@ -3,13 +3,22 @@ import { News } from "@/models/news";
 import { handleError } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+
+export async function GET(request: NextRequest) {
+    const searchParams = request.nextUrl.searchParams;
+    const query = searchParams.get('path');
+
     try {
         await connectDB();
 
-        const news = await News.find({});
+        let news;
+        if (query) {
+            news = await News.findOne({ path: query });
+        } else {
+            news = await News.find({});
+        }
 
-        if (!news || news.length === 0) {
+        if (!news || (Array.isArray(news) && news.length === 0)) {
             return NextResponse.json({ error: "No se encontraron noticias" }, { status: 404 });
         }
 
