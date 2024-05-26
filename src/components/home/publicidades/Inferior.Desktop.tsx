@@ -10,7 +10,7 @@ export default function InferiorDesktop({ url }: Props) {
     const hasUrl = url && url.length > 0;
 
     return (
-        <div className="col-start-1 col-span-8">
+        <div className="col-start-1 col-span-8 mb-10">
             <div
                 className="flex justify-center bg-publicidad items-center w-full h-[170px] "
             >

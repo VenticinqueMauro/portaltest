@@ -36,8 +36,8 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
     return (
         <div className="max-w-6xl 2xl:mx-auto  lg:mr-[240px]">
             <SectionTitle title={`Más de ${title}`} />
-            <div className="px-12">
-                <Carousel className="px-3 max-w-5xl mx-auto">
+            <div className="px-14">
+                <Carousel className="max-w-5xl mx-auto">
                     <CarouselContent className="-ml-1 flex gap-4 ">
                         {filteredNews.map((item: MoreNews) => (
                             <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[400px]">

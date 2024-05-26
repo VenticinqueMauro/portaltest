@@ -36,7 +36,9 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, mo
             {/* PUBLICIDAD SUPERIOR DESKTOP */}
             <SuperiorDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.url as string} />
             {/* TITULO DE SECCION */}
-            <SectionTitle title={title} />
+            <div className="py-10">
+                <SectionTitle title={title} />
+            </div>
             {/* GRILLA DE NOTICIAS  */}
             <GridDeNoticiasCategory sectionData={sectionData} ads={ads} sectionTitle={sectionTitle} />
             {/* MAS NOTICIAS  */}

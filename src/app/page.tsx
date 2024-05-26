@@ -25,7 +25,7 @@ export default async function page() {
     const ads: Ads = await getAds();
 
     return (
-        <div>
+        <section>
             <div className="h-[170px] bg-publicidad col-span-12 flex justify-center items-center relative">
                 <Image
                     src={ads.home.portada?.media?.desktop?.top?.url as string}
@@ -35,9 +35,11 @@ export default async function page() {
                     priority
                 />
             </div>
-            <Navbar />
-            <QuotesContainer />
+            <div className='sticky top-0 left-0 z-20'>
+                <Navbar />
+                <QuotesContainer />
+            </div>
             <ContainerHome ads={ads} />
-        </div>
+        </section>
     )
 }
