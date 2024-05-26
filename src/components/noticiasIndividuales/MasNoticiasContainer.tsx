@@ -40,7 +40,7 @@ export default async function MasNoticiasContainer
         <div>
             <SectionTitle title={`Más de ${category == 'eco & negocios' ? 'economía' : category}`} />
             <CarouselMasNoticias id={id} moreNews={moreNews} />
-            <LateralDesktop url={moreNews[0].media.portada.url as string} />
+            {/* <LateralDesktop url={moreNews[0].media.portada.url as string} /> */}
         </div>
     )
 }
