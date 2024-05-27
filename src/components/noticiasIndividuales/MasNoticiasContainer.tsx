@@ -1,17 +1,6 @@
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-import Link from "next/link";
 import { MoreNews } from "@/app/api/news/more-news/route";
 import SectionTitle from "../home/SectionTitle";
-import Image from "next/image";
-import { blurImage } from "@/utils/blurImage";
 import CarouselMasNoticias from "./CarouselMasNoticias";
-import LateralDesktop from "../home/publicidades/Lateral.Desktop";
 
 async function getFormatedCategoryNews(query: string) {
     try {
@@ -34,12 +23,19 @@ interface Props {
 
 export default async function MasNoticiasContainer
     ({ category, id }: Props) {
+
     const moreNews: MoreNews[] = await getFormatedCategoryNews(category);
+
+    const filteredMoreNews = moreNews.filter(item => item._id !== id)
+
+    if (!filteredMoreNews.length) {
+        return null
+    }
 
     return (
         <div>
             <SectionTitle title={`Más de ${category == 'eco & negocios' ? 'economía' : category}`} />
-            <CarouselMasNoticias id={id} moreNews={moreNews} />
+            <CarouselMasNoticias id={id} moreNews={filteredMoreNews} />
             {/* <LateralDesktop url={moreNews[0].media.portada.url as string} /> */}
         </div>
     )
