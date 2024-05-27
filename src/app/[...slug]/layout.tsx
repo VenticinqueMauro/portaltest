@@ -1,8 +1,6 @@
 import QuotesContainer from "@/components/cotizaciones/Quotes.container";
 import Navbar from "@/components/navbar/Navbar";
 import { getNewsByPath } from "@/utils/utils";
-import { Toaster } from "sonner";
-
 
 export async function generateMetadata({ params }: { params: { slug: string[] } }) {
     const { slug } = params;

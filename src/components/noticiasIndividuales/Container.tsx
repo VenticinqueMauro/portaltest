@@ -1,18 +1,22 @@
+import { MoreNews } from '@/app/api/news/more-news/route';
 import { NewsType } from '@/types/news.types';
-import MasNoticiasContainer from './MasNoticiasContainer';
 import News from './News';
 
 interface Props {
     news: NewsType;
     category: string;
+    moreNews: MoreNews[]
 }
 
-export default function Container({ news, category }: Props) {
+export default function Container({ news, category, moreNews }: Props) {
+
+    if (!news) {
+        return null
+    }
+
     return (
         <section className="py-5 relative ">
-            <News news={news}>
-                <MasNoticiasContainer category={category} id={news._id as string} />
-            </News>
+            <News news={news} category={category} moreNews={moreNews} />
         </section>
     )
 }

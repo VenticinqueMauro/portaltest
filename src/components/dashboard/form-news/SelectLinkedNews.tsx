@@ -41,7 +41,7 @@ export default function SelectLinkedNews({ LinkedNews, setLinkedNews, id }: Prop
     const handleNewsSelect = (isChecked: boolean, newsId: string) => {
         if (LinkedNews && setLinkedNews) {
             if (isChecked) {
-                if (LinkedNews.length < 3) {
+                if (LinkedNews.length < 5) {
                     setLinkedNews(prevSelected => [...prevSelected, newsId]);
                 } else {
                     toast.warning("Ya has seleccionado el máximo de noticias permitidas.");

@@ -288,3 +288,19 @@ export async function getNewsByPath(path: string) {
         console.log(error)
     }
 }
+
+// GET MORE NEWS 
+
+export async function getFormatedCategoryNews(query: string) {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news/more-news?category=${query}`, { next: { revalidate: 60 } });
+
+        if (!response.ok) {
+            console.log('Error al obtener el cover de la home');
+        }
+        const { data } = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}

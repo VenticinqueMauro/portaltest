@@ -1,13 +1,21 @@
+import { MoreNews } from "@/app/api/news/more-news/route";
 import { NewsType } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
+import MasNoticiasContainer from "./MasNoticiasContainer";
+import dynamic from "next/dynamic";
+
+
+const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
 
 interface Props {
-    children: React.ReactNode;
     news: NewsType;
+    category: string;
+    moreNews: MoreNews[]
 }
 
-export default function News({ news, children }: Props) {
+export default function News({ news, category, moreNews }: Props) {
+
     return (
         <div className="max-w-5xl mx-auto lg:mr-[240px] 2xl:mx-auto px-3">
             <div className="space-y-3">
@@ -34,10 +42,9 @@ export default function News({ news, children }: Props) {
                     <div dangerouslySetInnerHTML={{ __html: news.content }} />
                 </div>
                 {/* CAROUSEL MAS NOTICIAS  */}
-                <>
-                    {children}
-                </>
+                <MasNoticiasContainer moreNews={moreNews} category={category} id={news._id as string} />
             </div>
+            <NewsLinked newsLinked={news.newsLinked} />
         </div>
     )
 }

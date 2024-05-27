@@ -22,6 +22,15 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
         return null;
     }
 
+    const generateHref = (category: string, path: string) => {
+        // Si el path ya contiene la categoría, simplemente devuelve el path
+        if (path.startsWith(`${category}/`)) {
+            return `/${path}`;
+        }
+        // De lo contrario, construye la ruta completa
+        return `/${category}/${path}`;
+    };
+
     return (
         <div className="px-14 md:px-0">
             {/* DESKTOP  */}
@@ -29,7 +38,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                 <CarouselContent className={"space-y-3 -ml-1 flex gap-4"}>
                     {moreNews.slice(0.4).map((item: MoreNews, index) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5  md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[220px]">
-                            <Link href={`${item.category}/${item.path}`} className="rounded flex flex-col justify-start gap-1">
+                            <Link href={generateHref(item.category, item.path)} className="rounded flex flex-col justify-start gap-1">
                                 <div className={`${index === 0 ? 'block' : 'hidden'} px-1`}>
                                     {item.media.portada.type !== 'video' ? (
                                         <Image
@@ -71,7 +80,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                 <CarouselContent className={"-ml-1 flex gap-4"}>
                     {moreNews.slice(0, 4).map((item: MoreNews, index) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5  md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[220px]">
-                            <Link href={`${item.category}/${item.path}`} className="rounded flex flex-col justify-start gap-1">
+                            <Link href={generateHref(item.category, item.path)} className="rounded flex flex-col justify-start gap-1">
                                 <div className={`px-1`}>
                                     {item.media.portada.type !== 'video' ? (
                                         <Image

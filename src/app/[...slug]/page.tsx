@@ -1,6 +1,6 @@
 import Container from "@/components/noticiasIndividuales/Container";
 import { NewsType } from "@/types/news.types";
-import { getNewsByPath } from "@/utils/utils";
+import { getFormatedCategoryNews, getNewsByPath } from "@/utils/utils";
 
 export async function generateStaticParams() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, { cache: 'no-store' });
@@ -14,15 +14,20 @@ export async function generateStaticParams() {
     });
 }
 
+
 export default async function Page({ params }: { params: { slug: string[] } }) {
     const { slug } = params;
     const [category, path] = slug;
 
     const decodeCategory = decodeURIComponent(category)
 
-    const news: NewsType = await getNewsByPath(path);
+    const [news, moreNews] = await Promise.all([
+        getNewsByPath(path),
+        getFormatedCategoryNews(category)
+    ]);
+
 
     return (
-        <Container news={news} category={decodeCategory} />
+        <Container news={news} category={decodeCategory} moreNews={moreNews} />
     );
 }
