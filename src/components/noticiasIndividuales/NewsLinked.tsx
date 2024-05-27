@@ -82,52 +82,55 @@ export default function NewsLinked({ newsLinked }: Props) {
                     </h2>
                 </span>
             </div>
-            <Carousel className="max-w-5xl mx-auto">
-                <CarouselContent className="-ml-1 flex gap-4 ">
-                    {news.map((item: NewsLinked) => (
-                        <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[400px]">
-                            <Link href={`/${item.category}/${item.path}`} className="rounded flex flex-col justify-start gap-1">
-                                <div className="px-1">
-                                    {item.media.portada.type !== 'video' ? (
-                                        <Image
-                                            src={item.media.portada.url}
-                                            alt={item.title}
-                                            width={400}
-                                            height={300}
-                                            className="rounded aspect-video object-cover"
-                                            placeholder="blur"
-                                            blurDataURL={blurImage}
-                                        />
-                                    ) : (
-                                        <video
-                                            width="400"
-                                            height="300"
-                                            controls={true}
-                                            autoPlay
-                                            loop
-                                            className="w-full object-cover aspect-video rounded"
-                                        >
-                                            <source src={item.media.portada.url} type="video/mp4" />
-                                            Tu navegador no soporta la etiqueta de video.
-                                        </video>
-                                    )}
-                                </div>
-                                <div className="text-start px-1">
-                                    <p className="text-sm font-bold text-muted-foreground">{item.pretitle}</p>
-                                    <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
-                                </div>
-                            </Link>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-                {
-                    news.length > 1 &&
-                    <>
-                        <CarouselPrevious className="" />
-                        <CarouselNext className="" />
-                    </>
-                }
-            </Carousel>
+            <div className="px-14 md:px-0">
+                <Carousel className="max-w-5xl mx-auto">
+                    <CarouselContent className="-ml-1 flex gap-4 ">
+                        {news.map((item: NewsLinked) => (
+                            <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5 md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 max-w-[400px]">
+                                <Link href={`/${item.category}/${item.path}`} className="rounded flex flex-col justify-start gap-1">
+                                    <div className="px-1">
+                                        {item.media.portada.type !== 'video' ? (
+                                            <Image
+                                                src={item.media.portada.url}
+                                                alt={item.title}
+                                                width={400}
+                                                height={300}
+                                                className="rounded aspect-video object-cover"
+                                                placeholder="blur"
+                                                blurDataURL={blurImage}
+                                            />
+                                        ) : (
+                                            <video
+                                                width="400"
+                                                height="300"
+                                                controls={true}
+                                                autoPlay
+                                                loop
+                                                className="w-full object-cover aspect-video rounded"
+                                            >
+                                                <source src={item.media.portada.url} type="video/mp4" />
+                                                Tu navegador no soporta la etiqueta de video.
+                                            </video>
+                                        )}
+                                    </div>
+                                    <div className="text-start px-1">
+                                        <p className="text-sm font-bold text-muted-foreground">{item.pretitle}</p>
+                                        <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
+                                    </div>
+                                </Link>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    {
+                        news.length > 1 &&
+                        <>
+                            <CarouselPrevious className="" />
+                            <CarouselNext className="" />
+                        </>
+                    }
+                </Carousel>
+            </div>
+
         </div>
     )
 }
