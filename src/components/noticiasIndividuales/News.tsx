@@ -3,15 +3,14 @@ import { NewsType } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
 import MasNoticiasContainer from "./MasNoticiasContainer";
-
 import dynamic from "next/dynamic";
-import BreadCrumb from "./BreadCrumb";
 import { Separator } from "../ui/separator";
+import BreadCrumb from "./BreadCrumb";
 import { CreatedAndUpdated } from "./CreatedAndUpdated";
 import Tags from "./Tags";
 
-
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
+const Gallery = dynamic(() => import("./Gallery"), { ssr: false });
 
 interface Props {
     news: NewsType;
@@ -20,6 +19,7 @@ interface Props {
 }
 
 export default function News({ news, category, moreNews }: Props) {
+
 
     return (
         <div className="max-w-5xl mx-auto lg:mr-[240px] 2xl:mx-auto px-3">
@@ -34,7 +34,7 @@ export default function News({ news, category, moreNews }: Props) {
                 <h3 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{news.author}</b></h3>
                 <Separator />
             </div>
-            <div className="flex flex-col md:flex-row mt-3 gap-4">
+            <div className="flex flex-col md:flex-row mt-3 gap-4 relative">
                 <div className="grow">
                     <CreatedAndUpdated createdAt={news.createdAt} updatedAt={news.updatedAt} />
                     <div>
@@ -53,6 +53,7 @@ export default function News({ news, category, moreNews }: Props) {
                     </div>
                     <p className="text-xs mb-2 text-muted-foreground">{news.media?.portada.caption}</p>
                     <div dangerouslySetInnerHTML={{ __html: news.content }} />
+                    <Gallery gallery={news.media?.gallery} />
                     <Tags tags={news.tags} />
                 </div>
                 <Separator orientation='vertical' />

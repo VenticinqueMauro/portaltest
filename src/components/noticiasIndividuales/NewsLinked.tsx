@@ -124,8 +124,8 @@ export default function NewsLinked({ newsLinked }: Props) {
                     {
                         news.length > 1 &&
                         <>
-                            <CarouselPrevious className="" />
-                            <CarouselNext className="" />
+                            <CarouselPrevious />
+                            <CarouselNext />
                         </>
                     }
                 </Carousel>
