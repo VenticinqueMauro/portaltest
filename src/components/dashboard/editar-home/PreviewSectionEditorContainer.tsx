@@ -63,7 +63,7 @@ export default function PreviewSectionEditorContainer({ valueSection, titleSecti
                     <Card className="rounded hover:border-primary hover:border-2 relative min-h-full">
                         {
                             portadaPrincipal.media.type !== 'video' ?
-                                <Image src={portadaPrincipal.media.url ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                <Image src={portadaPrincipal.media.url ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={856} height={422} className="w-full object-cover aspect-video rounded" />
                                 :
                                 <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                     <source src={portadaPrincipal.media.url} type="video/mp4" />

@@ -24,7 +24,7 @@ export default function NoticiaPrincipalCategory({ image, pretitle, title, categ
                     <div className="relative -top-2">
                         {
                             image.type !== 'video' ?
-                                <Image src={image.url} alt={title} width={400} height={300} placeholder="blur"
+                                <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
                                     blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
                                 :
                                 <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">

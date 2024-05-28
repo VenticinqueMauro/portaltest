@@ -40,7 +40,7 @@ export default function News({ news, category, moreNews }: Props) {
                         <div className="relative -top-2">
                             {
                                 news.media?.portada.type !== 'video' ?
-                                    <Image src={news.media?.portada.url as string} alt={news.title} width={400} height={300} placeholder="blur"
+                                    <Image src={news.media?.portada.url as string} alt={news.title} width={856} height={422} placeholder="blur"
                                         blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
                                     :
                                     <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">

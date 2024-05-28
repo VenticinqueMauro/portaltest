@@ -33,8 +33,8 @@ const processAndUploadFiles = async (files: File[] | File | null, resourceType: 
                         folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}/galeria`,
                         resource_type: resourceType,
                         eager: {
-                            width: 400,
-                            height: 300,
+                            width: 856,
+                            height: 422,
                             crop: 'limit',
                             quality: 'auto',
                         },
@@ -76,8 +76,8 @@ const processAndUploadFiles = async (files: File[] | File | null, resourceType: 
                     folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}`,
                     resource_type: resourceType,
                     eager: {
-                        width: 400,
-                        height: 300,
+                        width: 856,
+                        height: 422,
                         crop: 'limit',
                         quality: 'auto',
                     },
@@ -212,12 +212,12 @@ export const handleEditNews = async (formData: FormData) => {
     // Reemplazar las URLs de las imágenes en el contenido si hay una URL de imagen
     if (imageContentUrl) {
         content = String(content).replace(/<img.*?src="(.*?)".*?>/g, () => {
-            return `<img src="${imageContentUrl?.url}" alt="${title}" />`;
+            return `<img src="${imageContentUrl?.url}" alt="${title}" class="object-cover rounded w-full aspect-video" />`;
         });
     }
     if (videoContentUrl) {
         content = String(content).replace(/<img.*?src="(.*?)".*?>/g, () => {
-            return `<video controls><source src="${videoContentUrl?.url}" type="video/mp4" /></video>`;
+            return `<video controls><source src="${videoContentUrl?.url}" type="video/mp4" class="object-cover rounded w-full aspect-video" /></video>`;
         });
     }
 
@@ -231,8 +231,8 @@ export const handleEditNews = async (formData: FormData) => {
 
     // Función para transformar etiquetas <p> vacías en <br/>
     function transformEmptyParagraphs(content: any) {
-        // Expresión regular para buscar etiquetas <p> vacías
-        const emptyParagraphRegex = /<p>\s*<\/p>/g;
+        // Expresión regular para buscar etiquetas <p> vacías, incluyendo aquellas con clases y espacios en blanco
+        const emptyParagraphRegex = /<p[^>]*>\s*<\/p>/g;
         // Reemplazar todas las coincidencias de etiquetas <p> vacías con <br/>
         return content.replace(emptyParagraphRegex, '<br/>');
     }

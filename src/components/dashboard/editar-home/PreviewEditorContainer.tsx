@@ -66,7 +66,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                                     <div className="relative -top-2">
                                         {
                                             lateralIzq[0].media.type !== 'video' ?
-                                                <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                                <Image src={lateralIzq && lateralIzq.length ? (lateralIzq[0]?.media.url || '/placeholder.svg') : '/placeholder.svg'} alt="placeholder" width={856} height={422} className="w-full object-cover aspect-video rounded" />
                                                 :
                                                 <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                                     <source src={lateralIzq && lateralIzq.length ? lateralIzq[0]?.media.url : '/placeholder.svg'} type="video/mp4" />
@@ -75,7 +75,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                                         }
                                     </div>) :
                                     index === 0 ?
-                                        <Image src='/placeholder.svg' alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" /> : null
+                                        <Image src='/placeholder.svg' alt="placeholder" width={856} height={422} className="w-full object-cover aspect-video rounded" /> : null
                                 }
                                 <p className="text-sm font-bold text-muted-foreground">
                                     {lateralIzq && lateralIzq[index]?.pretitle.length ? lateralIzq[index]?.pretitle : <span className="w-[150px] rounded h-[10px] mx-auto bg-gray-200 block mb-2" />}
@@ -96,7 +96,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                             <div className="relative -top-2" >
                                 {
                                     portadaPrincipal.media.type !== 'video' ?
-                                        <Image src={portadaPrincipal?.media.url.length > 0 ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={400} height={300} className="w-full object-cover aspect-video rounded" />
+                                        <Image src={portadaPrincipal?.media.url.length > 0 ? portadaPrincipal.media.url : '/placeholder.svg'} alt="placeholder" width={856} height={422} className="w-full object-cover aspect-video rounded" />
                                         :
                                         <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                             <source src={portadaPrincipal?.media.url} type="video/mp4" />

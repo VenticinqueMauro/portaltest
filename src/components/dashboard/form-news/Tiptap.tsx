@@ -21,7 +21,13 @@ interface Props {
 const Tiptap = ({ content, imageUrl, type, clearContent, onChange, handleContentFileChange }: Props) => {
     const editor = useEditor({
         extensions: [
-            StarterKit.configure(),
+            StarterKit.configure({
+                paragraph: {
+                    HTMLAttributes: {
+                        class: "text-lg"
+                    }
+                }
+            }),
             TaskList,
             TaskItem,
             Highlight.configure(),   

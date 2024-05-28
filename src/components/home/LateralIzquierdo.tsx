@@ -26,7 +26,7 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
                     <div className="hidden md:block relative -top-2">
                         {index === 0 && (
                             image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={400} height={300} placeholder="blur"
+                                <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
                                     blurDataURL={blurImage} className="w-full object-cover aspect-video rounded" />
                             ) : (
                                 <video
@@ -47,7 +47,7 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
                     <div className="md:hidden relative -top-2">
                         {(
                             image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={400} height={300} placeholder="blur"
+                                <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
                                     blurDataURL={blurImage} className="w-full object-cover aspect-video rounded" />
                             ) : (
                                 <video
