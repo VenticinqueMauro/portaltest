@@ -1,7 +1,7 @@
 import { incrementarVisita } from "@/actions/news/handleViews";
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
-import { handleError } from "@/utils/utils";
+import { handleError, normalizeTitle } from "@/utils/utils";
 import { isValidObjectId } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -50,8 +50,8 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
         }
 
         const data = await request.json();
-        const path = data.title.replace(/\s+/g, '-').toLowerCase();
-
+        
+        const path = normalizeTitle(data.title);
 
         const updatedNews = await News.findOneAndUpdate(
             { _id: id }, // Condición de búsqueda

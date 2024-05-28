@@ -304,3 +304,13 @@ export async function getFormatedCategoryNews(query: string) {
         console.log(error)
     }
 }
+
+// Función para normalizar el título y generar un path URL amigable
+export const normalizeTitle = (title: string) => {
+    // Reemplazar caracteres acentuados y especiales
+    const normalizedTitle = title.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    // Reemplazar espacios por guiones y convertir a minúsculas
+    const path = normalizedTitle.replace(/\s+/g, '-').toLowerCase();
+    // Eliminar caracteres no permitidos en URLs
+    return path.replace(/[^a-z0-9\-]/g, '');
+};

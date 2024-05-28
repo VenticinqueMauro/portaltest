@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
-import { handleError } from "@/utils/utils";
+import { handleError, normalizeTitle } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -41,8 +41,8 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Ya existe una noticia con el mismo título" }, { status: 400 });
         }
 
-        const path = title.replace(/\s+/g, '-').toLowerCase();
-
+        const path = normalizeTitle(title);
+        
         const newNews = new News({
             pretitle,
             title,
