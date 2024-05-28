@@ -107,7 +107,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                                     )}
                                 </div>
                                 <div className="text-start px-1">
-                                    <p className="text-xs font-bold text-muted-foreground">{item.pretitle}</p>
+                                    <p className="text-xs font-medium text-muted-foreground">{item.pretitle}</p>
                                     <p className="text-sm font-semibold tracking-tight line-clamp-3">{item.title}</p>
                                 </div>
                             </Link>

@@ -41,7 +41,7 @@ export default function LateralDerecho({ image, pretitle, title, category, path,
                         </div>
                     </div>
                     <div className="text-start px-1">
-                        <p className="text-sm font-bold text-muted-foreground">{pretitle}</p>
+                        <p className="text-sm font-medium text-muted-foreground">{pretitle}</p>
                         <p className="font-semibold tracking-tight line-clamp-4">{title}</p>
                     </div>
                 </div>

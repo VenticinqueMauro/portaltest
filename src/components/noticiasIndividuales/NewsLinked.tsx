@@ -114,7 +114,7 @@ export default function NewsLinked({ newsLinked }: Props) {
                                         )}
                                     </div>
                                     <div className="text-start px-1">
-                                        <p className="text-sm font-bold text-muted-foreground">{item.pretitle}</p>
+                                        <p className="text-sm font-medium text-muted-foreground">{item.pretitle}</p>
                                         <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
                                     </div>
                                 </Link>

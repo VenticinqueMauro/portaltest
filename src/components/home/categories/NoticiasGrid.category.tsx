@@ -37,7 +37,7 @@ export default function NoticiasGridCategory({ image, pretitle, title, category,
                 )
             }
             <div className="p-2">
-                <p className="text-sm font-bold text-muted-foreground">
+                <p className="text-sm font-medium text-muted-foreground">
                     {pretitle}
                 </p>
                 <p className="font-semibold tracking-tight line-clamp-3">

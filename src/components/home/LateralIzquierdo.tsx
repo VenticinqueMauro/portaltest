@@ -66,7 +66,7 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
                     </div>
                 </div>
                 <div className="text-start px-1">
-                    <p className="text-sm font-bold text-muted-foreground">{pretitle}</p>
+                    <p className="text-sm font-medium text-muted-foreground">{pretitle}</p>
                     <p className="font-semibold tracking-tight line-clamp-3">{title}</p>
                 </div>
             </Link>
