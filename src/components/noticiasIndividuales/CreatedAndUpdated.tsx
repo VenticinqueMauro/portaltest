@@ -19,7 +19,7 @@ interface Props {
 
 export const CreatedAndUpdated = ({ createdAt, updatedAt }: Props) => (
     createdAt &&
-    <div className="flex flex-col md:flex-row gap-1 text-xs text-muted-foreground font-light">
+    <div className="flex flex-col md:flex-row gap-1 text-xs text-muted-foreground font-light pb-5 ">
         <span>{formatDate(createdAt)}</span>
         <span className="hidden md:inline-flex">|</span>
         {

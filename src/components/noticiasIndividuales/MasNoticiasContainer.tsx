@@ -18,7 +18,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews }: P
 
     return (
         <div>
-            <div className="max-w-6xl 2xl:mx-auto">
+            <div className="max-w-6xl pt-5 md:pt-0 2xl:mx-auto">
                 <span className="italic tracking-tight text-2xl text-tdn relative inline-block">
                     <h2 className="pt-2 border-t border-tdn w-[200px] mb-5 relative">
                         {`Más de ${category == 'eco & negocios' ? 'economía' : category}`}

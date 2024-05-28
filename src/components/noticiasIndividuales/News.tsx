@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import BreadCrumb from "./BreadCrumb";
 import { Separator } from "../ui/separator";
 import { CreatedAndUpdated } from "./CreatedAndUpdated";
+import Tags from "./Tags";
 
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
@@ -32,11 +33,11 @@ export default function News({ news, category, moreNews }: Props) {
                 <h2 className="text-lg">{news.summary}</h2>
                 <h3 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{news.author}</b></h3>
                 <Separator />
-                <CreatedAndUpdated createdAt={news.createdAt} updatedAt={news.updatedAt} />
             </div>
-            <div className="flex flex-col md:flex-row mt-5 gap-4">
+            <div className="flex flex-col md:flex-row mt-3 gap-4">
                 <div className="grow">
-                    <div className="px-1">
+                    <CreatedAndUpdated createdAt={news.createdAt} updatedAt={news.updatedAt} />
+                    <div>
                         <div className="relative -top-2">
                             {
                                 news.media?.portada.type !== 'video' ?
@@ -50,9 +51,11 @@ export default function News({ news, category, moreNews }: Props) {
                             }
                         </div>
                     </div>
-                    <p className="text-xs mb-2 px-1 text-muted-foreground">{news.media?.portada.caption}</p>
+                    <p className="text-xs mb-2 text-muted-foreground">{news.media?.portada.caption}</p>
                     <div dangerouslySetInnerHTML={{ __html: news.content }} />
+                    <Tags tags={news.tags} />
                 </div>
+                <Separator orientation='vertical' />
                 {/* CAROUSEL MAS NOTICIAS  */}
                 <MasNoticiasContainer moreNews={moreNews} category={category} id={news._id as string} />
             </div>
