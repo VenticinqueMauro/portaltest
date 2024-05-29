@@ -147,7 +147,7 @@ export default async function QuotesContainer() {
     const formattedPortalData = formatPortalData(portal[0]);
 
     return (
-        <div className="px-3 pt-3 pb-2 backdrop-blur">
+        <div className="px-3 py-3 bg-gradient-to-b from-white to-transparent">
             <Carousel className="max-w-7xl mx-auto px-3 ">
                 <CarouselContent className="-ml-1 gap-10">
                     {quotations?.map((quote: QuoteApi) => (

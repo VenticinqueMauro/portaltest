@@ -33,7 +33,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
             </div>
             <CarouselMasNoticias id={id} moreNews={filteredMoreNews} />
             <div className="absolute top-0 right-0 h-full">
-                <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-32 right-0 mt-[600px]">
+                <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-40 right-0 mt-[600px]">
                     {ads?.media?.desktop?.side?.url ? (
                         <Image
                             src={ads?.media?.desktop?.side?.url}

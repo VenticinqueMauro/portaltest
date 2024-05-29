@@ -42,7 +42,7 @@ export default function Navbar() {
                     <Button variant='secondary' >Registrarme</Button>
                 </div>
             </ul>
-            <div className='bg-black '>
+            <div className='bg-black'>
                 <Carousel className="px-3 text-white md:hidden mt-2">
                     <CarouselContent className="-ml-1 gap-8">
                         {sections.map((section) => (
@@ -54,7 +54,7 @@ export default function Navbar() {
                         ))}
                     </CarouselContent>
                 </Carousel>
-                <div className='max-w-7xl mx-auto items-center gap-10 py-2 mt-2 hidden md:flex'>
+                <div className='max-w-7xl mx-auto items-center gap-10 py-2 mt-2 hidden md:flex px-3'>
                     {sections.map((section) => (
                         <Link key={section.title} href={section.href} className=" text-white py-1 text-xs md:text-sm  flex justify-center gap-1">
                             {section.title}
