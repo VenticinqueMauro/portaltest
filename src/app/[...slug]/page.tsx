@@ -14,6 +14,20 @@ export async function generateStaticParams() {
     });
 }
 
+async function getAds(category: string) {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/ads?category=${category}`, { next: { revalidate: 60 } });
+
+        if (!response.ok) {
+            console.log('Error al obtener publicidades');
+        }
+        const { data } = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
     const { slug } = params;
@@ -21,13 +35,14 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
     const decodeCategory = decodeURIComponent(category)
 
-    const [news, moreNews] = await Promise.all([
+    const [news, moreNews, ads] = await Promise.all([
         getNewsByPath(path),
-        getFormatedCategoryNews(category)
+        getFormatedCategoryNews(category),
+        getAds(category)
     ]);
 
 
     return (
-        <Container news={news} category={decodeCategory} moreNews={moreNews} />
+        <Container news={news} category={decodeCategory} moreNews={moreNews} ads={ads} />
     );
 }

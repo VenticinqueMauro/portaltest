@@ -10,26 +10,14 @@ import { blurImage } from '@/utils/blurImage';
 interface Props {
     news: NewsType;
     category: string;
-    moreNews: MoreNews[]
+    moreNews: MoreNews[];
+    ads?: Ad
 }
 
-async function getAds(category: string) {
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/ads?category=${category}`, { next: { revalidate: 60 } });
 
-        if (!response.ok) {
-            console.log('Error al obtener publicidades');
-        }
-        const { data } = await response.json();
-        return data;
-    } catch (error) {
-        console.log(error)
-    }
-}
 
-export default async function Container({ news, category, moreNews }: Props) {
+export default async function Container({ news, category, moreNews, ads }: Props) {
 
-    const ads: Ad = await getAds(category);
 
     if (!news) {
         return null
@@ -39,7 +27,7 @@ export default async function Container({ news, category, moreNews }: Props) {
         <section>
             {
                 <div className="p-3 md:p-0 md:py-5 bg-publicidad flex justify-center items-center relative">
-                    {ads.media?.desktop?.top?.url ? (
+                    {ads && ads.media?.desktop?.top?.url ? (
                         <Image
                             src={ads.media?.desktop?.top?.url}
                             alt="Publicidad principal"
