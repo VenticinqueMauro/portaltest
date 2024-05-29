@@ -147,28 +147,28 @@ export default async function QuotesContainer() {
     const formattedPortalData = formatPortalData(portal[0]);
 
     return (
-        <div className="bg-black px-3 py-3">
-            <Carousel className="max-w-7xl mx-auto px-3">
+        <div className="px-3 pt-3 pb-2 backdrop-blur">
+            <Carousel className="max-w-7xl mx-auto px-3 ">
                 <CarouselContent className="-ml-1 gap-10">
                     {quotations?.map((quote: QuoteApi) => (
                         <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto `}>
-                            <p className="text-tdn bg-white px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
-                                <b>{formatName(quote)}:</b> {formatQuote(quote)}
-                            </p>
+                            <span className="text-white bg-black px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
+                                {formatName(quote)}: <p className="font-medium">{formatQuote(quote)}</p>
+                            </span>
                         </CarouselItem>
                     ))}
                     {formattedPortalData.map((item) => (
                         <CarouselItem key={item.title} className={` pl-2 md:pl-1 basis-auto `}>
                             <Accordion type="single" collapsible >
                                 <AccordionItem value={item.title} className="border-none min-w-[200px]">
-                                    <AccordionTrigger className="text-tdn bg-white px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
-                                        <b>{item.title}</b>
+                                    <AccordionTrigger className="text-white bg-black px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
+                                        {item.title}
                                     </AccordionTrigger>
-                                    <AccordionContent className="text-tdn bg-white px-3 py-1 text-xs md:text-sm  border-none mt-1">
+                                    <AccordionContent className="text-white bg-black px-3 py-1 text-xs md:text-sm  border-none mt-1">
                                         {item.variants.map((variant) => (
-                                            <p key={variant.name} >
-                                                <b className="font-medium">{variant.name}</b>: {variant.precioActual}
-                                            </p>
+                                            <span key={variant.name} >
+                                                {variant.name}: <p className="font-medium">{variant.precioActual}</p>
+                                            </span>
                                         ))}
                                     </AccordionContent>
                                 </AccordionItem>
@@ -176,8 +176,8 @@ export default async function QuotesContainer() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="text-white border-none bg-black  hidden xl:flex" />
-                <CarouselNext className="text-white border-none bg-black  hidden xl:flex" />
+                <CarouselPrevious className="text-black border-none bg-white  hidden xl:flex" />
+                <CarouselNext className="text-black border-none bg-white  hidden xl:flex" />
             </Carousel>
         </div>
     )
