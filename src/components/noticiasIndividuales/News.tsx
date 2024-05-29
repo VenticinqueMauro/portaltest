@@ -1,5 +1,5 @@
 import { MoreNews } from "@/app/api/news/more-news/route";
-import { NewsType } from "@/types/news.types";
+import { Ad, Ads, NewsType } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
 import MasNoticiasContainer from "./MasNoticiasContainer";
@@ -8,6 +8,8 @@ import { Separator } from "../ui/separator";
 import BreadCrumb from "./BreadCrumb";
 import { CreatedAndUpdated } from "./CreatedAndUpdated";
 import Tags from "./Tags";
+import LateralDesktop from "../home/publicidades/Lateral.Desktop";
+import InferiorDesktop from "../home/publicidades/Inferior.Desktop";
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery"), { ssr: false });
@@ -15,10 +17,11 @@ const Gallery = dynamic(() => import("./Gallery"), { ssr: false });
 interface Props {
     news: NewsType;
     category: string;
-    moreNews: MoreNews[]
+    moreNews: MoreNews[];
+    ads?: Ad
 }
 
-export default function News({ news, category, moreNews }: Props) {
+export default function News({ news, category, moreNews, ads }: Props) {
 
 
     return (
@@ -52,13 +55,14 @@ export default function News({ news, category, moreNews }: Props) {
                         </div>
                     </div>
                     <p className="text-xs mb-2 text-muted-foreground">{news.media?.portada.caption}</p>
-                    <div dangerouslySetInnerHTML={{ __html: news.content }} />
+                    <div className="pb-7" dangerouslySetInnerHTML={{ __html: news.content }} />
+                    <InferiorDesktop url={ads?.media?.desktop?.bottom?.url || ''} />
                     <Gallery gallery={news.media?.gallery} />
                     <Tags tags={news.tags} />
                 </div>
                 <Separator orientation='vertical' />
                 {/* CAROUSEL MAS NOTICIAS  */}
-                <MasNoticiasContainer moreNews={moreNews} category={category} id={news._id as string} />
+                <MasNoticiasContainer moreNews={moreNews} category={category} id={news._id as string} ads={ads} />
             </div>
             <NewsLinked newsLinked={news.newsLinked} />
         </div>

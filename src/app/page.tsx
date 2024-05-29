@@ -1,6 +1,7 @@
 import QuotesContainer from '@/components/cotizaciones/Quotes.container';
 import Navbar from '@/components/navbar/Navbar';
 import { Ads } from '@/types/news.types';
+import { blurImage } from '@/utils/blurImage';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -26,13 +27,17 @@ export default async function page() {
 
     return (
         <section>
-            <div className="h-[170px] bg-publicidad col-span-12 flex justify-center items-center relative">
+            <div className="p-3 md:h-[170px] bg-publicidad col-span-12 flex justify-center items-center relative">
                 <Image
                     src={ads.home.portada?.media?.desktop?.top?.url as string}
                     alt={`publicidad`}
                     width={970}
                     height={150}
+                    placeholder="blur"
+                    blurDataURL={blurImage}
                     priority
+                    aria-label="Publicidad principal"
+                    className='object-cover h-[150px] md:h-auto'
                 />
             </div>
             <div className='sticky top-0 left-0 z-20'>

@@ -32,10 +32,10 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
     };
 
     return (
-        <div className="px-14 md:px-0">
+        <div className="px-14 md:px-0 ">
             {/* DESKTOP  */}
-            <Carousel orientation={'vertical'} className="hidden md:block md:px-3">
-                <CarouselContent className={"space-y-3 -ml-1 flex gap-4"}>
+            <Carousel orientation={'vertical'} className="hidden md:block md:px-3 ">
+                <CarouselContent className={"space-y-3 -ml-1 flex gap-4 max-h-[600px]"}>
                     {moreNews.slice(0.4).map((item: MoreNews, index) => (
                         <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5  md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[220px]">
                             <Link href={generateHref(item.category, item.path)} className="rounded flex flex-col justify-start gap-1">

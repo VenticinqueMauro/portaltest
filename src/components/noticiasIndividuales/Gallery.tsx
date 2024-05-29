@@ -23,7 +23,7 @@ export default function Gallery({ gallery }: Props) {
     }
 
     return (
-        <div className="py-5">
+        <div className="pb-5">
             <div >
                 <Carousel className="relative">
                     <CarouselContent className="-ml-1 flex gap-4 ">
