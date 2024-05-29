@@ -1,5 +1,3 @@
-import QuotesContainer from "@/components/cotizaciones/Quotes.container";
-import Navbar from "@/components/navbar/Navbar";
 import { getNewsByPath } from "@/utils/utils";
 
 export async function generateMetadata({ params }: { params: { slug: string[] } }) {
@@ -32,11 +30,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
-        <section >
-            <div className='sticky top-0 left-0 z-20'>
-                <Navbar />
-                <QuotesContainer />
-            </div>
+        <section>
             {children}
         </section>
     )

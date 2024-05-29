@@ -4,6 +4,10 @@ import { handleError } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+
+    const searchParams = request.nextUrl.searchParams;
+    const query = searchParams.get('category');
+
     try {
         // Conectar a la base de datos
         await connectDB();
@@ -16,12 +20,24 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ error: "No se encontraron anuncios" });
         }
 
+        // Si se proporciona una categoría, filtrar los anuncios por esa categoría
+        let filteredAds;
+        if (query) {
+            filteredAds = adsDocument.ads.home[query];
+            if (!filteredAds) {
+                // Si no se encuentra la categoría especificada, devolver un mensaje de error
+                return NextResponse.json({ error: `No se encontraron anuncios para la categoría: ${query}` });
+            }
+        } else {
+            // Si no se proporciona una categoría, devolver todos los anuncios
+            filteredAds = adsDocument;
+        }
+
         // Devolver el documento de anuncios encontrado
-        return NextResponse.json({ message: "Anuncios obtenidos correctamente", data: adsDocument });
+        return NextResponse.json({ message: "Anuncios obtenidos correctamente", data: filteredAds });
 
     } catch (error) {
-        // Manejar errores
-        return NextResponse.json({ error: "Error al obtener los datos de anuncios" });
+        return handleError(error);
     }
 }
 
