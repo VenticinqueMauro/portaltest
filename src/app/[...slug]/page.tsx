@@ -50,8 +50,19 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     }
 
     if (category && !path) {
+
+        const news = await getFormatedCategoryNews(decodeCategory);
+
+        console.log(news)
+
         return (
-            <p>{category}</p>
+            <div>
+                {
+                    news.map((news: NewsType) => (
+                        <p key={news._id}>{news.title}</p>
+                    ))
+                }
+            </div>
         )
     }
 
