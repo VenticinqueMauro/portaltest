@@ -9,23 +9,23 @@ import { Button } from '../ui/button';
 const sections = [
     {
         title: "Política",
-        href: "politica"
+        href: "/politica"
     },
     {
         title: "Eco & negocios",
-        href: "eco & negocios"
+        href: "/eco & negocios"
     },
     {
         title: "Deportes",
-        href: "deportes"
+        href: "/deportes"
     },
     {
         title: "Tendencias",
-        href: "tendencias"
+        href: "/tendencias"
     },
     {
         title: "Portal de la caña",
-        href: "portalcana"
+        href: "/portalcana"
     },
 ]
 
