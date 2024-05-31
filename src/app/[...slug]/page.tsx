@@ -1,6 +1,15 @@
+import QuotesContainer from "@/components/cotizaciones/Quotes.container";
+import { getCover } from "@/components/home/Container.home";
+import SectionTitle from "@/components/home/SectionTitle";
+import LateralDesktop from "@/components/home/publicidades/Lateral.Desktop";
+import Navbar from "@/components/navbar/Navbar";
+import PublicidadSuperior from "@/components/noticias-por-categoria/publicidades/PublicidadSuperior";
 import Container from "@/components/noticiasIndividuales/Container";
-import { NewsType } from "@/types/news.types";
+import { HomePageDocument } from "@/models/home";
+import { Ad, NewsType, SectionNewsMap } from "@/types/news.types";
+import { blurImage } from "@/utils/blurImage";
 import { getFormatedCategoryNews, getNewsByPath } from "@/utils/utils";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -37,6 +46,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     const decodeCategory = decodeURIComponent(category)
 
     if (category && path) {
+
+
         const [news, moreNews, ads] = await Promise.all([
             getNewsByPath(path),
             getFormatedCategoryNews(category),
@@ -51,18 +62,34 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
     if (category && !path) {
 
-        const news = await getFormatedCategoryNews(decodeCategory);
 
-        console.log(news)
+        const [news, ads] = await Promise.all([
+            getFormatedCategoryNews(decodeCategory),
+            getAds(category),
+            getFormatedCategoryNews(decodeCategory)
+        ]);
+
+        console.log(ads)
+
+        const sectionTitle = decodeCategory.charAt(0).toUpperCase() + decodeCategory.slice(1);
 
         return (
-            <div>
-                {
-                    news.map((news: NewsType) => (
-                        <p key={news._id}>{news.title}</p>
-                    ))
-                }
-            </div>
+            <main>
+                <PublicidadSuperior ads={ads} />
+                <div className='sticky top-0 left-0 z-20'>
+                    <Navbar />
+                    <QuotesContainer />
+                </div>
+                <div className="py-10">
+                    <section className="relative">
+                        <SectionTitle title={sectionTitle} />
+                        <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto  px-3">
+                            <h2>{news?.[0]?.title || 'no hay datos'}</h2>
+                            <LateralDesktop url={ads?.media.desktop?.side?.url} />
+                        </div>
+                    </section>
+                </div>
+            </main>
         )
     }
 
