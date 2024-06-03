@@ -1,11 +1,10 @@
 import { MoreNews } from "@/app/api/news/more-news/route";
-import SectionTitle from "../home/SectionTitle";
-import CarouselMasNoticias from "./CarouselMasNoticias";
 import { Ad } from "@/types/news.types";
-import LateralDesktop from "../home/publicidades/Lateral.Desktop";
 import { blurImage } from "@/utils/blurImage";
+import { fontLato } from "@/utils/utils";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import CarouselMasNoticias from "./CarouselMasNoticias";
 
 interface Props {
     category: string;
@@ -24,7 +23,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
 
     return (
         <div className="min-h-full relative">
-            <div className="max-w-6xl pt-5 md:pt-0 2xl:mx-auto">
+            <div className={`${fontLato.className} max-w-6xl pt-5 md:pt-0 2xl:mx-auto`}>
                 <span className="italic tracking-tight text-2xl text-tdn relative inline-block">
                     <h2 className="pt-2 border-t border-tdn w-[200px] mb-5 relative">
                         {`Más de ${category == 'eco & negocios' ? 'economía' : category}`}

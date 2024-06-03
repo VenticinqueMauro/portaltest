@@ -21,9 +21,8 @@ export default function SuperiorDesktop({ url }: Props) {
                         height={100}
                         placeholder="blur"
                         blurDataURL={blurImage}
-                        priority
                         aria-label="Publicidad superior"
-
+                        loading="lazy"
                     />
                     :
                     <span className="text-sm text-muted-foreground flex items-center justify-center text-center w-full">

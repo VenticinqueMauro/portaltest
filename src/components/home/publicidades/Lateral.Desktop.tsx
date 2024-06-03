@@ -20,8 +20,8 @@ export default function LateralDesktop({ url }: Props) {
                         height={500}
                         placeholder="blur"
                         blurDataURL={blurImage}
-                        priority
                         aria-label="Publicidad lateral"
+                        loading="lazy"
                     />
                 ) : (
                     <span className="w-[200px] h-[500px] text-sm text-muted-foreground flex items-center justify-center text-center">
