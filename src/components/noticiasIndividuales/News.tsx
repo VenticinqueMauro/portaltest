@@ -1,15 +1,15 @@
 import { MoreNews } from "@/app/api/news/more-news/route";
-import { Ad, Ads, NewsType } from "@/types/news.types";
+import { Ad, NewsType } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
-import Image from "next/image";
-import MasNoticiasContainer from "./MasNoticiasContainer";
+import { fontLato, fontMerriweather } from "@/utils/utils";
 import dynamic from "next/dynamic";
+import Image from "next/image";
+import InferiorDesktop from "../home/publicidades/Inferior.Desktop";
 import { Separator } from "../ui/separator";
 import BreadCrumb from "./BreadCrumb";
 import { CreatedAndUpdated } from "./CreatedAndUpdated";
+import MasNoticiasContainer from "./MasNoticiasContainer";
 import Tags from "./Tags";
-import LateralDesktop from "../home/publicidades/Lateral.Desktop";
-import InferiorDesktop from "../home/publicidades/Inferior.Desktop";
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery"), { ssr: false });
@@ -31,9 +31,9 @@ export default function News({ news, category, moreNews, ads }: Props) {
             <BreadCrumb category={category} />
 
             <div className="space-y-3">
-                <h3 className="text-muted-foreground font-medium">{news.pretitle}</h3>
+                <h3 className={`${fontLato.className} text-muted-foreground font-medium`}>{news.pretitle}</h3>
                 <h1 className="text-3xl font-semibold leading-none tracking-tight">{news.title}</h1>
-                <h2 className="text-lg">{news.summary}</h2>
+                <h2 className={`${fontMerriweather.className} text-lg`}>{news.summary}</h2>
                 <h3 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{news.author}</b></h3>
                 <Separator />
             </div>

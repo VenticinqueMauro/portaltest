@@ -1,3 +1,4 @@
+import { fontLato } from "@/utils/utils";
 
 interface Props {
     title: string;
@@ -10,7 +11,7 @@ export default function SectionTitle({ title }: Props) {
     }
 
     return (
-        <div className="max-w-6xl 2xl:mx-auto px-3">
+        <div className={`${fontLato.className} max-w-6xl 2xl:mx-auto px-3`}>
             <span className="italic tracking-tight text-2xl text-tdn relative inline-block">
                 <h2 className="pt-2 border-t border-tdn w-[200px] mb-5 relative">
                     {title}
