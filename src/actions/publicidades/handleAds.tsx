@@ -1,6 +1,5 @@
 'use server';
 
-import { SectionName } from '@/components/dashboard/editar-home/EditorContainer';
 import { Ad, AdPosition, AdSectionName, Ads } from '@/types/news.types';
 import { v2 as cloudinary } from 'cloudinary';
 import { revalidatePath } from 'next/cache';
@@ -29,7 +28,7 @@ const processAndUploadFiles = async (file: File | null, resourceType: ResourceTy
                 resource_type: resourceType,
                 eager: {
                     crop: 'auto',
-                    quality: 'auto',
+                    quality: '70',
                 },
             };
 

@@ -19,9 +19,9 @@ export default function PrincipalDesktop({ url }: Props) {
                     height={150}
                     placeholder="blur"
                     blurDataURL={blurImage}
-                    priority
                     aria-label="Publicidad principal"
                     className='object-cover h-[150px] md:h-auto'
+                    loading="lazy"
                 />
             ) : (
                 <span className="text-sm text-muted-foreground flex items-center justify-center text-center">

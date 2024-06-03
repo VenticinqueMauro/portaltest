@@ -23,7 +23,7 @@ export default function InferiorDesktop({ url }: Props) {
                             height={150}
                             placeholder="blur"
                             blurDataURL={blurImage}
-                            priority
+                            loading="lazy"
                             aria-label="Publicidad inferior"
                         />
                         :

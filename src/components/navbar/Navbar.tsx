@@ -35,7 +35,8 @@ export default function Navbar() {
         <nav className='bg-tdn  xl:px-0 pt-6 '>
             <ul className='max-w-7xl mx-auto text-white flex items-center justify-between px-3'>
                 <Link href='/'>
-                    <Image src='/logoblanco.png' alt='logo' width={200} height={283} />
+                    <Image src='/logoblanco.png' alt='logo' width={200} height={200} loading="lazy" className="w-auto h-auto"
+                    />
                 </Link>
                 <div className='space-x-4'>
                     <Button variant='ghost'>Iniciar sesión</Button>
