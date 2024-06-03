@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Separator } from "../ui/separator";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
+import { fontLato } from "@/utils/utils";
 
 interface Props {
     image: {
@@ -41,7 +42,7 @@ export default function LateralDerecho({ image, pretitle, title, category, path,
                         </div>
                     </div>
                     <div className="text-start px-1">
-                        <p className="text-sm font-medium text-muted-foreground">{pretitle}</p>
+                        <p className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>{pretitle}</p>
                         <p className="font-semibold tracking-tight line-clamp-4">{title}</p>
                     </div>
                 </div>

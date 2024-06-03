@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/carousel";
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import Image from "next/image";
 
 const sections = [
     {
@@ -34,8 +35,7 @@ export default function Navbar() {
         <nav className='bg-tdn  xl:px-0 pt-6 '>
             <ul className='max-w-7xl mx-auto text-white flex items-center justify-between px-3'>
                 <Link href='/'>
-                    {/* <Image src='/portada-dashboard.png' alt='logo' width={100} height={100} /> */}
-                    <p className='text-white text-3xl'>LOGO</p>
+                    <Image src='/logoblanco.png' alt='logo' width={200} height={283} />
                 </Link>
                 <div className='space-x-4'>
                     <Button variant='ghost'>Iniciar sesión</Button>

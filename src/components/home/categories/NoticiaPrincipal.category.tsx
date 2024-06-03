@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "../../ui/card";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
+import { fontLato } from "@/utils/utils";
 
 interface Props {
     image: {
@@ -35,7 +36,7 @@ export default function NoticiaPrincipalCategory({ image, pretitle, title, categ
                     </div>
                 </div>
                 <CardHeader className="text-center">
-                    <CardDescription className="text-muted-foreground font-medium text-sm">
+                    <CardDescription className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>
                         {pretitle}
                     </CardDescription>
                     <CardTitle className="text-3xl">

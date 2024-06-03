@@ -9,6 +9,7 @@ import Image from "next/image";
 import SectionTitle from "./SectionTitle";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
+import { fontLato } from "@/utils/utils";
 
 interface MostRead {
     _id: string;
@@ -84,7 +85,7 @@ export default async function MasLeidas() {
                                         )}
                                     </div>
                                     <div className="text-start px-1">
-                                        <p className="text-sm font-medium text-muted-foreground">{item.pretitle}</p>
+                                        <p className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>{item.pretitle}</p>
                                         <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
                                     </div>
                                 </Link>

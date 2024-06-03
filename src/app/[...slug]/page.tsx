@@ -92,7 +92,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                                             {news?.[0].media.portada.type !== 'video' ? (
                                                 <Image src={news?.[0].media.portada.url} alt={news?.[0].title} width={856} height={422} placeholder="blur" blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
                                             ) : (
-                                                <video width="400" height="300" controls autoPlay loop className="w-full object-cover aspect-video rounded">
+                                                <video width="856" height="422" controls autoPlay loop className="w-full object-cover aspect-video rounded">
                                                     <source src={news?.[0].media.portada.url} type="video/mp4" />
                                                     Tu navegador no soporta la etiqueta de video.
                                                 </video>

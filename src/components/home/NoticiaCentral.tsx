@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
+import { fontLato, fontMerriweather } from "@/utils/utils";
 
 interface Props {
     image: {
@@ -34,13 +35,13 @@ export default function NoticiaCentral({ image, pretitle, title, summary, catego
                     </div>
                 </div>
                 <CardHeader className="text-center">
-                    <CardDescription className="text-muted-foreground font-medium text-sm">
+                    <CardDescription className={`text-muted-foreground font-medium text-sm ${fontLato.className}`}>
                         {pretitle}
                     </CardDescription>
                     <CardTitle className="text-3xl">
                         {title}
                     </CardTitle>
-                    <CardDescription className="text-lg max-w-xl mx-auto">
+                    <CardDescription className={`${fontMerriweather.className} text-lg max-w-xl mx-auto`}>
                         {summary}
                     </CardDescription>
                 </CardHeader>

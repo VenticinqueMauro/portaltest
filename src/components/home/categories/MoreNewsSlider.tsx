@@ -6,6 +6,7 @@ import { blurImage } from '@/utils/blurImage';
 import { MoreNews, MoreNewsData } from '@/app/api/news/more-news/route';
 import { MainNews, SectionNewsMap, SidebarItem } from '@/types/news.types';
 import Link from 'next/link';
+import { fontLato } from '@/utils/utils';
 
 interface Props {
     title: string;
@@ -68,7 +69,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
                                         )}
                                     </div>
                                     <div className="text-start px-1">
-                                        <p className="text-sm font-medium text-muted-foreground">{item.pretitle}</p>
+                                        <p className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>{item.pretitle}</p>
                                         <p className="font-semibold tracking-tight line-clamp-3">{item.title}</p>
                                     </div>
                                 </Link>
