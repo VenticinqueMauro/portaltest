@@ -3,6 +3,7 @@ import React from 'react'
 import { Separator } from '../ui/separator'
 import { blurImage } from '@/utils/blurImage';
 import Link from 'next/link';
+import { fontLato } from '@/utils/utils';
 
 interface Props {
     image: {
@@ -66,7 +67,7 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
                     </div>
                 </div>
                 <div className="text-start px-1">
-                    <p className="text-sm font-medium text-muted-foreground">{pretitle}</p>
+                    <p className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>{pretitle}</p>
                     <p className="font-semibold tracking-tight line-clamp-3">{title}</p>
                 </div>
             </Link>

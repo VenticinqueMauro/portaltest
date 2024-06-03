@@ -8,7 +8,7 @@ import ContainerSectionCategory from "./categories/ContainerSection.category";
 import LateralDesktop from "./publicidades/Lateral.Desktop";
 import { MoreNewsData } from "@/app/api/news/more-news/route";
 
-async function getCover() {
+export async function getCover() {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/edit-home/cover`, { next: { revalidate: 60 } });
 
@@ -22,7 +22,7 @@ async function getCover() {
     }
 }
 
-async function getFormatedCategoryNews(): Promise<MoreNewsData | undefined> {
+export async function getFormatedCategoryNews(): Promise<MoreNewsData | undefined> {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news/more-news`, { next: { revalidate: 60 } });
 
@@ -103,7 +103,6 @@ export default async function ContainerHome({ ads }: Props) {
                 <LateralDesktop url={ads.home.portada?.media?.desktop?.side?.url as string} />
             </section>
 
-            {/* <ContainerSectionCategory homeNews={homeNews} ads={ads} /> */}
             {sections.map((sectionKey) => {
                 const sectionData = homeNews.sections[sectionKey as keyof SectionNewsMap];
                 const sectionTitle = sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);

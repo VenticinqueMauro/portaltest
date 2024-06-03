@@ -5,6 +5,7 @@ import { Ad } from "@/types/news.types";
 import LateralDesktop from "../home/publicidades/Lateral.Desktop";
 import { blurImage } from "@/utils/blurImage";
 import Image from "next/image";
+import { Separator } from "../ui/separator";
 
 interface Props {
     category: string;
@@ -32,6 +33,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
                 </span>
             </div>
             <CarouselMasNoticias id={id} moreNews={filteredMoreNews} />
+            <Separator className='mt-7' />
             <div className="absolute top-0 right-0 h-full">
                 <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-40 right-0 mt-[600px]">
                     {ads?.media?.desktop?.side?.url ? (

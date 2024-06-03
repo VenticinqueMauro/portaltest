@@ -1,4 +1,5 @@
 import { blurImage } from "@/utils/blurImage";
+import { fontLato } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,7 +38,7 @@ export default function NoticiasGridCategory({ image, pretitle, title, category,
                 )
             }
             <div className="p-2">
-                <p className="text-sm font-medium text-muted-foreground">
+                <p className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>
                     {pretitle}
                 </p>
                 <p className="font-semibold tracking-tight line-clamp-3">
