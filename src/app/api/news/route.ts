@@ -1,19 +1,28 @@
 import { connectDB } from "@/lib/mongodb";
 import { News } from "@/models/news";
+import { NewsStatus } from "@/types/news.types";
 import { handleError, normalizeTitle } from "@/utils/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
-    const query = searchParams.get('path');
+    const pathQuery = searchParams.get('path');
+    const categoryQuery = searchParams.get('category');
 
     try {
         await connectDB();
 
         let news;
-        if (query) {
-            news = await News.findOne({ path: query });
+        if (pathQuery) {
+            news = await News.findOne({ path: pathQuery });
+        } else if (categoryQuery) {
+            news = await News.find(
+                { category: categoryQuery, status: NewsStatus.PUBLISHED },
+                { _id: 1, media: 1, pretitle: 1, title: 1, category: 1, path: 1 }
+            )
+                .sort({ date: -1 })
+                .lean();;
         } else {
             news = await News.find({});
         }
@@ -27,6 +36,7 @@ export async function GET(request: NextRequest) {
         return handleError(error);
     }
 }
+
 
 export async function POST(request: NextRequest) {
 
@@ -42,7 +52,7 @@ export async function POST(request: NextRequest) {
         }
 
         const path = normalizeTitle(title);
-        
+
         const newNews = new News({
             pretitle,
             title,

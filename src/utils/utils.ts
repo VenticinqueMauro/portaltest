@@ -289,6 +289,21 @@ export async function getNewsByPath(path: string) {
     }
 }
 
+export async function getNewsByCategory(category: string) {
+    try {
+        const encodedCategory = encodeURIComponent(category);
+
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news?category=${encodedCategory}`);
+
+        const { data } = await res.json();
+
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 // GET MORE NEWS 
 
 export async function getFormatedCategoryNews(query: string) {

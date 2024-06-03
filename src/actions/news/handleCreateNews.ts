@@ -73,7 +73,7 @@ const processAndUploadFiles = async (files: File[] | File | null, resourceType: 
 
             const uploadPromise = new Promise<CloudinaryUploadResult>((resolve, reject) => {
                 const options: UploadApiOptions = {
-                    folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${title}`,
+                    folder: `Noticias/${category === 'eco & negocios' ? 'eco-negocios' : category}/${(title as string ?? '').trim()}`,
                     resource_type: resourceType,
                     eager: {
                         width: 856,
@@ -191,12 +191,12 @@ export const handleCreateNews = async (formData: FormData) => {
     // Reemplazar las URLs de las imágenes en el contenido si hay una URL de imagen
     if (imageContentUrl) {
         content = String(content).replace(/<img.*?src="(.*?)".*?>/g, () => {
-            return `<img src="${imageContentUrl?.url}" alt="${title}" class="object-cover rounded w-full aspect-video" />`;
+            return `<img src="${imageContentUrl?.url}" alt="${title}" width="856" height="422" class="object-cover rounded w-full aspect-video" />`;
         });
     }
     if (videoContentUrl) {
         content = String(content).replace(/<img.*?src="(.*?)".*?>/g, () => {
-            return `<video controls><source src="${videoContentUrl?.url}" type="video/mp4" class="object-cover rounded w-full aspect-video" /></video>`;
+            return `<video controls><source src="${videoContentUrl?.url}" width="856" height="422" type="video/mp4" class="object-cover rounded w-full aspect-video" /></video>`;
         });
     }
 
