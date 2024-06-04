@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
         if (query) {
             const news: MoreNews[] = await News.find(
                 { category: query, status: NewsStatus.PUBLISHED },
-                { _id: 1, media: 1, pretitle: 1, title: 1, category: 1, path: 1 }
+                { _id: 1, media: 1, pretitle: 1, title: 1, summary: 1, category: 1, path: 1, author: 1, createdAt: 1 }
             )
                 .sort({ date: -1 })
                 .lean();

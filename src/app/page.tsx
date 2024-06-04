@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const ContainerHome = dynamic(() => import('@/components/home/Container.home'), { loading: () => <div>Loading...</div> });
 
-async function getAds() {
+export async function getAds() {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/ads`, { next: { revalidate: 60 } });
 
