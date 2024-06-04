@@ -1,78 +1,82 @@
 import QuotesContainer from "@/components/cotizaciones/Quotes.container";
 import { getCover } from "@/components/home/Container.home";
-import SectionTitle from "@/components/home/SectionTitle";
-import LateralDesktop from "@/components/home/publicidades/Lateral.Desktop";
 import Navbar from "@/components/navbar/Navbar";
+import PortadaPrincipal from "@/components/noticias-por-categoria/PortadaPrincipal";
 import PublicidadSuperior from "@/components/noticias-por-categoria/publicidades/PublicidadSuperior";
 import Container from "@/components/noticiasIndividuales/Container";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { HomePageDocument } from "@/models/home";
-import { Ad, NewsType, SectionNewsMap } from "@/types/news.types";
-import { blurImage } from "@/utils/blurImage";
-import { getFormatedCategoryNews, getNewsByCategory, getNewsByPath } from "@/utils/utils";
-import Image from "next/image";
-import Link from "next/link";
+import { MainNews, NewsType, SidebarItem } from "@/types/news.types";
+import { getFormatedCategoryNews, getNewsByPath } from "@/utils/utils";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, { cache: 'no-store' });
-    const { data }: { data: NewsType[] } = await response.json();
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Failed to fetch news data');
+        const { data }: { data: NewsType[] } = await response.json();
 
-    return data.map((news: NewsType) => {
-        const path = news.title ? news.title.replace(/\s+/g, '-').toLowerCase() : 'default-path';
-        return {
-            slug: [news.category, path]
-        };
-    });
+        return data.map((news: NewsType) => {
+            const path = news.title ? news.title.replace(/\s+/g, '-').toLowerCase() : 'default-path';
+            return {
+                slug: [news.category, path]
+            };
+        });
+    } catch (error) {
+        console.error('Error in generateStaticParams:', error);
+        return [];
+    }
 }
 
 async function getAds(category: string) {
-
     const encodedCategory = encodeURIComponent(category);
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/ads?category=${encodedCategory}`, { next: { revalidate: 60 } });
-
-        if (!response.ok) {
-            console.log('Error al obtener publicidades');
-        }
+        if (!response.ok) throw new Error('Failed to fetch ads');
         const { data } = await response.json();
-
-        console.log(data)
         return data;
     } catch (error) {
-        console.log(error)
+        console.error('Error fetching ads:', error);
+        return null;
     }
 }
 
+interface SectionData {
+    mainNews: MainNews;
+    gridNews: SidebarItem[];
+}
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
     const { slug } = params;
-    const [category, path] = slug;
+    const [category, path] = slug || [];
 
-    const decodeCategory = decodeURIComponent(category.replace(/\+/g, ' '));
+    if (!category) return notFound();
 
-    if (category && path) {
+    const decodedCategory = decodeURIComponent(category.replace(/\+/g, ' '));
+    let news, moreNews, ads, homeNews;
 
-        const [news, moreNews, ads] = await Promise.all([
-            getNewsByPath(path),
-            getFormatedCategoryNews(decodeCategory),
-            getAds(decodeCategory)
+    try {
+        [news, homeNews, moreNews, ads] = await Promise.all([
+            path ? getNewsByPath(path) : Promise.resolve(null),
+            getCover(),
+            getFormatedCategoryNews(decodedCategory),
+            getAds(decodedCategory)
         ]);
-
-        return (
-            <Container news={news} category={decodeCategory} moreNews={moreNews} ads={ads} />
-        );
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return notFound();
     }
 
-    if (category && !path) {
+    if (path && news) {
+        return (
+            <Container news={news} category={decodedCategory} moreNews={moreNews} ads={ads} />
+        );
+    } else if (!path && homeNews) {
+        const sectionTitle = decodedCategory.charAt(0).toUpperCase() + decodedCategory.slice(1);
+        const { data: { sections } } = homeNews;
+        const news: SectionData = sections[decodedCategory];
 
-        const [news, ads] = await Promise.all([
-            getNewsByCategory(decodeCategory),
-            getAds(decodeCategory)
-        ]);
-
-        const sectionTitle = decodeCategory.charAt(0).toUpperCase() + decodeCategory.slice(1);
+        const allNews = [news.mainNews, ...news.gridNews];
+        const filteredNews = moreNews.filter((item: NewsType) => !allNews.some(newsItem => newsItem.id === item._id));
 
         return (
             <main>
@@ -81,41 +85,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                     <Navbar />
                     <QuotesContainer />
                 </div>
-                <div className="py-10">
-                    <section className="relative">
-                        <SectionTitle title={sectionTitle} />
-                        <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto px-3">
-                            <Link className="rounded min-h-full col-start-1 col-span-12 lg:col-start-3 lg:col-span-8" href={`${category}/${news[0].path}`}>
-                                <Card className="bg-gray-100 hover:bg-gray-200 transition-all duration-100">
-                                    <div className="px-1">
-                                        <div className="relative -top-2">
-                                            {news?.[0].media.portada.type !== 'video' ? (
-                                                <Image src={news?.[0].media.portada.url} alt={news?.[0].title} width={856} height={422} placeholder="blur" blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
-                                            ) : (
-                                                <video width="856" height="422" controls autoPlay loop className="w-full object-cover aspect-video rounded">
-                                                    <source src={news?.[0].media.portada.url} type="video/mp4" />
-                                                    Tu navegador no soporta la etiqueta de video.
-                                                </video>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <CardHeader className="text-center">
-                                        <CardDescription className="text-muted-foreground font-medium text-sm">
-                                            {news?.[0].pretitle}
-                                        </CardDescription>
-                                        <CardTitle className="text-3xl">
-                                            {news?.[0].title}
-                                        </CardTitle>
-                                        <CardDescription className="text-lg max-w-xl mx-auto">
-                                            {news?.[0].summary}
-                                        </CardDescription>
-                                    </CardHeader>
-                                </Card>
-                            </Link>
-                            <LateralDesktop url={ads?.media?.desktop?.side?.url || ''} />
-                        </div>
-                    </section>
-                </div>
+                <PortadaPrincipal sectionTitle={sectionTitle} allNews={allNews} news={news} ads={ads} filteredNews={filteredNews} />
             </main>
         );
     }
