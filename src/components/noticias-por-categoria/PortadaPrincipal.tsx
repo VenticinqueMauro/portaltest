@@ -19,7 +19,6 @@ interface Props {
 
 export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, filteredNews }: Props) {
 
-
     return (
         <div className="py-10">
             <div className="relative">
