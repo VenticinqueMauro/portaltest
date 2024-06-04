@@ -1,7 +1,6 @@
 import QuotesContainer from "@/components/cotizaciones/Quotes.container";
 import { getCover } from "@/components/home/Container.home";
 import SectionTitle from "@/components/home/SectionTitle";
-import ContainerSectionCategory from "@/components/home/categories/ContainerSection.category";
 import NoticiaPrincipalCategory from "@/components/home/categories/NoticiaPrincipal.category";
 import NoticiasGridCategory from "@/components/home/categories/NoticiasGrid.category";
 import InferiorDesktop from "@/components/home/publicidades/Inferior.Desktop";
@@ -12,9 +11,9 @@ import { MainNews, NewsType, SidebarItem } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
 import { getFormatedCategoryNews, getNewsByPath } from "@/utils/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fontMerriweather } from "../fonts";
-import Link from "next/link";
 
 export async function generateStaticParams() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/news`, { cache: 'no-store' });
