@@ -33,16 +33,22 @@ const sections = [
 export default function Navbar() {
     return (
         <nav className='bg-tdn  xl:px-0 pt-6 '>
-            <ul className='max-w-7xl mx-auto text-white flex items-center justify-between px-3'>
+            <div className='max-w-7xl mx-auto text-white flex items-end justify-between px-3'>
                 <Link href='/'>
-                    <Image src='/logoblanco.png' alt='logo' width={200} height={200} loading="lazy" className="w-auto h-auto"
+                    <Image
+                        src='/logoblanco.png'
+                        alt='logo tendencias de noticias'
+                        width={200}
+                        height={200}
+                        loading="lazy"
+                        className="w-auto h-auto"
                     />
                 </Link>
-                <div className='space-x-4'>
+                <div className='space-x-4 flex flex-col md:flex-row justify-between items-end  '>
                     <Button variant='ghost'>Iniciar sesión</Button>
                     <Button variant='secondary' >Registrarme</Button>
                 </div>
-            </ul>
+            </div>
             <div className='bg-black'>
                 <Carousel className="px-3 text-white md:hidden mt-2">
                     <CarouselContent className="-ml-1 gap-8">

@@ -6,7 +6,7 @@ import { blurImage } from '@/utils/blurImage';
 import { MoreNews, MoreNewsData } from '@/app/api/news/more-news/route';
 import { MainNews, SectionNewsMap, SidebarItem } from '@/types/news.types';
 import Link from 'next/link';
-import { fontLato } from '@/utils/utils';
+import { fontLato } from '@/app/fonts';
 
 interface Props {
     title: string;

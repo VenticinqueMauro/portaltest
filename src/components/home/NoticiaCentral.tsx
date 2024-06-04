@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
-import { fontLato, fontMerriweather } from "@/utils/utils";
+import { fontLato, fontMerriweather } from "@/app/fonts";
 
 interface Props {
     image: {
@@ -24,8 +24,15 @@ export default function NoticiaCentral({ image, pretitle, title, summary, catego
                     <div className="relative -top-2">
                         {
                             image.type !== 'video' ?
-                                <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
-                                    blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
+                                <Image
+                                    src={image.url}
+                                    alt={title}
+                                    width={856}
+                                    height={422}
+                                    placeholder="blur"
+                                    blurDataURL={blurImage}
+                                    className="object-cover rounded w-full aspect-video"
+                                />
                                 :
                                 <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">
                                     <source src={image.url} type="video/mp4" />
@@ -38,7 +45,7 @@ export default function NoticiaCentral({ image, pretitle, title, summary, catego
                     <CardDescription className={`text-muted-foreground font-medium text-sm ${fontLato.className}`}>
                         {pretitle}
                     </CardDescription>
-                    <CardTitle className="text-3xl">
+                    <CardTitle className="text-3xl ">
                         {title}
                     </CardTitle>
                     <CardDescription className={`${fontMerriweather.className} text-lg max-w-xl mx-auto`}>

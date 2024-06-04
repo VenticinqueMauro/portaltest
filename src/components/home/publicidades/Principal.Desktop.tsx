@@ -15,12 +15,11 @@ export default function PrincipalDesktop({ url }: Props) {
                 <Image
                     src={url}
                     alt="Publicidad principal"
-                    width={970}
-                    height={150}
+                    fill
                     placeholder="blur"
                     blurDataURL={blurImage}
                     aria-label="Publicidad principal"
-                    className='object-cover h-[150px] md:h-auto'
+                    className='h-auto w-auto'
                     loading="lazy"
                 />
             ) : (

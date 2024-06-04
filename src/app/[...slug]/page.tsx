@@ -85,7 +85,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                     <section className="relative">
                         <SectionTitle title={sectionTitle} />
                         <div className="max-w-6xl lg:mr-[240px] 2xl:mx-auto px-3">
-                            <Link className="rounded min-h-full col-start-1 col-span-12 lg:col-start-3 lg:col-span-8" href={`${category}/${path}`}>
+                            <Link className="rounded min-h-full col-start-1 col-span-12 lg:col-start-3 lg:col-span-8" href={`${category}/${news[0].path}`}>
                                 <Card className="bg-gray-100 hover:bg-gray-200 transition-all duration-100">
                                     <div className="px-1">
                                         <div className="relative -top-2">

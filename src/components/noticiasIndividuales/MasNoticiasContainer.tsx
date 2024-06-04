@@ -1,10 +1,10 @@
 import { MoreNews } from "@/app/api/news/more-news/route";
 import { Ad } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
-import { fontLato } from "@/utils/utils";
 import Image from "next/image";
 import { Separator } from "../ui/separator";
 import CarouselMasNoticias from "./CarouselMasNoticias";
+import { fontLato } from "@/app/fonts";
 
 interface Props {
     category: string;

@@ -1,7 +1,6 @@
 import { MoreNews } from "@/app/api/news/more-news/route";
 import { Ad, NewsType } from "@/types/news.types";
 import { blurImage } from "@/utils/blurImage";
-import { fontLato, fontMerriweather } from "@/utils/utils";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import InferiorDesktop from "../home/publicidades/Inferior.Desktop";
@@ -10,6 +9,7 @@ import BreadCrumb from "./BreadCrumb";
 import { CreatedAndUpdated } from "./CreatedAndUpdated";
 import MasNoticiasContainer from "./MasNoticiasContainer";
 import Tags from "./Tags";
+import { fontLato, fontMerriweather } from "@/app/fonts";
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery"), { ssr: false });

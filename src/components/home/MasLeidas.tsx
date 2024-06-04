@@ -9,7 +9,7 @@ import Image from "next/image";
 import SectionTitle from "./SectionTitle";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
-import { fontLato } from "@/utils/utils";
+import { fontLato } from "@/app/fonts";
 
 interface MostRead {
     _id: string;

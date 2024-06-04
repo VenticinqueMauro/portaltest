@@ -3,7 +3,7 @@ import React from 'react'
 import { Separator } from '../ui/separator'
 import { blurImage } from '@/utils/blurImage';
 import Link from 'next/link';
-import { fontLato } from '@/utils/utils';
+import { fontLato } from '@/app/fonts';
 
 interface Props {
     image: {

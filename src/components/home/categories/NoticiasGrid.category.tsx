@@ -1,5 +1,5 @@
+import { fontLato } from "@/app/fonts";
 import { blurImage } from "@/utils/blurImage";
-import { fontLato } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 

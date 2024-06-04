@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Card, CardDescription, CardHeader, CardTitle } from "../../ui/card";
 import { blurImage } from "@/utils/blurImage";
 import Link from "next/link";
-import { fontLato } from "@/utils/utils";
+import { fontLato } from "@/app/fonts";
 
 interface Props {
     image: {

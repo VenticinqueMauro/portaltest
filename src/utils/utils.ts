@@ -2,20 +2,7 @@ import { QuotationType } from "@/types/news.types";
 import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { Lato } from "next/font/google";
-import { Merriweather } from "next/font/google";
 
-export const fontLato = Lato({
-    subsets: ["latin"],
-    weight: ["300", "400", "700", "900"],
-    variable: '--font-lato'
-})
-
-export const fontMerriweather = Merriweather({
-    subsets: ["latin"],
-    weight: ["300", "400", "700", "900"],
-    variable: '--font-merriweather'
-})
 
 // Función para manejar errores backend
 export const handleError = (error: any) => {

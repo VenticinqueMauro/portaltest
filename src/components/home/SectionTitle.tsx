@@ -1,4 +1,4 @@
-import { fontLato } from "@/utils/utils";
+import { fontLato } from "@/app/fonts";
 
 interface Props {
     title: string;
