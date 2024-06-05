@@ -26,7 +26,7 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                 <SectionTitle title={sectionTitle} />
                 {
                     allNews.length &&
-                    <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 lg:mr-[240px]">
+                    <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 md:lg:mr-[240px]">
                         <NoticiaPrincipalCategory
                             image={{ type: news.mainNews.media.type as 'image' | 'video', url: news.mainNews.media.url }}
                             pretitle={news.mainNews.pretitle}

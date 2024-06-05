@@ -15,7 +15,7 @@ interface Props {
 export default function GridDeNoticiasCategory({ sectionData, ads, sectionTitle }: Props) {
 
     return (
-        <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 lg:mr-[240px]">
+        <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 md:lg:mr-[240px]">
             <NoticiaPrincipalCategory
                 image={{ type: sectionData.mainNews.media.type as 'image' | 'video', url: sectionData.mainNews.media.url }}
                 pretitle={sectionData.mainNews.pretitle}

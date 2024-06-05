@@ -35,7 +35,7 @@ function formatDate(isoDate: any) {
 export default function NewsCardByCategory({ news }: Props) {
 
     return (
-        <div className="max-w-7xl 2xl:mx-auto px-3 lg:mr-[240px]">
+        <div className="max-w-7xl 2xl:mx-auto px-3 md:lg:mr-[240px]">
             {
                 news.map((item: Partial<NewsType>) => (
                     <Link href={`/${item.category}/${item.path}`} key={item._id} className="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-10 border-b py-4 hover:bg-gray-50 p-1">
