@@ -9,13 +9,37 @@ interface Props {
     news: any
 }
 
+function formatDate(isoDate: any) {
+    if (!isoDate) {
+        return 'Fecha no válida';
+    }
+
+    const date = new Date(isoDate);
+
+    if (isNaN(date.getTime())) {
+        return 'Fecha no válida';
+    }
+
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    const monthNames = [
+        "enero", "febrero", "marzo", "abril", "mayo", "junio",
+        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    ];
+
+    return `${day} de ${monthNames[month]} de ${year}`;
+}
+
 export default function NewsCardByCategory({ news }: Props) {
+
     return (
         <div className="max-w-7xl 2xl:mx-auto px-3 lg:mr-[240px]">
             {
                 news.map((item: Partial<NewsType>) => (
                     <Link href={`/${item.category}/${item.path}`} key={item._id} className="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-10 border-b py-4 hover:bg-gray-50 p-1">
-                        <div className="min-w-fit text-xs md:text-sm text-muted-foreground font-light " >8 de mayo de 2024</div>
+                        <div className="min-w-fit text-xs md:text-sm text-muted-foreground font-light " >{formatDate(item?.createdAt)}</div>
                         <div className="flex flex-col space-y-2 grow order-first md:order-none">
                             <h3 className="text-2xl font-semibold leading-none tracking-tight">{item.title}</h3>
                             <h4 className={`${fontMerriweather.className} text-md`}>{item.summary}</h4>

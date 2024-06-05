@@ -41,14 +41,14 @@ export default function NoticiaCentral({ image, pretitle, title, summary, catego
                         }
                     </div>
                 </div>
-                <CardHeader className="text-center">
-                    <CardDescription className={`text-muted-foreground font-medium text-sm ${fontLato.className}`}>
+                <CardHeader className="text-start">
+                    <CardDescription className={`text-muted-foreground font-medium text-sm ${fontLato.className} text-start md:text-center`}>
                         {pretitle}
                     </CardDescription>
-                    <CardTitle className="text-3xl text-start">
+                    <CardTitle className="text-3xl font-bold">
                         {title}
                     </CardTitle>
-                    <CardDescription className={`${fontMerriweather.className} text-lg text-start`}>
+                    <CardDescription className={`${fontMerriweather.className} text-lg`}>
                         {summary}
                     </CardDescription>
                 </CardHeader>
