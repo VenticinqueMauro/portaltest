@@ -40,7 +40,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                         {moreNews.slice(0.4).map((item: MoreNews, index) => (
                             <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5  md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[220px]">
                                 <Link href={generateHref(item.category, item.path)} className="rounded flex flex-col justify-start gap-1">
-                                    <div className={`${index === 0 ? 'block' : 'hidden'} px-1`}>
+                                    <div className={`${index === 0 ? 'block' : ''} px-1`}>
                                         {item.media.portada.type !== 'video' ? (
                                             <Image
                                                 src={item.media.portada.url}
@@ -49,7 +49,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                                                 height={300}
                                                 className="rounded aspect-video object-cover"
                                                 placeholder="blur"
-                                                blurDataURL={blurImage}
+                                                blurDataURL={blurImage} 
                                             />
                                         ) : (
                                             <video

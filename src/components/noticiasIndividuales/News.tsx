@@ -25,14 +25,14 @@ export default function News({ news, category, moreNews, ads }: Props) {
 
 
     return (
-        <div className="max-w-5xl mx-auto lg:mr-[240px] 2xl:mx-auto px-3">
+        <div className="max-w-7xl mx-auto lg:mr-[240px] 2xl:mx-auto px-3">
 
             {/* BREADCRUMB  */}
             <BreadCrumb category={category} />
 
             <div className="space-y-3">
                 <h3 className={`${fontLato.className} text-muted-foreground font-medium`}>{news.pretitle}</h3>
-                <h1 className="text-3xl font-semibold leading-none tracking-tight">{news.title}</h1>
+                <h1 className="text-3xl md:text-4xl font-bold leading-none tracking-tight">{news.title}</h1>
                 <h2 className={`${fontMerriweather.className} text-lg`}>{news.summary}</h2>
                 <h3 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{news.author}</b></h3>
                 <Separator />

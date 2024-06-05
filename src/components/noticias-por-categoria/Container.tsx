@@ -7,7 +7,7 @@
 //                 <SectionTitle title={sectionTitle} />
 //                 {
 //                     allNews.length &&
-//                     <div className="max-w-6xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 lg:mr-[240px]">
+//                     <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 lg:mr-[240px]">
 //                         <NoticiaPrincipalCategory
 //                             image={{ type: news.mainNews.media.type as 'image' | 'video', url: news.mainNews.media.url }}
 //                             pretitle={news.mainNews.pretitle}
@@ -38,7 +38,7 @@
 //                         <InferiorDesktop url={ads?.media?.desktop?.bottom?.url || ''} />
 //                     </div>
 //                 }
-//                 <div className="max-w-6xl 2xl:mx-auto px-3 lg:mr-[240px]">
+//                 <div className="max-w-7xl 2xl:mx-auto px-3 lg:mr-[240px]">
 //                     {
 //                         filteredNews.map((item: Partial<NewsType>) => (
 //                             <Link href={`/${decodeCategory}/${item.path}`} key={item._id} className="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-10 border-b py-4 hover:bg-gray-50 p-1">
