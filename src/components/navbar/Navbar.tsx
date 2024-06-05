@@ -9,6 +9,10 @@ import Image from "next/image";
 
 const sections = [
     {
+        title: "Portada",
+        href: "/"
+    },
+    {
         title: "Política",
         href: "/politica"
     },
@@ -32,16 +36,16 @@ const sections = [
 
 export default function Navbar() {
     return (
-        <nav className='bg-tdn  xl:px-0 pt-6 '>
-            <div className='max-w-7xl mx-auto text-white flex items-end justify-between px-3'>
+        <nav className='bg-tdn  xl:px-0 pt-3'>
+            <div className='max-w-7xl mx-auto text-white flex items-end justify-end px-3 relative'>
                 <Link href='/'>
                     <Image
                         src='/logoblanco.png'
                         alt='logo tendencias de noticias'
-                        width={200}
+                        width={300}
                         height={200}
                         loading="lazy"
-                        className="w-auto h-auto"
+                        className="w-auto h-auto md:sticky md:top-0 md:left-1/2 md:transform md:-translate-x-1/2 mb-3"
                     />
                 </Link>
                 <div className='space-x-4 flex flex-col md:flex-row justify-between items-end  '>
@@ -54,7 +58,7 @@ export default function Navbar() {
                     <CarouselContent className="-ml-1 gap-8">
                         {sections.map((section) => (
                             <CarouselItem key={section.title} className={`pl-2 md:pl-1 basis-auto`}>
-                                <Link href={section.href} className="font-medium py-2 text-sm  flex justify-center gap-1">
+                                <Link href={section.href} className="font-medium py-2 text-sm  flex justify-center gap-1 ">
                                     {section.title}
                                 </Link>
                             </CarouselItem>
@@ -63,7 +67,7 @@ export default function Navbar() {
                 </Carousel>
                 <div className='max-w-7xl mx-auto items-center gap-10 py-2 mt-2 hidden md:flex px-3'>
                     {sections.map((section) => (
-                        <Link key={section.title} href={section.href} className=" text-white py-1 text-xs md:text-sm  flex justify-center gap-1">
+                        <Link key={section.title} href={section.href} className=" text-white py-1 text-sm md:text-lg  flex justify-center gap-1 ">
                             {section.title}
                         </Link>
                     ))}
