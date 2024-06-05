@@ -37,7 +37,7 @@ const sections = [
 export default function Navbar() {
     return (
         <nav className='bg-tdn  xl:px-0 pt-3'>
-            <div className='max-w-7xl mx-auto text-white flex items-end justify-end px-3 relative'>
+            <div className='max-w-7xl mx-auto text-white flex items-end justify-between px-3 relative'>
                 <Link href='/'>
                     <Image
                         src='/logoblanco.png'
@@ -45,7 +45,7 @@ export default function Navbar() {
                         width={300}
                         height={200}
                         loading="lazy"
-                        className="w-auto h-auto md:sticky md:top-0 md:left-1/2 md:transform md:-translate-x-1/2 mb-3"
+                        className="w-auto h-auto mb-3"
                     />
                 </Link>
                 <div className='space-x-4 flex flex-col md:flex-row justify-between items-end  '>

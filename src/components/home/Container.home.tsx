@@ -53,7 +53,7 @@ export default async function ContainerHome({ ads }: Props) {
         <main className="py-10">
             {/* NOTICIAS PRINCIPALES */}
             <section className="relative">
-                <div className="max-w-7xl md:lg:mr-[240px] 2xl:mx-auto grid grid-cols-12 gap-4 px-3">
+                <div className="max-w-7xl md:mr-[240px] 2xl:mx-auto grid grid-cols-12 gap-4 px-3">
 
                     {/* CENTRAL  */}
                     <NoticiaCentral
