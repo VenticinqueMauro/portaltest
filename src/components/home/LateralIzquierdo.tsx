@@ -24,7 +24,7 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
             <Link href={`${category}/${path}`} className="rounded flex flex-col justify-start md:hover:shadow md:hover:bg-gray-50 transition-all duration-100 cursor-pointer">
                 <div className="px-1">
                     {/* DESKTOP DONDE SOLO SE MUESTRA LA IMAGEN DE LA PRIMERA NOTICIA  */}
-                    <div className="hidden md:block relative -top-2">
+                    {/* <div className="hidden md:block relative -top-2">
                         {index === 0 && (
                             image.type !== 'video' ? (
                                 <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
@@ -43,7 +43,7 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
                                 </video>
                             )
                         )}
-                    </div>
+                    </div> */}
                     {/* MOBILE DONDE SE MUESTRAN IMAGENES EN TODAS LAS NOTICIAS  */}
                     <div className="md:hidden relative -top-2">
                         {(

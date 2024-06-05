@@ -5,6 +5,7 @@ import NoticiasGridCategory from '../home/categories/NoticiasGrid.category'
 import InferiorDesktop from '../home/publicidades/Inferior.Desktop'
 import NewsCardByCategory from './NewsCardByCategory'
 import { Ads, MainNews, SidebarItem } from '@/types/news.types'
+import LateralDesktop from '../home/publicidades/Lateral.Desktop'
 
 interface Props {
     sectionTitle: string;
@@ -25,7 +26,7 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                 <SectionTitle title={sectionTitle} />
                 {
                     allNews.length &&
-                    <div className="max-w-6xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 lg:mr-[240px]">
+                    <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 lg:mr-[240px]">
                         <NoticiaPrincipalCategory
                             image={{ type: news.mainNews.media.type as 'image' | 'video', url: news.mainNews.media.url }}
                             pretitle={news.mainNews.pretitle}
@@ -56,6 +57,7 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                         <InferiorDesktop url={ads?.media?.desktop?.bottom?.url || ''} />
                     </div>
                 }
+                <LateralDesktop url={ads?.media?.desktop?.side?.url || ''} />
                 <NewsCardByCategory news={filteredNews} />
             </div>
         </div>

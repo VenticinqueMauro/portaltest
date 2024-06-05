@@ -18,7 +18,7 @@ interface Props {
 
 export default function NoticiaCentral({ image, pretitle, title, summary, category, path }: Props) {
     return (
-        <Link className="rounded min-h-full col-start-1 col-span-12 lg:col-start-3 lg:col-span-8 " href={`${category}/${path}`}>
+        <Link className="rounded min-h-full col-start-1 col-span-12 lg:col-start-3 lg:col-span-6 " href={`${category}/${path}`}>
             <Card className="bg-gray-100 hover:bg-gray-200 transition-all duration-100">
                 <div className="px-1">
                     <div className="relative -top-2">
@@ -41,14 +41,14 @@ export default function NoticiaCentral({ image, pretitle, title, summary, catego
                         }
                     </div>
                 </div>
-                <CardHeader className="text-center">
-                    <CardDescription className={`text-muted-foreground font-medium text-sm ${fontLato.className}`}>
+                <CardHeader className="text-start">
+                    <CardDescription className={`text-muted-foreground font-medium text-sm ${fontLato.className} text-start md:text-center`}>
                         {pretitle}
                     </CardDescription>
-                    <CardTitle className="text-3xl ">
+                    <CardTitle className="text-3xl font-bold">
                         {title}
                     </CardTitle>
-                    <CardDescription className={`${fontMerriweather.className} text-lg max-w-xl mx-auto`}>
+                    <CardDescription className={`${fontMerriweather.className} text-lg`}>
                         {summary}
                     </CardDescription>
                 </CardHeader>

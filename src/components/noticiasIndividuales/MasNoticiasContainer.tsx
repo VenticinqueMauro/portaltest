@@ -23,7 +23,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
 
     return (
         <div className="min-h-full relative">
-            <div className={`${fontLato.className} max-w-6xl pt-5 md:pt-0 2xl:mx-auto`}>
+            <div className={`${fontLato.className} max-w-7xl pt-5 md:pt-0 2xl:mx-auto`}>
                 <span className="italic tracking-tight text-2xl text-tdn relative inline-block">
                     <h2 className="pt-2 border-t border-tdn w-[200px] mb-5 relative">
                         {`Más de ${category == 'eco & negocios' ? 'economía' : category}`}
@@ -33,7 +33,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
             </div>
             <CarouselMasNoticias id={id} moreNews={filteredMoreNews} />
             <Separator className='mt-7' />
-            <div className="absolute top-0 right-0 h-full">
+            <div className="absolute top-0 right-0 h-full -z-10">
                 <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-40 right-0 mt-[600px]">
                     {ads?.media?.desktop?.side?.url ? (
                         <Image
