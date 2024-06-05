@@ -11,7 +11,7 @@ export default function LateralDesktop({ url }: Props) {
 
     return (
         <div className="absolute top-0 right-0 h-full">
-            <div className="hidden lg:flex justify-center items-center bg-publicidad p-5 sticky top-32 right-0">
+            <div className="hidden lg:flex justify-center items-center bg-publicidad p-5 sticky top-52 right-0">
                 {hasUrl ? (
                     <Image
                         src={url}
