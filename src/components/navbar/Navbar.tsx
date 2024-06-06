@@ -50,7 +50,9 @@ export default function Navbar() {
                 </Link>
                 <div className='space-x-4 flex flex-col md:flex-row justify-between items-end  '>
                     <Button variant='ghost'>Iniciar sesión</Button>
-                    <Button variant='secondary' >Registrarme</Button>
+                    <Button variant='secondary' asChild >
+                        <Link href='/signup'>Registrarme</Link>
+                    </Button>
                 </div>
             </div>
             <div className='bg-black'>
