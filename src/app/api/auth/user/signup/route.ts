@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         await user.updateOne({ emailVerificationToken: emailVerificationToken }); // Actualiza el token de verificación de correo electrónico del usuario en la base de datos
 
         await sendEmail({
-            from: 'Registro | TENDENCIA DE NOTICIAS <onboarding@resend.dev>',
+            from: 'TENDENCIA DE NOTICIAS <onboarding@resend.dev>',
             to: [email],
             subject: "Verificación de Correo Electrónico",
             react: VerifyEmailTemplate({ email, emailVerificationToken }) as React.ReactElement, // Envía el correo electrónico de verificación
