@@ -3,11 +3,10 @@ interface VerifyEmailProps {
     searchParams: { [key: string]: string | string[] | undefined };
 }
 
-
 export default async function page({ searchParams }: VerifyEmailProps) {
 
     if (searchParams.token) {
-        const res = await fetch(`http://localhost:3000/api/auth/user/verify-email?token=${searchParams.token}`, {
+        const res = await fetch(`${process.env.PUBLIC_NEXT_URL}/api/auth/user/verify-email?token=${searchParams.token}`, {
             cache: 'no-store',
         })
 
