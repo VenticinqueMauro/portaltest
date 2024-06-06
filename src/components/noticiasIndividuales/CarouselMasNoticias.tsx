@@ -38,7 +38,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                 <Carousel orientation={'vertical'} className="hidden md:block md:px-3">
                     <CarouselContent className={"space-y-3 -ml-1 flex gap-4 max-h-[500px]"}>
                         {moreNews.slice(0.4).map((item: MoreNews, index) => (
-                            <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5  md:hover:bg-gray-50 transition-all duration-100 cursor-pointer max-w-[220px]">
+                            <CarouselItem key={item._id} className="pl-2 md:pl-1 lg:basis-1/5  md:hover:bg-gray-50 hover:shadow transition-all duration-100 cursor-pointer max-w-[220px]">
                                 <Link href={generateHref(item.category, item.path)} className="rounded flex flex-col justify-start gap-1">
                                     <div className={`${index === 0 ? 'block' : ''} px-1`}>
                                         {item.media.portada.type !== 'video' ? (
