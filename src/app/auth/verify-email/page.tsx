@@ -6,7 +6,7 @@ interface VerifyEmailProps {
 export default async function page({ searchParams }: VerifyEmailProps) {
 
     if (searchParams.token) {
-        const res = await fetch(`${process.env.PUBLIC_NEXT_URL}/api/auth/user/verify-email?token=${searchParams.token}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/auth/user/verify-email?token=${searchParams.token}`, {
             cache: 'no-store',
         })
 
