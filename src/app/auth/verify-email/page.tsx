@@ -1,3 +1,5 @@
+import ErrorMessage from "./components/ErrorMessage";
+import SuccessMessage from "./components/SuccessMessage";
 
 interface VerifyEmailProps {
     searchParams: { [key: string]: string | string[] | undefined };
@@ -11,16 +13,11 @@ export default async function page({ searchParams }: VerifyEmailProps) {
         })
 
         if (res.status === 404) {
-            // CREAR COMPONENTE PARA TOKEN INVALIDO CON REDIRECCION NECESARIA 
-            return <div>Invalid token</div>;
+            return <ErrorMessage />;
         }
 
-        console.log(await res.json())
-        
-        // CREAR COMPONENTE Y REDIRECCIONAR A PAGINA DE INICIO
-        return <div>Email verified successfully 👌</div>;
+        return <SuccessMessage />;
     } else {
-        // CREAR COMPONENTE PARA TOKEN NO PROPORCIONADO CON REDIRECCION
-        return <div>No token provided 😶‍🌫️</div>;
+        return <ErrorMessage />;
     }
 }
