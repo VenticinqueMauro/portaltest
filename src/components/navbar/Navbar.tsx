@@ -65,7 +65,7 @@ export default function Navbar() {
                 </Carousel>
                 <div className='max-w-7xl mx-auto items-center gap-10 py-2 mt-2 hidden md:flex px-3'>
                     {sections.map((section) => (
-                        <Link key={section.title} href={section.href} className=" text-white py-1 text-sm md:text-lg  flex justify-center gap-1 ">
+                        <Link key={section.title} href={section.href} className=" text-white py-1 text-sm md:text-lg  flex justify-center gap-1 navItem">
                             {section.title}
                         </Link>
                     ))}

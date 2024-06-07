@@ -114,7 +114,7 @@ export default function ContainerRegister() {
                         </div>
                         <div className="mt-4 text-center text-sm">
                             Ya tienes una cuenta?{" "}
-                            <Link href="#" className="underline">
+                            <Link href="/login" className="underline">
                                 Ingresa
                             </Link>
                         </div>
@@ -127,7 +127,8 @@ export default function ContainerRegister() {
                     alt="Image"
                     width="497"
                     height="640"
-                    className="object-fill  dark:brightness-[0.1] dark:grayscale"
+                    priority
+                    className="dark:brightness-[0.1] dark:grayscale w-auto h-auto"
                 />
             </div>
         </div>

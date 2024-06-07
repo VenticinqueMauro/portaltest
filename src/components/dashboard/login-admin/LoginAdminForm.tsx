@@ -92,7 +92,8 @@ export function LoginAdminForm() {
                     alt="Image"
                     width="497"
                     height="640"
-                    className="object-fill  dark:brightness-[0.1] dark:grayscale"
+                    priority
+                    className="dark:brightness-[0.1] dark:grayscale w-auto h-auto"
                 />
             </div>
         </div>
