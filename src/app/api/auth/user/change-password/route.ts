@@ -42,7 +42,7 @@ export async function PUT(req: NextRequest) {
         await userFound.updateOne({ password: hashedPassword, resetPasswordToken: null, resetPasswordTokenExpiry: null });
 
         // Retornar un mensaje de éxito indicando que la contraseña se cambió correctamente
-        return NextResponse.json({ message: 'Contraseña cambiada exitosamente' }, { status: 200 });
+        return NextResponse.json({ message: 'Contraseña modificada exitosamente' }, { status: 200 });
 
     } catch (error) {
         if (error instanceof Error) {
