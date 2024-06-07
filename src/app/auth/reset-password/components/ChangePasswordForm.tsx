@@ -46,7 +46,7 @@ export default function ChangePasswordForm({ token }: Props) {
             toast.success(result.message);
             ref.current?.reset();
             setTimeout(() => {
-                router.back();
+                router.push('/');
             }, 2000);
         } else (
             toast.warning(result)
