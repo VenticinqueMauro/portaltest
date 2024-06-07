@@ -68,7 +68,7 @@ export default function ContainerLogin() {
             ref.current?.reset();
             handleRefresh();
             setTimeout(() => {
-                router.back();
+                router.push('/');
             }, 2000);
         } else {
             toast.warning('Resultado inesperado');
@@ -131,7 +131,7 @@ export default function ContainerLogin() {
                     </CardContent>
                 </Card>
             </form>
-            <div className="hidden lg:flex justify-center items-center bg-[#433A8A]">
+            <div className="hidden lg:flex justify-center items-center bg-tdn">
                 <Image
                     src="/fondo-login.png"
                     alt="Image"

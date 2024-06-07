@@ -12,7 +12,7 @@ export default function LoginUsersLayout({ children }: { children: React.ReactNo
     return (
         <section className="min-h-screen bg-background text-foreground relative flex ">
             {children}
-            <Toaster />
+            <Toaster className="mx-auto" />
         </section>
     )
 }

@@ -28,7 +28,7 @@ export default function RootLayout({
         <ContextProvider>
           {children}
         </ContextProvider>
-        <Toaster />
+        <Toaster className="mx-auto" />
       </body>
     </html>
   );

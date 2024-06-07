@@ -86,7 +86,7 @@ export function LoginAdminForm() {
                     </form>
                 </div>
             </div>
-            <div className="hidden lg:flex justify-center items-center bg-[#433A8A]">
+            <div className="hidden lg:flex justify-center items-center bg-tdn">
                 <Image
                     src="/fondo-login.png"
                     alt="Image"

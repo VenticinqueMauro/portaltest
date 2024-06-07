@@ -63,12 +63,13 @@ export default function ButtonsByLogin() {
                 </>
             ) : (
                 <>
-                    <Button variant='ghost' asChild>
+                    <Button variant='ghost' className='mb-2 md:mb-0' asChild>
                         <Link href='/login'>Iniciar sesión</Link>
                     </Button>
                     <Button variant='secondary' asChild>
                         <Link href='/signup'>Registrarme</Link>
                     </Button>
+                    <span onClick={() => toast.message('hola mundo khe ace')}>sooner</span>
                 </>
             )}
         </div>
