@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
 
         // Enviar el correo electrónico de restablecimiento de contraseña
         await sendEmail({
-            from: 'Portal Test <onboarding@resend.dev>',
+            from: 'TENDENCIA DE NOTICIAS <onboarding@resend.dev>',
             to: [email],
             subject: "Restablecimiento de Contraseña",
             // Generar el contenido del correo electrónico utilizando la plantilla y los datos necesarios

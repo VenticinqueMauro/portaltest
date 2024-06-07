@@ -70,7 +70,7 @@ export default function ContainerRegister() {
                                 <Input id="fullname" name='fullname' placeholder="Elons Mask" required />
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email</Label>
+                                <Label htmlFor="email">Correo electrónico</Label>
                                 <Input
                                     id="email"
                                     type="email"

@@ -15,7 +15,7 @@ export default function ErrorMessage() {
     }, [router]);
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="flex items-center justify-center h-screen bg-gray-100 px-6">
             <div className="bg-white text-tdn p-6 rounded-lg shadow-lg text-center">
                 <h2 className="text-2xl font-bold mb-2">¡Error de verificación!</h2>
                 <p className="text-lg">El token es inválido o ha caducado.</p>

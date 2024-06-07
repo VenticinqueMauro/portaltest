@@ -1,5 +1,6 @@
 import { connectDB } from '@/lib/mongodb';
 import { ClientUser } from '@/models/client.user';
+import ChangePasswordForm from './components/ChangePasswordForm';
 
 interface ResetPasswordPageProps {
     searchParams: { [key: string]: string | string[] | undefined };
@@ -14,7 +15,7 @@ const ResetPasswordPage = async ({ searchParams }: ResetPasswordPageProps) => {
             return <div>Invalid token</div>;
         }
 
-        return <p>FORMULARIO CHANGE PASSWORD</p>;
+        return <ChangePasswordForm />;
     } else {
         return <p>FORMULARIO RESET PASSWORD</p>;
     }

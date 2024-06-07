@@ -82,7 +82,7 @@ export default function ContainerLogin() {
             <form ref={ref} onSubmit={handleSubmit} className="flex items-center justify-center py-12">
                 <Card className="mx-auto max-w-sm">
                     <CardHeader>
-                        <CardTitle className="text-2xl">Login</CardTitle>
+                        <CardTitle className="text-2xl">Inicio de sesión</CardTitle>
                         <CardDescription>
                             Ingresa tu email y contraseña para iniciar sesión
                         </CardDescription>
@@ -90,7 +90,7 @@ export default function ContainerLogin() {
                     <CardContent>
                         <div className="grid gap-4">
                             <div className="grid gap-2">
-                                <Label htmlFor="email">Email</Label>
+                                <Label htmlFor="email">Correo electrónico</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -102,7 +102,7 @@ export default function ContainerLogin() {
                             <div className="grid gap-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Contraseña</Label>
-                                    <Link href="#" className="ml-auto inline-block text-xs underline">
+                                    <Link href="/reset-password" className="ml-auto inline-block text-xs underline">
                                         Olvidates tu contraseña?
                                     </Link>
                                 </div>

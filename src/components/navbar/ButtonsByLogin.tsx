@@ -52,10 +52,10 @@ export default function ButtonsByLogin() {
         <div className='md:space-x-4 flex flex-col md:flex-row justify-between items-center '>
             {user && user.emailVerified ? (
                 <>
-                    <div className='flex flex-wrap justify-center items-center gap-1 mb-2 md:mb-0 text-xs md:text-base'>
+                    <div className='flex flex-col flex-wrap justify-center items-center gap-1 mb-2 md:mb-0 text-xs md:text-sm'>
                         <p>Hola! 👋</p>
-                        <b className='md:hidden'>{user?.fullname?.split(" ")[0]}</b>
-                        <b className='hidden md:inline-flex'>{user?.fullname}</b>
+                        <b className='md:hidden capitalize'>{user?.fullname?.split(" ")[0]}</b>
+                        <b className='hidden md:inline-flex capitalize line-clamp-1 max-w-[200px]'>{user?.fullname}</b>
                     </div>
                     <Button variant='secondary' onClick={Logout}>
                         Logout
@@ -69,7 +69,6 @@ export default function ButtonsByLogin() {
                     <Button variant='secondary' asChild>
                         <Link href='/signup'>Registrarme</Link>
                     </Button>
-                    <span onClick={() => toast.message('hola mundo khe ace')}>sooner</span>
                 </>
             )}
         </div>
