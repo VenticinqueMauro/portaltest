@@ -3,9 +3,9 @@ import {
     CarouselContent,
     CarouselItem
 } from "@/components/ui/carousel";
-import Link from 'next/link';
-import { Button } from '../ui/button';
 import Image from "next/image";
+import Link from "next/link";
+import ButtonsByLogin from "./ButtonsByLogin";
 
 const sections = [
     {
@@ -35,9 +35,10 @@ const sections = [
 ]
 
 export default function Navbar() {
+
     return (
         <nav className='bg-tdn  xl:px-0 pt-3'>
-            <div className='max-w-7xl mx-auto text-white flex items-end justify-between px-3 relative'>
+            <div className='max-w-7xl mx-auto text-white flex items-end justify-between px-3 relative space-x-5 md:space-x-0'>
                 <Link href='/'>
                     <Image
                         src='/logoblanco.png'
@@ -48,12 +49,7 @@ export default function Navbar() {
                         className="w-auto h-auto mb-3"
                     />
                 </Link>
-                <div className='space-x-4 flex flex-col md:flex-row justify-between items-end  '>
-                    <Button variant='ghost'>Iniciar sesión</Button>
-                    <Button variant='secondary' asChild >
-                        <Link href='/signup'>Registrarme</Link>
-                    </Button>
-                </div>
+                <ButtonsByLogin />
             </div>
             <div className='bg-black'>
                 <Carousel className="px-3 text-white md:hidden mt-2">

@@ -1,4 +1,4 @@
-import ContainerRegister from "./Container.register";
+import ContainerRegister from "@/components/auth-client-user/ContainerRegister";
 
 export default function page() {
 

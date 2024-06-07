@@ -1,7 +1,7 @@
-import React from 'react'
+import ContainerLogin from '@/components/auth-client-user/ContainerLogin'
 
 export default function page() {
     return (
-        <div>Login de usuarios en construccion</div>
+        <ContainerLogin />
     )
 }

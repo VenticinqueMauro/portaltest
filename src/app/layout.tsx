@@ -1,8 +1,10 @@
 
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans  } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { ContextProvider } from "@/components/provider/ContextProvider";
+import { Toaster } from "sonner";
 
 const fontJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -23,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={cn("min-h-screen bg-background antialiased text-foreground", fontJakarta.className)}>
-        {children}
+        <ContextProvider>
+          {children}
+        </ContextProvider>
+        <Toaster />
       </body>
     </html>
   );

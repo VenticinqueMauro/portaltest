@@ -38,7 +38,7 @@ export function formatDate(date: Date) {
 }
 
 
-// Funcion para decodificar token
+// Funcion para decodificar token administrador
 
 export function decodeToken() {
     const token = cookies().get("portal_app")?.value;
@@ -48,6 +48,7 @@ export function decodeToken() {
     const decodedToken: any = verify(token, `${process.env.JWT_KEY}`);
     return decodedToken;
 }
+
 
 // Funcion para calcular cotizaciones
 
