@@ -1,7 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import { ClientUser } from "@/models/client.user";
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 export async function POST(request: NextRequest) {
@@ -29,31 +28,12 @@ export async function POST(request: NextRequest) {
 
         await user.save();
 
-        const tokenData = {
-            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, 
-            email,
-            fullname,
-            subscribed: user?.subscribed,
-            emailVerified: user?.emailVerified
-        }
-
-        const token = jwt.sign(tokenData, `${process.env.JWT_KEY_CLIENT}`);
-
-        const response = NextResponse.json({ message: 'Inicio de sesión exitoso' }, { status: 200 });
-
-        response.cookies.set('portal_app_client', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 24 * 30, 
-            path: '/',
-        });
-
-        return response;
+        return NextResponse.json({ message: 'Usuario registrado con éxito' }, { status: 200 })
 
     } catch (error) {
         if (error instanceof Error) {
             return NextResponse.json({
-                error: `Fallo en el registro: ${error.message}` 
+                error: `Fallo en el registro: ${error.message}` // Devuelve un mensaje de error si algo falla durante el proceso de registro
             }, {
                 status: 400
             });
@@ -61,7 +41,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({
                 error: 'Ha ocurrido un error inesperado'
             }, {
-                status: 500 
+                status: 500 // Internal Server Error
             });
         }
     }

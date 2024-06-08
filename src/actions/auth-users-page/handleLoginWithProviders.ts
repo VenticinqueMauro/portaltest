@@ -1,5 +1,3 @@
-'use server';
-
 interface Props {
     name?: string | null | undefined;
     email?: string | null | undefined;
@@ -15,6 +13,7 @@ export async function handleLoginWithProviders({ email, name, image }: Props) {
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/auth/user/signup-provider`, {
+            cache: 'no-store',
             method: 'POST',
             credentials: "include",
             headers: {

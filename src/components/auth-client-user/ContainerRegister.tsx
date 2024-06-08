@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -103,7 +103,7 @@ export default function ContainerRegister() {
                                 Crear cuenta
                             </Button>
                             <Button type="button" variant="outline" className="w-full" onClick={() => signIn()}>
-                                Ingresar con google
+                                Iniciar sesión con Google
                             </Button>
                         </div>
                         <div className="mt-4 text-center text-sm">
