@@ -5,6 +5,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ContextProvider } from "@/components/provider/ContextProvider";
 import { Toaster } from "sonner";
+import NextAuthProviders from "./NextAuthProviders";
 
 const fontJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={cn("min-h-screen bg-background antialiased text-foreground", fontJakarta.className)}>
-        <ContextProvider>
-          {children}
-        </ContextProvider>
+        <NextAuthProviders>
+          <ContextProvider>
+            {children}
+          </ContextProvider>
+        </NextAuthProviders>
         <Toaster className="mx-auto" />
       </body>
     </html>

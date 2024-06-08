@@ -1,23 +1,17 @@
 'use client';
 
-import Link from "next/link";
-
 import { handleSignUpUser } from "@/actions/auth-users-page/signup";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createRef, useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 export default function ContainerRegister() {
 
@@ -108,7 +102,7 @@ export default function ContainerRegister() {
                             <Button type="submit" className="w-full">
                                 Crear cuenta
                             </Button>
-                            <Button variant="outline" className="w-full">
+                            <Button type="button" variant="outline" className="w-full" onClick={() => signIn()}>
                                 Ingresar con google
                             </Button>
                         </div>
