@@ -119,7 +119,7 @@ export default function ContainerLogin() {
                             <Button type="submit" className="w-full">
                                 Iniciar sesión
                             </Button>
-                            <Button type="button" variant="outline" className="w-full" onClick={() => signIn()}>
+                            <Button type="button" variant="outline" className="w-full" onClick={() => signIn('google')}>
                                 Iniciar sesión con Google
                             </Button>
                         </div>

@@ -102,7 +102,7 @@ export default function ContainerRegister() {
                             <Button type="submit" className="w-full">
                                 Crear cuenta
                             </Button>
-                            <Button type="button" variant="outline" className="w-full" onClick={() => signIn()}>
+                            <Button type="button" variant="outline" className="w-full" onClick={() => signIn('google')}>
                                 Iniciar sesión con Google
                             </Button>
                         </div>
