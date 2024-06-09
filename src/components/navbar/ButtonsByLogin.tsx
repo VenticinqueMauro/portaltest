@@ -34,7 +34,6 @@ const handleLogout = async () => {
 export default function ButtonsByLogin() {
 
     const context: UserContextType = useUser();
-
     const { setUser, handleRefresh } = context;
     const { user }: { user: ClientUser } = context;
 

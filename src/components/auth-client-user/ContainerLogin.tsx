@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { createRef, useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "../provider/ContextProvider";
+import { signIn } from "next-auth/react";
 
 async function handleSignin({ email, password }: { email: string, password: string }) {
 
@@ -118,7 +119,7 @@ export default function ContainerLogin() {
                             <Button type="submit" className="w-full">
                                 Iniciar sesión
                             </Button>
-                            <Button variant="outline" className="w-full">
+                            <Button type="button" variant="outline" className="w-full" onClick={() => signIn('google')}>
                                 Iniciar sesión con Google
                             </Button>
                         </div>
