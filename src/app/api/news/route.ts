@@ -15,7 +15,8 @@ export async function GET(request: NextRequest) {
 
         let news;
         if (pathQuery) {
-            news = await News.findOne({ path: pathQuery }).populate({ path: 'comments' }).lean()
+            news = await News.findOne({ path: pathQuery })
+            // .populate({ path: 'comments' }).lean()
         } else if (categoryQuery) {
             news = await News.find(
                 { category: categoryQuery, status: NewsStatus.PUBLISHED },
