@@ -2,11 +2,8 @@ import { MoreNews } from '@/app/api/news/more-news/route';
 import { Ad, NewsType } from '@/types/news.types';
 import QuotesContainer from '../cotizaciones/Quotes.container';
 import Navbar from '../navbar/Navbar';
-import News from './News';
-import PrincipalDesktop from '../home/publicidades/Principal.Desktop';
-import Image from 'next/image';
-import { blurImage } from '@/utils/blurImage';
 import PublicidadSuperior from '../noticias-por-categoria/publicidades/PublicidadSuperior';
+import News from './News';
 
 interface Props {
     news: NewsType;

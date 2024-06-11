@@ -68,8 +68,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
     if (path && news) {
 
-        console.log('NOTICIA: ', news)
-
         return (
             <Container news={news} category={decodedCategory} moreNews={moreNews} ads={ads} />
         );
