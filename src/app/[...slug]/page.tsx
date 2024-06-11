@@ -67,6 +67,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     }
 
     if (path && news) {
+
         return (
             <Container news={news} category={decodedCategory} moreNews={moreNews} ads={ads} />
         );
@@ -75,7 +76,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         const { data: { sections } } = homeNews;
         const news: SectionData = sections[decodedCategory];
 
-        const allNews = [news.mainNews, ...news.gridNews];
+        const allNews = [news?.mainNews, ...news.gridNews];
         const filteredNews = moreNews.filter((item: NewsType) => !allNews.some(newsItem => newsItem.id === item._id));
 
         return (

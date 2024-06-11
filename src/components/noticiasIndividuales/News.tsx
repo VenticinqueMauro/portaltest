@@ -10,6 +10,7 @@ import { CreatedAndUpdated } from "./CreatedAndUpdated";
 import MasNoticiasContainer from "./MasNoticiasContainer";
 import Tags from "./Tags";
 import { fontLato, fontMerriweather } from "@/app/fonts";
+import CommentsContainer from "./CommentsContainer";
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery"), { ssr: false });
@@ -59,6 +60,7 @@ export default function News({ news, category, moreNews, ads }: Props) {
                     <InferiorDesktop url={ads?.media?.desktop?.bottom?.url || ''} />
                     <Gallery gallery={news.media?.gallery} />
                     <Tags tags={news.tags} />
+                    <CommentsContainer comments={news.comments} id={news._id as string} category={news.category} />
                 </div>
                 <Separator orientation='vertical' />
                 {/* CAROUSEL MAS NOTICIAS  */}

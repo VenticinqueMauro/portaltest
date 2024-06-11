@@ -18,6 +18,7 @@ import { createRef, useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "../provider/ContextProvider";
 import { signIn } from "next-auth/react";
+import SubmitAuth from "./SubmitAuth";
 
 async function handleSignin({ email, password }: { email: string, password: string }) {
 
@@ -116,9 +117,7 @@ export default function ContainerLogin() {
                                     </span>
                                 </div>
                             </div>
-                            <Button type="submit" className="w-full">
-                                Iniciar sesión
-                            </Button>
+                            <SubmitAuth title={'Iniciar sesión'} />
                             <Button type="button" variant="outline" className="w-full" onClick={() => signIn('google')}>
                                 Iniciar sesión con Google
                             </Button>

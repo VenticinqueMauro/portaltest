@@ -330,3 +330,14 @@ export const normalizeTitle = (title: string) => {
     // Eliminar caracteres no permitidos en URLs
     return path.replace(/[^a-z0-9\-]/g, '');
 };
+
+// CLIENT USER 
+
+
+export interface ClientUser {
+    id: string;
+    email: string;
+    fullname: string;
+    emailVerified: boolean;
+    suscribed: boolean;
+}

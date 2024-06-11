@@ -8,11 +8,10 @@ import Image from "next/image";
 import { createRef, useEffect, useState } from "react";
 import { toast } from "sonner";
 import SelectCategories from "./SelectCategories";
-import SubmitButton from "./SubmitButton";
-import Tiptap from "./Tiptap";
 import SelectLinkedNews from "./SelectLinkedNews";
-import { Delete } from "lucide-react";
+import SubmitButton from "./SubmitButton";
 import TagsNews from "./TagsNews";
+import Tiptap from "./Tiptap";
 
 
 export default function CreateNewsForm() {
@@ -51,7 +50,7 @@ export default function CreateNewsForm() {
             } else {
                 setSelectedPortadaFile(file);
 
-                // Previsualización de la imagen
+                // Previsualización de la imagen        const res = 
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const imageUrl = e.target?.result;

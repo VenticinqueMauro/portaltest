@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createRef, useState } from "react";
 import { toast } from "sonner";
+import SubmitAuth from "./SubmitAuth";
 
 export default function ContainerRegister() {
 
@@ -99,9 +100,7 @@ export default function ContainerRegister() {
                                     </span>
                                 </div>
                             </div>
-                            <Button type="submit" className="w-full">
-                                Crear cuenta
-                            </Button>
+                            <SubmitAuth title={'Crear cuenta'} />
                             <Button type="button" variant="outline" className="w-full" onClick={() => signIn('google')}>
                                 Iniciar sesión con Google
                             </Button>
