@@ -42,7 +42,8 @@ export async function POST(req: NextRequest) {
             email,
             fullname,
             subscribed: userFound?.subscribed,
-            emailVerified: userFound?.emailVerified
+            emailVerified: userFound?.emailVerified,
+            id: userFound._id,
         }
 
         // Firmar el token JWT con la clave secreta del cliente

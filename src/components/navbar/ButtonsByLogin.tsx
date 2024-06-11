@@ -4,13 +4,8 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 import { UserContextType, useUser } from '../provider/ContextProvider';
 import { Button } from '../ui/button';
+import { ClientUser } from '@/utils/utils';
 
-interface ClientUser {
-    email: string;
-    fullname: string;
-    emailVerified: boolean;
-    suscribed: boolean;
-}
 
 const handleLogout = async () => {
     try {

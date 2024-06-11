@@ -17,6 +17,7 @@ import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { createRef } from "react";
 import { toast } from "sonner";
+import SubmitAuth from "./SubmitAuth";
 
 export default function ContainerResetPassword() {
 
@@ -63,9 +64,7 @@ export default function ContainerResetPassword() {
                                     required
                                 />
                             </div>
-                            <Button type="submit" className="w-full">
-                                Enviar Enlace de Recuperación
-                            </Button>
+                            <SubmitAuth title='Enviar enlace de recuperación' />
                         </div>
                     </CardContent>
                 </Card>

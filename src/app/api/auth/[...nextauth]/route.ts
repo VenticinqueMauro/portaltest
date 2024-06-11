@@ -28,7 +28,8 @@ const handler = NextAuth({
                 email,
                 fullname: userFound?.fullname,
                 subscribed: userFound?.subscribed,
-                emailVerified: userFound?.emailVerified
+                emailVerified: userFound?.emailVerified,
+                id: userFound?._id,
             }
 
             const token = jwt.sign(tokenData, `${process.env.JWT_KEY_CLIENT}`);
