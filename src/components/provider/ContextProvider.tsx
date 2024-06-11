@@ -19,7 +19,6 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         async function getUser() {
             const response = await handleDecodeUserToken();
-            console.log(response)
             setUser(response);
         }
 

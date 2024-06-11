@@ -108,7 +108,8 @@ const NewsSchema = new Schema<NewsDocument>({
     comments: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Comment'
+            ref: 'Comment',
+            default: []
         }
     ],
     path: {
