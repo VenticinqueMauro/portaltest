@@ -1,5 +1,6 @@
 import { CategoryNews, MediaNews, NewsStatus } from "@/types/news.types";
 import { Document, Schema, model, models } from "mongoose";
+import { CommentDocument } from "./comment";
 
 
 interface NewsDocument extends Document {
@@ -15,7 +16,7 @@ interface NewsDocument extends Document {
     media?: MediaNews;
     author?: string;
     tags?: string[];
-    comments?: string[];
+    comments?: CommentDocument[] | [];
     path: string;
     createdAt?: Date;
     updatedAt?: Date;
@@ -105,10 +106,12 @@ const NewsSchema = new Schema<NewsDocument>({
         type: Boolean,
         default: false
     },
-    comments: {
-        type: [String],
-        default: []
-    },
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ],
     path: {
         type: String
     },

@@ -1,3 +1,5 @@
+import { CommentDocument } from "@/models/comment";
+import { ObjectId } from "mongoose";
 
 export type MediaNews = {
     portada: {
@@ -47,7 +49,7 @@ export type NewsType = {
     media?: MediaNews;
     author?: string;
     tags?: string[];
-    comments?: string[];
+    comments?: CommentDocument[] | [];
     createdAt?: Date;
     updatedAt?: Date;
 }
