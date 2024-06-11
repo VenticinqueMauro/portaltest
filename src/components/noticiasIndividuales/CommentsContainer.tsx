@@ -37,13 +37,14 @@ export default function CommentsContainer({ comments, id, category }: Props) {
             {comments && comments.length > 0 ? (
                 <div className="flex flex-col">
                     {comments.map((comment, index) => (
-                        <div key={index} className="border rounded p-3 ml-3 my-3 relative">
-                            <div className="flex gap-3 items-center">
-                                <h3 className="font-bold">{comment.author.fullname}</h3>
+                        comment.author && comment.author.fullname && comment.content ? (
+                            <div key={index} className="border rounded p-3 ml-3 my-3 relative">
+                                <div className="flex gap-3 items-center">
+                                    <h3 className="font-bold">{comment.author.fullname}</h3>
+                                </div>
+                                <p className="text-gray-600 mt-2">{comment.content}</p>
                             </div>
-                            <p className="text-gray-600 mt-2">{comment.content}</p>
-                            {/* <Trash className="absolute top-0 right-0 p-1 text-red-400 hover:text-red-500 cursor-pointer" /> */}
-                        </div>
+                        ) : null
                     ))}
                 </div>
             ) : (
