@@ -13,11 +13,18 @@ import { useRouter } from "next/navigation";
 import { createRef, useState } from "react";
 import { toast } from "sonner";
 import SubmitAuth from "./SubmitAuth";
+import { useUser } from "../provider/ContextProvider";
 
 export default function ContainerRegister() {
 
+    const { user } = useUser();
     const ref = createRef<HTMLFormElement>();
     const router = useRouter();
+
+    if (user && user.email) {
+        router.push('/');
+    }
+
     const [isVisible, setIsVisible] = useState(false);
     const [isVisible2, setIsVisible2] = useState(false);
 
