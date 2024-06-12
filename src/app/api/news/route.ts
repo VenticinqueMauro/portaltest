@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
+import { Comment } from "@/models/comment";
 import { News } from "@/models/news";
 import { NewsStatus } from "@/types/news.types";
 import { handleError, normalizeTitle } from "@/utils/utils";
@@ -15,8 +16,10 @@ export async function GET(request: NextRequest) {
 
         let news;
         if (pathQuery) {
-            news = await News.findOne({ path: pathQuery })
-            // .populate({ path: 'comments' }).lean()
+            news = await News.findOne({ path: pathQuery }).populate({
+                path: "comments",
+                model: Comment
+            })
         } else if (categoryQuery) {
             news = await News.find(
                 { category: categoryQuery, status: NewsStatus.PUBLISHED },

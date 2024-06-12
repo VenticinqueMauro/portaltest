@@ -10,7 +10,7 @@ import { CreatedAndUpdated } from "./CreatedAndUpdated";
 import MasNoticiasContainer from "./MasNoticiasContainer";
 import Tags from "./Tags";
 import { fontLato, fontMerriweather } from "@/app/fonts";
-import CommentsContainer from "./CommentsContainer";
+const CommentsContainer = dynamic(() => import("./CommentsContainer"), { ssr: false , loading: () => <div>Loading...</div> });
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
 const Gallery = dynamic(() => import("./Gallery"), { ssr: false });

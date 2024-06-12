@@ -7,7 +7,11 @@ interface Reaction {
 
 export interface CommentDocument extends Document {
     content: string;
-    author: Schema.Types.ObjectId;
+    author: {
+        id: Schema.Types.ObjectId;
+        fullname: string;
+        image?: string;
+    };
     news: Schema.Types.ObjectId;
     replies?: Schema.Types.ObjectId[];
     reactions?: Reaction[];
