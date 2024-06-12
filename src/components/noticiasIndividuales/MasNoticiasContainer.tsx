@@ -34,7 +34,7 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
             <CarouselMasNoticias id={id} moreNews={filteredMoreNews} />
             <Separator className='mt-7' />
             <div className="absolute top-0 right-0 h-full -z-10">
-                <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-40 right-0 mt-[600px]">
+                <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-60 right-0 mt-[650px]">
                     {ads?.media?.desktop?.side?.url ? (
                         <Image
                             src={ads?.media?.desktop?.side?.url}

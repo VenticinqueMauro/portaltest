@@ -26,7 +26,7 @@ export default function News({ news, category, moreNews, ads }: Props) {
 
 
     return (
-        <div className="max-w-7xl mx-auto md:mr-[240px] 2xl:mx-auto px-3">
+        <div className="max-w-7xl mx-auto px-3">
 
             {/* BREADCRUMB  */}
             <BreadCrumb category={category} />

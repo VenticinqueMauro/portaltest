@@ -34,7 +34,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
     return (
         <div className="px-14 md:px-0 ">
             {/* DESKTOP  */}
-            <div className="relative">
+            <div className="relative mt-10">
                 <Carousel orientation={'vertical'} className="hidden md:block md:px-3">
                     <CarouselContent className={"space-y-3 -ml-1 flex gap-4 max-h-[500px]"}>
                         {moreNews.slice(0.4).map((item: MoreNews, index) => (
@@ -49,7 +49,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                                                 height={300}
                                                 className="rounded aspect-video object-cover"
                                                 placeholder="blur"
-                                                blurDataURL={blurImage} 
+                                                blurDataURL={blurImage}
                                             />
                                         ) : (
                                             <video
@@ -73,10 +73,8 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <div className="absolute top-0 -right-5 flex flex-row items-center" >
-                        <CarouselPrevious />
-                        <CarouselNext className="" />
-                    </div>
+                    <CarouselPrevious />
+                    <CarouselNext />
                 </Carousel>
             </div>
             {/* MOBILE */}
