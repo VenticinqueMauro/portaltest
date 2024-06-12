@@ -19,15 +19,12 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({ error: "ID de usuario inválido" }, { status: 400 });
         }
 
-        console.log("HOLA", newsId, userId)
-
         await connectDB();
 
         const session = await ClientUser.findOne({ _id: userId })
 
-        console.log(session)
         if (!session) {
-            return NextResponse.json({ success: false, message: 'Authentication required' }, { status: 401 });
+            return NextResponse.json({ success: false, message: 'Se requiere autenticación' }, { status: 401 });
         }
 
         const newComment = new Comment({
@@ -53,8 +50,34 @@ export async function PUT(request: NextRequest) {
             await News.findByIdAndUpdate(newsId, { $push: { comments: newComment._id } });
         }
 
-        return NextResponse.json({ success: true, data: newComment });
+        return NextResponse.json({ message: 'Comentario agregado exitosamente', data: newComment });
     } catch (error) {
         return handleError(error)
+    }
+}
+
+
+export async function DELETE(request: NextRequest) {
+    try {
+        await connectDB();
+
+        const { commentId, newsId } = await request.json();
+
+        if (!commentId || !newsId) {
+            return NextResponse.json({ error: 'Falta commentId o newsId' }, { status: 400 });
+        }
+
+        const deletedComment = await Comment.findByIdAndDelete(commentId);
+        if (!deletedComment) {
+            return NextResponse.json({ error: 'Comentario no encontrado' }, { status: 404 });
+        }
+
+        await News.findByIdAndUpdate(newsId, {
+            $pull: { comments: commentId }
+        });
+
+        return NextResponse.json({ message: 'Comentario eliminado con éxito' }, { status: 200 });
+    } catch (error) {
+        return handleError(error);
     }
 }

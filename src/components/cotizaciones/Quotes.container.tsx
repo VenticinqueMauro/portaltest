@@ -176,8 +176,8 @@ export default async function QuotesContainer() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="text-black border-none bg-white  hidden xl:flex" />
-                <CarouselNext className="text-black border-none bg-white  hidden xl:flex" />
+                <CarouselPrevious className="text-black border-none bg-white  hidden 2xl:flex" />
+                <CarouselNext className="text-black border-none bg-white  hidden 2xl:flex" />
             </Carousel>
         </div>
     )

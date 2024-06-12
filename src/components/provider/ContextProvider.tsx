@@ -1,10 +1,12 @@
 'use client';
 
+import { handleDecodeAdminUserToken } from "@/actions/adminUsers/adminUserToken";
 import { handleDecodeUserToken } from "@/actions/auth-users-page/userToken";
-import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 export interface UserContextType {
     user: any;
+    adminUser: any;
     refresh: boolean;
     setUser: React.Dispatch<React.SetStateAction<any>>;
     handleRefresh: () => void;
@@ -14,6 +16,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState(null);
+    const [adminUser, setAdminUser] = useState(null);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
@@ -22,13 +25,19 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
             setUser(response);
         }
 
+        async function getAdminUser() {
+            const response = await handleDecodeAdminUserToken();
+            setAdminUser(response);
+        }
+
         getUser();
+        getAdminUser();
     }, [refresh]);
 
     const handleRefresh = () => setRefresh(prev => !prev);
 
     return (
-        <UserContext.Provider value={{ user, refresh, setUser, handleRefresh }}>
+        <UserContext.Provider value={{ user, adminUser, refresh, setUser, handleRefresh }}>
             {children}
         </UserContext.Provider>
     );
