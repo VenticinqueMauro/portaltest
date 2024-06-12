@@ -73,7 +73,7 @@ export default function NewsLinked({ newsLinked }: Props) {
     }
 
     return (
-        <div className="py-10 px-14">
+        <div className="py-10">
             <div className={"max-w-7xl 2xl:mx-auto"}>
                 <span className="italic tracking-tight text-2xl text-tdn relative inline-block">
                     <h2 className="pt-2 border-t border-tdn min-w-[200px] mb-5 relative">
@@ -82,7 +82,7 @@ export default function NewsLinked({ newsLinked }: Props) {
                     </h2>
                 </span>
             </div>
-            <div className="px-14 md:px-0">
+            <div className="px-14 2xl:px-0">
                 <Carousel className="max-w-7xl mx-auto">
                     <CarouselContent className="-ml-1 flex gap-4 ">
                         {news.map((item: NewsLinked) => (
