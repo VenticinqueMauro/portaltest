@@ -49,8 +49,12 @@ async function handleSignin({ email, password }: { email: string, password: stri
 export default function ContainerLogin() {
 
     const ref = createRef<HTMLFormElement>();
-    const { handleRefresh } = useUser();
+    const { user, handleRefresh } = useUser();
     const router = useRouter();
+
+    if (user && user.email) {
+        router.push('/');
+    }
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => setIsVisible(!isVisible);
