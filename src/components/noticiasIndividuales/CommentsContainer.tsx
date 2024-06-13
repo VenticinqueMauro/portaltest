@@ -12,6 +12,36 @@ import { Textarea } from "../ui/textarea";
 import { DialogDeleteComment } from "./DialogDeleteComment";
 import SubmitComment from "./SubmitComment";
 
+function relativeTime(date: string) {
+    const now = new Date();
+    const secondsPast = (now.getTime() - new Date(date).getTime()) / 1000;
+
+    if (secondsPast < 60) {
+        return 'hace unos segundos';
+    }
+    if (secondsPast < 3600) {
+        return `hace ${Math.floor(secondsPast / 60)} minutos`;
+    }
+    if (secondsPast < 86400) {
+        const hours = Math.floor(secondsPast / 3600);
+        return `hace ${hours} ${hours > 1 ? 'horas' : 'hora'}`;
+    }
+    const daysPast = Math.floor(secondsPast / 86400);
+    if (daysPast < 7) {
+        return `hace ${daysPast} ${daysPast > 1 ? 'días' : 'día'}`;
+    }
+    const weeksPast = Math.floor(daysPast / 7);
+    if (weeksPast < 4) {
+        return `hace ${weeksPast} ${weeksPast > 1 ? 'semanas' : 'semana'}`;
+    }
+    const monthsPast = Math.floor(weeksPast / 4);
+    if (monthsPast < 12) {
+        return `hace ${monthsPast} ${monthsPast > 1 ? 'meses' : 'mes'}`;
+    }
+    const yearsPast = Math.floor(monthsPast / 12);
+    return `hace ${yearsPast} ${yearsPast > 1 ? 'años' : 'año'}`;
+}
+
 interface Props {
     comments?: Comment[];
     id: string;
@@ -61,8 +91,9 @@ export default function CommentsContainer({ comments, id, category }: Props) {
                     {comments.map((comment, index) => (
                         comment.author && comment.author.fullname && comment.content ? (
                             <div key={comment._id} className="border rounded p-3 ml-3 my-3 relative">
-                                <div className="flex gap-3 items-center">
+                                <div className="flex gap-3 items-end">
                                     <h3 className="font-bold">{comment.author.fullname}</h3>
+                                    <span className="text-muted-foreground text-xs font-medium">•&nbsp;&nbsp;{relativeTime(comment.createdAt)}</span>
                                 </div>
                                 <p className="text-gray-600 mt-2">{comment.content}</p>
                                 <DialogDeleteComment
