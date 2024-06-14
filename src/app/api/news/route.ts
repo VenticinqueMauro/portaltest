@@ -1,3 +1,4 @@
+import { incrementarVisita } from "@/actions/news/handleViews";
 import { connectDB } from "@/lib/mongodb";
 import { Comment } from "@/models/comment";
 import { News } from "@/models/news";
@@ -20,6 +21,8 @@ export async function GET(request: NextRequest) {
                 path: "comments",
                 model: Comment
             })
+
+            await incrementarVisita(news._id);        
         } else if (categoryQuery) {
             news = await News.find(
                 { category: categoryQuery, status: NewsStatus.PUBLISHED },

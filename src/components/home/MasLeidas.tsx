@@ -44,7 +44,7 @@ export default async function MasLeidas() {
 
     const mostReads: MostRead[] = await getMostReads();
 
-    if (!mostReads.length) {
+    if (!mostReads || !mostReads.length) {
         return null;
     }
 
