@@ -98,7 +98,7 @@ export default function CommentsContainer({ comments, id, category }: Props) {
                     {comments.map((comment, index) => (
                         comment.author && comment.author.fullname && comment.content ? (
                             <div key={comment._id} className="border rounded p-3 ml-3 my-3 relative">
-                                <div className="flex gap-3 items-end">
+                                <div className="flex gap-1 items-end">
                                     <h3 className="font-bold">{comment.author.fullname}</h3>
                                     <span className="text-muted-foreground text-xs font-medium">•&nbsp;&nbsp;{relativeTime(comment.createdAt)}</span>
                                 </div>
