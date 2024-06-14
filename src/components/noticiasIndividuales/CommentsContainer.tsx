@@ -12,9 +12,15 @@ import { Textarea } from "../ui/textarea";
 import { DialogDeleteComment } from "./DialogDeleteComment";
 import SubmitComment from "./SubmitComment";
 
-function relativeTime(date: string) {
+function relativeTime(date: string): string {
     const now = new Date();
-    const secondsPast = (now.getTime() - new Date(date).getTime()) / 1000;
+    const pastDate = new Date(date);
+
+    if (isNaN(pastDate.getTime())) {
+        return 'Fecha inválida';
+    }
+
+    const secondsPast = (now.getTime() - pastDate.getTime()) / 1000;
 
     if (secondsPast < 60) {
         return 'hace unos segundos';
@@ -34,13 +40,14 @@ function relativeTime(date: string) {
     if (weeksPast < 4) {
         return `hace ${weeksPast} ${weeksPast > 1 ? 'semanas' : 'semana'}`;
     }
-    const monthsPast = Math.floor(weeksPast / 4);
+    const monthsPast = Math.floor(daysPast / 30); 
     if (monthsPast < 12) {
         return `hace ${monthsPast} ${monthsPast > 1 ? 'meses' : 'mes'}`;
     }
-    const yearsPast = Math.floor(monthsPast / 12);
+    const yearsPast = Math.floor(daysPast / 365); 
     return `hace ${yearsPast} ${yearsPast > 1 ? 'años' : 'año'}`;
 }
+
 
 interface Props {
     comments?: Comment[];
