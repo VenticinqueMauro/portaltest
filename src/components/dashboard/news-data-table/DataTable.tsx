@@ -95,7 +95,7 @@ export function DataTableNews<TData, TValue>({ columns, data, }: DataTableProps<
                                             column.toggleVisibility(!!value)
                                         }
                                     >
-                                        {column.id === 'title' ? 'Título' : column.id === 'summary' ? 'Sumario' : column.id === 'category' ? 'Categoría' : column.id === 'author' ? 'Autor' : column.id === 'status' ? 'Estado' : column.id === 'lastModifiedBy' ? 'Modificado por' : column.id === 'createdAt' ? 'Creado En' : column.id === 'updatedAt' ? 'Actualizado En' : column.id === 'newsLinked' ? 'Noticias Vinculadas' : column.id}
+                                        {column.id === 'title' ? 'Título' : column.id === 'summary' ? 'Sumario' : column.id === 'category' ? 'Categoría' : column.id === 'author' ? 'Autor' : column.id === 'status' ? 'Estado' : column.id === 'lastModifiedBy' ? 'Modificado por' : column.id === 'createdAt' ? 'Creado En' : column.id === 'updatedAt' ? 'Actualizado En' : column.id === 'newsLinked' ? 'Noticias Vinculadas' : column.id === 'showAuthor' ? 'Mostrar autor' : column.id}
                                     </DropdownMenuCheckboxItem>
                                 )
                             })}

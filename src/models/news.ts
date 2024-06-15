@@ -14,6 +14,7 @@ interface NewsDocument extends Document {
     newsLinked?: string[];
     media?: MediaNews;
     author?: string;
+    showAuthor: boolean;
     tags?: string[];
     comments?: Comment[] | [];
     path: string;
@@ -45,6 +46,10 @@ const NewsSchema = new Schema<NewsDocument>({
     author: {
         type: String,
         minlength: [3, 'El autor debe tener al menos 3 caracteres']
+    },
+    showAuthor: {
+        type: Boolean,
+        default: false
     },
     category: {
         type: String,

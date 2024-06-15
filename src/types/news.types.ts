@@ -46,6 +46,7 @@ export type NewsType = {
     newsLinked?: string[];
     media?: MediaNews;
     author?: string;
+    showAuthor: boolean;
     tags?: string[];
     comments?: Comment[] | [];
     createdAt?: Date;

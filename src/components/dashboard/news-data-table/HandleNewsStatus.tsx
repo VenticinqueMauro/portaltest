@@ -20,7 +20,7 @@ export default function HandleNewsStatus({ row }: Props) {
             toast.error(response.error);
         } else {
             toast.success(response);
-        } 
+        }
     }
 
 
@@ -29,6 +29,7 @@ export default function HandleNewsStatus({ row }: Props) {
             variant={"outline"}
             className={`${row.getValue('status') === 'pendiente' ? 'text-amber-600 hover:bg-amber-500/20' : 'text-green-600 hover:bg-green-500/20'} uppercase rounded cursor-pointer font-normal`}
             onClick={() => changeNewsStatus()}
+            title={row.getValue('status') === 'pendiente' ? "Publicar noticia" : "Pausar publicación"}
         >
             {row.original.status === 'pendiente'
                 ? <Play className="h-4 w-4 mr-1" />

@@ -16,6 +16,7 @@ import Image from "next/image";
 import ButtonActionsNews from "./Button.ActionsNews";
 import HandleNewsStatus from "./HandleNewsStatus";
 import { CategoryNews, MediaNews, NewsStatus } from "@/types/news.types";
+import HandleShowAuthor from "./handleShowAuthor";
 
 
 export type NewsDataTable = {
@@ -26,6 +27,7 @@ export type NewsDataTable = {
     content: string;
     category: CategoryNews;
     author: string,
+    showAuthor: boolean;
     status: NewsStatus;
     media?: MediaNews;
     lastModifiedBy?: string;
@@ -131,6 +133,25 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
                 <p className="capitalize">{row.original.author}</p>
             )
         }
+    },
+    {
+        accessorKey: "showAuthor",
+        header: ({ column }) => {
+            return (
+                <span
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
+                >
+                    Mostrar autor
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </span>
+            )
+        },
+        cell: ({ row }) => {
+            return (
+                <HandleShowAuthor row={row} />
+            )
+        },
     },
     {
         accessorKey: "createdAt",
