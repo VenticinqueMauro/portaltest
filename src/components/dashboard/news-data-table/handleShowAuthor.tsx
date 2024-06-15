@@ -36,9 +36,11 @@ export default function HandleShowAuthor({ row }: Props) {
             {row.getValue('showAuthor')
                 ? <>
                     <Eye className="h-4 w-4 mr-1" />
+                    visible
                 </>
                 : <>
                     <EyeOff className="h-4 w-4 mr-1" />
+                    No visible
                 </>
             }
         </Badge>

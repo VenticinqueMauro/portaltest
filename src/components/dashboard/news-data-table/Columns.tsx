@@ -139,9 +139,11 @@ export const columnsNews: ColumnDef<NewsDataTable>[] = [
         header: ({ column }) => {
             return (
                 <span
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     className="flex justify-start items-center cursor-pointer hover:text-accent-foreground"
                 >
                     Mostrar autor
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
                 </span>
             )
         },
