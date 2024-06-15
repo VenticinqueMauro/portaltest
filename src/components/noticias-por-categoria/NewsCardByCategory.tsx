@@ -34,6 +34,10 @@ function formatDate(isoDate: any) {
 
 export default function NewsCardByCategory({ news }: Props) {
 
+
+    const showAuthor = !news.showAuthor ? 'Tendencia de noticias' : news.author;
+
+
     return (
         <div className="max-w-7xl 2xl:mx-auto px-3 md:mr-[240px]">
             {
@@ -43,7 +47,7 @@ export default function NewsCardByCategory({ news }: Props) {
                         <div className="flex flex-col space-y-2 grow order-first md:order-none">
                             <h3 className="text-2xl font-semibold leading-none tracking-tight">{item.title}</h3>
                             <h4 className={`${fontMerriweather.className} text-md`}>{item.summary}</h4>
-                            <h5 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{item.author}</b></h5>
+                            <h5 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{showAuthor}</b></h5>
                         </div>
                         {
                             item.media?.portada.type !== 'video' ? (

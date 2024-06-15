@@ -24,6 +24,8 @@ interface Props {
 
 export default function News({ news, category, moreNews, ads }: Props) {
 
+    const showAuthor = !news.showAuthor ? 'Tendencia de noticias' : news.author;
+
 
     return (
         <div className="max-w-7xl mx-auto px-3">
@@ -35,7 +37,7 @@ export default function News({ news, category, moreNews, ads }: Props) {
                 <h3 className={`${fontLato.className} text-muted-foreground font-medium`}>{news.pretitle}</h3>
                 <h1 className="text-3xl md:text-4xl font-bold leading-none tracking-tight">{news.title}</h1>
                 <h2 className={`${fontMerriweather.className} text-lg`}>{news.summary}</h2>
-                <h3 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{news.author}</b></h3>
+                <h3 className="text-muted-foreground text-sm">Por <b className="text-foreground capitalize">{showAuthor}</b></h3>
                 <Separator />
             </div>
             <div className="flex flex-col md:flex-row mt-3 gap-4 relative">
