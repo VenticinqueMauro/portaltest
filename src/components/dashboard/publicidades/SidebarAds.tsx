@@ -64,6 +64,11 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
 
     const handleForm = async (formData: FormData) => {
 
+        if (!formData.get('urldesktop') && !formData.get('urlmobile')) {
+            toast.error('Debes agregar una url publicitaria')
+            return
+        }
+
         if (deskPublicId) {
             formData.append('deskPublicId', deskPublicId as string);
         }

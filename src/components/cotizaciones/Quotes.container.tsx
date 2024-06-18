@@ -144,13 +144,16 @@ export default async function QuotesContainer() {
     const quotations = await getQuotations();
     const portal = await getPortalQuotations();
 
+    const dolarQuotations = quotations.filter(quote => quote.moneda === 'USD');
+    const otherQuotantions = quotations.filter(quote => quote.moneda !== 'USD');
+
     const formattedPortalData = formatPortalData(portal[0]);
 
     return (
         <div className="px-3 py-3 bg-gradient-to-b from-white to-transparent">
             <Carousel className="max-w-7xl mx-auto px-3 ">
                 <CarouselContent className="-ml-1 gap-10">
-                    {quotations?.map((quote: QuoteApi) => (
+                    {dolarQuotations?.map((quote: QuoteApi) => (
                         <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto `}>
                             <span className="text-white bg-black px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
                                 {formatName(quote)}: <p className="font-medium">{formatQuote(quote)}</p>
@@ -173,6 +176,13 @@ export default async function QuotesContainer() {
                                     </AccordionContent>
                                 </AccordionItem>
                             </Accordion>
+                        </CarouselItem>
+                    ))}
+                    {otherQuotantions?.map((quote: QuoteApi) => (
+                        <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto `}>
+                            <span className="text-white bg-black px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
+                                {formatName(quote)}: <p className="font-medium">{formatQuote(quote)}</p>
+                            </span>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
