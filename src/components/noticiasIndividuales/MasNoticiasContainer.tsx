@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Separator } from "../ui/separator";
 import CarouselMasNoticias from "./CarouselMasNoticias";
 import { fontLato } from "@/app/fonts";
+import Link from "next/link";
 
 interface Props {
     category: string;
@@ -33,19 +34,21 @@ export default async function MasNoticiasContainer({ category, id, moreNews, ads
             </div>
             <CarouselMasNoticias id={id} moreNews={filteredMoreNews} />
             <Separator className='mt-7' />
-            <div className="absolute top-0 left-0 h-full -z-10">
+            <div className="absolute top-0 left-0 h-full">
                 <div className="hidden md:flex justify-center items-center bg-publicidad p-5 sticky top-60 right-0 mt-[650px]">
                     {ads?.media?.desktop?.side?.url ? (
-                        <Image
-                            src={ads?.media?.desktop?.side?.url}
-                            alt="Publicidad lateral"
-                            width={200}
-                            height={500}
-                            placeholder="blur"
-                            blurDataURL={blurImage}
-                            priority
-                            aria-label="Publicidad lateral"
-                        />
+                        <Link href={ads?.media?.desktop?.side?.link || '#'} target='_blank' rel='noreferrer'>
+                            <Image
+                                src={ads?.media?.desktop?.side?.url}
+                                alt="Publicidad lateral"
+                                width={200}
+                                height={500}
+                                placeholder="blur"
+                                blurDataURL={blurImage}
+                                priority
+                                aria-label="Publicidad lateral"
+                            />
+                        </Link>
                     ) : (
                         <span className="w-full h-[500px] text-sm text-muted-foreground flex items-center justify-center text-center">
                             Espacio publicitario disponible

@@ -137,6 +137,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                                 </div>
                             )
                         }
+                        <Input id="linkdesktop" name="linkdesktop" className="mb-3 w-fit" placeholder="URL publicitaria" />
                         <Separator className='mb-3' />
                         <Label htmlFor="mobile" className="flex gap-1 items-center mb-2 text-muted-foreground font-normal">
                             <TabletSmartphone />
@@ -153,6 +154,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                                 </button>
                             </div>
                         }
+                        <Input id="linkmobile" name="linkmobile" className="mb-3 w-fit" placeholder="URL publicitaria" />
                         <SubmitButton title={'Guardar cambios'} disabled={!imagePreviewDesktop && !imagePreviewMobile} />
                     </form> :
                     <p className="text-center text-muted-foreground">Seleccione un espacio publicitario</p>

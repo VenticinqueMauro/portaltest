@@ -4,14 +4,14 @@ import { Schema, Document, model, models } from 'mongoose';
 interface AdDocument extends Document {
     media?: {
         desktop?: {
-            top?: { public_Id?: string; url?: string },
-            side?: { public_Id?: string; url?: string },
-            bottom?: { public_Id?: string; url?: string }
+            top?: { public_Id?: string; url?: string, link?: string },
+            side?: { public_Id?: string; url?: string, link?: string },
+            bottom?: { public_Id?: string; url?: string, link?: string }
         };
         mobile?: {
-            top?: { public_Id?: string; url?: string },
-            side?: { public_Id?: string; url?: string },
-            bottom?: { public_Id?: string; url?: string }
+            top?: { public_Id?: string; url?: string, link?: string },
+            side?: { public_Id?: string; url?: string, link?: string },
+            bottom?: { public_Id?: string; url?: string, link?: string }
         }
     };
 }
@@ -19,14 +19,14 @@ interface AdDocument extends Document {
 const AdSchema = new Schema<AdDocument>({
     media: {
         desktop: {
-            top: { public_id: String, url: String },
-            side: { public_id: String, url: String },
-            bottom: { public_id: String, url: String }
+            top: { public_id: String, url: String, link: String },
+            side: { public_id: String, url: String, link: String },
+            bottom: { public_id: String, url: String, link: String }
         },
         mobile: {
-            top: { public_id: String, url: String },
-            side: { public_id: String, url: String },
-            bottom: { public_id: String, url: String }
+            top: { public_id: String, url: String, link: String },
+            side: { public_id: String, url: String, link: String },
+            bottom: { public_id: String, url: String, link: String }
         }
     }
 });

@@ -100,7 +100,10 @@ export default async function ContainerHome({ ads }: Props) {
                 <MasLeidas />
 
                 {/* PUBLICIDAD LATERAL */}
-                <LateralDesktop url={ads.home.portada?.media?.desktop?.side?.url as string} />
+                <LateralDesktop
+                    url={ads.home.portada?.media?.desktop?.side?.url as string}
+                    link={ads.home.portada?.media?.desktop?.side?.link as string}
+                />
             </section>
 
             {sections.map((sectionKey) => {

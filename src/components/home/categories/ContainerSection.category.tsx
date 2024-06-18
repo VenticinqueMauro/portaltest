@@ -34,7 +34,10 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, mo
     return (
         <section className="relative ">
             {/* PUBLICIDAD SUPERIOR DESKTOP */}
-            <SuperiorDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.url as string ?? ''} />
+            <SuperiorDesktop
+                url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.url as string ?? ''}
+                link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.link as string ?? ''}
+            />
             {/* TITULO DE SECCION */}
             <div className="py-10">
                 <SectionTitle title={title} />
@@ -44,7 +47,10 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, mo
             {/* MAS NOTICIAS  */}
             <MoreNewsSlider title={title} moreNews={moreNews} category={sectionTitle} sectionData={sectionData} />
             {/* PUBLICIDAD LATERAL */}
-            <LateralDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.url as string} />
+            <LateralDesktop
+                url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.url as string}
+                link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.link as string}
+            />
         </section>
     )
 }

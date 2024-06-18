@@ -199,28 +199,34 @@ export type Ad = {
             top?: {
                 public_id?: string;
                 url?: string;
+                link?: string;
             },
             side?: {
                 public_id?: string;
                 url?: string;
+                link?: string;
             },
             bottom?: {
                 public_id?: string;
                 url?: string;
+                link?: string;
             }
         };
         mobile?: {
             top?: {
                 public_id?: string;
                 url?: string;
+                link?: string;
             },
             side?: {
                 public_id?: string;
                 url?: string;
+                link?: string;
             },
             bottom?: {
                 public_id?: string;
                 url?: string;
+                link?: string;
             }
         }
     };

@@ -24,7 +24,7 @@ const processAndUploadFiles = async (file: File | null, resourceType: ResourceTy
 
         return new Promise<CloudinaryUploadResult>((resolve, reject) => {
             let options: any = {
-                folder: `Publicidades/${sectionName}/${device}/${position}`,
+                folder: `Publicidades/${sectionName === 'eco & negocios' && 'econegocios'}/${device}/${position}`,
                 resource_type: resourceType,
                 eager: {
                     crop: 'auto',
@@ -99,7 +99,6 @@ const deleteResources = async (publicId: string) => {
 
 
 export async function handleAds(formData: FormData) {
-
     const sectionValue = formData.get('section');
     if (sectionValue === null) {
         return null;
@@ -111,12 +110,13 @@ export async function handleAds(formData: FormData) {
         return null;
     }
 
-
     const deskPublicId = formData.get('deskPublicId');
     const mobPublicId = formData.get('mobPublicId');
     const position = positionValue as AdPosition;
     const DesktopFile = formData.get('desktop') as File;
     const MobileFile = formData.get('mobile') as File;
+    const linkDesktop = formData.get('linkdesktop') as string;
+    const linkMobile = formData.get('linkmobile') as string;
 
     const ads: Ads = {
         home: {}
@@ -125,14 +125,14 @@ export async function handleAds(formData: FormData) {
     const newAd: Ad = {
         media: {
             desktop: {
-                top: { public_id: '', url: '' },
-                side: { public_id: '', url: '' },
-                bottom: { public_id: '', url: '' }
+                top: { public_id: '', url: '', link: '' },
+                side: { public_id: '', url: '', link: '' },
+                bottom: { public_id: '', url: '', link: '' }
             },
             mobile: {
-                top: { public_id: '', url: '' },
-                side: { public_id: '', url: '' },
-                bottom: { public_id: '', url: '' }
+                top: { public_id: '', url: '', link: '' },
+                side: { public_id: '', url: '', link: '' },
+                bottom: { public_id: '', url: '', link: '' }
             }
         }
     };
@@ -144,7 +144,10 @@ export async function handleAds(formData: FormData) {
                 await deleteResources(deskPublicId as string);
             }
             const desktopMedia = await processAndUploadFiles(DesktopFile, 'image', section, 'desktop', position);
-            newAd.media.desktop[position] = desktopMedia;
+            newAd.media.desktop[position] = {
+                ...desktopMedia,
+                link: linkDesktop // Asignar el linkDesktop aquí
+            };
         } catch (error) {
             console.error('Error al cargar y procesar archivo de escritorio:', error);
         }
@@ -157,7 +160,10 @@ export async function handleAds(formData: FormData) {
                 await deleteResources(mobPublicId as string);
             }
             const mobileMedia = await processAndUploadFiles(MobileFile, 'image', section, 'mobile', position);
-            newAd.media.mobile[position] = mobileMedia;
+            newAd.media.mobile[position] = {
+                ...mobileMedia,
+                link: linkMobile // Asignar el linkMobile aquí
+            };
         } catch (error) {
             console.error('Error al cargar y procesar archivo móvil:', error);
         }
@@ -168,7 +174,7 @@ export async function handleAds(formData: FormData) {
 
     const data = {
         ads: ads
-    }
+    };
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_URL}api/ads`, {
@@ -183,13 +189,13 @@ export async function handleAds(formData: FormData) {
         const json = await response.json();
 
         if (!response.ok) {
-            return json.error
+            return json.error;
         }
         revalidatePath('/dashboard/publicidad');
         return json;
     } catch (error) {
         if (error instanceof Error) {
-            return error.message
+            return error.message;
         }
     }
 }
