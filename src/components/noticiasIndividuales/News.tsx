@@ -59,7 +59,10 @@ export default function News({ news, category, moreNews, ads }: Props) {
                     </div>
                     <p className="text-xs mb-2 text-muted-foreground">{news.media?.portada.caption}</p>
                     <div className="pb-7" dangerouslySetInnerHTML={{ __html: news.content }} />
-                    <InferiorDesktop url={ads?.media?.desktop?.bottom?.url || ''} />
+                    <InferiorDesktop
+                        url={ads?.media?.desktop?.bottom?.url || ''}
+                        link={ads?.media?.desktop?.bottom?.link || ''}
+                    />
                     <Gallery gallery={news.media?.gallery} />
                     <Tags tags={news.tags} />
                     <CommentsContainer comments={news.comments} id={news._id as string} category={news.category} />

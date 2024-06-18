@@ -54,10 +54,16 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                             </div>
                         </div>
                         {/* PUBLICIDAD INFERIOR DESKTOP  */}
-                        <InferiorDesktop url={ads?.media?.desktop?.bottom?.url || ''} />
+                        <InferiorDesktop
+                            url={ads?.media?.desktop?.bottom?.url || ''}
+                            link={ads?.media?.desktop?.bottom?.link || ''}
+                        />
                     </div>
                 }
-                <LateralDesktop url={ads?.media?.desktop?.side?.url || ''} />
+                <LateralDesktop
+                    url={ads?.media?.desktop?.side?.url || ''}
+                    link={ads?.media?.desktop?.side?.link || ''}
+                />
                 <NewsCardByCategory news={filteredNews} />
             </div>
         </div>
