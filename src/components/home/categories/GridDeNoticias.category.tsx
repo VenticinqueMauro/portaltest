@@ -44,7 +44,10 @@ export default function GridDeNoticiasCategory({ sectionData, ads, sectionTitle 
             </div>
 
             {/* PUBLICIDAD INFERIOR DESKTOP  */}
-            <InferiorDesktop url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.bottom?.url as string} />
+            <InferiorDesktop
+                url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.bottom?.url as string}
+                link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.bottom?.link as string}
+            />
         </div>
     )
 }
