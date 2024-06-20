@@ -7,6 +7,9 @@ import NoticiaCentral from "./NoticiaCentral";
 import ContainerSectionCategory from "./categories/ContainerSection.category";
 import LateralDesktop from "./publicidades/Lateral.Desktop";
 import { MoreNewsData } from "@/app/api/news/more-news/route";
+import Image from "next/image";
+import Link from "next/link";
+import InferiorMobile from "./publicidades/Inferior.Mobile";
 
 export async function getCover() {
     try {
@@ -48,6 +51,7 @@ export default async function ContainerHome({ ads }: Props) {
     const moreNews = await getFormatedCategoryNews();
 
     const sections = Object.keys(homeNews.sections);
+
 
     return (
         <main className="py-10">
@@ -97,15 +101,23 @@ export default async function ContainerHome({ ads }: Props) {
                     </div>
                 </div>
 
+                {/* PUBLICIDAD INFERIOR MOBILE  */}
+                <InferiorMobile
+                    link={ads.home.portada?.media?.mobile?.side?.link as string}
+                    url={ads.home.portada?.media?.mobile?.side?.url as string}
+                />
+
+                {/* NOTICIAS MAS LEIDAS  */}
                 <MasLeidas />
 
-                {/* PUBLICIDAD LATERAL */}
+                {/* PUBLICIDAD LATERAL DESKTOP */}
                 <LateralDesktop
                     url={ads.home.portada?.media?.desktop?.side?.url as string}
                     link={ads.home.portada?.media?.desktop?.side?.link as string}
                 />
             </section>
 
+            {/* NOTICIAS POR SECCIONES  */}
             {sections.map((sectionKey) => {
                 const sectionData = homeNews.sections[sectionKey as keyof SectionNewsMap];
                 const sectionTitle = sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
