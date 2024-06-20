@@ -141,7 +141,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                         <Separator className='mb-3' />
                         <Label htmlFor="mobile" className="flex gap-1 items-center mb-2 text-muted-foreground font-normal">
                             <TabletSmartphone />
-                            Mobile {sectionPosition === 'top' ? '400x100 (sugerido)' : sectionPosition === 'side' && '400x400 (sugerido)' }
+                            Mobile {sectionPosition === 'top' ? '400x100 (sugerido)' : '400x400 (sugerido)' }
                         </Label>
                         <Input id="mobile" type='file' accept="image/*" className="mb-3 max-w-full" onChange={handleImageUploadMobile} />
                         {mobileFile && <span className="text-muted-foreground text-sm">Archivo seleccionado: {mobileFile.name}</span>}

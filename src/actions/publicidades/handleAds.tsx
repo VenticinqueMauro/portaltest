@@ -24,7 +24,7 @@ const processAndUploadFiles = async (file: File | null, resourceType: ResourceTy
 
         return new Promise<CloudinaryUploadResult>((resolve, reject) => {
             let options: any = {
-                folder: `Publicidades/${sectionName === 'eco & negocios' && 'econegocios'}/${device}/${position}`,
+                folder: `Publicidades/${sectionName === 'eco & negocios' ? 'econegocios' : sectionName}/${device}/${position}`,
                 resource_type: resourceType,
                 eager: {
                     crop: 'auto',
@@ -55,18 +55,30 @@ const processAndUploadFiles = async (file: File | null, resourceType: ResourceTy
                     }
                 }
             } else {
-                if (position === 'top') {
-                    options.eager.width = 970;
-                    options.eager.height = 100;
-                    options.eager.aspect_ratio = '970:100';
-                } else if (position === 'side') {
-                    options.eager.width = 200;
-                    options.eager.height = 500;
-                    options.eager.aspect_ratio = '200:500';
-                } else if (position === 'bottom') {
-                    options.eager.width = 480;
-                    options.eager.height = 150;
-                    options.eager.aspect_ratio = '480:150';
+                if (device === 'desktop') {
+                    if (position === 'top') {
+                        options.eager.width = 970;
+                        options.eager.height = 100;
+                        options.eager.aspect_ratio = '970:100';
+                    } else if (position === 'side') {
+                        options.eager.width = 200;
+                        options.eager.height = 500;
+                        options.eager.aspect_ratio = '200:500';
+                    } else if (position === 'bottom') {
+                        options.eager.width = 480;
+                        options.eager.height = 150;
+                        options.eager.aspect_ratio = '480:150';
+                    }
+                } else if (device === 'mobile') {
+                    if (position === 'top') {
+                        options.eager.width = 400;
+                        options.eager.height = 100;
+                        options.eager.aspect_ratio = '400:100';
+                    } else if (position === 'side' || position === 'bottom') {
+                        options.eager.width = 400;
+                        options.eager.height = 400;
+                        options.eager.aspect_ratio = '400:400';
+                    }
                 }
             }
 

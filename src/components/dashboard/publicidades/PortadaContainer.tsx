@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AdPosition, AdSectionName, Ads } from "@/types/news.types";
 import { Monitor, Smartphone } from "lucide-react";
+import { AdPosition, AdSectionName, Ads } from "@/types/news.types";
 import { Dispatch, SetStateAction } from "react";
 import PortadaDesktop from "./PortadaDesktop";
 import PortadaMobile from "./PortadaMobile";
