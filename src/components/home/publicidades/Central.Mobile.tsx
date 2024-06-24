@@ -10,7 +10,7 @@ export default function CentralMobile({ url, link }: Props) {
     const hasUrl = url && url.length > 0;
 
     return (
-        <div className="h-[420px] bg-publicidad col-span-12 flex md:hidden justify-center items-center relative mb-7" >
+        <div className="h-[420px] bg-publicidad col-span-12 flex md:hidden justify-center items-center relative " >
             {
                 hasUrl ? (
                     <div className="relative w-[400px] h-[400px]">

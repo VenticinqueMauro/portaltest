@@ -10,6 +10,8 @@ import { CreatedAndUpdated } from "./CreatedAndUpdated";
 import MasNoticiasContainer from "./MasNoticiasContainer";
 import Tags from "./Tags";
 import { fontLato, fontMerriweather } from "@/app/fonts";
+import InferiorMobile from "../home/publicidades/Inferior.Mobile";
+import CentralMobile from "../home/publicidades/Central.Mobile";
 const CommentsContainer = dynamic(() => import("./CommentsContainer"), { ssr: false });
 
 const NewsLinked = dynamic(() => import("./NewsLinked"), { ssr: false });
@@ -59,6 +61,7 @@ export default function News({ news, category, moreNews, ads }: Props) {
                     </div>
                     <p className="text-xs mb-2 text-muted-foreground">{news.media?.portada.caption}</p>
                     <div className="pb-7" dangerouslySetInnerHTML={{ __html: news.content }} />
+                    {/* PUBLICIDAD INFERIOR DESKTOP */}
                     <InferiorDesktop
                         url={ads?.media?.desktop?.bottom?.url || ''}
                         link={ads?.media?.desktop?.bottom?.link || ''}
@@ -68,9 +71,19 @@ export default function News({ news, category, moreNews, ads }: Props) {
                     <CommentsContainer comments={news.comments} id={news._id as string} category={news.category} />
                 </div>
                 <Separator orientation='vertical' />
+                {/* PUBLICIDAD CENTRAL MOBILE */}
+                <CentralMobile
+                    url={ads?.media?.mobile?.side?.url || ''}
+                    link={ads?.media?.mobile?.side?.link || ''}
+                />
                 {/* CAROUSEL MAS NOTICIAS  */}
                 <MasNoticiasContainer moreNews={moreNews} category={category} id={news._id as string} ads={ads} />
             </div>
+            {/* PUBLICIDAD INFERIOR MOBILE */}
+            <InferiorMobile
+                url={ads?.media?.mobile?.bottom?.url || ''}
+                link={ads?.media?.mobile?.bottom?.link || ''}
+            />
             <NewsLinked newsLinked={news.newsLinked} />
         </div>
     )
