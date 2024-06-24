@@ -1,10 +1,11 @@
-import { Ads, MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
-import SuperiorDesktop from "../publicidades/Superior.Desktop";
-import SectionTitle from "../SectionTitle";
-import GridDeNoticiasCategory from "./GridDeNoticias.category";
-import LateralDesktop from "../publicidades/Lateral.Desktop";
 import { MoreNewsData } from "@/app/api/news/more-news/route";
+import { Ads, MainNews, SectionNewsMap, SidebarItem } from "@/types/news.types";
 import dynamic from "next/dynamic";
+import SectionTitle from "../SectionTitle";
+import LateralDesktop from "../publicidades/Lateral.Desktop";
+import SuperiorDesktop from "../publicidades/Superior.Desktop";
+import SuperiorMobile from "../publicidades/Superior.Mobile";
+import GridDeNoticiasCategory from "./GridDeNoticias.category";
 
 const MoreNewsSlider = dynamic(() => import("./MoreNewsSlider"));
 
@@ -38,6 +39,11 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, mo
                 url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.url as string ?? ''}
                 link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.top?.link as string ?? ''}
             />
+            {/* PUBLICIDAD SUPERIOR MOBILE */}
+            <SuperiorMobile
+                url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.mobile?.top?.url as string ?? ''}
+                link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.mobile?.top?.link as string ?? ''}
+            />
             {/* TITULO DE SECCION */}
             <div className="py-10">
                 <SectionTitle title={title} />
@@ -46,7 +52,7 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, mo
             <GridDeNoticiasCategory sectionData={sectionData} ads={ads} sectionTitle={sectionTitle} />
             {/* MAS NOTICIAS  */}
             <MoreNewsSlider title={title} moreNews={moreNews} category={sectionTitle} sectionData={sectionData} />
-            {/* PUBLICIDAD LATERAL */}
+            {/* PUBLICIDAD LATERAL DESKTOP */}
             <LateralDesktop
                 url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.url as string}
                 link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.link as string}

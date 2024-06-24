@@ -23,12 +23,15 @@ export default async function Container({ news, category, moreNews, ads }: Props
 
     return (
         <section>
+            {/* PUBLICIDAD */}
             <PublicidadSuperior ads={ads} />
+            {/* NAVBAR */}
             <div className='sticky top-0 left-0 z-20'>
                 <Navbar />
                 <QuotesContainer />
             </div>
-            <div className="py-5 relative ">
+            {/* NOTICIAS  */}
+            <div className="py-5 relative">
                 <News news={news} category={category} moreNews={moreNews} ads={ads} />
             </div>
         </section>

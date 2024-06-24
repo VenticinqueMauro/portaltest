@@ -64,11 +64,6 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
 
     const handleForm = async (formData: FormData) => {
 
-        if (!formData.get('urldesktop') && !formData.get('urlmobile')) {
-            toast.error('Debes agregar una url publicitaria')
-            return
-        }
-
         if (deskPublicId) {
             formData.append('deskPublicId', deskPublicId as string);
         }
@@ -124,7 +119,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                             <ScreenShare />
                             Desktop {sectionPosition === 'top' ? '970x150 (sugerido)' : sectionPosition === 'side' ? '200x500 (sugerido)' : '480x150 (sugerido)'}
                         </Label>
-                        <Input id="desktop" type='file' accept="image/*" className="mb-3 w-fit" onChange={handleImageUploadDesktop} />
+                        <Input id="desktop" type='file' accept="image/*" className="mb-3 max-w-full" onChange={handleImageUploadDesktop} />
                         {desktopFile && <span className="text-muted-foreground text-sm">Archivo seleccionado: {desktopFile.name}</span>}
                         {
                             imagePreviewDesktop && (
@@ -142,13 +137,13 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                                 </div>
                             )
                         }
-                        <Input id="linkdesktop" name="linkdesktop" className="mb-3 w-fit" placeholder="URL publicitaria" />
+                        <Input id="linkdesktop" name="linkdesktop" className="mb-3 max-w-full" placeholder="URL publicitaria" />
                         <Separator className='mb-3' />
                         <Label htmlFor="mobile" className="flex gap-1 items-center mb-2 text-muted-foreground font-normal">
                             <TabletSmartphone />
-                            Mobile
+                            Mobile {sectionPosition === 'top' ? '400x100 (sugerido)' : '400x400 (sugerido)' }
                         </Label>
-                        <Input id="mobile" type='file' accept="image/*" className="mb-3 w-fit" onChange={handleImageUploadMobile} />
+                        <Input id="mobile" type='file' accept="image/*" className="mb-3 max-w-full" onChange={handleImageUploadMobile} />
                         {mobileFile && <span className="text-muted-foreground text-sm">Archivo seleccionado: {mobileFile.name}</span>}
                         {
                             imagePreviewMobile &&
@@ -159,7 +154,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                                 </button>
                             </div>
                         }
-                        <Input id="linkmobile" name="linkmobile" className="mb-3 w-fit" placeholder="URL publicitaria" />
+                        <Input id="linkmobile" name="linkmobile" className="mb-3 max-w-full" placeholder="URL publicitaria" />
                         <SubmitButton title={'Guardar cambios'} disabled={!imagePreviewDesktop && !imagePreviewMobile} />
                     </form> :
                     <p className="text-center text-muted-foreground">Seleccione un espacio publicitario</p>

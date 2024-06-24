@@ -92,14 +92,14 @@ export default function CardProfile({ user }: Props) {
                 </form>
                 <div className="border-t border-gray-200 dark:border-gray-800" />
                 <div className="grid gap-1.5 md:grid-cols-2">
-                    <div>
+                    {/* <div>
                         <h3 className="text-sm font-bold">Permisos</h3>
                         <ul className="pt-2 list-disc text-sm grid text-gray-500 dark:text-gray-400">
                             <li>Create user accounts</li>
                             <li>Manage documents</li>
                             <li>Access analytics dashboard</li>
                         </ul>
-                    </div>
+                    </div> */}
                     <div>
                         <h3 className="text-sm font-bold">Rol</h3>
                         <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">{user.role}</p>

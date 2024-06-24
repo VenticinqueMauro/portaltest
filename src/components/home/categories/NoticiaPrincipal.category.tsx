@@ -19,7 +19,7 @@ interface Props {
 export default function NoticiaPrincipalCategory({ image, pretitle, title, category, path, id }: Props) {
 
     return (
-        <Link href={`${category}/${path}`} className="rounded min-h-full col-span-12 lg:col-span-8">
+        <Link href={`${category}/${path}`} className="rounded min-h-full col-span-12 lg:col-span-8 pb-4 md:pb-0">
             <Card className="bg-gray-100 hover:bg-gray-200 transition-all duration-100">
                 <div className="px-1">
                     <div className="relative -top-2">
