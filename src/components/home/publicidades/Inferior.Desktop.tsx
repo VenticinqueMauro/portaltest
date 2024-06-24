@@ -14,7 +14,7 @@ export default function InferiorDesktop({ url, link }: Props) {
     return (
         <div className="col-start-1 col-span-12 mb-10">
             <div
-                className="flex justify-center bg-publicidad items-center w-full h-[170px] "
+                className="hidden md:flex justify-center bg-publicidad items-center w-full h-[170px] "
             >
                 {
                     hasUrl ?
