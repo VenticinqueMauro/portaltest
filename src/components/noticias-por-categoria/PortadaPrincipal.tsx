@@ -6,6 +6,8 @@ import InferiorDesktop from '../home/publicidades/Inferior.Desktop'
 import NewsCardByCategory from './NewsCardByCategory'
 import { Ads, MainNews, SidebarItem } from '@/types/news.types'
 import LateralDesktop from '../home/publicidades/Lateral.Desktop'
+import CentralMobile from '../home/publicidades/Central.Mobile'
+import InferiorMobile from '../home/publicidades/Inferior.Mobile'
 
 interface Props {
     sectionTitle: string;
@@ -26,7 +28,7 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                 <SectionTitle title={sectionTitle} />
                 {
                     allNews.length &&
-                    <div className="max-w-7xl 2xl:mx-auto grid grid-cols-12 gap-4 px-3 md:mr-[240px]">
+                    <div className="min-[1760px]:max-w-7xl min-[1760px]:mx-auto grid grid-cols-12 gap-4 px-3 md:mr-[240px]">
                         <NoticiaPrincipalCategory
                             image={{ type: news.mainNews.media.type as 'image' | 'video', url: news.mainNews.media.url }}
                             pretitle={news.mainNews.pretitle}
@@ -36,7 +38,13 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                             id={news.mainNews.id}
                         />
 
-                        <div className="col-span-12 lg:col-span-4 min-h-full">
+                        {/* PUBLICIDAD CENTRAL MOBILE  */}
+                        <CentralMobile
+                            url={ads?.media?.mobile?.side?.url as string}
+                            link={ads?.media?.mobile?.side?.link as string}
+                        />
+
+                        <div className="col-span-12 lg:col-span-4 min-h-full pt-3 md:pt-0">
                             <div className="grid grid-cols-12 gap-4 h-full">
                                 {
                                     news.gridNews.map((item, index) => (
@@ -60,10 +68,19 @@ export default function PortadaPrincipal({ sectionTitle, allNews, news, ads, fil
                         />
                     </div>
                 }
+                {/* PUBLICIDAD LATERAL DESKTOP  */}
                 <LateralDesktop
                     url={ads?.media?.desktop?.side?.url || ''}
                     link={ads?.media?.desktop?.side?.link || ''}
                 />
+
+                {/* PUBLICIDAD INFERIOR MOBILE  */}
+                <div className='pt-7 pb-4 mx-3 md:hidden'>
+                    <InferiorMobile
+                        url={ads?.media?.mobile?.bottom?.url as string}
+                        link={ads?.media?.mobile?.bottom?.link as string}
+                    />
+                </div>
                 <NewsCardByCategory news={filteredNews} />
             </div>
         </div>

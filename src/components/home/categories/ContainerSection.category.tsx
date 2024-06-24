@@ -57,8 +57,6 @@ export default function ContainerSectionCategory({ sectionData, sectionTitle, mo
                 url={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.url as string}
                 link={ads.home[sectionTitle as keyof SectionNewsMap]?.media?.desktop?.side?.link as string}
             />
-
-
         </section>
     )
 }

@@ -39,7 +39,7 @@ export default function NewsCardByCategory({ news }: Props) {
 
 
     return (
-        <div className="max-w-7xl 2xl:mx-auto px-3 md:mr-[240px]">
+        <div className="min-[1760px]:max-w-7xl min-[1760px]:mx-auto px-3 md:mr-[240px]">
             {
                 news.map((item: Partial<NewsType>) => (
                     <Link href={`/${item.category}/${item.path}`} key={item._id} className="flex flex-col-reverse md:flex-row justify-between gap-2 md:gap-10 border-b py-4 hover:bg-gray-50 p-1">
@@ -56,7 +56,7 @@ export default function NewsCardByCategory({ news }: Props) {
                                     alt={item.title ?? ''}
                                     width={400}
                                     height={300}
-                                    className=" object-cover aspect-video rounded md:w-72 "
+                                    className=" object-cover aspect-video rounded md:w-72 md:h-44"
                                     placeholder="blur"
                                     blurDataURL={blurImage}
                                     priority

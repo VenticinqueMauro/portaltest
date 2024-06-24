@@ -13,7 +13,7 @@ export default function SuperiorDesktop({ url, link }: Props) {
     const hasUrl = url && url.length > 0;
 
     return (
-        <div className="h-[120px] bg-publicidad col-span-12 hidden md:flex justify-start lg:justify-center md:mr-[260px] items-center max-w-7xl 2xl:mx-auto mx-3 p-3 2xl:px-0  relative my-5">
+        <div className="h-[120px] bg-publicidad col-span-12 hidden md:flex justify-start lg:justify-center md:mr-[260px] items-center min-[1760px]:max-w-7xl min-[1760px]:mx-auto mx-3 p-3 2xl:px-0  relative mt-10">
             {
                 hasUrl ?
                     <Link href={link || '#'} target='_blank' rel='noreferrer'>

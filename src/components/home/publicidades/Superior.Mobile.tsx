@@ -13,7 +13,7 @@ export default function SuperiorMobile({ url, link }: Props) {
     const hasUrl = url && url.length > 0;
 
     return (
-        <div className="h-[120px] bg-publicidad col-span-12 flex justify-start  items-center  mx-3 p-3 relative my-5 md:hidden">
+        <div className="h-[120px] bg-publicidad col-span-12 flex justify-start  items-center p-3 relative my-5 md:hidden">
             {
                 hasUrl ?
                     <Link href={link || '#'} target='_blank' rel='noreferrer'>
