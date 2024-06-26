@@ -154,9 +154,9 @@ export default async function QuotesContainer() {
             <Carousel className="max-w-7xl mx-auto px-3 ">
                 <CarouselContent className="-ml-1 gap-10">
                     {dolarQuotations?.map((quote: QuoteApi) => (
-                        <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto `}>
-                            <span className="text-white bg-black px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
-                                {formatName(quote)}: <p className="font-medium">{formatQuote(quote)}</p>
+                        <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto`}>
+                            <span className="text-tdn font-bold bg-gray-100 border border-muted-foreground px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
+                                {formatName(quote)}: <p className="font-bold text-black">{formatQuote(quote)}</p>
                             </span>
                         </CarouselItem>
                     ))}
@@ -164,13 +164,13 @@ export default async function QuotesContainer() {
                         <CarouselItem key={item.title} className={` pl-2 md:pl-1 basis-auto `}>
                             <Accordion type="single" collapsible >
                                 <AccordionItem value={item.title} className="border-none min-w-[200px]">
-                                    <AccordionTrigger className="text-white bg-black px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
+                                    <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-muted-foreground  px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
                                         {item.title}
                                     </AccordionTrigger>
-                                    <AccordionContent className="text-white bg-black px-3 py-1 text-xs md:text-sm  border-none mt-1">
+                                    <AccordionContent className="text-tdn font-bold bg-gray-100 border border-muted-foreground  px-3 py-1 text-xs md:text-sm  border-none mt-1">
                                         {item.variants.map((variant) => (
-                                            <span key={variant.name} >
-                                                {variant.name}: <p className="font-medium">{variant.precioActual}</p>
+                                            <span key={variant.name} className="flex gap-1">
+                                                {variant.name}: <p className="font-bold text-black">{variant.precioActual}</p>
                                             </span>
                                         ))}
                                     </AccordionContent>
@@ -179,9 +179,9 @@ export default async function QuotesContainer() {
                         </CarouselItem>
                     ))}
                     {otherQuotantions?.map((quote: QuoteApi) => (
-                        <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto `}>
-                            <span className="text-white bg-black px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
-                                {formatName(quote)}: <p className="font-medium">{formatQuote(quote)}</p>
+                        <CarouselItem key={quote.nombre + quote.venta} className={`pl-2 md:pl-1 basis-auto`}>
+                            <span className="text-tdn font-bold bg-gray-100 border border-muted-foreground  px-3 py-1 rounded md:w-[200px] text-xs md:text-sm  flex justify-center gap-1">
+                                {formatName(quote)}: <p className="font-bold text-black">{formatQuote(quote)}</p>
                             </span>
                         </CarouselItem>
                     ))}

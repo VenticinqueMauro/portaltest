@@ -32,7 +32,7 @@ export default function CarouselMasNoticias({ id, moreNews }: Props) {
     };
 
     return (
-        <div className="px-14 md:px-0 ">
+        <div className="px-14 md:px-0">
             {/* DESKTOP  */}
             <div className="relative mt-10">
                 <Carousel orientation={'vertical'} className="hidden md:block md:px-3">
