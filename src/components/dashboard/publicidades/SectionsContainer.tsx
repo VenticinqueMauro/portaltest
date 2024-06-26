@@ -20,13 +20,16 @@ export default function SectionsContainer({ allAds, sectionName, sectionPosition
 
     return (
         <Tabs defaultValue="desktop">
-            <TabsList className="max-w-[100px] ms-auto flex justify-end">
-                <TabsTrigger value="mobile">
-                    <Smartphone />
-                </TabsTrigger>
-                <TabsTrigger value="desktop">
-                    <Monitor />
-                </TabsTrigger>
+            <TabsList className="max-w-[100px] ms-auto flex flex-col gap-1 justify-end">
+                <p className="text-sm font-medium">Preview</p>
+                <div className="flex ">
+                    <TabsTrigger value="mobile">
+                        <Smartphone />
+                    </TabsTrigger>
+                    <TabsTrigger value="desktop">
+                        <Monitor />
+                    </TabsTrigger>
+                </div>
             </TabsList>
             {/* DESKTOP */}
             <TabsContent value="desktop">
