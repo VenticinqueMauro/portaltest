@@ -1,12 +1,10 @@
 User-agent: *
 Disallow:
-Allow: /
-Noindex: false
 
 User-agent: Googlebot
 Disallow:
-Allow: /
-Noimageindex: false
+Noindex:
+Noimageindex:
 Max-video-preview: -1
 Max-image-preview: large
 Max-snippet: -1
