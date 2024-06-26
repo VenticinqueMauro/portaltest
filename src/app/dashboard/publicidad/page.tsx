@@ -1,4 +1,5 @@
 import PublicidadContainer from "@/components/dashboard/publicidades/PublicidadContainer";
+import DashboardEditorSkeleton from "@/components/skeleton/DashboardEditorSkeleton";
 import { Ads } from "@/types/news.types";
 import { initialAds } from "@/utils/utils";
 
