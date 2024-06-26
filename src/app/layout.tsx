@@ -18,7 +18,7 @@ const fontJakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tendenciadenoticias.com/'),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_URL}`),
   title: {
     default: 'Tendencia de Noticias - San Miguel de Tucumán',
     template: '%s - Tendencia de Noticias',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
       }
     ],
     description: 'Mantente al día con las últimas noticias de política, economía y negocios, deportes, tendencias y el sector azucarero en San Miguel de Tucumán. Tendencia de Noticias te ofrece una cobertura completa y actualizada de los eventos más relevantes de la región.',
-    url: 'https://tendenciadenoticias.com/',
+    url: `${process.env.NEXT_PUBLIC_URL}`,
     type: 'website',
   },
   twitter: {

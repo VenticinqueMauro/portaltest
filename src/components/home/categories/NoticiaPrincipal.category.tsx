@@ -36,7 +36,7 @@ export default function NoticiaPrincipalCategory({ image, pretitle, title, categ
                     </div>
                 </div>
                 <CardHeader className="text-center">
-                    <CardDescription className={`${fontLato.className} text-sm font-medium text-muted-foreground`}>
+                    <CardDescription className={`${fontLato.className} text-sm font-medium text-foreground`}>
                         {pretitle}
                     </CardDescription>
                     <CardTitle className="text-3xl">
