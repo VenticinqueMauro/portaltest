@@ -62,7 +62,8 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                     {
                         Array.from({ length: 4 }).map((_, index) => (
                             <div key={`left-${index}`} className={`${lateralIzq && lateralIzq.length && index !== lateralIzq.length - 1 ? 'border-b-2' : ''} py-2 px-1 h-full flex flex-col gap-1 text-start`} onClick={() => setSectionName('leftSidebar' as SectionName)}>
-                                {index === 0 && lateralIzq && lateralIzq.length ? (
+                                {/* LOGICA PARA MOSTRAR LA IMAGEN DE LA PRIMERA NOTICIA  */}
+                                {/* {index === 0 && lateralIzq && lateralIzq.length ? (
                                     <div className="relative -top-2">
                                         {
                                             lateralIzq[0].media.type !== 'video' ?
@@ -76,7 +77,7 @@ export default function PreviewPortadaEditorContainer({ selectedNews, sectionNam
                                     </div>) :
                                     index === 0 ?
                                         <Image src='/placeholder.svg' alt="placeholder" width={856} height={422} className="w-full object-cover aspect-video rounded" /> : null
-                                }
+                                } */}
                                 <p className="text-sm font-bold text-muted-foreground">
                                     {lateralIzq && lateralIzq[index]?.pretitle.length ? lateralIzq[index]?.pretitle : <span className="w-[150px] rounded h-[10px] mx-auto bg-gray-200 block mb-2" />}
                                 </p>

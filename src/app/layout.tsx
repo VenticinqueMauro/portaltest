@@ -6,6 +6,10 @@ import "./globals.css";
 import { ContextProvider } from "@/components/provider/ContextProvider";
 import { Toaster } from "sonner";
 import NextAuthProviders from "./NextAuthProviders";
+import dynamic from "next/dynamic";
+
+
+const Footer = dynamic(() => import("@/components/footer/Footer"), { ssr: false });
 
 const fontJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -29,6 +33,7 @@ export default function RootLayout({
         <NextAuthProviders>
           <ContextProvider>
             {children}
+            <Footer />
           </ContextProvider>
         </NextAuthProviders>
         <Toaster className="mx-auto" />

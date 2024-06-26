@@ -1,12 +1,13 @@
 import QuotesContainer from '@/components/cotizaciones/Quotes.container';
 import Navbar from '@/components/navbar/Navbar';
+import HomeSkeleton from '@/components/skeleton/HomeSkeleton';
 import { Ads } from '@/types/news.types';
 import { blurImage } from '@/utils/blurImage';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const ContainerHome = dynamic(() => import('@/components/home/Container.home'), { loading: () => <div>Loading...</div> });
+const ContainerHome = dynamic(() => import('@/components/home/Container.home'), { loading: () => <HomeSkeleton /> });
 
 async function getHomeAds() {
     try {
