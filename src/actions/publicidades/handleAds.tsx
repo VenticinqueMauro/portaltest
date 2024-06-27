@@ -65,9 +65,9 @@ const processAndUploadFiles = async (file: File | null, resourceType: ResourceTy
                         options.eager.height = 500;
                         options.eager.aspect_ratio = '200:500';
                     } else if (position === 'bottom') {
-                        options.eager.width = 480;
+                        options.eager.width = 970;
                         options.eager.height = 150;
-                        options.eager.aspect_ratio = '480:150';
+                        options.eager.aspect_ratio = '970:150';
                     }
                 } else if (device === 'mobile') {
                     if (position === 'top') {

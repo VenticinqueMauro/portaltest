@@ -22,7 +22,7 @@ export default function InferiorDesktop({ url, link }: Props) {
                             <Image
                                 src={url}
                                 alt={`publicidad lateral`}
-                                width={480}
+                                width={970}
                                 height={150}
                                 placeholder="blur"
                                 blurDataURL={blurImage}

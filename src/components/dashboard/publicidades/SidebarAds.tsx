@@ -117,7 +117,7 @@ export default function SidebarAds({ sectionName, sectionPosition, deskPublicId,
                         <p className="text-lg tracking-tight mb-5 font-medium">{sectionPosition === 'top' ? 'Banner principal' : sectionPosition === 'side' ? 'Banner lateral' : 'Banner inferior'}</p>
                         <Label htmlFor="desktop" className="flex gap-1 items-center mb-2 text-muted-foreground font-normal">
                             <ScreenShare />
-                            Desktop {sectionPosition === 'top' ? '970x150 (sugerido)' : sectionPosition === 'side' ? '200x500 (sugerido)' : '480x150 (sugerido)'}
+                            Desktop {sectionPosition === 'top' ? '970x150 (sugerido)' : sectionPosition === 'side' ? '200x500 (sugerido)' : '970x150 (sugerido)'}
                         </Label>
                         <Input id="desktop" type='file' accept="image/*" className="mb-3 max-w-full" onChange={handleImageUploadDesktop} />
                         {desktopFile && <span className="text-muted-foreground text-sm">Archivo seleccionado: {desktopFile.name}</span>}

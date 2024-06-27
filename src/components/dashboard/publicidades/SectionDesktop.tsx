@@ -44,25 +44,25 @@ export default function SectionDesktop({ imageAd, sectionName, sectionPosition, 
                 <div className="col-span-12 w-full justify-between flex gap-3">
 
                     <div className="w-full flex flex-col items-start justify-end text-muted-foreground relative shrink">
-                        <div className=" bg-publicidad flex justify-center items-center w-[500px] h-[170px] hover:border-primary border-2 relative">
+                        <div className=" bg-publicidad flex justify-center items-center w-full h-[170px] hover:border-primary border-2 relative">
                             {
                                 imageAd && imageAd.desktop && imageAd.desktop?.bottom?.public_id ?
                                     <Image
                                         src={imageAd.desktop.bottom.url as string}
                                         alt={`${sectionName}-${sectionPosition}`}
-                                        width={480}
+                                        width={970}
                                         height={150}
                                         className="cursor-pointer"
                                         onClick={() => setSectionPosition('bottom')}
                                     />
                                     :
                                     <div
-                                        className="h-[150px] w-[480px] bg-gray-200/50 border text-foreground text-sm flex justify-center items-center relative"
+                                        className="h-[150px] w-full bg-gray-200/50 border text-foreground text-sm flex justify-center items-center relative"
                                         onClick={() => setSectionPosition('bottom')}
                                     >
                                         <div className="text-center">
                                             <p>Debajo de portada</p>
-                                            <p>480 x 150</p>
+                                            <p>970 x 150</p>
                                         </div>
                                     </div>
                             }
