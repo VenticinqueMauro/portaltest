@@ -32,6 +32,7 @@ export default function NoticiaCentral({ image, pretitle, title, summary, catego
                                     placeholder="blur"
                                     blurDataURL={blurImage}
                                     className="object-cover rounded w-full aspect-video"
+                                    priority
                                 />
                                 :
                                 <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">

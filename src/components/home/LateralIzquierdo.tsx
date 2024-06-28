@@ -48,8 +48,18 @@ export default function LateralIzquierdo({ image, pretitle, title, category, pat
                     <div className="md:hidden relative -top-2">
                         {(
                             image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
-                                    blurDataURL={blurImage} className="w-full object-cover aspect-video rounded" />
+                                <Image
+                                    src={image.url}
+                                    alt={title}
+                                    width={856}
+                                    height={422}
+                                    placeholder="blur"
+                                    blurDataURL={blurImage}
+                                    sizes="(max-width: 768px) 100vw, 
+                                    (max-width: 1200px) 50vw, 
+                                    33vw"
+                                    priority
+                                    className="w-full object-cover aspect-video rounded" />
                             ) : (
                                 <video
                                     width="400"

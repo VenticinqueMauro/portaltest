@@ -24,8 +24,18 @@ export default function LateralDerecho({ image, pretitle, title, category, path,
                     <div className="px-1">
                         <div className="relative -top-2">
                             {image.type !== 'video' ? (
-                                <Image src={image.url} alt={title} width={856} height={422} placeholder="blur"
-                                    blurDataURL={blurImage} className="object-cover rounded w-full aspect-video" />
+                                <Image
+                                    src={image.url}
+                                    alt={title}
+                                    width={856}
+                                    height={422}
+                                    placeholder="blur"
+                                    blurDataURL={blurImage}
+                                    sizes="(max-width: 768px) 100vw, 
+                                    (max-width: 1200px) 50vw, 
+                                    33vw"
+                                    priority
+                                    className="object-cover rounded w-full aspect-video" />
                             ) : (
                                 <video
                                     width="400"

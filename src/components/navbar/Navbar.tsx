@@ -30,7 +30,7 @@ const sections = [
         href: "/tendencias"
     },
     {
-        title: "Portal de la caña",
+        title: "Portal caña",
         href: "/portalcana"
     },
 ]

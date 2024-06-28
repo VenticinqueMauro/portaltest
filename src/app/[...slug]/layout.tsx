@@ -4,7 +4,7 @@ function capitalizeWords(str: string): string {
     const decodedStr = decodeURIComponent(str);
 
     if (decodedStr === 'portalcana') {
-        return 'Portal de la caña';
+        return 'Portal caña';
     }
     return decodedStr.replace(/\b\w/g, char => char.toUpperCase());
 }
