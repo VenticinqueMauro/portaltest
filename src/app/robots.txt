@@ -3,5 +3,5 @@ Allow: /
 Disallow: /dashboard/
 Disallow: /api/
 Disallow: /login-tdn/
-Sitemap: https://portaltdntest.vercel.app//sitemap.xml
+Sitemap: https://portaltdntest.vercel.app/sitemap.xml
 
