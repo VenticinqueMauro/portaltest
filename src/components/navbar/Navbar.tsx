@@ -5,8 +5,15 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
-import ButtonsByLogin from "./ButtonsByLogin";
 import NavItem from "./NavItem";
+import dynamic from "next/dynamic";
+import AuthSkeleton from "../skeleton/AuthSkeleton";
+
+
+const ButtonsByLogin = dynamic(() => import("./ButtonsByLogin"), {
+    ssr: false,
+    loading: () => <AuthSkeleton />
+});
 
 const sections = [
     {
@@ -47,7 +54,7 @@ export default function Navbar() {
                         width={300}
                         height={200}
                         loading="lazy"
-                        className="w-auto h-auto mb-3"
+                        className="max-w-[200px] md:max-w-max h-auto mb-3"
                     />
                 </Link>
                 <ButtonsByLogin />
