@@ -1,3 +1,4 @@
+import { MoreNewsData } from "@/app/api/news/more-news/route";
 import { HomePageDocument } from "@/models/home";
 import { Ads, SectionNewsMap } from "@/types/news.types";
 import LateralDerecho from "./LateralDerecho";
@@ -5,11 +6,8 @@ import LateralIzquierdo from "./LateralIzquierdo";
 import MasLeidas from "./MasLeidas";
 import NoticiaCentral from "./NoticiaCentral";
 import ContainerSectionCategory from "./categories/ContainerSection.category";
-import LateralDesktop from "./publicidades/Lateral.Desktop";
-import { MoreNewsData } from "@/app/api/news/more-news/route";
-import Image from "next/image";
-import Link from "next/link";
 import InferiorMobile from "./publicidades/Inferior.Mobile";
+import LateralDesktop from "./publicidades/Lateral.Desktop";
 
 export async function getCover() {
     try {

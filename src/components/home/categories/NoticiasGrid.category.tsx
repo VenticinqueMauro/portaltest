@@ -28,7 +28,7 @@ export default function NoticiasGridCategory({ image, pretitle, title, category,
                         className="w-full object-cover aspect-video rounded"
                         placeholder="blur"
                         blurDataURL={blurImage}
-                        priority
+                        loading="lazy"
                     />
                 ) : (
                     <video width="400" height="300" controls={true} autoPlay loop className="w-full object-cover aspect-video rounded">

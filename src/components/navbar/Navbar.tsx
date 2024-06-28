@@ -45,7 +45,7 @@ const sections = [
 export default function Navbar() {
 
     return (
-        <nav className='bg-tdn  xl:px-0 pt-3'>
+        <nav className='bg-tdn  xl:px-0 pt-3 max-h-[300px]'>
             <div className='max-w-7xl mx-auto text-white flex items-end justify-between px-3 relative space-x-5 md:space-x-0'>
                 <Link href='/'>
                     <Image

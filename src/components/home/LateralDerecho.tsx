@@ -31,9 +31,6 @@ export default function LateralDerecho({ image, pretitle, title, category, path,
                                     height={422}
                                     placeholder="blur"
                                     blurDataURL={blurImage}
-                                    sizes="(max-width: 768px) 100vw, 
-                                    (max-width: 1200px) 50vw, 
-                                    33vw"
                                     priority
                                     className="object-cover rounded w-full aspect-video" />
                             ) : (

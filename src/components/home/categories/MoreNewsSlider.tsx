@@ -53,6 +53,7 @@ const MoreNewsSlider: React.FC<Props> = ({ title, moreNews, category, sectionDat
                                                 className="rounded aspect-video object-cover"
                                                 placeholder="blur"
                                                 blurDataURL={blurImage}
+                                                loading='lazy'
                                             />
                                         ) : (
                                             <video
