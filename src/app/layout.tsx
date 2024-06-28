@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     template: '%s - Tendencia de Noticias',
   },
   description: 'Mantente al día con las últimas noticias de política, economía y negocios, deportes, tendencias y el sector azucarero en San Miguel de Tucumán. Tendencia de Noticias te ofrece una cobertura completa y actualizada de los eventos más relevantes de la región.',
+  icons: {
+    icon: '/icon.jpg',
+  },
   keywords: [
     'San Miguel de Tucumán',
     'Noticias',

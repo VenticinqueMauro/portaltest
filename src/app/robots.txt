@@ -1,10 +1,7 @@
-User-agent: *
-Disallow:
+User-Agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /login-tdn/
+Sitemap: https://portaltdntest.vercel.app//sitemap.xml
 
-User-agent: Googlebot
-Disallow:
-Noindex:
-Noimageindex:
-Max-video-preview: -1
-Max-image-preview: large
-Max-snippet: -1
