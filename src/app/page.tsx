@@ -27,8 +27,8 @@ export default async function page() {
 
     const ads: Ads = await getHomeAds();
 
-    const hasUrlDesktop = ads.home.portada?.media?.desktop?.top?.url && ads.home.portada?.media?.desktop?.top?.url.length > 0;
-    const hasUrlMobile = ads.home.portada?.media?.mobile?.top?.url && ads.home.portada?.media?.mobile?.top?.url.length > 0;
+    const hasUrlDesktop = ads?.home.portada?.media?.desktop?.top?.url && ads.home.portada?.media?.desktop?.top?.url.length > 0;
+    const hasUrlMobile = ads?.home.portada?.media?.mobile?.top?.url && ads.home.portada?.media?.mobile?.top?.url.length > 0;
 
     return (
         <section>

@@ -20,6 +20,7 @@ export async function getCover() {
         return await response.json();
     } catch (error) {
         console.log(error)
+        return {};
     }
 }
 
@@ -45,6 +46,10 @@ interface Props {
 export default async function ContainerHome({ ads }: Props) {
 
     const { data: homeNews }: { data: HomePageDocument } = await getCover();
+
+    if (!homeNews) return (
+        <div className="h-screen text-center text-medium text-xl">Página en construcción</div>
+    )
 
     const moreNews = await getFormatedCategoryNews();
 

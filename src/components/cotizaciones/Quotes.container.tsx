@@ -45,6 +45,8 @@ const formatName = (quote: QuoteApi) => {
 };
 
 const formatPortalData = (data: any) => {
+
+    if(!data) return;
     // Filtrar las propiedades _id y __v antes de procesar los datos
     const filteredData = Object.entries(data).reduce((acc: any, [key, value]) => {
         if (key !== '_id' && key !== '__v') {
@@ -170,7 +172,7 @@ export default async function QuotesContainer() {
                             </AccordionItem>
                         </Accordion>
                     </CarouselItem>
-                    {formattedPortalData.map((item) => (
+                    {formattedPortalData?.map((item) => (
                         <CarouselItem key={item.title} className={` pl-2 md:pl-1 basis-auto `}>
                             <Accordion type="single" collapsible >
                                 <AccordionItem value={item.title} className="border-none w-fit">

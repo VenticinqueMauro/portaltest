@@ -72,8 +72,20 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
             <Container news={news} category={decodedCategory} moreNews={moreNews} ads={ads} />
         );
     } else if (!path && homeNews) {
+        if (!homeNews.data) return (
+            <main>
+                <PublicidadSuperior ads={ads} />
+                <div className='sticky top-0 left-0 z-20'>
+                    <Navbar />
+                    <QuotesContainer />
+                </div>
+                <div className="h-screen text-center text-medium text-xl">Página en construcción</div>
+            </main>
+        )
+
         const sectionTitle = decodedCategory.charAt(0).toUpperCase() + decodedCategory.slice(1);
         const { data: { sections } } = homeNews;
+
         const news: SectionData = sections[decodedCategory];
 
         const allNews = [news?.mainNews, ...news?.gridNews];
