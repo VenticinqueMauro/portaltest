@@ -151,8 +151,8 @@ export default async function QuotesContainer() {
 
     return (
         <div className="px-3 py-3 bg-gradient-to-b from-white to-transparent">
-            <Carousel className="max-w-7xl mx-auto px-3" >
-                <CarouselContent className="-ml-1 gap-10">
+            <Carousel className="max-w-7xl mx-auto pr-3 md:px-3" >
+                <CarouselContent className="-ml-1 gap-2 md:gap-5">
                     <CarouselItem className={`pl-2 md:pl-1 basis-auto `}>
                         <Accordion type="single" collapsible>
                             <AccordionItem value="dolar-hoy" className="border-none">
