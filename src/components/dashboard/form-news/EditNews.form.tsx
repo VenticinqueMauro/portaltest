@@ -257,7 +257,7 @@ export default function EditNewsForm({ news }: { news: NewsDataTable }) {
                 <Input className="font-normal" id="title" name='tags' placeholder="Agrega etiquetas y presiona 'espacio' para generar una nueva" onChange={handleChangeTags} />
                 <TagsNews tags={tags} handleDeleteTags={handleDeleteTags} />
             </div>
-            <SubmitButton title={'Editar Noticia'} />
+            <SubmitButton title={'Guardar Cambios'} />
         </form>
     )
 }
