@@ -13,6 +13,10 @@ export default async function page() {
 
     const news: NewsType[] = await GetAllNews();
 
+    if (!news) {
+        return null;
+    }
+
     return (
         <div className="relative">
             <EditorContainer news={news} />
