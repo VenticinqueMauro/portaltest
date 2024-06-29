@@ -70,12 +70,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={cn("min-h-screen bg-background antialiased text-foreground", fontJakarta.className)}>
-        <NextAuthProviders>
+        {/* <NextAuthProviders>
           <ContextProvider>
-            {children}
             <Footer />
           </ContextProvider>
-        </NextAuthProviders>
+        </NextAuthProviders> */}
+            {children}
         <Toaster className="mx-auto" />
       </body>
     </html>
