@@ -11,6 +11,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Separator } from "../ui/separator";
 
 const urls = [
     "https://dolarapi.com/v1/dolares/oficial",
@@ -46,7 +47,7 @@ const formatName = (quote: QuoteApi) => {
 
 const formatPortalData = (data: any) => {
 
-    if(!data) return;
+    if (!data) return;
     // Filtrar las propiedades _id y __v antes de procesar los datos
     const filteredData = Object.entries(data).reduce((acc: any, [key, value]) => {
         if (key !== '_id' && key !== '__v') {
@@ -158,14 +159,17 @@ export default async function QuotesContainer() {
                     <CarouselItem className={`pl-2 md:pl-1 basis-auto `}>
                         <Accordion type="single" collapsible>
                             <AccordionItem value="dolar-hoy" className="border-none">
-                                <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-muted-foreground px-3 py-1 rounded w-fit text-xs md:text-sm space-x-3">
+                                <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-gray-400 px-3 py-1 rounded w-fit text-xs md:text-sm space-x-3">
                                     <p>Dólar hoy</p>
                                 </AccordionTrigger>
-                                <AccordionContent className="text-tdn font-bold bg-gray-100 border border-muted-foreground px-3 py-1 text-xs md:text-sm border-none mt-1">
+                                <AccordionContent className="text-tdn font-bold bg-gray-100 border px-3 py-1 text-xs md:text-sm rounded mt-1">
                                     {dolarQuotations.map(item => (
-                                        <div key={item.casa} className="flex justify-between items-center gap-1 mb-1">
-                                            <span>{item.nombre}:</span>
-                                            <span className="font-bold text-black">${item.venta}</span>
+                                        <div key={item.casa}>
+                                            <div className="flex justify-between items-center gap-1 mb-1">
+                                                <span>{item.nombre}:</span>
+                                                <span className="font-bold text-black">${item.venta}</span>
+                                            </div>
+                                            <Separator />
                                         </div>
                                     ))}
                                 </AccordionContent>
@@ -176,14 +180,17 @@ export default async function QuotesContainer() {
                         <CarouselItem key={item.title} className={` pl-2 md:pl-1 basis-auto `}>
                             <Accordion type="single" collapsible >
                                 <AccordionItem value={item.title} className="border-none w-fit">
-                                    <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-muted-foreground  px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
+                                    <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-gray-400  px-3 py-1 rounded w-fit text-xs md:text-sm  space-x-3">
                                         <p>{item.title}</p>
                                     </AccordionTrigger>
-                                    <AccordionContent className="text-tdn font-bold bg-gray-100 border border-muted-foreground  px-3 py-1 text-xs md:text-sm  border-none mt-1">
+                                    <AccordionContent className="text-tdn font-bold bg-gray-100 border border-gray-400  px-3 py-1 text-xs md:text-sm rounded mt-1">
                                         {item.variants.map((variant) => (
-                                            <span key={variant.name} className="flex justify-between gap-1 mb-1">
-                                                {variant.name}: <p className="font-bold text-black">{variant.precioActual}</p>
-                                            </span>
+                                            <div key={variant.name}>
+                                                <span className="flex justify-between gap-1 mb-1">
+                                                    {variant.name}: <p className="font-bold text-black">{variant.precioActual}</p>
+                                                </span>
+                                                <Separator />
+                                            </div>
                                         ))}
                                     </AccordionContent>
                                 </AccordionItem>
@@ -191,22 +198,25 @@ export default async function QuotesContainer() {
                         </CarouselItem>
                     ))}
                     <CarouselItem className={`pl-2 md:pl-1 basis-auto`}>
-                            <Accordion type="single" collapsible>
-                                <AccordionItem value="dolar-hoy" className="border-none">
-                                    <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-muted-foreground px-3 py-1 rounded w-fit text-xs md:text-sm space-x-3">
-                                        <p>Otras monedas</p>
-                                    </AccordionTrigger>
-                                    <AccordionContent className="text-tdn font-bold bg-gray-100 border border-muted-foreground px-3 py-1 text-xs md:text-sm border-none mt-1">
-                                        {otherQuotantions.map(item => (
-                                            <div key={item.venta} className="flex justify-between items-center gap-1 mb-1">
+                        <Accordion type="single" collapsible>
+                            <AccordionItem value="dolar-hoy" className="border-none">
+                                <AccordionTrigger className="text-tdn font-bold bg-gray-100 border border-muted-foreground px-3 py-1 rounded w-fit text-xs md:text-sm space-x-3">
+                                    <p>Otras monedas</p>
+                                </AccordionTrigger>
+                                <AccordionContent className="text-tdn font-bold bg-gray-100 border border-gray-400 px-3 py-1 text-xs md:text-sm rounded mt-1">
+                                    {otherQuotantions.map(item => (
+                                        <div key={item.venta}>
+                                            <div className="flex justify-between items-center gap-1 mb-1">
                                                 <span>{item.nombre.startsWith('Real') ? 'Real' : item.nombre}:</span>
                                                 <span className="font-bold text-black">${item.venta}</span>
                                             </div>
-                                        ))}
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
-                        </CarouselItem>
+                                            <Separator />
+                                        </div>
+                                    ))}
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </CarouselItem>
                 </CarouselContent>
                 <CarouselPrevious className="text-black border-none bg-white  hidden " />
                 <CarouselNext className="text-black border-none bg-white  hidden " />
