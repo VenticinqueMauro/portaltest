@@ -44,7 +44,7 @@ export default async function page() {
                                 height={150}
                                 placeholder="blur"
                                 blurDataURL={blurImage}
-                                priority
+                                loading="lazy"
                                 aria-label="Publicidad principal"
                                 className='object-cover'
                             />
@@ -67,7 +67,7 @@ export default async function page() {
                                 className="object-contain p-3"
                                 placeholder="blur"
                                 blurDataURL={blurImage}
-                                priority
+                                loading="lazy"
                                 aria-label="Publicidad principal"
                             />
                         </Link>

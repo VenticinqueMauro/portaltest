@@ -19,6 +19,7 @@ export default function InferiorMobile({ url, link }: Props) {
                                 src={url}
                                 alt={`publicidad`}
                                 fill
+                                loading="lazy"
                                 className="cursor-pointer object-cover"
                             />
                         </Link>
