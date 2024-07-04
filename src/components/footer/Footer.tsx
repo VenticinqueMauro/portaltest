@@ -28,16 +28,13 @@ export default function Footer() {
                     </Link>
                     <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-white sm:mb-0 dark:text-gray-400 list-none">
                         <li>
-                            <a href="#" className="hover:underline me-4 md:me-6">About</a>
+                            <Link href="#" className="hover:underline me-4 md:me-6">Contacto</Link>
                         </li>
                         <li>
-                            <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
+                            <Link href="/politica-privacidad" className="hover:underline me-4 md:me-6">Política de privacidad</Link>
                         </li>
                         <li>
-                            <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
-                        </li>
-                        <li>
-                            <a href="#" className="hover:underline">Contact</a>
+                            <Link href="/terminos-condiciones" className="hover:underline">Términos y condiciones</Link>
                         </li>
                     </ul>
                 </div>

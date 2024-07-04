@@ -5,6 +5,7 @@ import PortadaPrincipal from "@/components/noticias-por-categoria/PortadaPrincip
 import PublicidadSuperior from "@/components/noticias-por-categoria/publicidades/PublicidadSuperior";
 import Container from "@/components/noticiasIndividuales/Container";
 import { MainNews, NewsType, SidebarItem } from "@/types/news.types";
+import PaginaEnConstruccion from "@/utils/PaginaEnConstruccion";
 import { getFormatedCategoryNews, getNewsByPath } from "@/utils/utils";
 import { notFound } from "next/navigation";
 
@@ -79,7 +80,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                     <Navbar />
                     <QuotesContainer />
                 </div>
-                <div className="h-screen text-center text-medium text-xl">Página en construcción</div>
+                <PaginaEnConstruccion />
             </main>
         )
 

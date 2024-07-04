@@ -8,6 +8,7 @@ import NoticiaCentral from "./NoticiaCentral";
 import ContainerSectionCategory from "./categories/ContainerSection.category";
 import InferiorMobile from "./publicidades/Inferior.Mobile";
 import LateralDesktop from "./publicidades/Lateral.Desktop";
+import PaginaEnConstruccion from "@/utils/PaginaEnConstruccion";
 
 export async function getCover() {
     try {
@@ -48,7 +49,7 @@ export default async function ContainerHome({ ads }: Props) {
     const { data: homeNews }: { data: HomePageDocument } = await getCover();
 
     if (!homeNews) return (
-        <div className="h-screen text-center text-medium text-xl">Página en construcción</div>
+        <PaginaEnConstruccion />
     )
 
     const moreNews = await getFormatedCategoryNews();

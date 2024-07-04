@@ -1,13 +1,12 @@
-import React from 'react'
+import { MainNews, SidebarItem } from '@/types/news.types'
 import SectionTitle from '../home/SectionTitle'
 import NoticiaPrincipalCategory from '../home/categories/NoticiaPrincipal.category'
 import NoticiasGridCategory from '../home/categories/NoticiasGrid.category'
-import InferiorDesktop from '../home/publicidades/Inferior.Desktop'
-import NewsCardByCategory from './NewsCardByCategory'
-import { Ads, MainNews, SidebarItem } from '@/types/news.types'
-import LateralDesktop from '../home/publicidades/Lateral.Desktop'
 import CentralMobile from '../home/publicidades/Central.Mobile'
+import InferiorDesktop from '../home/publicidades/Inferior.Desktop'
 import InferiorMobile from '../home/publicidades/Inferior.Mobile'
+import LateralDesktop from '../home/publicidades/Lateral.Desktop'
+import NewsCardByCategory from './NewsCardByCategory'
 
 interface Props {
     sectionTitle: string;
