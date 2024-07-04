@@ -4,9 +4,10 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { MainCover, NewsType, SidebarItem } from '@/types/news.types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CustomCheckbox from './CustomCheckbox';
 import { SectionName } from './EditorContainer';
+import InfoTooltip from './InfoTooltip';
 
 interface Props {
     news: NewsType[];
@@ -118,12 +119,15 @@ export default function EditorSidebar({ news, sectionName, selectedNews, setSele
     return (
         <div className='rounded border col-span-3 px-3 flex gap-y-3 flex-col sticky top-0 right-0 h-screen overflow-y-auto'>
             <div className='space-y-2  sticky top-0 z-10 bg-white w-full backdrop-blur pt-3 '>
-                <Input
-                    placeholder="Buscar por título o categoría"
-                    className="w-56 my-1"
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
+                <div className='flex justify-between'>
+                    <Input
+                        placeholder="Buscar por título o categoría"
+                        className="w-56 my-1"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
+                    <InfoTooltip />
+                </div>
                 <Separator className='' />
             </div>
             {!sectionName || sectionName === undefined ? (
